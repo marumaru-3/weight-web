@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,45 +8,48 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
-    <div class="display-wrap">
-      <aside id="sidebar">
-        <button class="menu-open">
+    <div class="layout">
+      <aside class="sidebar">
+        <button class="sidebar__menu-toggle">
           <span class="material-symbols-outlined"> menu_open </span>
         </button>
-        <button class="record-btn">記録を追加</button>
-        <nav class="nav">
-          <ul>
-            <li>
-              <a href="#" class="page-active">
+        <button class="btn btn--record">
+          <span class="material-symbols-outlined"> edit_square </span>
+          記録を追加
+        </button>
+        <nav class="sidebar__nav">
+          <ul class="sidebar__list">
+            <li class="sidebar__item">
+              <a href="#" class="sidebar__link sidebar__link--active">
                 <span class="material-symbols-outlined"> home </span>
                 ホーム
               </a>
             </li>
-            <li>
-              <a href="#" class="page-active">
+            <li class="sidebar__item">
+              <a href="#" class="sidebar__link">
                 <span class="material-symbols-outlined">
                   settings_accessibility
                 </span>
                 体重ログ
               </a>
             </li>
-            <li>
-              <a href="#" class="page-active">
+            <li class="sidebar__item">
+              <a href="#" class="sidebar__link">
                 <span class="material-symbols-outlined"> account_circle </span>
                 ユーザー情報
               </a>
             </li>
-            <li>
-              <a href="#" class="page-active">
+            <li class="sidebar__item">
+              <a href="#" class="sidebar__link">
                 <span class="material-symbols-outlined"> help </span>
                 ヘルプ
               </a>
             </li>
-            <li>
-              <a href="#" class="page-active">
+            <li class="sidebar__item">
+              <a href="#" class="sidebar__link">
                 <span class="material-symbols-outlined"> settings </span>
                 設定
               </a>
@@ -54,18 +57,63 @@
           </ul>
         </nav>
       </aside>
-      <div class="main-wrap">
-        <header>
-          <a href="#">
-            <img src="./images/logo.svg" alt="" />
-            体重Web
-          </a>
-          <a href="#">
+      <div class="page-main">
+        <header class="header">
+          <h1 class="header__logo">
+            <a href="#">
+              <img src="./images/logo.svg" alt="体重Web ロゴ" />
+              体重Web
+            </a>
+          </h1>
+          <a href="#" class="header__profile">
             <span class="material-symbols-outlined"> account_circle </span>
           </a>
-          <span>ID : 0000000000</span>
+          <span class="header__user-id">ID : 0000000000</span>
         </header>
-        <main></main>
+        <main class="main">
+          <div class="home">
+            <div class="home__reminder">
+              <p class="home__text">○○さん、体重測定の時間です！</p>
+              <button class="btn btn--record">今日の記録を追加する</button>
+            </div>
+            <div class="weight-summary">
+              <div class="weight-summary__block">
+                <p class="weight-summary__title">今日の体重</p>
+                <p class="weight-summary__text">
+                  <span class="weight-summary__num">68.1</span>
+                  <span class="weight-summary__unit">kg</span>
+                </p>
+              </div>
+              <div class="weight-summary__block">
+                <p class="weight-summary__title">今日の体脂肪率(推定)</p>
+                <p class="weight-summary__text">
+                  <span class="weight-summary__num">24.1</span>
+                  <span class="weight-summary__unit">%</span>
+                </p>
+              </div>
+              <div class="weight-summary__block">
+                <p class="weight-summary__title">あなたの理想体重</p>
+                <p class="weight-summary__text">
+                  <span class="weight-summary__num">64.0</span>
+                  <span class="weight-summary__unit">kg</span>
+                </p>
+              </div>
+            </div>
+            <div class="weight-graph">
+              <div class="weight-graph__header">
+                <div class="weight-graph__meta">
+                  <h2 class="weight-graph__title">体重</h2>
+                  <p class="weight-graph__date">2024/12/06～2025/01/07</p>
+                </div>
+                <button class="btn btn--more">
+                  もっと見る
+                  <span class="material-symbols-outlined"> chevron_right </span>
+                </button>
+              </div>
+              <div class="weight-graph__graph"></div>
+            </div>
+          </div>
+        </main>
       </div>
     </div>
   </body>
