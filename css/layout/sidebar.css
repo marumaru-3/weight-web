@@ -1,0 +1,14 @@
+.sidebar__menu-toggle {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+}
+
+.sidebar__nav {
+  width: 100%;
+}
+
+.btn--nav.sidebar__link--active {
+  background-color: var(--blue-02);
+}

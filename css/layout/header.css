@@ -1,0 +1,20 @@
+.header__logo {
+  font-size: 20px;
+}
+.header__logo a,
+.header__info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.header__logo img {
+  width: 40px;
+  height: 40px;
+}
+
+.header__info a {
+  line-height: 0;
+}
+.header__info .material-symbols-outlined {
+  font-size: 40px;
+}
