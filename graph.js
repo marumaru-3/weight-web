@@ -15,29 +15,40 @@ const labels = Array.from({ length: days }, (_, i) => {
     ? `${date.getMonth() + 1}月${date.getDate()}日`
     : `${date.getDate()}日`;
 });
+
+// 体重記録
+const weights = [
+  69.2,
+  68.9,
+  69.1,
+  68.9,
+  68.7,
+  68.5,
+  68.5,
+  68.1,
+  68.2,
+  68.2,
+  null,
+  68.0,
+  68.0,
+  66.4,
+];
+
 const data = {
   labels: labels,
   datasets: [
     {
-      label: "体重",
-      backgroundColor: "rgb(255, 99, 132)",
-      borderColor: "rgb(255, 99, 132)",
-      data: [
-        69.2,
-        68.9,
-        69.1,
-        68.9,
-        68.7,
-        68.5,
-        68.5,
-        68.1,
-        68.2,
-        68.2,
-        null,
-        68.0,
-        68.0,
-        66.4,
-      ],
+      label: "体重（kg）",
+      data: weights,
+      backgroundColor: "#4a90e2",
+      borderColor: "#4a90e2",
+      borderWidth: 2,
+      pointRadius: 4,
+      pointBackgroundColor: "#fff",
+      pointBorderColor: "#4a90e2",
+      pointBorderWidth: 3,
+      hoverBorderWidth: 4,
+      spanGaps: true,
     },
   ],
 };
@@ -47,7 +58,7 @@ const config = {
   data: data,
   options: {
     responsive: true,
-    maintainAspectRatio: false,
+    // maintainAspectRatio: false,
     scales: {
       x: {
         ticks: {
@@ -59,6 +70,14 @@ const config = {
     plugins: {
       legend: {
         display: false,
+      },
+      tooltip: {
+        callbacks: {
+          label(context) {
+            let value = context.raw;
+            return ` 体重: ${value.toFixed(1)} kg`;
+          },
+        },
       },
     },
   },

@@ -40,6 +40,9 @@
 /* / 今日の一言メモカード */
 
 /* 体重グラフカード */
+.weight-graph {
+  padding: 16px 24px 32px;
+}
 .weight-graph__header {
   display: flex;
   justify-content: space-between;
@@ -54,6 +57,11 @@
 }
 .weight-graph__title {
   font-size: 20px;
+}
+.weight-graph__graph {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  padding: 0 8px;
 }
 #graph {
   width: 100%;

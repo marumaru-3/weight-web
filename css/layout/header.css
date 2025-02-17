@@ -18,3 +18,7 @@
 .header__info .material-symbols-outlined {
   font-size: 40px;
 }
+.header__user-id {
+  font-weight: bold;
+  font-size: 18px;
+}

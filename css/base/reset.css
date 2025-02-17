@@ -29,6 +29,7 @@
 }
 :where(button) {
   all: unset;
+  box-sizing: border-box;
 }
 :where(input, button, textarea, select) {
   font: inherit;

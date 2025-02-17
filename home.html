@@ -19,7 +19,7 @@
         </button>
         <button class="btn btn--record">
           <span class="material-symbols-outlined"> edit_square </span>
-          記録を追加
+          <span class="btn__text">記録を追加</span>
         </button>
         <nav class="sidebar__nav">
           <ul class="sidebar__list">
@@ -29,7 +29,7 @@
                 class="sidebar__link btn btn--nav sidebar__link--active"
               >
                 <span class="material-symbols-outlined"> home </span>
-                ホーム
+                <span class="btn__text">ホーム</span>
               </a>
             </li>
             <li class="sidebar__item">
@@ -37,25 +37,25 @@
                 <span class="material-symbols-outlined">
                   accessibility_new
                 </span>
-                体重ログ
+                <span class="btn__text">体重ログ</span>
               </a>
             </li>
             <li class="sidebar__item">
               <a href="#" class="sidebar__link btn btn--nav">
                 <span class="material-symbols-outlined"> account_circle </span>
-                ユーザー情報
+                <span class="btn__text">ユーザー情報</span>
               </a>
             </li>
             <li class="sidebar__item">
               <a href="#" class="sidebar__link btn btn--nav">
                 <span class="material-symbols-outlined"> help </span>
-                ヘルプ
+                <span class="btn__text">ヘルプ</span>
               </a>
             </li>
             <li class="sidebar__item">
               <a href="#" class="sidebar__link btn btn--nav">
                 <span class="material-symbols-outlined"> settings </span>
-                設定
+                <span class="btn__text">設定</span>
               </a>
             </li>
           </ul>
@@ -65,7 +65,7 @@
         <header class="layout__header">
           <h1 class="header__logo">
             <a href="#">
-              <img src="./images/logo.svg" alt="体重Web ロゴ" />
+              <img src="./images/main-logo.svg" alt="体重Web ロゴ" />
               体重Web
             </a>
           </h1>
@@ -80,7 +80,9 @@
           <div class="home">
             <div class="home__reminder">
               <p class="home__text">○○さん、体重測定の時間です！</p>
-              <button class="btn btn--record">今日の記録を追加する</button>
+              <button class="btn btn--record">
+                <span class="btn__text">今日の記録を追加する</span>
+              </button>
             </div>
             <div class="weight-summary">
               <div class="weight-summary__block card">
@@ -118,7 +120,7 @@
                   <p class="weight-graph__date">2024/12/06～2025/01/07</p>
                 </div>
                 <button class="btn btn--more">
-                  もっと見る
+                  <span class="btn__text">もっと見る</span>
                   <span class="material-symbols-outlined"> chevron_right </span>
                 </button>
               </div>

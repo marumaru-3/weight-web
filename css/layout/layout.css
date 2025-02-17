@@ -14,17 +14,19 @@ body {
   flex-direction: column;
   align-items: flex-start;
   gap: 32px;
-  width: 240px;
+  width: var(--sidebar-width_pc);
   height: 100vh;
-  padding: 16px 8px;
+  padding: 16px;
 }
 
 .layout__content {
   position: relative;
-  width: calc(100% - 240px);
+  width: calc(100% - var(--sidebar-width_pc));
 }
 
 .layout__header {
+  position: sticky;
+  top: 0;
   background-color: #fff;
   display: flex;
   justify-content: space-between;
@@ -36,5 +38,14 @@ body {
   max-width: calc(960px + 24px * 2);
   width: 100%;
   margin: auto;
-  padding: 24px;
+  padding: 24px 24px 80px;
+}
+
+@media (max-width: 1299px) {
+  .layout__sidebar {
+    width: var(--sidebar-width_sp);
+  }
+  .layout__content {
+    width: calc(100% - var(--sidebar-width_sp));
+  }
 }

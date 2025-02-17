@@ -12,3 +12,13 @@
 .btn--nav.sidebar__link--active {
   background-color: var(--blue-02);
 }
+
+@media (max-width: 1299px) {
+  .layout__sidebar .btn {
+    padding: 12px;
+    width: 48px;
+  }
+  .layout__sidebar .btn__text {
+    display: none;
+  }
+}
