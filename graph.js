@@ -34,6 +34,20 @@ const weights = [
   66.4,
 ];
 
+// レスポンシブサイズの調整
+const ctx = document.getElementById("graph").getContext("2d");
+const mediaQuery = window.matchMedia("(max-width: 599px)");
+
+function applyRespons(chart) {
+  // レスポンシブ比率
+  chart.options.aspectRatio = mediaQuery.matches ? 4 / 3 : 2 / 1;
+  chart.resize();
+
+  // レスポンシブy軸個数
+  chart.options.scales.y.ticks.maxTicksLimit = mediaQuery.matches ? 6 : 8;
+  chart.update();
+}
+
 const data = {
   labels: labels,
   datasets: [
@@ -58,12 +72,19 @@ const config = {
   data: data,
   options: {
     responsive: true,
-    // maintainAspectRatio: false,
+    maintainAspectRatio: true,
+    aspectRatio: mediaQuery.matches ? 4 / 3 : 2 / 1,
     scales: {
       x: {
         ticks: {
+          autoSkip: true,
           maxRotation: 0,
           minRotation: 0,
+        },
+      },
+      y: {
+        ticks: {
+          maxTicksLimit: mediaQuery.matches ? 6 : 8,
         },
       },
     },
@@ -83,4 +104,10 @@ const config = {
   },
 };
 
-let myChart = new Chart(document.getElementById("graph"), config);
+let weightChart = new Chart(document.getElementById("graph"), config);
+
+// 初回適用
+applyRespons(weightChart);
+
+// メディアクエリの変更を検知して更新
+mediaQuery.addEventListener("change", () => applyRespons(weightChart));

@@ -30,6 +30,7 @@ body {
   background-color: #fff;
   display: flex;
   justify-content: space-between;
+  gap: 24px;
   width: 100%;
   padding: 16px 24px;
 }
@@ -43,9 +44,26 @@ body {
 
 @media (max-width: 1299px) {
   .layout__sidebar {
-    width: var(--sidebar-width_sp);
+    width: var(--sidebar-width_tb);
   }
   .layout__content {
-    width: calc(100% - var(--sidebar-width_sp));
+    width: calc(100% - var(--sidebar-width_tb));
+  }
+}
+
+@media (max-width: 599px) {
+  .layout__sidebar {
+    position: fixed;
+    left: -80px;
+    z-index: 10;
+  }
+  .layout__content {
+    width: 100%;
+  }
+  .layout__header {
+    padding: 16px;
+  }
+  .layout__main {
+    padding: 24px 16px 40px;
   }
 }

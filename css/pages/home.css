@@ -7,7 +7,27 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 24px;
 }
 .home__text {
+  flex: 1;
   font-size: 20px;
+}
+.home__reminder .btn {
+  width: 200px;
+}
+
+@media (max-width: 999px) {
+  .home__text {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 599px) {
+  .home__reminder {
+    flex-direction: column;
+  }
+  .home__text {
+    text-align: center;
+  }
 }

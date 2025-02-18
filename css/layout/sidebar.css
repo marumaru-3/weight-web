@@ -1,8 +1,8 @@
 .sidebar__menu-toggle {
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
 }
 
 .sidebar__nav {
