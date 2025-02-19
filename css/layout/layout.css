@@ -17,6 +17,7 @@ body {
   width: var(--sidebar-width_pc);
   height: 100vh;
   padding: 16px;
+  z-index: 100;
 }
 
 .layout__content {
@@ -33,6 +34,8 @@ body {
   gap: 24px;
   width: 100%;
   padding: 16px 24px;
+  transition: 0.5s all;
+  z-index: 100;
 }
 
 .layout__main {
@@ -42,9 +45,16 @@ body {
   padding: 24px 24px 80px;
 }
 
+.layout__sp-menu {
+  width: 100%;
+  display: flex;
+}
+
 @media (max-width: 1299px) {
   .layout__sidebar {
+    align-items: center;
     width: var(--sidebar-width_tb);
+    padding: 16px 8px;
   }
   .layout__content {
     width: calc(100% - var(--sidebar-width_tb));
@@ -54,8 +64,12 @@ body {
 @media (max-width: 599px) {
   .layout__sidebar {
     position: fixed;
-    left: -80px;
-    z-index: 10;
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    padding: 8px 16px;
   }
   .layout__content {
     width: 100%;
@@ -64,6 +78,6 @@ body {
     padding: 16px;
   }
   .layout__main {
-    padding: 24px 16px 40px;
+    padding: 24px 16px 152px;
   }
 }

@@ -75,9 +75,7 @@
 @media (max-width: 999px) {
   /* 体重情報カード */
   .weight-summary {
-    display: flex;
     flex-wrap: wrap;
-    gap: 24px;
   }
   .weight-summary__block {
     width: calc(50% - 24px / 2);
@@ -96,6 +94,9 @@
 
 @media (max-width: 599px) {
   /* 体重情報カード */
+  .weight-summary {
+    gap: 16px;
+  }
   .weight-summary__block {
     width: 100%;
   }
@@ -118,12 +119,18 @@
     align-items: flex-start;
     gap: 8px;
   }
+  .weight-graph__title {
+    font-size: 18px;
+  }
   .weight-graph__date {
     font-size: 14px;
   }
   .weight-graph .btn {
     font-size: 14px;
     padding: 8px 16px;
+  }
+  .weight-graph .btn .material-symbols-outlined {
+    font-size: 20px;
   }
   .weight-graph__graph {
     aspect-ratio: 4 / 3;

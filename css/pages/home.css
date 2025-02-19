@@ -24,6 +24,9 @@
 }
 
 @media (max-width: 599px) {
+  .home {
+    gap: 24px;
+  }
   .home__reminder {
     flex-direction: column;
   }

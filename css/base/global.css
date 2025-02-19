@@ -18,3 +18,7 @@
 .in-bl {
   display: inline-block;
 }
+
+.material-symbols-outlined {
+  font-size: 28px;
+}

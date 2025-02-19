@@ -45,6 +45,18 @@ function applyRespons(chart) {
 
   // レスポンシブy軸個数
   chart.options.scales.y.ticks.maxTicksLimit = mediaQuery.matches ? 6 : 8;
+
+  // レスポンシブ点の数調整
+  const weightLength = weights.length;
+  console.log(weightLength);
+  const labels = chart.data.labels;
+  chart.data.datasets[0].pointRadius = labels.map((_, i) =>
+    mediaQuery.matches
+      ? i === 0 || i === weightLength - 1 || i % 2 === 0
+        ? 4
+        : 0
+      : 5
+  );
   chart.update();
 }
 
