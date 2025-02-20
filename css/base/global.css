@@ -7,8 +7,8 @@
   --att-color-01: #d32f2f;
   --att-color-02: #e65100;
   --att-color-03: #1976d2;
-  --sidebar-width_pc: 240px;
-  --sidebar-width_tb: 80px;
+  --sidebar-width_open: 240px;
+  --sidebar-width_close: 72px;
 }
 
 * {

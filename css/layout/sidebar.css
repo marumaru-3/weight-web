@@ -1,40 +1,55 @@
 .sidebar__menu-toggle {
   display: grid;
   place-items: center;
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
 }
 
 .sidebar__nav {
   width: 100%;
 }
+
 .sidebar__list {
   display: flex;
   flex-direction: column;
+}
+.layout__sidebar.open .sidebar__list {
+  width: 100%;
+  align-items: normal;
+}
+
+.layout__sidebar .btn {
+  height: 56px;
+  transition: 0.3s all;
+}
+.layout__sidebar .btn:hover {
+  background-color: #ddd;
+}
+.layout__sidebar.close .btn {
+  justify-content: center;
+  padding: 14px 16px;
+  width: 56px;
+}
+.layout__sidebar.open .btn {
+  justify-content: flex-start;
+  padding: 14px 24px;
+  width: 100%;
 }
 
 .btn--nav.sidebar__link--active {
   background-color: var(--blue-02);
 }
 
-@media (max-width: 1299px) {
-  .layout__sidebar .btn {
-    justify-content: center;
-    padding: 0;
-    width: 56px;
-    height: 56px;
-  }
-  .layout__sidebar .btn--record {
-    width: 56px;
-    height: 56px;
-  }
-  .layout__sidebar .btn__text {
-    display: none;
-  }
-
-  .sidebar__list {
-    align-items: center;
-  }
+.layout__sidebar .btn__text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.layout__sidebar.close .btn__text {
+  display: none;
+}
+.layout__sidebar.open .btn__text {
+  display: block;
 }
 
 @media (max-width: 599px) {
@@ -42,10 +57,17 @@
     display: none;
   }
 
-  .layout__sidebar .btn--record {
+  .layout__sidebar .btn.btn--record {
     position: fixed;
     bottom: 80px;
     right: 16px;
+    justify-content: center;
+    padding: 0;
+    width: 56px;
+    height: 56px;
+  }
+  .layout__sidebar .btn.btn--record .btn__text {
+    display: none;
   }
 
   .sidebar__list {
@@ -53,12 +75,18 @@
     justify-content: space-between;
   }
 
-  .sidebar__link {
+  .layout__sidebar.open .sidebar__link,
+  .layout__sidebar.close .sidebar__link {
     margin: auto;
     flex-direction: column;
     gap: 4px;
+    justify-content: center;
+    padding: 0;
+    width: 56px;
+    height: 56px;
   }
-  .sidebar__link .btn__text {
+  .layout__sidebar.open .sidebar__link .btn__text,
+  .layout__sidebar.close .sidebar__link .btn__text {
     display: block;
     font-size: 10px;
   }
