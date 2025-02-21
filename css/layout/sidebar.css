@@ -1,8 +1,13 @@
 .sidebar__menu-toggle {
+  border-radius: 50%;
   display: grid;
   place-items: center;
   width: 56px;
   height: 56px;
+  padding: 0;
+}
+.sidebar__menu-toggle:hover {
+  background-color: #ddd;
 }
 
 .sidebar__nav {
@@ -12,31 +17,35 @@
 .sidebar__list {
   display: flex;
   flex-direction: column;
+  gap: 8px;
 }
 .layout__sidebar.open .sidebar__list {
   width: 100%;
   align-items: normal;
 }
 
-.layout__sidebar .btn {
+.sidebar__list .btn {
   height: 56px;
   transition: 0.3s all;
 }
-.layout__sidebar .btn:hover {
+.sidebar__list .btn:hover {
   background-color: #ddd;
 }
-.layout__sidebar.close .btn {
+.layout__sidebar.close .sidebar__list .btn,
+.layout__sidebar.close .btn.btn--record {
   justify-content: center;
   padding: 14px 16px;
   width: 56px;
 }
-.layout__sidebar.open .btn {
+.layout__sidebar.open .sidebar__list .btn,
+.layout__sidebar.open .btn.btn--record {
   justify-content: flex-start;
   padding: 14px 24px;
   width: 100%;
 }
 
-.btn--nav.sidebar__link--active {
+.layout__sidebar .btn--nav.sidebar__link--active,
+.layout__sidebar .btn--nav.sidebar__link--active:hover {
   background-color: var(--blue-02);
 }
 
@@ -75,8 +84,8 @@
     justify-content: space-between;
   }
 
-  .layout__sidebar.open .sidebar__link,
-  .layout__sidebar.close .sidebar__link {
+  .layout__sidebar.close .sidebar__list .btn,
+  .layout__sidebar.close .btn.btn--record {
     margin: auto;
     flex-direction: column;
     gap: 4px;

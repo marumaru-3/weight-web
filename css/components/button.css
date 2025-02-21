@@ -5,17 +5,29 @@
   gap: 16px;
   font-weight: bold;
   padding: 14px 24px;
+  transition: 0.3s all;
 }
 
 .btn--record {
+  border: 2px solid var(--text-color);
   background-color: var(--text-color);
+}
+.btn--record:hover {
+  background-color: #fff;
 }
 .btn--record .material-symbols-outlined,
 .btn--record .btn__text {
   color: #fff;
 }
+.btn--record:hover .material-symbols-outlined,
+.btn--record:hover .btn__text {
+  color: var(--text-color);
+}
 
 .btn--more {
   background-color: var(--blue-02);
   gap: 8px;
+}
+.btn--more:hover {
+  background-color: var(--blue-01);
 }

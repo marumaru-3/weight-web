@@ -54,7 +54,10 @@ mediaQueryTB.addEventListener("change", sidebarResponse);
 // レスポンシブ表示のとき、サイドバー以外の場所をクリックしたら表示切り替え
 document.addEventListener("click", (e) => {
   if (!e.target.closest(".layout__sidebar")) {
-    sidebarResponse(mediaQueryTB);
+    if (mediaQueryTB.matches) {
+      sidebar.classList.remove("open");
+      sidebar.classList.add("close");
+    }
   }
 });
 // / レスポンシブ表示のとき、サイドバー以外の場所をクリックしたら表示切り替え
