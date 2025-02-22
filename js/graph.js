@@ -73,6 +73,7 @@ const data = {
       pointBorderColor: "#4a90e2",
       pointBorderWidth: 3,
       hoverBorderWidth: 4,
+      pointHoverRadius: 6,
       spanGaps: true,
     },
   ],

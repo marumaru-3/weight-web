@@ -1,0 +1,47 @@
+<aside class="layout__sidebar">
+  <button id="menu-toggle" class="btn sidebar__menu-toggle">
+    <span class="material-symbols-outlined"> menu_open </span>
+  </button>
+  <button class="btn btn--record">
+    <span class="material-symbols-outlined"> edit_square </span>
+    <span class="btn__text">記録を追加</span>
+  </button>
+  <nav class="sidebar__nav">
+    <ul class="sidebar__list">
+      <li class="sidebar__item">
+        <a
+          href="#"
+          class="sidebar__link btn btn--nav sidebar__link--active">
+          <span class="material-symbols-outlined"> home </span>
+          <span class="btn__text">ホーム</span>
+        </a>
+      </li>
+      <li class="sidebar__item">
+        <a href="#" class="sidebar__link btn btn--nav">
+          <span class="material-symbols-outlined">
+            accessibility_new
+          </span>
+          <span class="btn__text">体重ログ</span>
+        </a>
+      </li>
+      <li class="sidebar__item">
+        <a href="#" class="sidebar__link btn btn--nav">
+          <span class="material-symbols-outlined"> account_circle </span>
+          <span class="btn__text">ユーザー情報</span>
+        </a>
+      </li>
+      <li class="sidebar__item">
+        <a href="#" class="sidebar__link btn btn--nav">
+          <span class="material-symbols-outlined"> help </span>
+          <span class="btn__text">ヘルプ</span>
+        </a>
+      </li>
+      <li class="sidebar__item">
+        <a href="#" class="sidebar__link btn btn--nav">
+          <span class="material-symbols-outlined"> settings </span>
+          <span class="btn__text">設定</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</aside>

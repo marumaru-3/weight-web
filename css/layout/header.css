@@ -18,11 +18,15 @@
 }
 
 .header__profile {
+  border-radius: 50%;
   line-height: 0;
+  padding: 4px;
+  transition: 0.3s all;
 }
-.header__info .material-symbols-outlined {
-  font-size: 40px;
+.header__profile:hover {
+  background-color: var(--blue-02);
 }
+
 .header__user-id {
   font-weight: bold;
   font-size: 18px;
