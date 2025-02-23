@@ -1,0 +1,113 @@
+/* 日ごとの体重記録カード */
+.weight-days {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.weight-days__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.weight-days__switch {
+  display: flex;
+  gap: 8px;
+}
+.weight-days__switch .btn {
+  padding: 8px 24px;
+}
+
+.weight-days__blocks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.weight-days__block {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  font-weight: bold;
+  width: calc(33.3% - 16px);
+}
+
+.weight-days__date {
+  font-size: 18px;
+}
+
+.weight-days__admin {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: var(--blue-02);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+}
+.weight-days__admin .material-symbols-outlined {
+  font-size: 20px;
+}
+
+.weight-days__item {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.weight-days__item--weight {
+  padding: 8px 0;
+}
+.weight-days__item--memo {
+  gap: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 8px;
+}
+
+.weight-days__label {
+  font-size: 14px;
+  width: 120px;
+}
+.weight-days__item--weight .weight-days__label {
+  font-size: 16px;
+}
+
+.weight-days__value {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+.weight-days__item--memo .weight-days__value {
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.weight-days__num {
+  font-size: 24px;
+}
+.weight-days__item--weight .weight-days__num {
+  font-size: 32px;
+}
+
+.weight-days__unit {
+  font-size: 20px;
+}
+.weight-days__item--weight .weight-days__unit {
+  font-size: 24px;
+}
+
+.weight-days .btn--more {
+  position: relative;
+  justify-content: center;
+  width: 240px;
+  height: 48px;
+  margin: auto;
+}
+.weight-days .btn--more .material-symbols-outlined {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+}
+/* / 日ごとの体重記録カード */

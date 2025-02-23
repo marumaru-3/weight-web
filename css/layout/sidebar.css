@@ -24,7 +24,8 @@
   align-items: normal;
 }
 
-.sidebar__list .btn {
+.sidebar__list .btn,
+.btn.btn--record {
   height: 56px;
   transition: 0.3s all;
 }
@@ -70,10 +71,6 @@
     position: fixed;
     bottom: 80px;
     right: 16px;
-    justify-content: center;
-    padding: 0;
-    width: 56px;
-    height: 56px;
   }
   .layout__sidebar .btn.btn--record .btn__text {
     display: none;
@@ -85,7 +82,9 @@
   }
 
   .layout__sidebar.close .sidebar__list .btn,
-  .layout__sidebar.close .btn.btn--record {
+  .layout__sidebar.close .btn.btn--record,
+  .layout__sidebar.open .sidebar__list .btn,
+  .layout__sidebar.open .btn.btn--record {
     margin: auto;
     flex-direction: column;
     gap: 4px;

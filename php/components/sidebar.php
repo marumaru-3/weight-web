@@ -10,14 +10,14 @@
     <ul class="sidebar__list">
       <li class="sidebar__item">
         <a
-          href="#"
+          href="/weight-management/home"
           class="sidebar__link btn btn--nav sidebar__link--active">
           <span class="material-symbols-outlined"> home </span>
           <span class="btn__text">ホーム</span>
         </a>
       </li>
       <li class="sidebar__item">
-        <a href="#" class="sidebar__link btn btn--nav">
+        <a href="/weight-management/log" class="sidebar__link btn btn--nav">
           <span class="material-symbols-outlined">
             accessibility_new
           </span>
@@ -27,7 +27,8 @@
       <li class="sidebar__item">
         <a href="#" class="sidebar__link btn btn--nav">
           <span class="material-symbols-outlined"> account_circle </span>
-          <span class="btn__text">ユーザー情報</span>
+          <span class="btn__text sp-none">ユーザー情報</span>
+          <span class="btn__text sp-only">ユーザー</span>
         </a>
       </li>
       <li class="sidebar__item">

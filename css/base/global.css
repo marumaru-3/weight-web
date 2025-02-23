@@ -13,6 +13,7 @@
 
 * {
   color: var(--text-color);
+  font-family: "Noto Sans JP", sans-serif;
 }
 
 .in-bl {
@@ -21,4 +22,18 @@
 
 .material-symbols-outlined {
   font-size: 28px;
+}
+
+.sp-only {
+  display: none !important;
+}
+
+@media (max-width: 599px) {
+  .sp-only {
+    display: block !important;
+  }
+
+  .sp-none {
+    display: none !important;
+  }
 }

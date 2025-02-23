@@ -1,4 +1,4 @@
-<div class="home">
+<div class="page home">
   <div class="home__reminder">
     <p class="home__text">
       ○○さん、あと4.1kgで目標達成！<span class="in-bl">焦らずに頑張ろう！</span>
@@ -40,7 +40,7 @@
   <div class="weight-graph card">
     <div class="weight-graph__header">
       <div class="weight-graph__meta">
-        <h2 class="weight-graph__title">体重</h2>
+        <h3 class="weight-graph__title">体重</h3>
         <p class="weight-graph__date">2024/12/06～2025/01/07</p>
       </div>
       <button class="btn btn--more">

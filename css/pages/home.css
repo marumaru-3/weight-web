@@ -1,8 +1,3 @@
-.home {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
 .home__reminder {
   display: flex;
   justify-content: space-between;
@@ -13,9 +8,6 @@
   flex: 1;
   font-size: 20px;
 }
-.home__reminder .btn {
-  width: 200px;
-}
 
 @media (max-width: 999px) {
   .home__text {
@@ -24,9 +16,6 @@
 }
 
 @media (max-width: 599px) {
-  .home {
-    gap: 24px;
-  }
   .home__reminder {
     flex-direction: column;
   }
