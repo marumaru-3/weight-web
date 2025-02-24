@@ -47,13 +47,19 @@
 
 /* 体重グラフカード */
 .weight-graph {
-  padding: 16px 24px 32px;
+  padding: 32px 24px;
+}
+.home .weight-graph {
+  padding-top: 16px;
 }
 
 .weight-graph__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 16px;
+}
+.home .weight-graph__header {
   margin-bottom: 8px;
 }
 

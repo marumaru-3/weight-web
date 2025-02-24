@@ -53,6 +53,7 @@
 
 .weight-days__item {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 32px;
 }
@@ -111,3 +112,18 @@
   right: 16px;
 }
 /* / 日ごとの体重記録カード */
+
+@media (max-width: 999px) {
+  .weight-days__block {
+    width: calc(50% - 24px / 2);
+  }
+}
+
+@media (max-width: 599px) {
+  .weight-days__blocks {
+    gap: 16px;
+  }
+  .weight-days__block {
+    width: 100%;
+  }
+}

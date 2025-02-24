@@ -31,42 +31,42 @@
   <div class="weight-summary">
     <div
       class="weight-summary__block card">
-      <p class="weight-summary__title">今日の体重</p>
+      <p class="weight-summary__title">1ヶ月の平均体重</p>
       <p class="weight-summary__text">
         <span class="weight-summary__num">68.1</span>
         <span class="weight-summary__unit">kg</span>
       </p>
     </div>
     <div class="weight-summary__block card">
-      <p class="weight-summary__title">今日の体脂肪率(推定)</p>
+      <p class="weight-summary__title">1ヶ月の平均体脂肪率(推定)</p>
       <p class="weight-summary__text">
         <span class="weight-summary__num">24.1</span>
         <span class="weight-summary__unit">%</span>
       </p>
     </div>
     <div class="weight-summary__block card">
-      <p class="weight-summary__title">あなたの理想体重</p>
+      <p class="weight-summary__title">1ヶ月の平均BMI</p>
       <p class="weight-summary__text">
         <span class="weight-summary__num">64.0</span>
         <span class="weight-summary__unit">kg</span>
       </p>
     </div>
     <div class="weight-summary__block card">
-      <p class="weight-summary__title">あなたの理想体重</p>
+      <p class="weight-summary__title">前月比 (1ヶ月の平均体重)</p>
       <p class="weight-summary__text">
         <span class="weight-summary__num">64.0</span>
         <span class="weight-summary__unit">kg</span>
       </p>
     </div>
     <div class="weight-summary__block card">
-      <p class="weight-summary__title">あなたの理想体重</p>
+      <p class="weight-summary__title">1ヶ月の最高体重</p>
       <p class="weight-summary__text">
         <span class="weight-summary__num">64.0</span>
         <span class="weight-summary__unit">kg</span>
       </p>
     </div>
     <div class="weight-summary__block card">
-      <p class="weight-summary__title">あなたの理想体重</p>
+      <p class="weight-summary__title">1ヶ月の最低体重</p>
       <p class="weight-summary__text">
         <span class="weight-summary__num">64.0</span>
         <span class="weight-summary__unit">kg</span>
@@ -86,7 +86,7 @@
       </ul>
     </div>
     <div class="weight-days__blocks">
-      <?php for ($i = 0; $i < 6; $i++) : ?>
+      <?php for ($i = 0; $i < 6; $i++): ?>
         <div class="weight-days__block card">
           <p class="weight-days__date">2025/01/03</p>
           <button class="weight-days__admin">
