@@ -26,7 +26,7 @@
 }
 .weight-days__block {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 16px;
   font-weight: bold;
   width: calc(33.3% - 16px);
@@ -34,6 +34,7 @@
 
 .weight-days__date {
   font-size: 18px;
+  width: 100%;
 }
 
 .weight-days__admin {
@@ -53,25 +54,32 @@
 
 .weight-days__item {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 32px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8px;
+  width: calc(50% - 8px);
+  min-width: 110px;
 }
 .weight-days__item--weight {
-  padding: 8px 0;
+  padding: 0;
 }
 .weight-days__item--memo {
   gap: 16px;
   flex-direction: column;
   align-items: flex-start;
   margin-top: 8px;
+  width: 100%;
 }
 
-.weight-days__label {
+.weight-days__label,
+.weight-days__label span {
+  color: #666;
   font-size: 14px;
-  width: 120px;
 }
-.weight-days__item--weight .weight-days__label {
+.weight-days__item--weight .weight-days__label,
+.weight-days__item--memo .weight-days__label {
+  color: var(--text-color);
   font-size: 16px;
 }
 

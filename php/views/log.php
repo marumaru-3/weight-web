@@ -1,29 +1,27 @@
 <div class="page log">
   <h2 class="page-title">体重ログ</h2>
   <div class="weight-graph card">
-    <div class="weight-graph__header">
-      <div class="weight-graph__meta">
-        <h3 class="weight-graph__title">体重</h3>
-        <p class="weight-graph__date">2024/12/06～2025/01/07</p>
-      </div>
-      <ul class="weight-graph__switch">
-        <li class="weight-graph__item">
-          <button class="btn btn--select">1週間</button>
-        </li>
-        <li class="weight-graph__item">
-          <button class="btn">1ヶ月</button>
-        </li>
-        <li class="weight-graph__item">
-          <button class="btn">3ヶ月</button>
-        </li>
-        <li class="weight-graph__item">
-          <button class="btn">半年</button>
-        </li>
-        <li class="weight-graph__item">
-          <button class="btn">1年</button>
-        </li>
-      </ul>
+    <div class="weight-graph__meta">
+      <h3 class="weight-graph__title">体重</h3>
+      <p class="weight-graph__date">2024/12/06～2025/01/07</p>
     </div>
+    <ul class="weight-graph__switch">
+      <li class="weight-graph__item">
+        <button class="btn btn--select">1週間</button>
+      </li>
+      <li class="weight-graph__item">
+        <button class="btn">1ヶ月</button>
+      </li>
+      <li class="weight-graph__item">
+        <button class="btn">3ヶ月</button>
+      </li>
+      <li class="weight-graph__item">
+        <button class="btn">半年</button>
+      </li>
+      <li class="weight-graph__item">
+        <button class="btn">1年</button>
+      </li>
+    </ul>
     <div class="weight-graph__graph">
       <canvas id="graph"></canvas>
     </div>
@@ -38,10 +36,10 @@
       </p>
     </div>
     <div class="weight-summary__block card">
-      <p class="weight-summary__title">1ヶ月の平均体脂肪率(推定)</p>
+      <p class="weight-summary__title">前月比 (1ヶ月の平均体重)</p>
       <p class="weight-summary__text">
-        <span class="weight-summary__num">24.1</span>
-        <span class="weight-summary__unit">%</span>
+        <span class="weight-summary__num">64.0</span>
+        <span class="weight-summary__unit">kg</span>
       </p>
     </div>
     <div class="weight-summary__block card">
@@ -52,10 +50,10 @@
       </p>
     </div>
     <div class="weight-summary__block card">
-      <p class="weight-summary__title">前月比 (1ヶ月の平均体重)</p>
+      <p class="weight-summary__title">1ヶ月の平均体脂肪率(推定)</p>
       <p class="weight-summary__text">
-        <span class="weight-summary__num">64.0</span>
-        <span class="weight-summary__unit">kg</span>
+        <span class="weight-summary__num">24.1</span>
+        <span class="weight-summary__unit">%</span>
       </p>
     </div>
     <div class="weight-summary__block card">
@@ -102,10 +100,10 @@
             </p>
           </div>
           <div class="weight-days__item">
-            <p class="weight-days__label">体脂肪率(推定)</p>
+            <p class="weight-days__label">前日比</p>
             <p class="weight-days__value">
-              <span class="weight-days__num">24.2</span>
-              <span class="weight-days__unit">%</span>
+              <span class="weight-days__num">-0.6</span>
+              <span class="weight-days__unit">kg</span>
             </p>
           </div>
           <div class="weight-days__item">
@@ -115,10 +113,10 @@
             </p>
           </div>
           <div class="weight-days__item">
-            <p class="weight-days__label">前日比</p>
+            <p class="weight-days__label">体脂肪率<span class="in-bl">(推定)</span></p>
             <p class="weight-days__value">
-              <span class="weight-days__num">-0.6</span>
-              <span class="weight-days__unit">kg</span>
+              <span class="weight-days__num">24.2</span>
+              <span class="weight-days__unit">%</span>
             </p>
           </div>
           <div class="weight-days__item weight-days__item--memo">

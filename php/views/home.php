@@ -38,16 +38,14 @@
     </p>
   </div>
   <div class="weight-graph card">
-    <div class="weight-graph__header">
-      <div class="weight-graph__meta">
-        <h3 class="weight-graph__title">体重</h3>
-        <p class="weight-graph__date">2024/12/06～2025/01/07</p>
-      </div>
-      <button class="btn btn--more">
-        <span class="btn__text">もっと見る</span>
-        <span class="material-symbols-outlined"> chevron_right </span>
-      </button>
+    <div class="weight-graph__meta">
+      <h3 class="weight-graph__title">体重</h3>
+      <p class="weight-graph__date">2024/12/06～2025/01/07</p>
     </div>
+    <a href="/weight-management/log" class="btn btn--more">
+      <span class="btn__text">もっと見る</span>
+      <span class="material-symbols-outlined"> chevron_right </span>
+    </a>
     <div class="weight-graph__graph">
       <canvas id="graph"></canvas>
     </div>

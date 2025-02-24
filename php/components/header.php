@@ -1,7 +1,7 @@
 <header id="header" class="layout__header">
   <div class="header__left">
     <h1 class="header__logo">
-      <a href="#" title="体重Web">
+      <a href="/weight-management/home" title="体重Web">
         <img src="./images/main-logo.svg" alt="体重Web ロゴ" />
         体重Web
       </a>

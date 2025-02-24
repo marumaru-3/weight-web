@@ -47,21 +47,24 @@
 
 /* 体重グラフカード */
 .weight-graph {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
   padding: 32px 24px;
 }
 .home .weight-graph {
   padding-top: 16px;
 }
 
-.weight-graph__header {
+/* .weight-graph__header {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
   margin-bottom: 16px;
-}
-.home .weight-graph__header {
-  margin-bottom: 8px;
-}
+} */
 
 .weight-graph__meta {
   display: flex;
@@ -133,9 +136,8 @@
     padding: 16px 16px 24px;
   }
   .weight-graph__meta {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+    order: 1;
+    gap: 16px;
   }
   .weight-graph__title {
     font-size: 18px;
@@ -143,15 +145,26 @@
   .weight-graph__date {
     font-size: 14px;
   }
-  .weight-graph .btn {
-    font-size: 14px;
-    padding: 8px 16px;
+  .weight-graph .btn,
+  .weight-graph__switch {
+    order: 3;
+  }
+  .weight-graph__switch {
+    justify-content: space-between;
+    width: 100%;
   }
   .weight-graph .btn .material-symbols-outlined {
     font-size: 20px;
   }
   .weight-graph__graph {
+    order: 2;
     aspect-ratio: 4 / 3;
   }
   /* / 体重グラフカード */
+}
+
+@media (max-width: 399px) {
+  .weight-graph__switch {
+    font-size: 3.6vw;
+  }
 }
