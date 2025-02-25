@@ -14,6 +14,10 @@ switch ($page) {
         $page_title = "ユーザー情報";
         $page_content = __DIR__ . "/php/views/user.php";
         break;
+    case "help":
+        $page_title = "ヘルプ";
+        $page_content = __DIR__ . "/php/views/help.php";
+        break;
     default:
         $page_title = "ページが見つかりません";
         $page_content = __DIR__ . "/php/views/404.php";

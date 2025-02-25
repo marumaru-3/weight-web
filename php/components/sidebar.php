@@ -25,14 +25,14 @@
         </a>
       </li>
       <li class="sidebar__item">
-        <a href="#" class="sidebar__link btn btn--nav">
+        <a href="/weight-management/user" class="sidebar__link btn btn--nav">
           <span class="material-symbols-outlined"> account_circle </span>
           <span class="btn__text sp-none">ユーザー情報</span>
           <span class="btn__text sp-only">ユーザー</span>
         </a>
       </li>
       <li class="sidebar__item">
-        <a href="#" class="sidebar__link btn btn--nav">
+        <a href="/weight-management/help" class="sidebar__link btn btn--nav">
           <span class="material-symbols-outlined"> help </span>
           <span class="btn__text">ヘルプ</span>
         </a>

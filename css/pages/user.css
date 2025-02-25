@@ -3,10 +3,46 @@
   flex-wrap: wrap;
   gap: 24px;
 }
+
 .info-summary__block {
   display: flex;
   flex-direction: column;
   gap: 24px;
   width: calc(50% - 12px);
   padding-bottom: 40px;
+}
+
+.info-summary__admin {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: var(--blue-02);
+  border-radius: 40px;
+  font-weight: bold;
+  padding: 8px 16px;
+}
+.info-summary__admin .material-symbols-outlined {
+  font-size: 24px;
+}
+
+.info-summary__item {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.info-summary__label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+@media (max-width: 599px) {
+  .info-summary__block {
+    width: 100%;
+  }
 }
