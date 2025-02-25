@@ -72,9 +72,6 @@
   gap: 24px;
   font-weight: bold;
 }
-.weight-graph__title {
-  font-size: 20px;
-}
 
 .weight-graph__switch {
   display: flex;

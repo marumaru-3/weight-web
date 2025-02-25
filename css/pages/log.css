@@ -8,9 +8,12 @@
 
 .weight-days__header {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  gap: 24px;
 }
+
 .weight-days__switch {
   display: flex;
   gap: 8px;

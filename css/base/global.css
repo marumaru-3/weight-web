@@ -24,6 +24,15 @@
   font-size: 28px;
 }
 
+.page-title {
+  font-size: 24px;
+}
+
+.contents-title {
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .sp-only {
   display: none !important;
 }

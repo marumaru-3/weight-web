@@ -1,8 +1,8 @@
 <div class="page log">
-  <h2 class="page-title">体重ログ</h2>
+  <h2 class="page-title"><?php echo $page_title; ?></h2>
   <div class="weight-graph card">
     <div class="weight-graph__meta">
-      <h3 class="weight-graph__title">体重</h3>
+      <h3 class="weight-graph__title contents-title">体重</h3>
       <p class="weight-graph__date">2024/12/06～2025/01/07</p>
     </div>
     <ul class="weight-graph__switch">
@@ -27,8 +27,7 @@
     </div>
   </div>
   <div class="weight-summary">
-    <div
-      class="weight-summary__block card">
+    <div class="weight-summary__block card">
       <p class="weight-summary__title">1ヶ月の平均体重</p>
       <p class="weight-summary__text">
         <span class="weight-summary__num">68.1</span>
@@ -73,7 +72,7 @@
   </div>
   <div class="weight-days">
     <div class="weight-days__header">
-      <h3 class="weight-days__title">日ごとの体重記録</h3>
+      <h3 class="weight-days__title contents-title">日ごとの体重記録</h3>
       <ul class="weight-days__switch">
         <li class="weight-days__list">
           <button class="btn btn--select">新しい順</button>

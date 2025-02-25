@@ -1,0 +1,12 @@
+.info-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.info-summary__block {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: calc(50% - 12px);
+  padding-bottom: 40px;
+}

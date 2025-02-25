@@ -8,8 +8,7 @@
     </button>
   </div>
   <div class="weight-summary">
-    <div
-      class="weight-summary__block card weight-summary__block--main">
+    <div class="weight-summary__block card weight-summary__block--main">
       <p class="weight-summary__title">今日の体重</p>
       <p class="weight-summary__text">
         <span class="weight-summary__num">68.1</span>
@@ -39,10 +38,11 @@
   </div>
   <div class="weight-graph card">
     <div class="weight-graph__meta">
-      <h3 class="weight-graph__title">体重</h3>
+      <h3 class="weight-graph__title contents-title">体重</h3>
       <p class="weight-graph__date">2024/12/06～2025/01/07</p>
     </div>
-    <a href="/weight-management/log" class="btn btn--more">
+    <a href="/weight-management/log"
+      class="btn btn--more">
       <span class="btn__text">もっと見る</span>
       <span class="material-symbols-outlined"> chevron_right </span>
     </a>
