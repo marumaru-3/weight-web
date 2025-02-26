@@ -3,6 +3,7 @@
 @import url("./base/global.css");
 
 /* Components */
+@import url("./components/accordion.css");
 @import url("./components/button.css");
 @import url("./components/card.css");
 @import url("./components/form.css");

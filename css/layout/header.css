@@ -20,7 +20,7 @@
 .header__profile {
   border-radius: 50%;
   line-height: 0;
-  padding: 4px;
+  padding: 8px;
   transition: 0.3s all;
 }
 .header__profile:hover {

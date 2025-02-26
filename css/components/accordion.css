@@ -1,0 +1,13 @@
+/* アコーディオンアニメーション */
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+}
+.accordion-btn .material-symbols-outlined {
+  transition: 0.5s all;
+}
+.accordion[data-state="open"] .accordion-btn .material-symbols-outlined {
+  transform: rotate(135deg);
+}
+/* / アコーディオンアニメーション */

@@ -23,9 +23,13 @@
   border-radius: 40px;
   font-weight: bold;
   padding: 8px 16px;
+  transition: 0.3s all;
 }
 .info-summary__admin .material-symbols-outlined {
   font-size: 24px;
+}
+.info-summary__admin:hover {
+  background-color: var(--blue-01);
 }
 
 .info-summary__item {
@@ -41,8 +45,23 @@
   font-size: 18px;
 }
 
+.info-summary__item.copy .info-summary__value {
+  font-size: 18px;
+}
+
+.user-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 16px;
+}
+
 @media (max-width: 599px) {
   .info-summary__block {
     width: 100%;
+  }
+
+  .info-summary__label {
+    font-size: 16px;
   }
 }

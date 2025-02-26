@@ -50,9 +50,13 @@
   place-items: center;
   width: 32px;
   height: 32px;
+  transition: 0.3s all;
 }
 .weight-days__admin .material-symbols-outlined {
   font-size: 20px;
+}
+.weight-days__admin:hover {
+  background-color: var(--blue-01);
 }
 
 .weight-days__item {

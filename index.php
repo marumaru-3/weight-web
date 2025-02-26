@@ -18,6 +18,10 @@ switch ($page) {
         $page_title = "ヘルプ";
         $page_content = __DIR__ . "/php/views/help.php";
         break;
+    case "settings":
+        $page_title = "設定";
+        $page_content = __DIR__ . "/php/views/settings.php";
+        break;
     default:
         $page_title = "ページが見つかりません";
         $page_content = __DIR__ . "/php/views/404.php";

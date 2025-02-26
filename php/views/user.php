@@ -47,4 +47,9 @@
       </div>
     </div>
   </div>
+  <div class="user-btns">
+    <button class="btn btn--logout">
+      <span class="btn__text">ログアウト</span>
+    </button>
+  </div>
 </div>

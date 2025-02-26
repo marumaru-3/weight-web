@@ -38,6 +38,10 @@
 }
 
 @media (max-width: 599px) {
+  .contents-title {
+    font-size: 18px;
+  }
+
   .sp-only {
     display: block !important;
   }
