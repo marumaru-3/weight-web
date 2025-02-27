@@ -22,6 +22,24 @@
   width: calc(33.3% - 16px);
   height: 120px;
 }
+.weight-summary__admin {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: var(--blue-02);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  transition: 0.3s all;
+}
+.weight-summary__admin .material-symbols-outlined {
+  font-size: 20px;
+}
+.weight-summary__admin:hover {
+  background-color: var(--blue-01);
+}
 .weight-summary__text {
   font-size: 24px;
 }
