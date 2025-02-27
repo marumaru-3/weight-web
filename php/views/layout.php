@@ -31,6 +31,7 @@
   </div>
 
   <script src="./js/layout.js"></script>
+  <script src="./js/modal.js"></script>
   <script src="./js/graph.js"></script>
   <script src="./js/accordion.js"></script>
 </body>

@@ -87,7 +87,8 @@
   display: none !important;
 }
 :where(:focus-visible) {
-  outline: 3px solid CanvasText;
+  outline: 3px solid var(--line-color);
+  border-radius: 4px;
   box-shadow: 0 0 0 5px Canvas;
   outline-offset: 1px;
 }
@@ -102,4 +103,16 @@
   position: absolute !important;
   white-space: nowrap !important;
   border: 0 !important;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }

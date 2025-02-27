@@ -22,7 +22,7 @@
 }
 
 .sidebar__list .btn,
-.btn.btn--record {
+.sidebar__list .btn.btn--record {
   height: 56px;
   transition: 0.3s all;
 }

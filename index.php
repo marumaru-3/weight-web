@@ -28,4 +28,6 @@ switch ($page) {
         break;
 }
 
+require_once __DIR__ . "/php/components/modal/modal.php";
+
 require_once __DIR__ . "/php/views/layout.php";
