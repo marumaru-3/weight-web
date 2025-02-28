@@ -1,13 +1,15 @@
 const layoutElement = document.getElementById("layout");
 
-const openRecordModalBtns = document.querySelectorAll(".modal-record__open");
-const openAdminModalBtns = document.querySelectorAll(".modal-admin__open");
+const openModalBtns = document.querySelectorAll("[data-modal]");
 
 // モーダルを開く
-const openModal = (openModalBtns) => {
-  openModalBtns.forEach((openModalBtn) => {
-    openModalBtn.addEventListener("click", () => {
-      fetch("/weight-management/php/components/modal/modal.php?fetch=true")
+const openModal = (btns) => {
+  btns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const modalType = btn.getAttribute("data-modal");
+      fetch(
+        `/weight-management/php/components/modal/modal.php?fetch=true&modal=${modalType}`
+      )
         .then((response) => response.text())
         .then((html) => {
           layoutElement.insertAdjacentHTML("afterend", html);
@@ -32,16 +34,16 @@ const openModal = (openModalBtns) => {
     });
   });
 };
-openModal(openRecordModalBtns);
 
-// モーダルを閉じる関数
+openModal(openModalBtns);
+
 const closeModal = () => {
   const modal = document.getElementById("modal");
   if (modal) {
     modal.remove();
   }
 };
-// モーダルコンテンツ以外をクリックしたらモーダルを閉じる
+// モーダル背景クリックで閉じる
 document.addEventListener("click", (e) => {
   const modal = document.getElementById("modal");
   if (modal && e.target === modal) {

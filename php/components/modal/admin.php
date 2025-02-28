@@ -1,14 +1,6 @@
 <div class="modal-record">
   <div class="modal-record__date">
-    <button class="date-prev">
-      <img src="./images/date-arrow.svg"
-        alt="<" />
-    </button>
     <p class="date__contents">2025/01/07</p>
-    <button class="date-next">
-      <img src="./images/date-arrow.svg"
-        alt="<" />
-    </button>
   </div>
   <form id="record-form"
     class="record-form">
@@ -39,7 +31,7 @@
           id="close-modal"
           class="btn btn--cancel">キャンセル</button>
         <button type="submit"
-          class="btn btn--record"><span class="btn__text">記録を追加</span></button>
+          class="btn btn--record"><span class="btn__text">編集を保存</span></button>
       </div>
     </div>
   </form>

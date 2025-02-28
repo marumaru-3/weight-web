@@ -1,6 +1,6 @@
 <?php
 
-require_once 'config.php';
+require_once "config.php";
 
 $page = $_GET["page"] ?? "home";
 
@@ -30,7 +30,5 @@ switch ($page) {
         $page_content = SOURCE_BASE . "views/404.php";
         break;
 }
-
-require_once SOURCE_BASE . "components/modal/modal.php";
 
 require_once SOURCE_BASE . "views/layout.php";

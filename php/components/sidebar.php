@@ -3,7 +3,8 @@
           class="btn sidebar__menu-toggle">
     <span class="material-symbols-outlined"> menu_open </span>
   </button>
-  <button class="modal-record__open btn btn--record">
+  <button class="btn btn--record"
+          data-modal="record">
     <span class="material-symbols-outlined"> edit_square </span>
     <span class="btn__text">記録を追加</span>
   </button>

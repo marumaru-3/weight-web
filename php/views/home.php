@@ -3,13 +3,15 @@
     <p class="home__text">
       ○○さん、あと4.1kgで目標達成！<span class="in-bl">焦らずに頑張ろう！</span>
     </p>
-    <button class="modal-record__open btn btn--record">
+    <button class="btn btn--record"
+      data-modal="record">
       <span class="btn__text">今日の記録を追加する</span>
     </button>
   </div>
   <div class="weight-summary">
     <div class="weight-summary__block card weight-summary__block--main">
-      <button class="weight-summary__admin">
+      <button class="weight-summary__admin"
+        data-modal="admin">
         <span class="material-symbols-outlined">
           edit
         </span>
