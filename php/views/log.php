@@ -86,7 +86,7 @@
       <?php for ($i = 0; $i < 6; $i++): ?>
         <div class="weight-days__block card">
           <p class="weight-days__date">2025/01/03</p>
-          <button class="weight-days__admin">
+          <button class="weight-days__admin" data-modal="admin">
             <span class="material-symbols-outlined">
               edit
             </span>
