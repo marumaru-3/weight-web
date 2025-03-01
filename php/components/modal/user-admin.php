@@ -4,10 +4,14 @@
     class="basic-info-form">
     <div class="basic-info-form__contents">
       <div class="basic-info-form__input">
-        <label for="name">ユーザー名</label>
-        <input type="text"
-          id="name"
-          maxlength="10">
+        <label for="name" class="text-label">
+          <div class="label-name">
+            名前
+          </div>
+          <input type="text"
+            id="name"
+            maxlength="10">
+        </label>
       </div>
 
       <div class="basic-info-form__date">
@@ -17,6 +21,9 @@
             <label for="year">年</label>
             <select name="year"
               id="year">
+              <option value
+                disabled
+                selected></option>
             </select>
           </div>
           <div class="basic-info-form__input">
@@ -38,21 +45,24 @@
             <label for="day">日</label>
             <select name="day"
               id="day">
+              <option value
+                disabled
+                selected></option>
             </select>
           </div>
         </div>
       </div>
       <div class="basic-info-form__flex">
         <div class="basic-info-form__input">
-          <label for="name">身長</label>
+          <label for="height">身長</label>
           <input type="text"
-            id="name"
+            id="height"
             maxlength="10">
         </div>
         <div class="basic-info-form__input">
-          <label for="name">理想体重</label>
+          <label for="ideal-weight">理想体重</label>
           <input type="text"
-            id="name"
+            id="ideal-weight"
             maxlength="10">
         </div>
       </div>

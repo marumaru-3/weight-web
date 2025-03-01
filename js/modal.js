@@ -17,8 +17,11 @@ const openModal = (btns) => {
           const closeModalBtn = document.getElementById("close-modal");
           const recordForm = document.getElementById("record-form");
 
-          // 日付変更対応
+          // 記録モーダル日付変更対応
           recordDateSelect();
+
+          // アカウント生年月日日付変更対応
+          userDateForm();
 
           // 背景スクロールさせない
           bodyElement.style.overflow = "hidden";
@@ -29,12 +32,12 @@ const openModal = (btns) => {
           }
 
           // フォームの送信処理
-          if (closeModalBtn) {
-            recordForm.addEventListener("submit", (e) => {
-              e.preventDefault();
-              console.log("フォーム送信がブロックされました");
-            });
-          }
+          // if (closeModalBtn) {
+          //   recordForm.addEventListener("submit", (e) => {
+          //     e.preventDefault();
+          //     console.log("フォーム送信がブロックされました");
+          //   });
+          // }
         })
         .catch((error) => console.error("モーダルの読み込みに失敗:", error));
     });
