@@ -1,5 +1,5 @@
-<div class="modal-record">
-  <div class="modal-record__date">
+<div class="modal-record-admin">
+  <div class="modal-record-admin__date">
     <p class="date__contents">2025/01/07</p>
   </div>
   <form id="record-form"
@@ -12,6 +12,7 @@
           name="weight"
           placeholder="例： 68.4"
           step="0.1"
+          value="68.1"
           required> <span class="weight__unit">kg</span>
       </div>
     </div>
@@ -21,15 +22,18 @@
         <textarea id="memo"
           name="memo"
           rows="1"
-          placeholder="例: 今日はたくさん運動した。"></textarea>
+          maxlength="30"
+          placeholder="例: 今日はたくさん運動した。">あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほ</textarea>
       </div>
     </div>
 
-    <div class="modal-buttons record-form__buttons">
+    <div class="modal-buttons">
+      <button type="button"
+        class="btn btn--att-color-01"><span class="btn__text">削除</span></button>
       <div class="modal-buttons__group">
         <button type="button"
           id="close-modal"
-          class="btn btn--cancel">キャンセル</button>
+          class="btn btn--cancel"><span class="btn__text">キャンセル</span></button>
         <button type="submit"
           class="btn btn--record"><span class="btn__text">編集を保存</span></button>
       </div>

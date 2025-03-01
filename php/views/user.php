@@ -23,7 +23,8 @@
     </div>
     <div class="info-summary__block card">
       <h3 class="info-summary__title contents-title">基本情報</h3>
-      <button class="info-summary__admin">
+      <button class="info-summary__admin"
+              data-modal="user-admin">
         <span class="material-symbols-outlined">
           edit
         </span>
@@ -48,7 +49,7 @@
     </div>
   </div>
   <div class="user-btns">
-    <button class="btn btn--logout">
+    <button class="btn btn--att-color-03">
       <span class="btn__text">ログアウト</span>
     </button>
   </div>

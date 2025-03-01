@@ -12,10 +12,10 @@
       <p class="settings-block__value">0000000000</p>
     </div>
     <div class="settings-btns">
-      <button class="btn btn--acc-delete">
+      <button class="btn btn--att-color-01">
         <span class="btn__text">アカウントの削除</span>
       </button>
-      <button class="btn btn--data-delete">
+      <button class="btn btn--att-color-02">
         <span class="btn__text">データの初期化</span>
       </button>
     </div>

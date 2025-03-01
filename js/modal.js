@@ -1,5 +1,5 @@
+const bodyElement = document.querySelector("body");
 const layoutElement = document.getElementById("layout");
-
 const openModalBtns = document.querySelectorAll("[data-modal]");
 
 // モーダルを開く
@@ -16,6 +16,12 @@ const openModal = (btns) => {
 
           const closeModalBtn = document.getElementById("close-modal");
           const recordForm = document.getElementById("record-form");
+
+          // 日付変更対応
+          recordDateSelect();
+
+          // 背景スクロールさせない
+          bodyElement.style.overflow = "hidden";
 
           // モーダルを閉じるボタン
           if (closeModalBtn) {
@@ -41,6 +47,8 @@ const closeModal = () => {
   const modal = document.getElementById("modal");
   if (modal) {
     modal.remove();
+    // 背景スクロール
+    bodyElement.style.overflow = "";
   }
 };
 // モーダル背景クリックで閉じる

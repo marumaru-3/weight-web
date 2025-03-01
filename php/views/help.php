@@ -2,9 +2,9 @@
   <h2 class="page-title"><?php echo $page_title; ?></h2>
   <ul class="help-summary">
     <li class="help-summary__accordion accordion card"
-        data-state="close">
+      data-state="close">
       <button class="accordion-btn"
-              type="button">
+        type="button">
         基本的な使い方について
         <span class="material-symbols-outlined">
           add_circle
@@ -15,7 +15,7 @@
           <p class="ul__list-title">ステップ1: 記録の追加方法</p>
           <ol class="ul__ol">
             <li>サイドバーの「記録を追加」、またはホームの「今日の記録を追加する」を押します。</li>
-            <li>今日以外の記録を追加したい場合には、年月日(例: 2025/01/07)を押す、または左右の矢印から記録したい日を選択します。</li>
+            <li>今日以外の記録を追加したい場合には、左右の矢印から記録したい日を選択します。</li>
             <li>体重と一言メモを入力して「記録を追加」を押します。</li>
           </ol>
         </li>
@@ -36,9 +36,9 @@
       </ul>
     </li>
     <li class="help-summary__accordion accordion card"
-        data-state="close">
+      data-state="close">
       <button class="accordion-btn"
-              type="button">
+        type="button">
         アカウント関連について
         <span class="material-symbols-outlined">
           add_circle
@@ -65,9 +65,9 @@
       </ul>
     </li>
     <li class="help-summary__accordion accordion card"
-        data-state="close">
+      data-state="close">
       <button class="accordion-btn"
-              type="button">
+        type="button">
         プライバシーについて
         <span class="material-symbols-outlined">
           add_circle
@@ -83,9 +83,9 @@
       </ul>
     </li>
     <li class="help-summary__accordion accordion card"
-        data-state="close">
+      data-state="close">
       <button class="accordion-btn"
-              type="button">
+        type="button">
         よくある質問（FAQ）
         <span class="material-symbols-outlined">
           add_circle
@@ -109,14 +109,14 @@
         <li>
           <p class="ul__list-question">データが正しく保存されない場合は？</p>
           <p class="ul__list-answer"><span>こちらのXアカウントのDMでご連絡ください。 <a href="#"
-                 class="ul__link">@twitter.com/acoount</a></span></p>
+                class="ul__link">@twitter.com/acoount</a></span></p>
         </li>
       </ul>
     </li>
     <li class="help-summary__accordion accordion card"
-        data-state="close">
+      data-state="close">
       <button class="accordion-btn"
-              type="button">
+        type="button">
         お問い合わせ
         <span class="material-symbols-outlined">
           add_circle
@@ -126,7 +126,7 @@
         <li>
           <p class="ul__list-text">体重管理ステーションについて疑問点や改善点等ありましたら、<br>
             こちらのXアカウントのDMでご連絡ください。 <a href="#"
-               class="ul__link">@twitter.com/acoount</a></p>
+              class="ul__link">@twitter.com/acoount</a></p>
         </li>
       </ul>
     </li>

@@ -1,11 +1,14 @@
 <div class="modal-record">
   <div class="modal-record__date">
-    <button id="date-prev" class="date-prev">
+    <button id="date-prev"
+      class="date-prev">
       <img src="./images/date-arrow.svg"
         alt="<" />
     </button>
-    <p id="date-contents" class="date__contents">2025/01/07</p>
-    <button id="date-next" class="date-next">
+    <p id="date-contents"
+      class="date__contents"></p>
+    <button id="date-next"
+      class="date-next">
       <img src="./images/date-arrow.svg"
         alt="<" />
     </button>
@@ -29,6 +32,7 @@
         <textarea id="memo"
           name="memo"
           rows="1"
+          maxlength="30"
           placeholder="例: 今日はたくさん運動した。"></textarea>
       </div>
     </div>
@@ -37,7 +41,7 @@
       <div class="modal-buttons__group">
         <button type="button"
           id="close-modal"
-          class="btn btn--cancel">キャンセル</button>
+          class="btn btn--cancel"><span class="btn__text">キャンセル</span></button>
         <button type="submit"
           class="btn btn--record"><span class="btn__text">記録を追加</span></button>
       </div>

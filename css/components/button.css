@@ -40,46 +40,50 @@
   background-color: var(--blue-01);
 }
 
-.btn--logout,
-.btn--acc-delete,
-.btn--data-delete {
+.btn--att-color-03,
+.btn--att-color-01,
+.btn--att-color-02 {
   background-color: #fff;
   border: 2px solid var(--att-color-03);
-  width: 200px;
   justify-content: center;
 }
-.btn--logout:hover .btn__text,
-.btn--acc-delete:hover .btn__text,
-.btn--data-delete:hover .btn__text {
+.page .btn--att-color-03,
+.page .btn--att-color-01,
+.page .btn--att-color-02 {
+  width: 200px;
+}
+.btn--att-color-03:hover .btn__text,
+.btn--att-color-01:hover .btn__text,
+.btn--att-color-02:hover .btn__text {
   color: #fff;
 }
 
-.btn--logout {
+.btn--att-color-03 {
   border-color: var(--att-color-03);
 }
-.btn--logout .btn__text {
+.btn--att-color-03 .btn__text {
   color: var(--att-color-03);
 }
-.btn--logout:hover {
+.btn--att-color-03:hover {
   background-color: var(--att-color-03);
 }
 
-.btn--acc-delete {
+.btn--att-color-01 {
   border-color: var(--att-color-01);
 }
-.btn--acc-delete .btn__text {
+.btn--att-color-01 .btn__text {
   color: var(--att-color-01);
 }
-.btn--acc-delete:hover {
+.btn--att-color-01:hover {
   background-color: var(--att-color-01);
 }
 
-.btn--data-delete {
+.btn--att-color-02 {
   border-color: var(--att-color-02);
 }
-.btn--data-delete .btn__text {
+.btn--att-color-02 .btn__text {
   color: var(--att-color-02);
 }
-.btn--data-delete:hover {
+.btn--att-color-02:hover {
   background-color: var(--att-color-02);
 }

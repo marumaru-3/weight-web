@@ -19,11 +19,27 @@
   max-width: 600px;
 }
 
-.modal-record__date {
+.modal-width {
+  max-width: 432px;
+  margin: auto;
+}
+
+.modal-title {
+  font-size: 20px;
+  padding: 32px 0;
+}
+
+.modal-record__date,
+.modal-record-admin__date {
   display: flex;
   align-items: center;
   gap: 16px;
+}
+.modal-record__date {
   padding: 24px 16px 28px;
+}
+.modal-record-admin__date {
+  padding: 24px 24px 28px;
 }
 .date__contents {
   font-size: 18px;
@@ -31,6 +47,9 @@
 }
 .date-next {
   transform: scale(-1, 1);
+}
+.date-next:disabled {
+  opacity: 0.5;
 }
 
 .record-form__contents {
@@ -84,10 +103,14 @@
 .modal-buttons {
   display: flex;
   justify-content: space-between;
+  gap: 24px;
   padding: 24px 24px 32px;
 }
 .modal-buttons.record-form__buttons {
   justify-content: flex-end;
+}
+.modal-width .modal-buttons {
+  padding: 24px 0 32px;
 }
 
 .modal-buttons__group {
@@ -99,13 +122,36 @@
 .modal-buttons .btn {
   height: 48px;
 }
+.modal-width .modal-buttons .btn {
+  justify-content: center;
+  width: 160px;
+}
 
 @media (max-width: 599px) {
   .modal__container {
     top: 14vh;
   }
 
+  .record-form__input input,
+  .record-form__input textarea {
+    padding: 4px;
+  }
   .record-form__input #memo {
-    min-height: 72px;
+    min-height: 64px;
+  }
+
+  .modal-buttons {
+    gap: 16px;
+    padding: 24px 16px 32px;
+  }
+  .modal-buttons__group {
+    gap: 16px;
+  }
+  .modal-buttons .btn {
+    padding: 8px 16px;
+    height: 40px;
+  }
+  .modal-buttons .btn__text {
+    font-size: 14px;
   }
 }
