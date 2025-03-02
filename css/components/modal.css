@@ -20,8 +20,9 @@
 }
 
 .modal-width {
-  max-width: 432px;
+  max-width: 480px;
   margin: auto;
+  padding: 0 24px;
 }
 
 .modal-title {
@@ -110,7 +111,7 @@
   justify-content: flex-end;
 }
 .modal-width .modal-buttons {
-  padding: 24px 0 32px;
+  padding: 48px 0 32px;
 }
 
 .modal-buttons__group {
@@ -122,27 +123,103 @@
 .modal-buttons .btn {
   height: 48px;
 }
-.modal-width .modal-buttons .btn {
+/* .modal-width .modal-buttons .btn {
   justify-content: center;
   width: 160px;
-}
+} */
 
+.basic-info-form__contents {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.label-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+.basic-info-form__flex {
+  display: flex;
+  gap: 8px;
+}
 .basic-info-form__input {
   position: relative;
-  border: 1px solid #ddd;
+  border: 1px solid var(--line-color);
   border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+}
+.basic-info-form__input.click {
+  box-shadow: var(--blue-01) 0px 0px 0px 1px;
+  border-color: var(--blue-01);
 }
 .basic-info-form__input .text-label {
   display: flex;
+}
+.basic-info-form__input .select-label {
+  display: flex;
+  position: relative;
+  cursor: auto;
+}
+.basic-info-form__input .select-label::before {
+  content: "";
+  position: absolute;
+  top: 30px;
+  right: 16px;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--text-color);
+  border-bottom: 2px solid var(--text-color);
+  transform: rotate(45deg);
+}
+.basic-info-form__input.click .select-label::before {
+  border-color: var(--blue-01);
 }
 .basic-info-form__input .label-name {
   position: absolute;
   top: 0;
   left: 0;
+  display: flex;
+  align-items: flex-start;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 14px 8px 0;
+  pointer-events: none;
+  height: 100%;
+  transition: 0.2s all;
+  z-index: 1;
 }
-.basic-info-form__input input {
+.basic-info-form__input .select-label .label-name {
+  transition: none;
+}
+.basic-info-form__input.click .label-name {
+  color: var(--blue-01);
+}
+.basic-info-form__input.text-on .label-name {
+  font-size: 12px;
+  padding-top: 4px;
+}
+.basic-info-form__input .label-input {
+  margin-top: 16px;
+  padding: 8px;
+  width: 100%;
+}
+.basic-info-form__input .select-label .label-input {
+  padding-top: 24px;
+  margin-top: 0;
+}
+.basic-info-form__input input,
+.basic-info-form__input select {
   border: none;
   width: 100%;
+}
+.basic-info-form__input select {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.basic-info-form__input input:focus-visible,
+.basic-info-form__input select:focus-visible {
+  outline: none;
 }
 
 @media (max-width: 599px) {
@@ -171,5 +248,16 @@
   }
   .modal-buttons .btn__text {
     font-size: 14px;
+  }
+
+  .modal-title {
+    font-size: 18px;
+  }
+  .basic-info-form__input .label-name,
+  .label-title {
+    font-size: 16px;
+  }
+  .basic-info-form__input .label-name {
+    padding-top: 16px;
   }
 }

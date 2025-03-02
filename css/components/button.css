@@ -87,3 +87,30 @@
 .btn--att-color-02:hover {
   background-color: var(--att-color-02);
 }
+
+.btn--user {
+  background-color: var(--att-color-03);
+  border: 2px solid var(--att-color-03);
+}
+.btn--user .btn__text {
+  color: #fff;
+}
+.btn--user:hover {
+  background-color: #fff;
+}
+.btn--user:hover .btn__text {
+  color: var(--att-color-03);
+}
+
+.btn--logout {
+  background-color: #fff;
+}
+.btn--logout .btn__text {
+  color: var(--text-color);
+}
+.btn--logout:hover {
+  background-color: var(--text-color);
+}
+.btn--logout:hover .btn__text {
+  color: #fff;
+}

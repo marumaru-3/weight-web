@@ -12,6 +12,9 @@
   align-items: center;
   gap: 16px;
 }
+.header__info {
+  position: relative;
+}
 .header__logo img {
   width: 40px;
   height: 40px;
@@ -23,6 +26,7 @@
   padding: 8px;
   transition: 0.3s all;
 }
+.header__info.click .header__profile,
 .header__profile:hover {
   background-color: var(--blue-02);
 }
@@ -32,8 +36,58 @@
   font-size: 18px;
 }
 
+.user-popup {
+  position: absolute;
+  top: 64px;
+  right: 0;
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #e2ecff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  font-weight: bold;
+  width: 280px;
+  padding: 32px 0 56px;
+}
+.header__info.click .user-popup {
+  display: flex;
+}
+.user-popup__name {
+  font-size: 20px;
+  margin-bottom: 24px;
+}
+.user-popup__copy,
+.copy__label {
+  display: flex;
+  align-items: center;
+}
+.copy__label {
+  gap: 8px;
+}
+.copy__value {
+  font-size: 20px;
+}
+.user-popup__copy {
+  gap: 16px;
+  cursor: pointer;
+  margin-bottom: 40px;
+}
+.user-popup__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.user-popup__buttons .btn {
+  justify-content: center;
+  width: 168px;
+  height: 40px;
+}
+
 @media (max-width: 599px) {
-  .header__profile {
+  .header__profile,
+  .header__info.click .user-popup {
     display: none;
   }
   .header__user-id {
