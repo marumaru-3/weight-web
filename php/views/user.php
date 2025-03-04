@@ -4,13 +4,13 @@
     <div class="info-summary__block card">
       <h3 class="info-summary__title contents-title">アカウント情報</h3>
       <div class="info-summary__item copy">
-        <p class="info-summary__label">
+        <p class="info-summary__label copy-contents">
           ID
           <span class="material-symbols-outlined">
             content_copy
           </span>
         </p>
-        <p class="info-summary__value">0000000000</p>
+        <p class="info-summary__value copy__value">0000000000</p>
       </div>
       <div class="info-summary__item">
         <p class="info-summary__label">登録日</p>
@@ -24,7 +24,7 @@
     <div class="info-summary__block card">
       <h3 class="info-summary__title contents-title">基本情報</h3>
       <button class="info-summary__admin"
-              data-modal="user-admin">
+        data-modal="user-admin">
         <span class="material-symbols-outlined">
           edit
         </span>

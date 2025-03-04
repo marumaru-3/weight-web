@@ -71,7 +71,6 @@
 }
 .user-popup__copy {
   gap: 16px;
-  cursor: pointer;
   margin-bottom: 40px;
 }
 .user-popup__buttons {

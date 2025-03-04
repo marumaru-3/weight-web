@@ -1,15 +1,26 @@
-const copyButton = () => {
-  // 指定したクラスの要素のテキストを取得
-  const element = document.querySelector(".copy__value");
+// ダイアログ表示
+const showDialog = (message) => {
+  const dialog = document.createElement("div");
+  dialog.textContent = message;
+  dialog.classList.add("copy-dialog");
 
-  // テキストをクリップボードにコピー
-  navigator.clipboard.writeText(element.textContent);
+  document.body.appendChild(dialog);
 
-  console.log("コピーしました。");
+  setTimeout(() => dialog.classList.add("show"), 10);
+  setTimeout(() => dialog.classList.remove("show"), 1500);
+  setTimeout(() => dialog.remove(), 2000);
 };
 
+// コピーボタン用
 const copyContents = document.querySelectorAll(".copy-contents");
 
-copyContents.forEach((copy) => {
-  copy.addEventListener("click", copyButton);
+copyContents.forEach((copy, num) => {
+  copy.addEventListener("click", () => {
+    const element = document.querySelectorAll(".copy__value");
+
+    // テキストをクリップボードにコピー
+    navigator.clipboard.writeText(element[num].textContent);
+
+    showDialog("IDをコピーしました。");
+  });
 });

@@ -7,19 +7,19 @@
     </div>
     <ul class="weight-graph__switch">
       <li class="weight-graph__item">
-        <button class="btn btn--select">1週間</button>
+        <button id="weight-graph__week" class="btn">1週間</button>
       </li>
       <li class="weight-graph__item">
-        <button class="btn">1ヶ月</button>
+        <button id="weight-graph__month" class="btn btn--select">1ヶ月</button>
       </li>
       <li class="weight-graph__item">
-        <button class="btn">3ヶ月</button>
+        <button id="weight-graph__three-month" class="btn">3ヶ月</button>
       </li>
       <li class="weight-graph__item">
-        <button class="btn">半年</button>
+        <button id="weight-graph__half-year" class="btn">半年</button>
       </li>
       <li class="weight-graph__item">
-        <button class="btn">1年</button>
+        <button id="weight-graph__year" class="btn">1年</button>
       </li>
     </ul>
     <div class="weight-graph__graph">
@@ -84,46 +84,46 @@
     </div>
     <div class="weight-days__blocks">
       <?php for ($i = 0; $i < 6; $i++): ?>
-      <div class="weight-days__block card">
-        <p class="weight-days__date">2025/01/03</p>
-        <button class="weight-days__admin"
-                data-modal="record-admin">
-          <span class="material-symbols-outlined">
-            edit
-          </span>
-        </button>
-        <div class="weight-days__item weight-days__item--weight">
-          <p class="weight-days__label">体重</p>
-          <p class="weight-days__value">
-            <span class="weight-days__num">68.1</span>
-            <span class="weight-days__unit">kg</span>
-          </p>
+        <div class="weight-days__block card">
+          <p class="weight-days__date">2025/01/03</p>
+          <button class="weight-days__admin"
+            data-modal="record-admin">
+            <span class="material-symbols-outlined">
+              edit
+            </span>
+          </button>
+          <div class="weight-days__item weight-days__item--weight">
+            <p class="weight-days__label">体重</p>
+            <p class="weight-days__value">
+              <span class="weight-days__num">68.1</span>
+              <span class="weight-days__unit">kg</span>
+            </p>
+          </div>
+          <div class="weight-days__item">
+            <p class="weight-days__label">前日比</p>
+            <p class="weight-days__value">
+              <span class="weight-days__num">-0.6</span>
+              <span class="weight-days__unit">kg</span>
+            </p>
+          </div>
+          <div class="weight-days__item">
+            <p class="weight-days__label">BMI</p>
+            <p class="weight-days__value">
+              <span class="weight-days__num">24.18</span>
+            </p>
+          </div>
+          <div class="weight-days__item">
+            <p class="weight-days__label">体脂肪率<span class="in-bl">(推定)</span></p>
+            <p class="weight-days__value">
+              <span class="weight-days__num">24.2</span>
+              <span class="weight-days__unit">%</span>
+            </p>
+          </div>
+          <div class="weight-days__item weight-days__item--memo">
+            <p class="weight-days__label">一言メモ</p>
+            <p class="weight-days__value">あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほ</p>
+          </div>
         </div>
-        <div class="weight-days__item">
-          <p class="weight-days__label">前日比</p>
-          <p class="weight-days__value">
-            <span class="weight-days__num">-0.6</span>
-            <span class="weight-days__unit">kg</span>
-          </p>
-        </div>
-        <div class="weight-days__item">
-          <p class="weight-days__label">BMI</p>
-          <p class="weight-days__value">
-            <span class="weight-days__num">24.18</span>
-          </p>
-        </div>
-        <div class="weight-days__item">
-          <p class="weight-days__label">体脂肪率<span class="in-bl">(推定)</span></p>
-          <p class="weight-days__value">
-            <span class="weight-days__num">24.2</span>
-            <span class="weight-days__unit">%</span>
-          </p>
-        </div>
-        <div class="weight-days__item weight-days__item--memo">
-          <p class="weight-days__label">一言メモ</p>
-          <p class="weight-days__value">あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほ</p>
-        </div>
-      </div>
       <?php endfor; ?>
     </div>
     <button class="btn btn--more">
