@@ -40,6 +40,9 @@
 .weight-summary__admin:hover {
   background-color: var(--blue-01);
 }
+.weight-summary__title {
+  text-align: center;
+}
 .weight-summary__text {
   font-size: 24px;
 }
@@ -96,9 +99,11 @@
   gap: 4px;
 }
 .weight-graph__switch .btn {
+  justify-content: center;
   border-radius: 8px;
   font-weight: 500;
-  padding: 8px 12px;
+  width: 64px;
+  padding: 8px;
 }
 
 .weight-graph__graph {
@@ -168,6 +173,9 @@
     justify-content: space-between;
     width: 100%;
   }
+  .weight-graph__switch .btn {
+    width: 60px;
+  }
   .weight-graph .btn .material-symbols-outlined {
     font-size: 20px;
   }
@@ -181,5 +189,8 @@
 @media (max-width: 399px) {
   .weight-graph__switch {
     font-size: 3.6vw;
+  }
+  .weight-graph__switch .btn {
+    width: 15vw;
   }
 }

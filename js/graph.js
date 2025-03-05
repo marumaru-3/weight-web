@@ -35,6 +35,12 @@ function weightGraph() {
     { date: "2025-01-03", weight: 69.2 },
     { date: "2025-01-04", weight: 69.0 },
     { date: "2025-01-05", weight: 68.5 },
+    { date: "2025-02-05", weight: 68.5 },
+    { date: "2025-02-15", weight: 68.8 },
+    { date: "2025-02-28", weight: 69.1 },
+    { date: "2025-03-03", weight: 67.8 },
+    { date: "2025-03-04", weight: 68.1 },
+    { date: "2025-03-05", weight: 67.6 },
   ];
 
   // 指定した範囲の日付リストを作成
@@ -71,10 +77,14 @@ function weightGraph() {
     return { labels, dataset };
   };
 
+  // レスポンシブサイズの調整
+  const mediaQueryChart = window.matchMedia("(max-width: 599px)");
+
   let weightChart;
 
   const updateChart = (range) => {
     const { labels, dataset } = processChartData(range);
+    const labelsReplace = labels.map((label) => label.replaceAll("-", "/"));
     const ctx = graphElement.getContext("2d");
 
     if (weightChart) weightChart.destroy();
@@ -82,7 +92,7 @@ function weightGraph() {
     weightChart = new Chart(ctx, {
       type: "line",
       data: {
-        labels: labels,
+        labels: labelsReplace,
         datasets: [
           {
             label: "体重（kg）",
@@ -103,7 +113,7 @@ function weightGraph() {
       options: {
         responsive: true,
         maintainAspectRatio: true,
-        aspectRatio: 2 / 1,
+        aspectRatio: mediaQueryChart.matches ? 4 / 3 : 2 / 1,
         scales: {
           x: {
             ticks: {
@@ -120,7 +130,7 @@ function weightGraph() {
           },
           y: {
             ticks: {
-              maxTicksLimit: 8,
+              maxTicksLimit: mediaQueryChart.matches ? 6 : 8,
             },
           },
         },
@@ -140,19 +150,68 @@ function weightGraph() {
       },
     });
 
-    if (range === "3m") {
-      weightChart.options.scales.x.ticks.callback = (value) => {
-        console.log(labels[value]);
-        return labels[value]
-          ? `${new Date(labels[value]).getMonth() + 1}月`
-          : "";
+    // データポイントの個数制限関数
+    const dataPointNum = (num) => {
+      const maxPoints = num;
+      const step = Math.ceil(labels.length / maxPoints);
+      weightChart.data.datasets[0].data = dataset.map((_, index, arr) => {
+        const lastIndex = arr.length - 1;
+        const distanceFromLast = lastIndex - index;
+
+        if (index === lastIndex || distanceFromLast % step === 0) {
+          return dataset[index];
+        } else {
+          return null;
+        }
+      });
+    };
+
+    // レスポンシブポイント表示数変更
+    if (mediaQueryChart.matches) {
+      dataPointNum(12);
+      weightChart.update();
+    } else {
+      dataPointNum(31);
+      weightChart.update();
+    }
+
+    if (range === "3m" || range === "6m" || range === "1y") {
+      let lastMonth = null;
+
+      // x軸の各月を表示
+      weightChart.options.scales.x.ticks.callback = (value, i) => {
+        let date = new Date(labels[value]);
+        let month = date.getMonth() + 1;
+
+        if (month === lastMonth) {
+          return;
+        }
+
+        lastMonth = month;
+
+        return `${month}月`;
       };
+
       weightChart.update();
     }
   };
 
-  // 体重グラフの初期表示
-  updateChart("1m");
+  // 体重グラフカード日付変更
+  const titleDate = (range) => {
+    const dateArr = getDateRange(range).map((date) =>
+      date.replaceAll("-", "/")
+    );
+    const firstDate = dateArr[0];
+    const lastDate = dateArr[dateArr.length - 1];
+
+    return `${firstDate}～${lastDate}`;
+  };
+  const weightGraphDate = document.querySelector(".weight-graph__date");
+
+  // 体重グラフカードの初期表示
+  let chartPeriod = "1m";
+  updateChart(chartPeriod);
+  weightGraphDate.innerHTML = titleDate(chartPeriod);
 
   const weightGraphSwitchBtns = document.querySelectorAll(
     ".weight-graph__switch button"
@@ -173,30 +232,45 @@ function weightGraph() {
     });
   });
 
-  // 各切り替えスイッチグラフ変更
+  // 体重グラフ下カード表示変更
+
+  // 各期間切り替えボタン
   document
     .getElementById("weight-graph__week")
     .addEventListener("click", () => {
-      updateChart("7d");
+      chartPeriod = "7d";
+      updateChart(chartPeriod);
+      weightGraphDate.innerHTML = titleDate(chartPeriod);
     });
   document
     .getElementById("weight-graph__month")
     .addEventListener("click", () => {
-      updateChart("1m");
+      chartPeriod = "1m";
+      updateChart(chartPeriod);
+      weightGraphDate.innerHTML = titleDate(chartPeriod);
     });
   document
     .getElementById("weight-graph__three-month")
     .addEventListener("click", () => {
-      updateChart("3m");
+      chartPeriod = "3m";
+      updateChart(chartPeriod);
+      weightGraphDate.innerHTML = titleDate(chartPeriod);
     });
   document
     .getElementById("weight-graph__half-year")
     .addEventListener("click", () => {
-      updateChart("6m");
+      chartPeriod = "6m";
+      updateChart(chartPeriod);
+      weightGraphDate.innerHTML = titleDate(chartPeriod);
     });
   document
     .getElementById("weight-graph__year")
     .addEventListener("click", () => {
-      updateChart("1y");
+      chartPeriod = "1y";
+      updateChart(chartPeriod);
+      weightGraphDate.innerHTML = titleDate(chartPeriod);
     });
+
+  // // メディアクエリの変更を検知して更新
+  mediaQueryChart.addEventListener("change", () => updateChart(chartPeriod));
 }
