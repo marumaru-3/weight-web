@@ -28,6 +28,10 @@
   color: var(--text-color);
 }
 
+.btn--select {
+  pointer-events: none;
+}
+
 .btn--more,
 .btn--cancel,
 .btn--select,

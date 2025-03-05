@@ -41,22 +41,69 @@ function weightGraph() {
     { date: "2025-03-03", weight: 67.8 },
     { date: "2025-03-04", weight: 68.1 },
     { date: "2025-03-05", weight: 67.6 },
+    { date: "2025-03-06", weight: 68.5 },
   ];
 
   // 指定した範囲の日付リストを作成
-  const getDateRange = (range) => {
+  const getDateRange = (range, isPrev = false) => {
     const now = new Date();
     let startDate = new Date();
+    let endDate = new Date(now);
 
-    if (range === "7d") startDate.setDate(now.getDate() - 7);
-    if (range === "1m") startDate.setMonth(now.getMonth() - 1);
-    if (range === "3m") startDate.setMonth(now.getMonth() - 3);
-    if (range === "6m") startDate.setMonth(now.getMonth() - 6);
-    if (range === "1y") startDate.setFullYear(now.getFullYear() - 1);
+    const offsets = {
+      "7d": [7, 14],
+      "1m": [1, 2],
+      "3m": [3, 6],
+      "6m": [6, 12],
+      "1y": [12, 24],
+    };
+
+    if (range === "7d") {
+      startDate.setDate(now.getDate() - offsets[range][0]);
+    } else {
+      startDate.setMonth(now.getMonth() - offsets[range][0]);
+    }
 
     let dates = [];
     let current = new Date(startDate);
     while (current <= now) {
+      dates.push(current.toISOString().split("T")[0]);
+      current.setDate(current.getDate() + 1);
+    }
+
+    return dates;
+  };
+
+  // 指定した前の範囲の日付リストを作成
+  const getPrevDateRange = (range) => {
+    const now = new Date();
+    let endDate = new Date();
+    let startDate = new Date();
+
+    if (range === "7d") {
+      endDate.setDate(now.getDate() - 7);
+      startDate.setDate(now.getDate() - 14);
+    }
+    if (range === "1m") {
+      endDate.setMonth(now.getMonth() - 1);
+      startDate.setMonth(now.getMonth() - 2);
+    }
+    if (range === "3m") {
+      endDate.setMonth(now.getMonth() - 3);
+      startDate.setMonth(now.getMonth() - 6);
+    }
+    if (range === "6m") {
+      endDate.setMonth(now.getMonth() - 6);
+      startDate.setMonth(now.getMonth() - 12);
+    }
+    if (range === "1y") {
+      endDate.setFullYear(now.getFullYear() - 1);
+      startDate.setFullYear(now.getFullYear() - 2);
+    }
+
+    let dates = [];
+    let current = new Date(startDate);
+    while (current <= endDate) {
       dates.push(current.toISOString().split("T")[0]);
       current.setDate(current.getDate() + 1);
     }
@@ -209,9 +256,9 @@ function weightGraph() {
   const weightGraphDate = document.querySelector(".weight-graph__date");
 
   // 体重グラフカードの初期表示
-  let chartPeriod = "1m";
-  updateChart(chartPeriod);
-  weightGraphDate.innerHTML = titleDate(chartPeriod);
+  let range = "1m";
+  updateChart(range);
+  weightGraphDate.innerHTML = titleDate(range);
 
   const weightGraphSwitchBtns = document.querySelectorAll(
     ".weight-graph__switch button"
@@ -222,55 +269,71 @@ function weightGraph() {
     return;
   }
 
+  // 体重グラフ下カード表示
+  const weightSummaryBlocks = document.querySelectorAll(
+    ".weight-summary__block"
+  );
+
   // 各期間切り替えスイッチのカラー制御
   weightGraphSwitchBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", (e) => {
       document
         .querySelector(".weight-graph__switch .btn--select")
         ?.classList.remove("btn--select");
       btn.classList.add("btn--select");
+
+      weightSummaryBlocks.forEach((summary) => {
+        summary.querySelector(".period").innerHTML = e.target.innerHTML;
+      });
     });
   });
-
-  // 体重グラフ下カード表示変更
 
   // 各期間切り替えボタン
   document
     .getElementById("weight-graph__week")
     .addEventListener("click", () => {
-      chartPeriod = "7d";
-      updateChart(chartPeriod);
-      weightGraphDate.innerHTML = titleDate(chartPeriod);
+      range = "7d";
+      updateChart(range);
+      weightGraphDate.innerHTML = titleDate(range);
+
+      const { _, dataset } = processChartData(range);
+      const nullNotDataset = dataset.filter((data) => data !== null);
+      const maxWeight = Math.max(...nullNotDataset);
+      const minWeight = Math.min(...nullNotDataset);
+      const datasetSum = nullNotDataset.reduce((arr, cur) => arr + cur);
+      const average = (datasetSum / nullNotDataset.length).toFixed(1);
+
+      console.log(average);
     });
   document
     .getElementById("weight-graph__month")
     .addEventListener("click", () => {
-      chartPeriod = "1m";
-      updateChart(chartPeriod);
-      weightGraphDate.innerHTML = titleDate(chartPeriod);
+      range = "1m";
+      updateChart(range);
+      weightGraphDate.innerHTML = titleDate(range);
     });
   document
     .getElementById("weight-graph__three-month")
     .addEventListener("click", () => {
-      chartPeriod = "3m";
-      updateChart(chartPeriod);
-      weightGraphDate.innerHTML = titleDate(chartPeriod);
+      range = "3m";
+      updateChart(range);
+      weightGraphDate.innerHTML = titleDate(range);
     });
   document
     .getElementById("weight-graph__half-year")
     .addEventListener("click", () => {
-      chartPeriod = "6m";
-      updateChart(chartPeriod);
-      weightGraphDate.innerHTML = titleDate(chartPeriod);
+      range = "6m";
+      updateChart(range);
+      weightGraphDate.innerHTML = titleDate(range);
     });
   document
     .getElementById("weight-graph__year")
     .addEventListener("click", () => {
-      chartPeriod = "1y";
-      updateChart(chartPeriod);
-      weightGraphDate.innerHTML = titleDate(chartPeriod);
+      range = "1y";
+      updateChart(range);
+      weightGraphDate.innerHTML = titleDate(range);
     });
 
   // // メディアクエリの変更を検知して更新
-  mediaQueryChart.addEventListener("change", () => updateChart(chartPeriod));
+  mediaQueryChart.addEventListener("change", () => updateChart(range));
 }
