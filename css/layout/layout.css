@@ -86,7 +86,7 @@ body {
     width: 100%;
     height: auto;
     flex-direction: row;
-    padding: 8px 16px;
+    padding: 8px;
     transition: none;
   }
   .layout__content,

@@ -27,6 +27,8 @@
   padding: 16px 24px;
   border-radius: 8px;
   font-size: 20px;
+  width: 280px;
+  text-align: center;
   opacity: 0;
   transition: 0.3s all;
   z-index: 200;

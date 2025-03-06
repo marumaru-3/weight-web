@@ -35,13 +35,12 @@ function weightGraph() {
     { date: "2025-01-03", weight: 69.2 },
     { date: "2025-01-04", weight: 69.0 },
     { date: "2025-01-05", weight: 68.5 },
-    { date: "2025-02-05", weight: 68.5 },
-    { date: "2025-02-15", weight: 68.8 },
-    { date: "2025-02-28", weight: 69.1 },
-    { date: "2025-03-03", weight: 67.8 },
-    { date: "2025-03-04", weight: 68.1 },
-    { date: "2025-03-05", weight: 67.6 },
-    { date: "2025-03-06", weight: 68.5 },
+    { date: "2025-02-26", weight: 61.5 },
+    { date: "2025-03-01", weight: 68.5 },
+    { date: "2025-03-02", weight: 70.5 },
+    { date: "2025-03-03", weight: 68.5 },
+    { date: "2025-03-04", weight: 68.5 },
+    { date: "2025-03-06", weight: 66.5 },
   ];
 
   // 指定した範囲の日付リストを作成
@@ -59,46 +58,15 @@ function weightGraph() {
     };
 
     if (range === "7d") {
-      startDate.setDate(now.getDate() - offsets[range][0]);
+      startDate.setDate(
+        now.getDate() - (isPrev ? offsets[range][1] : offsets[range][0])
+      );
+      if (isPrev) endDate.setDate(now.getDate() - offsets[range][0]);
     } else {
-      startDate.setMonth(now.getMonth() - offsets[range][0]);
-    }
-
-    let dates = [];
-    let current = new Date(startDate);
-    while (current <= now) {
-      dates.push(current.toISOString().split("T")[0]);
-      current.setDate(current.getDate() + 1);
-    }
-
-    return dates;
-  };
-
-  // 指定した前の範囲の日付リストを作成
-  const getPrevDateRange = (range) => {
-    const now = new Date();
-    let endDate = new Date();
-    let startDate = new Date();
-
-    if (range === "7d") {
-      endDate.setDate(now.getDate() - 7);
-      startDate.setDate(now.getDate() - 14);
-    }
-    if (range === "1m") {
-      endDate.setMonth(now.getMonth() - 1);
-      startDate.setMonth(now.getMonth() - 2);
-    }
-    if (range === "3m") {
-      endDate.setMonth(now.getMonth() - 3);
-      startDate.setMonth(now.getMonth() - 6);
-    }
-    if (range === "6m") {
-      endDate.setMonth(now.getMonth() - 6);
-      startDate.setMonth(now.getMonth() - 12);
-    }
-    if (range === "1y") {
-      endDate.setFullYear(now.getFullYear() - 1);
-      startDate.setFullYear(now.getFullYear() - 2);
+      startDate.setMonth(
+        now.getMonth() - (isPrev ? offsets[range][1] : offsets[range][0])
+      );
+      if (isPrev) endDate.setMonth(now.getMonth() - offsets[range][0]);
     }
 
     let dates = [];
@@ -112,8 +80,8 @@ function weightGraph() {
   };
 
   // ラベル作成＆データマッピング
-  const processChartData = (range) => {
-    const labels = getDateRange(range);
+  const processChartData = (range, isPrev = false) => {
+    const labels = getDateRange(range, isPrev);
     const dataMap = Object.fromEntries(
       weightRecords.map((r) => [r.date, r.weight])
     );
@@ -255,13 +223,20 @@ function weightGraph() {
   };
   const weightGraphDate = document.querySelector(".weight-graph__date");
 
-  // 体重グラフカードの初期表示
+  // 体重グラフの初期表示
   let range = "1m";
   updateChart(range);
   weightGraphDate.innerHTML = titleDate(range);
 
+  // メディアクエリの変更を検知して更新
+  mediaQueryChart.addEventListener("change", () => updateChart(range));
+
+  // 各期間切り替え要素
   const weightGraphSwitchBtns = document.querySelectorAll(
     ".weight-graph__switch button"
+  );
+  const weightSummaryBlocks = document.querySelectorAll(
+    ".weight-summary__block"
   );
 
   // 各期間切り替えスイッチが無い場合、ここで処理終了
@@ -269,24 +244,142 @@ function weightGraph() {
     return;
   }
 
-  // 体重グラフ下カード表示
-  const weightSummaryBlocks = document.querySelectorAll(
-    ".weight-summary__block"
-  );
+  // ユーザー登録データ取得
+  const stature = 1.685;
+  const age = 25;
+  const isWomen = false;
 
   // 各期間切り替えスイッチのカラー制御
   weightGraphSwitchBtns.forEach((btn) => {
-    btn.addEventListener("click", (e) => {
+    btn.addEventListener("click", () => {
       document
         .querySelector(".weight-graph__switch .btn--select")
         ?.classList.remove("btn--select");
       btn.classList.add("btn--select");
-
-      weightSummaryBlocks.forEach((summary) => {
-        summary.querySelector(".period").innerHTML = e.target.innerHTML;
-      });
     });
   });
+
+  // weight-summary データ更新用関数
+  const weightSummaryUpdate = (range) => {
+    // グラフデータ
+    const chartData = processChartData(range);
+    const nullNotDataset = chartData.dataset.filter((data) => data !== null);
+
+    // 比較用 前グラフデータ
+    const prevChartData = processChartData(range, true);
+    const prevNullNotDataset = prevChartData.dataset.filter(
+      (data) => data !== null
+    );
+
+    // 平均体重取得関数
+    const calcWeightAverage = (nullNotDataset) => {
+      if (nullNotDataset.length) {
+        const datasetSum = nullNotDataset.reduce((arr, cur) => arr + cur);
+
+        return (datasetSum / nullNotDataset.length).toFixed(1);
+      } else {
+        return null;
+      }
+    };
+
+    // BMI配列取得関数
+    const calcBMIArr = (nullNotDataset) => {
+      if (nullNotDataset.length) {
+        return nullNotDataset.map((data) =>
+          Number((data / Math.pow(stature, 2)).toFixed(2))
+        );
+      } else {
+        return null;
+      }
+    };
+
+    // 平均BMI取得関数
+    const calcBMIAverage = (nullNotDataset) => {
+      if (nullNotDataset.length) {
+        const BMIArr = calcBMIArr(nullNotDataset);
+        const arrSum = BMIArr.reduce((arr, cur) => arr + cur);
+
+        return (arrSum / BMIArr.length).toFixed(2);
+      } else {
+        return null;
+      }
+    };
+
+    // 平均体脂肪率（推定）取得関数
+    const calcBFPAverage = (nullNotDataset) => {
+      if (nullNotDataset.length) {
+        const averageBMI = calcBMIAverage(nullNotDataset);
+
+        return (averageBMI * 1.2 + age * 0.23 - (isWomen ? 5.4 : 16.2)).toFixed(
+          2
+        );
+      } else {
+        return null;
+      }
+    };
+
+    // 平均の増減
+    const calcAverageCompare = (nullNotDataset, prevNullNotDataset) => {
+      if (nullNotDataset.length && prevNullNotDataset.length) {
+        const result = (
+          calcWeightAverage(nullNotDataset) -
+          calcWeightAverage(prevNullNotDataset)
+        ).toFixed(1);
+
+        return result > 0 ? "+" + result : String(result);
+      } else {
+        return null;
+      }
+    };
+
+    // 最高体重取得関数
+    const maxWeightFunc = (nullNotDataset) => {
+      if (nullNotDataset.length) {
+        return Math.max(...nullNotDataset);
+      } else {
+        return null;
+      }
+    };
+
+    // 最低体重取得関数
+    const minWeightFunc = (nullNotDataset) => {
+      if (nullNotDataset.length) {
+        return Math.min(...nullNotDataset);
+      } else {
+        return null;
+      }
+    };
+
+    const summaryOffsets = {
+      average: calcWeightAverage(nullNotDataset),
+      bfp: calcBFPAverage(nullNotDataset),
+      bmi: calcBMIAverage(nullNotDataset),
+      in_de: calcAverageCompare(nullNotDataset, prevNullNotDataset),
+      best: maxWeightFunc(nullNotDataset),
+      lowest: minWeightFunc(nullNotDataset),
+    };
+
+    let rangeText;
+    if (range === "7d") rangeText = "1週間";
+    if (range === "1m") rangeText = "1ヶ月";
+    if (range === "3m") rangeText = "3ヶ月";
+    if (range === "6m") rangeText = "半年";
+    if (range === "1y") rangeText = "1年";
+
+    // weight-summary データ更新
+    weightSummaryBlocks.forEach((summary) => {
+      summary.querySelector(".period").innerHTML = rangeText;
+      const summaryOffset = summaryOffsets[summary.dataset.summary];
+      if (summaryOffset) {
+        summary.querySelector(".weight-summary__num").innerHTML = summaryOffset;
+      } else {
+        summary.querySelector(".weight-summary__num").innerHTML = "--";
+      }
+    });
+  };
+
+  // weight-summary データ初期状態
+  weightSummaryUpdate(range);
 
   // 各期間切り替えボタン
   document
@@ -295,15 +388,7 @@ function weightGraph() {
       range = "7d";
       updateChart(range);
       weightGraphDate.innerHTML = titleDate(range);
-
-      const { _, dataset } = processChartData(range);
-      const nullNotDataset = dataset.filter((data) => data !== null);
-      const maxWeight = Math.max(...nullNotDataset);
-      const minWeight = Math.min(...nullNotDataset);
-      const datasetSum = nullNotDataset.reduce((arr, cur) => arr + cur);
-      const average = (datasetSum / nullNotDataset.length).toFixed(1);
-
-      console.log(average);
+      weightSummaryUpdate(range);
     });
   document
     .getElementById("weight-graph__month")
@@ -311,6 +396,7 @@ function weightGraph() {
       range = "1m";
       updateChart(range);
       weightGraphDate.innerHTML = titleDate(range);
+      weightSummaryUpdate(range);
     });
   document
     .getElementById("weight-graph__three-month")
@@ -318,6 +404,7 @@ function weightGraph() {
       range = "3m";
       updateChart(range);
       weightGraphDate.innerHTML = titleDate(range);
+      weightSummaryUpdate(range);
     });
   document
     .getElementById("weight-graph__half-year")
@@ -325,6 +412,7 @@ function weightGraph() {
       range = "6m";
       updateChart(range);
       weightGraphDate.innerHTML = titleDate(range);
+      weightSummaryUpdate(range);
     });
   document
     .getElementById("weight-graph__year")
@@ -332,8 +420,6 @@ function weightGraph() {
       range = "1y";
       updateChart(range);
       weightGraphDate.innerHTML = titleDate(range);
+      weightSummaryUpdate(range);
     });
-
-  // // メディアクエリの変更を検知して更新
-  mediaQueryChart.addEventListener("change", () => updateChart(range));
 }

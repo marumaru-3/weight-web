@@ -96,7 +96,10 @@
           <p class="ul__list-question">体脂肪率(推定)とは何ですか？</p>
           <p class="ul__list-answer"><span>体重と身長をもとに算出される推定値です。体組成計を使った測定とは異なり、<br class="sp-none">
               一般的な計算式を用いた参考値となります。<br>
-              ※ 計算式（例）：<span class="in-bl">「BMI × 1.2 + 年齢 × 0.23 - 5.4」</span></span></p>
+              ※ 計算式（例）<br>
+              男性「BMI × 1.2 + 年齢 × 0.23 - 16.2」<br>
+              女性「BMI × 1.2 + 年齢 × 0.23 - 5.4」
+            </span></p>
         </li>
         <li>
           <p class="ul__list-question">スマホとパソコンで同じアカウントを使えますか？</p>

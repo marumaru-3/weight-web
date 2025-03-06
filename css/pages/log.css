@@ -19,6 +19,8 @@
   gap: 8px;
 }
 .weight-days__switch .btn {
+  width: 112px;
+  justify-content: center;
   padding: 8px 24px;
 }
 

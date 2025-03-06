@@ -6,7 +6,7 @@
   font-weight: bold;
   line-height: 1;
   padding: 14px 24px;
-  transition: 0.3s all;
+  transition: background-color 0.3s;
 }
 .btn:hover {
   background-color: #ddd;

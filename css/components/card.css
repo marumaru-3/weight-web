@@ -32,7 +32,7 @@
   place-items: center;
   width: 32px;
   height: 32px;
-  transition: 0.3s all;
+  transition: background-color 0.3s;
 }
 .weight-summary__admin .material-symbols-outlined {
   font-size: 20px;
@@ -71,7 +71,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 16px;
+  gap: 16px 8px;
   padding: 32px 24px;
 }
 .home .weight-graph {
@@ -130,6 +130,15 @@
   .weight-graph__graph {
     padding: 0;
   }
+  .weight-graph .btn--more {
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+  }
+  .weight-graph .btn--more .btn__text {
+    display: none;
+  }
   /* / 体重グラフカード */
 }
 
@@ -165,7 +174,9 @@
   .weight-graph__date {
     font-size: 14px;
   }
-  .weight-graph .btn,
+  .weight-graph .btn {
+    order: 2;
+  }
   .weight-graph__switch {
     order: 3;
   }
@@ -175,9 +186,6 @@
   }
   .weight-graph__switch .btn {
     width: 60px;
-  }
-  .weight-graph .btn .material-symbols-outlined {
-    font-size: 20px;
   }
   .weight-graph__graph {
     order: 2;

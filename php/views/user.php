@@ -39,6 +39,10 @@
         <p class="info-summary__value">2000年1月15日</p>
       </div>
       <div class="info-summary__item">
+        <p class="info-summary__label">性別</p>
+        <p class="info-summary__value">男性</p>
+      </div>
+      <div class="info-summary__item">
         <p class="info-summary__label">身長</p>
         <p class="info-summary__value">168cm</p>
       </div>

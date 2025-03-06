@@ -36,7 +36,7 @@
 .layout__sidebar.open .sidebar__list .btn,
 .layout__sidebar.open .btn.btn--record {
   justify-content: flex-start;
-  padding: 14px 24px;
+  padding: 12px 24px;
   width: 100%;
 }
 
@@ -73,7 +73,7 @@
 
   .sidebar__list {
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
   }
 
   .layout__sidebar.close .sidebar__list .btn,
