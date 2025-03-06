@@ -30,11 +30,14 @@
   gap: 24px;
 }
 .weight-days__block {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   gap: 16px;
   font-weight: bold;
   width: calc(33.3% - 16px);
+}
+.weight-days__block.show {
+  display: flex;
 }
 
 .weight-days__date {
@@ -122,6 +125,9 @@
   width: 240px;
   height: 48px;
   margin: auto;
+}
+.weight-days .btn--more.hide {
+  display: none;
 }
 .weight-days .btn--more .material-symbols-outlined {
   position: absolute;
