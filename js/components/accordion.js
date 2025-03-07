@@ -2,9 +2,7 @@ accordionMove();
 function accordionMove() {
   const accordionBtns = document.querySelectorAll(".accordion-btn");
 
-  if (!accordionBtns) {
-    return;
-  }
+  if (!accordionBtns) return;
 
   accordionBtns.forEach((btn) => {
     btn.addEventListener("click", () => {

@@ -72,6 +72,9 @@ body {
     width: var(--sidebar-width_close);
     padding: 16px 8px;
   }
+  .layout__sidebar.open {
+    box-shadow: 8px 0 8px -3px rgba(0, 0, 0, 0.1);
+  }
   .layout__content {
     width: calc(100% - var(--sidebar-width_close));
   }
@@ -86,6 +89,7 @@ body {
     width: 100%;
     height: auto;
     flex-direction: row;
+    box-shadow: none;
     padding: 8px;
     transition: none;
   }

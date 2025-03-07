@@ -2,9 +2,7 @@ weightGraph();
 function weightGraph() {
   const graphElement = document.getElementById("graph");
 
-  if (!graphElement) {
-    return;
-  }
+  if (!graphElement) return;
 
   // 体重記録の配列
   const weightRecords = [
@@ -41,6 +39,7 @@ function weightGraph() {
     { date: "2025-03-03", weight: 68.5 },
     { date: "2025-03-04", weight: 68.5 },
     { date: "2025-03-06", weight: 66.5 },
+    { date: "2025-03-07", weight: 68.0 },
   ];
 
   // 指定した範囲の日付リストを作成

@@ -16,7 +16,6 @@ window.addEventListener("load", () => {
     startPos = scrollPos;
   });
 });
-// / ヘッダースクロール非表示
 
 // サイドバークリック表示切り替え
 const menuToggle = document.getElementById("menu-toggle");
@@ -30,7 +29,6 @@ menuToggle.addEventListener("click", () => {
     sidebar.classList.add("open");
   }
 });
-// / メニュー表示切り替え
 
 // サイドバーレスポンシブ表示切り替え
 const mediaQueryTB = window.matchMedia("(max-width: 1299px)");
@@ -49,7 +47,6 @@ function sidebarResponse(mediaQuery) {
 sidebarResponse(mediaQueryTB);
 
 mediaQueryTB.addEventListener("change", sidebarResponse);
-// / レスポンシブ表示切り替え
 
 // レスポンシブ表示のとき、サイドバー以外の場所をクリックしたら表示切り替え
 document.addEventListener("click", (e) => {
@@ -60,4 +57,3 @@ document.addEventListener("click", (e) => {
     }
   }
 });
-// / レスポンシブ表示のとき、サイドバー以外の場所をクリックしたら表示切り替え
