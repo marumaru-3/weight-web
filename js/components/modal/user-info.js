@@ -1,4 +1,4 @@
-import { userDateForm } from "../../features/user-date.js";
+import { userDateForm } from "../../features/form-date.js";
 
 export const init = () => {
   // 日付選択処理
