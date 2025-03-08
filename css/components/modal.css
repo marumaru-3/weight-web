@@ -226,6 +226,13 @@
   outline: none;
 }
 
+.basic-info-form__validate {
+  color: var(--att-color-01);
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
 .basic-info-form__gender .basic-info-form__flex {
   gap: 40px;
 }
