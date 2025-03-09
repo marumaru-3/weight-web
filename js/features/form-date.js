@@ -1,8 +1,8 @@
 // ユーザー生年月日用
 export function userDateForm() {
-  const yearSelect = document.getElementById("year");
-  const monthSelect = document.getElementById("month");
-  const daySelect = document.getElementById("day");
+  const yearSelect = document.getElementById("birth-year");
+  const monthSelect = document.getElementById("birth-month");
+  const daySelect = document.getElementById("birth-day");
 
   if (!yearSelect) return;
 

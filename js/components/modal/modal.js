@@ -55,6 +55,9 @@ const initializeModal = (modalType) => {
     case "record":
       import("./record.js").then((module) => module.init());
       break;
+    case "record-admin":
+      import("./record.js").then((module) => module.init());
+      break;
     case "user-admin":
       import("./user-info.js").then((module) => module.init());
       break;

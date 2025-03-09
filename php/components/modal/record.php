@@ -14,20 +14,23 @@
     </button>
   </div>
   <form id="record-form"
-    class="record-form">
-    <div class="record-form__contents">
-      <label for="weight">体重</label>
-      <div class="record-form__input">
-        <input type="number"
-          id="weight"
-          name="weight"
-          placeholder="例： 68.4"
-          step="0.1"
-          required> <span class="weight__unit">kg</span>
+    class="record-form validate-form" novalidate>
+    <div class="record-form__contents validate-form__input">
+      <label for="weight" class="label-name">体重</label>
+      <div class="basic-info-form__box">
+        <div class="record-form__input">
+          <input type="number"
+            id="weight"
+            name="weight"
+            placeholder="例： 68.4"
+            step="0.1"
+            required> <span class="weight__unit">kg</span>
+        </div>
+        <div class="validate-text"></div>
       </div>
     </div>
     <div class="record-form__contents">
-      <label for="memo">一言メモ <span class="label-att">※30文字以内</span></label>
+      <label for="memo" class="label-name">一言メモ <span class="label-att">※30文字以内</span></label>
       <div class="record-form__input">
         <textarea id="memo"
           name="memo"
@@ -43,7 +46,7 @@
           id="close-modal"
           class="btn btn--cancel"><span class="btn__text">キャンセル</span></button>
         <button type="submit"
-          class="btn btn--record"><span class="btn__text">記録を追加</span></button>
+          class="btn btn--record submit-btn"><span class="btn__text">記録を追加</span></button>
       </div>
     </div>
   </form>

@@ -127,10 +127,6 @@
 .modal-buttons .btn {
   height: 48px;
 }
-/* .modal-width .modal-buttons .btn {
-  justify-content: center;
-  width: 160px;
-} */
 
 .basic-info-form__contents {
   display: flex;
@@ -152,10 +148,15 @@
   border-radius: 8px;
   overflow: hidden;
   width: 100%;
+  transition: 0.3s all;
 }
 .basic-info-form__input.click {
   box-shadow: var(--blue-01) 0px 0px 0px 1px;
   border-color: var(--blue-01);
+}
+.basic-info-form__input.no-text {
+  box-shadow: var(--att-color-01) 0px 0px 0px 1px;
+  border-color: var(--att-color-01);
 }
 .basic-info-form__input .text-label {
   display: flex;
@@ -199,6 +200,9 @@
 .basic-info-form__input.click .label-name {
   color: var(--blue-01);
 }
+.basic-info-form__input.no-text .label-name {
+  color: var(--att-color-01);
+}
 .basic-info-form__input.text-on .label-name {
   font-size: 12px;
   padding-top: 4px;
@@ -226,7 +230,7 @@
   outline: none;
 }
 
-.basic-info-form__validate {
+.validate-text {
   color: var(--att-color-01);
   font-size: 12px;
   font-weight: bold;
