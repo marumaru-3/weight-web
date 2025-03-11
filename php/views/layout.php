@@ -4,24 +4,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport"
-    content="width=device-width, initial-scale=1.0" />
+        content="width=device-width, initial-scale=1.0" />
   <title><?php echo $page_title; ?> / 体重Web</title>
   <link rel="preconnect"
-    href="https://fonts.googleapis.com">
+        href="https://fonts.googleapis.com">
   <link rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin>
+        href="https://fonts.gstatic.com"
+        crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap"
-    rel="stylesheet">
+        rel="stylesheet">
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link rel="stylesheet"
-    href="./css/style.css" />
+        href="./css/style.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <body>
   <div id="layout"
-    class="layout">
+       class="layout">
     <?php include "./php/components/sidebar.php"; ?>
     <div class="layout__content">
       <?php include "./php/components/header.php"; ?>
@@ -32,7 +32,7 @@
   </div>
 
   <script type="module"
-    src="./js/main.js"></script>
+          src="<?php echo BASE_JS_PATH; ?>main.js"></script>
 </body>
 
 </html>

@@ -2,8 +2,8 @@ RewriteEngine On
 RewriteBase /weight-management/
 
 # 「/weight-management/」にアクセスされたら「/weight-management/home」にリダイレクト
-RewriteCond %{REQUEST_URI} ^/weight-management/$
-RewriteRule ^$ /weight-management/home [R=301,L]
+# RewriteCond %{REQUEST_URI} ^/weight-management/$
+# RewriteRule ^$ /weight-management/home [R=301,L]
 
 # 「/home」や「/log」などのアクセスを「index.php?page=home」に変換
 RewriteCond %{REQUEST_FILENAME} !-f
