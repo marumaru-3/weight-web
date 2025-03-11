@@ -2,14 +2,14 @@
   <div class="modal-record__date">
     <button id="date-prev"
       class="date-prev">
-      <img src="./images/date-arrow.svg"
+      <img src="<?php echo BASE_IMAGE_PATH; ?>date-arrow.svg"
         alt="<" />
     </button>
     <p id="date-contents"
       class="date__contents"></p>
     <button id="date-next"
       class="date-next">
-      <img src="./images/date-arrow.svg"
+      <img src="<?php echo BASE_IMAGE_PATH; ?>date-arrow.svg"
         alt="<" />
     </button>
   </div>
