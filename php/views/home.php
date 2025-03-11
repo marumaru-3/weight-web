@@ -8,6 +8,7 @@
       <span class="btn__text">今日の記録を追加する</span>
     </button>
   </div>
+  <p><?php echo $foo; ?></p>
   <div class="weight-summary">
     <div class="weight-summary__block card weight-summary__block--main">
       <button class="weight-summary__admin"
