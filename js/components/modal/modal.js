@@ -45,7 +45,8 @@ const openModalBtns = document.querySelectorAll("[data-modal]");
 openModalBtns.forEach((btn) => {
   btn.addEventListener("click", () => {
     const modalType = btn.getAttribute("data-modal");
-    openModal(modalType);
+    const modal = document.getElementById("modal");
+    if (!modal) openModal(modalType);
   });
 });
 

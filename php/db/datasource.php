@@ -1,14 +1,73 @@
 <?php
-$dsn = "mysql:host=localhost;port=8889;dbname=weightweb;charset=utf8mb4";
-$username = "develop_user";
-$password = "developKaihatsu0310";
 
-try {
-    $pdo = new PDO($dsn, $username, $password, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    ]);
-    echo "接続成功！";
-} catch (PDOException $e) {
-    echo "接続失敗：" . $e->getMessage();
+namespace db;
+
+use PDO;
+
+class DataSource
+{
+    private $conn;
+    private $sqlResult;
+    public const CLS = "cls";
+
+    public function __construct(
+        $host = "localhost",
+        $port = "8889",
+        $dbName = "weightweb",
+        $username = "develop_user",
+        $password = "developKaihatsu0310"
+    ) {
+        $dsn = "mysql:host={$host};port={$port};dbname={$dbName};";
+        $this->conn = new PDO($dsn, $username, $password);
+        $this->conn->setAttribute(
+            PDO::ATTR_DEFAULT_FETCH_MODE,
+            PDO::FETCH_ASSOC
+        );
+        $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $this->conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    }
+
+    public function select($sql = "", $params = [], $type = "", $cls = "")
+    {
+        $stmt = $this->executeSql($sql, $params);
+        if ($type === static::CLS) {
+            return $stmt->fetchAll(PDO::FETCH_CLASS, $cls);
+        } else {
+            return $stmt->fetchAll();
+        }
+    }
+
+    public function selectOne($sql = "", $params = [], $type = "", $cls = "")
+    {
+        $result = $this->select($sql, $params, $type, $cls);
+        return count($result) > 0 ? $result[0] : false;
+    }
+
+    public function execute($sql = "", $params = [])
+    {
+        $this->executeSql($sql, $params);
+        return $this->sqlResult;
+    }
+
+    public function begin()
+    {
+        $this->conn->beginTransaction();
+    }
+
+    public function commit()
+    {
+        $this->conn->commit();
+    }
+
+    public function rollback()
+    {
+        $this->conn->rollBack();
+    }
+
+    private function executeSql($sql, $params)
+    {
+        $stmt = $this->conn->prepare($sql);
+        $this->sqlResult = $stmt->execute($params);
+        return $stmt;
+    }
 }

@@ -2,31 +2,36 @@
 
 require_once "config.php";
 
-$page = $_GET["page"] ?? "home";
+// Models
+require_once SOURCE_BASE . "models/user.model.php";
 
-switch ($page) {
-    case "home":
-        require_once 'php/controllers/home.php';
-        break;
-    case "log":
-        require_once 'php/controllers/log.php';
-        break;
-    case "user":
-        require_once 'php/controllers/user.php';
-        break;
-    case "help":
-        require_once 'php/controllers/help.php';
-        break;
-    case "settings":
-        require_once 'php/controllers/settings.php';
-        break;
-    case "login":
-        require_once 'php/controllers/login.php';
-        break;
-    case "register":
-        require_once 'php/controllers/register.php';
-        break;
-    default:
-        require_once 'php/controllers/404.php';
-        break;
+// DB
+require_once SOURCE_BASE . "db/datasource.php";
+require_once SOURCE_BASE . "db/user.query.php";
+
+use db\UserQuery;
+
+$result = UserQuery::fetchById(1000000000);
+
+var_dump($result);
+
+$page = $_GET["page"] ?? "home";
+$method = strtolower($_SERVER["REQUEST_METHOD"]);
+
+route($page, $method);
+
+function route($page, $method)
+{
+    $targetFile = SOURCE_BASE . "controllers/{$page}.php";
+
+    if (!file_exists($targetFile)) {
+        require_once SOURCE_BASE . "controllers/404.php";
+        return;
+    }
+
+    require_once $targetFile;
+
+    $fn = "\\controller\\{$page}\\{$method}";
+
+    $fn($page);
 }
