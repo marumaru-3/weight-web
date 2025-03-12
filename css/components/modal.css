@@ -123,6 +123,12 @@
   align-items: center;
   gap: 24px;
 }
+.modal-buttons__group--columns {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
 
 .modal-buttons .btn {
   height: 48px;
@@ -254,6 +260,15 @@
   inline-size: 20px;
   block-size: 20px;
 }
+
+/* login */
+.login .modal-title {
+  padding-bottom: 64px;
+}
+.login.modal-width .modal-buttons {
+  padding-top: 72px;
+}
+/* / login */
 
 @media (max-width: 599px) {
   .modal__container {

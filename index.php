@@ -9,12 +9,6 @@ require_once SOURCE_BASE . "models/user.model.php";
 require_once SOURCE_BASE . "db/datasource.php";
 require_once SOURCE_BASE . "db/user.query.php";
 
-use db\UserQuery;
-
-$result = UserQuery::fetchById(1000000000);
-
-var_dump($result);
-
 $page = $_GET["page"] ?? "home";
 $method = strtolower($_SERVER["REQUEST_METHOD"]);
 

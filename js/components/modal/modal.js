@@ -62,5 +62,11 @@ const initializeModal = (modalType) => {
     case "user-admin":
       import("./user-info.js").then((module) => module.init());
       break;
+    case "login":
+      import("./user-info.js").then((module) => module.init());
+      break;
+    case "":
+      import("./user-info.js").then((module) => module.init());
+      break;
   }
 };

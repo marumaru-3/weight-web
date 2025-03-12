@@ -40,13 +40,20 @@
 .btn--more,
 .btn--cancel,
 .btn--select,
-.btn--select:hover {
+.btn--select:hover,
+.btn--login {
   background-color: var(--blue-02);
   gap: 8px;
 }
 .btn--more:hover,
-.btn--cancel:hover {
+.btn--cancel:hover,
+.btn--login:hover,
+.btn--account {
   background-color: var(--blue-01);
+}
+
+.btn--account:hover {
+  background-color: var(--text-color);
 }
 
 .btn--att-color-03,
@@ -63,7 +70,9 @@
 }
 .btn--att-color-03:hover .btn__text,
 .btn--att-color-01:hover .btn__text,
-.btn--att-color-02:hover .btn__text {
+.btn--att-color-02:hover .btn__text,
+.btn--att-color-02:hover .btn__text,
+.btn--account .btn__text {
   color: #fff;
 }
 
@@ -122,4 +131,9 @@
 }
 .btn--logout:hover .btn__text {
   color: #fff;
+}
+
+.btn--w-100 {
+  width: 100%;
+  justify-content: center;
 }
