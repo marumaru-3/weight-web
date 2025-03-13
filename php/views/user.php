@@ -3,6 +3,13 @@
   <div class="info-summary">
     <div class="info-summary__block card">
       <h3 class="info-summary__title contents-title">アカウント情報</h3>
+      <button class="info-summary__admin"
+        data-modal="account-admin">
+        <span class="material-symbols-outlined">
+          edit
+        </span>
+        編集
+      </button>
       <div class="info-summary__item copy">
         <p class="info-summary__label copy-contents">
           ID
@@ -11,6 +18,19 @@
           </span>
         </p>
         <p class="info-summary__value copy__value">0000000000</p>
+      </div>
+      <div class="info-summary__item">
+        <p class="info-summary__label">パスワード</p>
+        <p class="info-summary__value pwd">
+          <span class="pwd-value" data-hidden="true">
+            ••••••••••••••
+          </span>
+          <button class="btn--pwd pwd-btn">
+            <span class="material-symbols-outlined">
+              visibility
+            </span>
+          </button>
+        </p>
       </div>
       <div class="info-summary__item">
         <p class="info-summary__label">登録日</p>

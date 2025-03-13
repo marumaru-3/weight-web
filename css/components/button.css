@@ -137,3 +137,11 @@
   width: 100%;
   justify-content: center;
 }
+
+.btn--pwd {
+  width: 20px;
+  height: 20px;
+}
+.btn--pwd .material-symbols-outlined {
+  font-size: 20px;
+}

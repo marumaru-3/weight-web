@@ -45,6 +45,11 @@
   font-weight: bold;
   font-size: 18px;
 }
+.info-summary__value.pwd {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+}
 
 .info-summary__item.copy .info-summary__value {
   font-size: 18px;
