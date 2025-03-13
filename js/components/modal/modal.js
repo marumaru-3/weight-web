@@ -63,9 +63,9 @@ const initializeModal = (modalType) => {
       import("./user-info.js").then((module) => module.init());
       break;
     case "login":
-      import("./user-info.js").then((module) => module.init());
+      import("./login.js").then((module) => module.init());
       break;
-    case "":
+    case "signup":
       import("./user-info.js").then((module) => module.init());
       break;
   }

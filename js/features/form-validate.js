@@ -1,5 +1,11 @@
 // バリデーション
 export const initValidateBtn = () => {
+  validateBtn();
+  document.addEventListener("input", initValidateBtn);
+  document.addEventListener("change", initValidateBtn);
+};
+
+const validateBtn = () => {
   const form = document.querySelector(".validate-form");
   const submitButton = document.querySelector(".submit-btn");
 

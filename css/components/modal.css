@@ -13,14 +13,18 @@
 }
 
 .modal__container {
-  /* position: absolute;
-  top: 120px;
-  left: 50%;
-  transform: translateX(-50%); */
+  position: relative;
   background-color: #fff;
   border-radius: 16px;
   width: 95%;
   max-width: 600px;
+}
+
+.close-logo {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  transform: rotate(45deg);
 }
 
 .modal-width {
@@ -271,10 +275,6 @@
 /* / login */
 
 @media (max-width: 599px) {
-  .modal__container {
-    top: 14vh;
-  }
-
   .record-form__input input,
   .record-form__input textarea {
     padding: 4px;

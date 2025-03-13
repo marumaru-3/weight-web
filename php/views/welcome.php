@@ -31,7 +31,8 @@
     </div>
     <div class="welcome__btn-text">
       <p class="welcome__big-text">今すぐ始めましょう</p>
-      <button class="welcome__btn btn btn--account" data-modal="signUp">
+      <button class="welcome__btn btn btn--account"
+        data-modal="signup">
         <span class="btn__text">
           アカウントを作成
         </span>
@@ -39,7 +40,8 @@
     </div>
     <div class="welcome__btn-text">
       <p class="welcome__text">アカウントをお持ちの場合</p>
-      <button class="welcome__btn btn btn--login" data-modal="login">
+      <button class="welcome__btn btn btn--login"
+        data-modal="login">
         <span class="btn__text">
           ログイン
         </span>

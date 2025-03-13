@@ -1,5 +1,8 @@
 <?php
+
 require_once "../../../config.php";
+
+session_start();
 
 if (!isset($_GET["fetch"]) || !isset($_GET["modal"])) {
     http_response_code(400);
