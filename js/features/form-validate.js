@@ -1,8 +1,8 @@
 // バリデーション
 export const initValidateBtn = () => {
   validateBtn();
-  document.addEventListener("input", initValidateBtn);
-  document.addEventListener("change", initValidateBtn);
+  document.addEventListener("input", validateBtn);
+  document.addEventListener("change", validateBtn);
 };
 
 const validateBtn = () => {
@@ -14,7 +14,7 @@ const validateBtn = () => {
 
   // すべての必須項目が入力済みか判定
   const isValid = requiredFields.every((field) => {
-    if (field.type === "radio") {
+    if (field.type === "radio" || field.type === "checkbox") {
       // ラジオボタンは同じ name のどれかが選択されていればOK
       return form.querySelector(`input[name="${field.name}"]:checked`);
     } else {
@@ -64,6 +64,7 @@ export const initTextLabelClick = () => {
   validateForms.forEach((validateForm) => {
     const input = validateForm.querySelector("input");
     const select = validateForm.querySelector("select");
+    const button = validateForm.querySelector("button");
 
     // クリック時にクラスを追加
     validateForm.addEventListener("click", (e) => {
@@ -80,7 +81,7 @@ export const initTextLabelClick = () => {
 
     // フォーカスが外れたときにクラスを削除
     document.addEventListener("click", (e) => {
-      if (input && e.target !== input) {
+      if (input && e.target !== input && e.target !== button) {
         validateForm.classList.remove("click");
 
         if (input.value.trim() === "") {
@@ -89,6 +90,15 @@ export const initTextLabelClick = () => {
       } else if (select && e.target !== select) {
         validateForm.classList.remove("click");
       }
+    });
+  });
+};
+
+// 半角英数字の入力制御
+export const initRestrictToAlphanumeric = (selector) => {
+  document.querySelectorAll(selector).forEach((input) => {
+    input.addEventListener("input", (e) => {
+      e.target.value = e.target.value.replace(/[^a-zA-Z0-9]/g, "");
     });
   });
 };

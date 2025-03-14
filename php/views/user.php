@@ -4,7 +4,7 @@
     <div class="info-summary__block card">
       <h3 class="info-summary__title contents-title">アカウント情報</h3>
       <button class="info-summary__admin"
-        data-modal="account-admin">
+              data-modal="admin-account">
         <span class="material-symbols-outlined">
           edit
         </span>
@@ -22,10 +22,11 @@
       <div class="info-summary__item">
         <p class="info-summary__label">パスワード</p>
         <p class="info-summary__value pwd">
-          <span class="pwd-value" data-hidden="true">
+          <span class="pwd-value">
             ••••••••••••••
           </span>
-          <button class="btn--pwd pwd-btn">
+          <button class="btn--pwd pwd-btn"
+                  data-hidden="true">
             <span class="material-symbols-outlined">
               visibility
             </span>
@@ -44,7 +45,7 @@
     <div class="info-summary__block card">
       <h3 class="info-summary__title contents-title">基本情報</h3>
       <button class="info-summary__admin"
-        data-modal="user-admin">
+              data-modal="admin-user">
         <span class="material-symbols-outlined">
           edit
         </span>

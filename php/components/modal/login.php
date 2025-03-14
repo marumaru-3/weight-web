@@ -5,7 +5,7 @@
     add_circle
   </span>
 </button>
-<div class="login modal-width">
+<div class="login modal-width few-forms">
   <h3 class="modal-title">体重Webにログイン</h3>
   <form id="login-form"
         class="basic-info-form validate-form"
@@ -25,6 +25,35 @@
                      class="validate-target"
                      maxlength="10"
                      required>
+            </div>
+          </label>
+        </div>
+        <div class="validate-text"></div>
+      </div>
+
+      <div class="basic-info-form__box">
+        <div class="basic-info-form__input validate-form__input">
+          <label for="password"
+                 class="text-label">
+            <div class="label-name">
+              パスワード
+            </div>
+            <div class="label-input pwd">
+              <input type="password"
+                     name="password"
+                     id="password"
+                     class="validate-target"
+                     maxlength="30"
+                     pattern="[a-zA-Z0-9]+"
+                     inputmode="latin"
+                     data-alphanumeric
+                     required>
+              <button class="btn--pwd pwd-btn"
+                      data-hidden="true">
+                <span class="material-symbols-outlined">
+                  visibility
+                </span>
+              </button>
             </div>
           </label>
         </div>

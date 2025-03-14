@@ -20,9 +20,16 @@
   display: inline-block;
 }
 
+/* Google icons */
 .material-symbols-outlined {
   font-size: 28px;
 }
+/* .material-symbols-outlined {
+  visibility: hidden;
+}
+.font-loaded .material-symbols-outlined {
+  visibility: visible;
+} */
 
 .sp-only {
   display: none !important;

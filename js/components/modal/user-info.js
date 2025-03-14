@@ -2,6 +2,7 @@ import { userDateForm } from "../../features/form-date.js";
 import {
   initValidateBtn,
   initTextLabelClick,
+  initRestrictToAlphanumeric,
 } from "../../features/form-validate.js";
 
 export const init = () => {
@@ -10,10 +11,11 @@ export const init = () => {
   // テキストラベルクリック判定
   initTextLabelClick();
 
+  // 半角英数字バリデーション
+  initRestrictToAlphanumeric("input[data-alphanumeric]");
+
   // バリデーションボタン制御
   initValidateBtn();
-
-  console.log("user-info");
 
   // フォームの送信処理
   const userInfoForm = document.querySelector(".basic-info-form");

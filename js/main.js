@@ -8,7 +8,7 @@ import "./utils/layout.js";
 // components
 import "./components/accordion.js";
 import "./components/copy.js";
-import "./components/password.js";
+import "./components/pwd-btn.js";
 import "./components/modal/modal.js";
 import "./components/user-popup.js";
 

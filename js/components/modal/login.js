@@ -10,6 +10,9 @@ export const init = () => {
   // バリデーションボタン制御
   initValidateBtn();
 
+  // 半角英数字バリデーション
+  initRestrictToAlphanumeric("input[data-alphanumeric]");
+
   // フォームの送信処理
   const loginForm = document.getElementById("login-form");
   if (loginForm) {
