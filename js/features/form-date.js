@@ -1,5 +1,5 @@
 // ユーザー生年月日用
-export function userDateForm() {
+export const initUserDateForm = () => {
   const yearSelect = document.getElementById("birth-year");
   const monthSelect = document.getElementById("birth-month");
   const daySelect = document.getElementById("birth-day");
@@ -52,4 +52,4 @@ export function userDateForm() {
 
   // 関数呼び出し時に日付を設定
   updateDays();
-}
+};

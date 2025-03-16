@@ -2,7 +2,12 @@
 
 require_once "config.php";
 
+// library
+require_once SOURCE_BASE . "libs/helper.php";
+require_once SOURCE_BASE . "libs/auth.php";
+
 // Models
+require_once SOURCE_BASE . "models/abstract.model.php";
 require_once SOURCE_BASE . "models/user.model.php";
 
 // DB

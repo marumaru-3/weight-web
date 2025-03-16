@@ -24,12 +24,10 @@
 .material-symbols-outlined {
   font-size: 28px;
 }
-/* .material-symbols-outlined {
-  visibility: hidden;
+.material-symbols-outlined {
+  font-family: "Material Symbols Outlined";
+  font-display: swap;
 }
-.font-loaded .material-symbols-outlined {
-  visibility: visible;
-} */
 
 .sp-only {
   display: none !important;

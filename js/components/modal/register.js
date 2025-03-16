@@ -5,21 +5,25 @@ import {
   initTextLabelClick,
   initRestrictToAlphanumeric,
 } from "../../features/form-validate.js";
+import { initUserDateForm } from "../../features/form-date.js";
+import { initStepBtn } from "../../features/form-step.js";
 
 export const init = () => {
+  initUserDateForm();
   initTextLabelClick();
   initValidateBtn();
   initRestrictToAlphanumeric("input[data-alphanumeric]");
+  initStepBtn();
 
   // フォームの送信処理
-  const loginForm = document.getElementById("login-form");
-  if (loginForm) {
-    loginForm.addEventListener("submit", function (e) {
+  const registerForm = document.getElementById("register-form");
+  if (registerForm) {
+    registerForm.addEventListener("submit", function (e) {
       e.preventDefault();
 
       // バリデーションチェックを実行
       initCheckBtn();
-      const isValid = initValidateForm(loginForm);
+      const isValid = initValidateForm(registerForm);
 
       if (!isValid) {
         console.log("バリデーションエラー： フォーム送信をキャンセル");
@@ -28,7 +32,7 @@ export const init = () => {
 
       const formData = new FormData(this);
 
-      fetch("/weight-management/index.php?modal=login", {
+      fetch("/weight-management/index.php?modal=register", {
         method: "POST",
         body: formData,
       })
@@ -36,17 +40,11 @@ export const init = () => {
         // .then((text) => console.log(JSON.parse(text)));
         .then((response) => response.json())
         .then((data) => {
-          const formMessage = document.querySelector(".form-message");
-
+          console.log(data);
           if (data.success) {
-            console.log("ログイン成功なのだ", data.errorMessage);
-            window.location.href = "/weight-management/home";
+            console.log("登録成功なのだ", data.errorMessage);
           } else {
-            console.log("ログイン失敗なのだ", data.errorMessage);
-            formMessage.classList.add("error");
-            formMessage.innerHTML =
-              "ログインに失敗しました。<br>IDまたはパスワードを確認してください。"; // ✅ エラーメッセージを表示
-            formMessage.style.display = "block";
+            console.log("登録失敗なのだ", data.errorMessage);
           }
         })
         .catch((error) => console.log("エラー：", error));

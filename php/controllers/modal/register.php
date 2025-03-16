@@ -2,12 +2,34 @@
 
 namespace controller\register;
 
-function get($page)
-{
-    require_once SOURCE_BASE . "views/register.php";
-}
+use lib\Auth;
+use model\UserModel;
 
-function post($page)
+header("Content-Type: application/json");
+
+function post()
 {
-    echo "post methodを受け取りました。";
+    $user =  new UserModel;
+    // フォームデータを取得
+    $user->password = get_param('password', '');
+    $user->username = get_param('username', '');
+
+    $birth_year = get_param('birth-year', '');
+    $birth_month = get_param('birth-month', '');
+    $birth_day = get_param('birth-day', '');
+    $birthdate = "{$birth_year}-{$birth_month}-{$birth_day}";
+    $user->birthdate = $birthdate;
+
+    $user->gender = get_param('gender', '');
+    $user->height = get_param('height', '');
+    $user->ideal_weight = get_param('ideal-weight', '');
+
+    $result = Auth::regist($user);
+
+    // ログイン判定
+    echo json_encode([
+        "success" => $result,
+        // "arr" => [$pwd, $username, $birthdate, $gender, $height, $ideal_weight]
+    ]);
+    exit();
 }

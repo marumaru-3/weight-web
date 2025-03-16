@@ -22,7 +22,7 @@
                 inputmode="latin"
                 data-alphanumeric
                 required>
-              <button class="btn--pwd pwd-btn"
+              <button type="button" class="btn--pwd pwd-btn"
                 data-hidden="true">
                 <span class="material-symbols-outlined">
                   visibility

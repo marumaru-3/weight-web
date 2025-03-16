@@ -7,6 +7,16 @@
   <div class="layout__content">
     <?php include "./php/components/header.php"; ?>
     <main class="layout__main">
+      <?php
+
+      use lib\Auth;
+
+      if (Auth::isLogin()) {
+        echo 'ログイン中です。';
+      } else {
+        echo 'ログインしていません。';
+      }
+      ?>
       <?php require_once $page_content; ?>
     </main>
   </div>

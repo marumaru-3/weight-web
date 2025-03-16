@@ -144,6 +144,9 @@
   height: 48px;
 }
 
+.basic-info-form {
+  position: relative;
+}
 .basic-info-form__contents {
   display: flex;
   flex-direction: column;
@@ -318,6 +321,27 @@
   padding-top: 72px;
 }
 /* / フォームが少ないとき */
+
+/* ステップでの表示切り替え */
+.step {
+  /* position: absolute; */
+  width: 100%;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.visible {
+  /* visibility: visible;
+  opacity: 1; */
+  display: block;
+  transform: translateX(0);
+}
+.hidden {
+  /* visibility: hidden;
+  opacity: 0; */
+  display: none;
+  transform: translateX(-100%);
+}
+/* / ステップでの表示切り替え */
 
 @media (max-width: 599px) {
   .record-form__input input,

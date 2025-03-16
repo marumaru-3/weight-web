@@ -32,7 +32,7 @@
     <div class="welcome__btn-text">
       <p class="welcome__big-text">今すぐ始めましょう</p>
       <button class="welcome__btn btn btn--account"
-        data-modal="signup">
+        data-modal="register">
         <span class="btn__text">
           アカウントを作成
         </span>

@@ -1,0 +1,10 @@
+.form-message {
+  display: none;
+  border: 4px solid #8effb2;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 32px;
+}
+.form-message.error {
+  border-color: #ff0059;
+}

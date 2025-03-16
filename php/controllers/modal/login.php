@@ -2,32 +2,22 @@
 
 namespace controller\login;
 
+use lib\Auth;
+
 header("Content-Type: application/json");
-
-use db\UserQuery;
-
-function login($id)
-{
-    $is_success = false;
-
-    $user = UserQuery::fetchById($id);
-
-    if (!empty($user)) {
-        $is_success = true;
-        $_SESSION["user"] = $user;
-    }
-
-    return $is_success;
-}
 
 function post()
 {
     // フォームデータを取得
-    $id = $_POST["user_id"] ?? "";
+    $id = get_param('user_id', '');
+    $pwd = get_param('password', '');
 
-    $result = login($id);
+    $result = Auth::login($id, $pwd);
 
     // ログイン判定
-    echo json_encode(["success" => $result]);
+    echo json_encode([
+        "success" => $result[0],
+        'errorMessage' => $result[1]
+    ]);
     exit();
 }

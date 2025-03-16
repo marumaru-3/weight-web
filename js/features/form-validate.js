@@ -1,16 +1,30 @@
-// バリデーション
+// ボタン制御バリデーション
 export const initValidateBtn = () => {
-  validateBtn();
-  document.addEventListener("input", validateBtn);
-  document.addEventListener("change", validateBtn);
+  initValidateForm(document.querySelector(".validate-form"));
+  document.addEventListener("input", () =>
+    initValidateForm(document.querySelector(".validate-form"))
+  );
+  document.addEventListener("change", () =>
+    initValidateForm(document.querySelector(".validate-form"))
+  );
+
+  // ステップがある場合のバリデーション更新
+  document.querySelectorAll(".next-btn, .prev-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      initValidateForm(document.querySelector(".validate-form"));
+    });
+  });
 };
 
-const validateBtn = () => {
-  const form = document.querySelector(".validate-form");
-  const submitButton = document.querySelector(".submit-btn");
+export const initValidateForm = (form) => {
+  if (!form) return false;
+
+  // '.step'がある場合は、現在アクティブな'.step'を対象にする
+  const activeStep = form.querySelector(".step.visible");
+  const target = activeStep || form;
 
   // required なフィールドをすべて取得
-  const requiredFields = [...form.querySelectorAll("[required]")];
+  const requiredFields = [...target.querySelectorAll("[required]")];
 
   // すべての必須項目が入力済みか判定
   const isValid = requiredFields.every((field) => {
@@ -23,34 +37,61 @@ const validateBtn = () => {
     }
   });
 
-  if (isValid) {
-    submitButton.classList.remove("disabled");
-  } else {
-    submitButton.classList.add("disabled");
-  }
-  submitButton.disabled = !isValid;
-};
-
-const validateFormCheck = (input, form) => {
-  input.addEventListener("input", () => inputValidateCheck(input, form));
-};
-
-const inputValidateCheck = (input, form) => {
-  let formValidate;
-  if (form.querySelector(".validate-text")) {
-    formValidate = form.querySelector(".validate-text");
-  } else {
-    formValidate = form.nextElementSibling;
-  }
-  const labelName = form.querySelector(".label-name").textContent;
-  const labelNameSprit = labelName.substr(0, labelName.indexOf("（"));
-  if (input.validity.valueMissing) {
-    if (labelNameSprit.length) {
-      formValidate.textContent = `${labelNameSprit}を入力してください`;
+  const submitButtons = document.querySelectorAll(".submit-btn");
+  submitButtons.forEach((btn) => {
+    if (isValid) {
+      btn.classList.remove("disabled");
     } else {
-      formValidate.textContent = `${labelName}を入力してください`;
+      btn.classList.add("disabled");
     }
+    btn.disabled = !isValid;
+  });
+
+  return isValid;
+};
+
+// ボタンクリック時のチェック
+export const initCheckBtn = () => {
+  const formBoxes = document.querySelectorAll(".basic-info-form__box");
+  formBoxes.forEach((formBox) => {
+    const input = formBox.querySelector("input");
+    const selects = formBox.querySelectorAll("select");
+
+    if (input) inputValidateCheck(input, formBox);
+    if (selects.length) {
+      selects.forEach((select) => {
+        inputValidateCheck(select, formBox);
+      });
+    }
+  });
+};
+
+const validateFormCheck = (element, form) => {
+  if (element.tagName === "SELECT") {
+    element.addEventListener("change", () => inputValidateCheck(element, form));
+  } else {
+    element.addEventListener("input", () => inputValidateCheck(element, form));
+  }
+};
+
+// バリデーションチェック
+const inputValidateCheck = (element, form) => {
+  let formValidate =
+    form.querySelector(".validate-text") || form.nextElementSibling;
+  const labelName = form.querySelector(".label-title")
+    ? form.querySelector(".label-title").textContent
+    : form.querySelector(".label-name").textContent;
+  const labelNameSprit = labelName.includes("（")
+    ? labelName.substr(0, labelName.indexOf("（"))
+    : labelName;
+
+  if (
+    (element.tagName === "INPUT" && element.validity.valueMissing) ||
+    (element.tagName === "SELECT" && element.value === "")
+  ) {
+    formValidate.textContent = `${labelNameSprit}を入力してください`;
     form.classList.add("no-text");
+    return false;
   } else {
     formValidate.textContent = "";
     form.classList.remove("no-text");
