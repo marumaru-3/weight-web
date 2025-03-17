@@ -5,9 +5,7 @@ const layoutElement = document.getElementById("layout");
 
 // モーダルを開く
 const openModal = (modalType) => {
-  fetch(
-    `/weight-management/php/components/modal/modal.php?fetch=true&modal=${modalType}`
-  )
+  fetch(getUrl(`/php/components/modal/modal.php?fetch=true&modal=${modalType}`))
     .then((response) => response.text())
     .then((html) => {
       layoutElement.insertAdjacentHTML("afterend", html);

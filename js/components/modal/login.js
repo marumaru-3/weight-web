@@ -28,7 +28,7 @@ export const init = () => {
 
       const formData = new FormData(this);
 
-      fetch("/weight-management/index.php?modal=login", {
+      fetch(getUrl("/index.php?modal=login"), {
         method: "POST",
         body: formData,
       })
@@ -39,13 +39,10 @@ export const init = () => {
           const formMessage = document.querySelector(".form-message");
 
           if (data.success) {
-            console.log("ログイン成功なのだ", data.errorMessage);
-            window.location.href = "/weight-management/home";
+            window.location.href = getUrl("/home");
           } else {
-            console.log("ログイン失敗なのだ", data.errorMessage);
             formMessage.classList.add("error");
-            formMessage.innerHTML =
-              "ログインに失敗しました。<br>IDまたはパスワードを確認してください。"; // ✅ エラーメッセージを表示
+            formMessage.innerHTML = `ログインに失敗しました。<br>${data.errorMessage}`;
             formMessage.style.display = "block";
           }
         })

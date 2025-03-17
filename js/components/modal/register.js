@@ -32,7 +32,7 @@ export const init = () => {
 
       const formData = new FormData(this);
 
-      fetch("/weight-management/index.php?modal=register", {
+      fetch(getUrl("/index.php?modal=register"), {
         method: "POST",
         body: formData,
       })

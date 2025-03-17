@@ -1,3 +1,5 @@
+import "./helper.js";
+
 // modules
 import "./modules/api.js";
 import "./modules/data.js";
