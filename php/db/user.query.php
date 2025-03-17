@@ -27,13 +27,13 @@ class UserQuery
     $db = new DataSource();
     $sql = "insert into users(id, password, username, birthdate, gender, height, ideal_weight) values (:id, :password, :username, :birthdate, :gender, :height, :ideal_weight)";
 
-    $user->pwd = password_hash($user->pwd, PASSWORD_DEFAULT);
+    $user->password = password_hash($user->password, PASSWORD_DEFAULT);
 
     return $db->execute(
       $sql,
       [
         ":id" => $user->id,
-        ":password" => $user->pwd,
+        ":password" => $user->password,
         ":username" => $user->username,
         ":birthdate" => $user->birthdate,
         ":gender" => $user->gender,

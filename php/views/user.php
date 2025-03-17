@@ -74,8 +74,8 @@
     </div>
   </div>
   <div class="user-btns">
-    <button class="btn btn--att-color-03">
+    <a href="<?php echo BASE_CONTEXT_PATH; ?>logout" class="btn btn--att-color-03">
       <span class="btn__text">ログアウト</span>
-    </button>
+    </a>
   </div>
 </div>

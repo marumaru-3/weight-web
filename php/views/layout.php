@@ -8,16 +8,13 @@
     <?php include "./php/components/header.php"; ?>
     <main class="layout__main">
       <?php
+
       use lib\Auth;
 
-      use lib\Msg;
-
-      Msg::flush();
-
       if (Auth::isLogin()) {
-          echo "ログイン中です。";
+        echo "ログイン中です。";
       } else {
-          echo "ログインしていません。";
+        echo "ログインしていません。";
       }
       ?>
       <?php require_once $page_content; ?>

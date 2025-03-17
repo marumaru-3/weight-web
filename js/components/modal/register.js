@@ -40,11 +40,14 @@ export const init = () => {
         // .then((text) => console.log(JSON.parse(text)));
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          const formMessage = document.querySelector(".form-message");
+
           if (data.success) {
-            console.log("登録成功なのだ", data.errorMessage);
+            window.location.href = getUrl("/home");
           } else {
-            console.log("登録失敗なのだ", data.errorMessage);
+            formMessage.classList.add("error");
+            formMessage.innerHTML = `新規登録に失敗しました。<br>${data.errorMessage}`;
+            formMessage.style.display = "block";
           }
         })
         .catch((error) => console.log("エラー：", error));

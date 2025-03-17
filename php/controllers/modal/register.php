@@ -28,7 +28,8 @@ function post()
 
     // ログイン判定
     echo json_encode([
-        "success" => $result,
+        "success" => $result[0],
+        "errorMessage" => $result[1],
         // "arr" => [$pwd, $username, $birthdate, $gender, $height, $ideal_weight]
     ]);
     exit();

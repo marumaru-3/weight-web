@@ -2,7 +2,7 @@
   class="layout__header">
   <div class="header__left">
     <h1 class="header__logo">
-      <a href="/weight-management/home"
+      <a href="<?php echo BASE_CONTEXT_PATH; ?>home"
         title="体重Web">
         <img src="<?php echo BASE_IMAGE_PATH; ?>main-logo.svg"
           alt="体重Web ロゴ" />
@@ -36,8 +36,8 @@
           class="btn btn--user">
           <span class="btn__text">ユーザー情報</span>
         </a>
-        <button type="submit"
-          class="btn btn--logout"><span class="btn__text">ログアウト</span></button>
+        <a href="<?php echo BASE_CONTEXT_PATH; ?>logout"
+          class="btn btn--logout"><span class="btn__text">ログアウト</span></a>
       </div>
     </div>
   </div>
