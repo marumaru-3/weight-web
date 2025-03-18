@@ -7,6 +7,11 @@ use lib\Msg;
 
 header("Content-Type: application/json");
 
+function get()
+{
+    require_once SOURCE_BASE . "views/modal/modal.php";
+}
+
 function post()
 {
     // フォームデータを取得

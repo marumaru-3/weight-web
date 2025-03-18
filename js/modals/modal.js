@@ -1,11 +1,13 @@
-import { initPwdClick } from "../buttons/pwd-btn.js";
+import { initPwdClick } from "../components/buttons/pwd-btn.js";
 
 const bodyElement = document.querySelector("body");
 const layoutElement = document.getElementById("layout");
 
 // モーダルを開く
 const openModal = (modalType) => {
-  fetch(getUrl(`/php/components/modal/modal.php?fetch=true&modal=${modalType}`))
+  fetch(getUrl(`/index.php?modal=${modalType}`), {
+    method: "GET",
+  })
     .then((response) => response.text())
     .then((html) => {
       layoutElement.insertAdjacentHTML("afterend", html);

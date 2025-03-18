@@ -10,7 +10,6 @@ import "./utils/layout.js";
 // components
 import "./components/buttons/copy.js";
 import "./components/buttons/pwd-btn.js";
-import "./components/modal/modal.js";
 import "./components/accordion.js";
 import "./components/user-popup.js";
 
@@ -21,6 +20,9 @@ import "./features/forms/form-step.js";
 import "./features/records/record-date.js";
 import "./features/records/weight-days.js";
 import "./features/graph.js";
+
+// modals
+import "./modals/modal.js";
 
 // pages
 import "./pages/home.js";

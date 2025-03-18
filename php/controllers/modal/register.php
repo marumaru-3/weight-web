@@ -7,6 +7,11 @@ use model\UserModel;
 
 header("Content-Type: application/json");
 
+function get()
+{
+    require_once SOURCE_BASE . "views/modal/modal.php";
+}
+
 function post()
 {
     $user =  new UserModel;

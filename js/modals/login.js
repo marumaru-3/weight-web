@@ -4,26 +4,22 @@ import {
   initCheckBtn,
   initTextLabelClick,
   initRestrictToAlphanumeric,
-} from "../../features/forms/form-validate.js";
-import { initUserDateForm } from "../../features/forms/form-date.js";
-import { initStepBtn } from "../../features/forms/form-step.js";
+} from "../features/forms/form-validate.js";
 
 export const init = () => {
-  initUserDateForm();
   initTextLabelClick();
   initValidateBtn();
   initRestrictToAlphanumeric("input[data-alphanumeric]");
-  initStepBtn();
 
   // フォームの送信処理
-  const registerForm = document.getElementById("register-form");
-  if (registerForm) {
-    registerForm.addEventListener("submit", function (e) {
+  const loginForm = document.getElementById("login-form");
+  if (loginForm) {
+    loginForm.addEventListener("submit", function (e) {
       e.preventDefault();
 
       // バリデーションチェックを実行
       initCheckBtn();
-      const isValid = initValidateForm(registerForm);
+      const isValid = initValidateForm(loginForm);
 
       if (!isValid) {
         console.log("バリデーションエラー： フォーム送信をキャンセル");
@@ -32,7 +28,7 @@ export const init = () => {
 
       const formData = new FormData(this);
 
-      fetch(getUrl("/index.php?modal=register"), {
+      fetch(getUrl("/index.php?modal=login"), {
         method: "POST",
         body: formData,
       })
@@ -43,12 +39,10 @@ export const init = () => {
           const formMessage = document.querySelector(".form-message");
 
           if (data.success) {
-            // アカウント作成後にフラグをセット
-            sessionStorage.setItem("accountCreated", "true");
             window.location.href = getUrl("/home");
           } else {
             formMessage.classList.add("error");
-            formMessage.innerHTML = `新規登録に失敗しました。<br>${data.errorMessage}`;
+            formMessage.innerHTML = `ログインに失敗しました。<br>${data.errorMessage}`;
             formMessage.style.display = "block";
           }
         })

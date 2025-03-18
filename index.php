@@ -30,7 +30,7 @@ try {
     $page = $_GET["page"] ?? "home";
     $method = strtolower($_SERVER["REQUEST_METHOD"]);
 
-    // modal用ルーティング
+    // モーダル用ルーティング
     if (isset($_GET["modal"])) {
         modal_route($_GET["modal"], $method);
         exit();
