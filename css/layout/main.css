@@ -13,8 +13,11 @@
   font-weight: bold;
 }
 
-.copy-contents {
+.copy-link {
   cursor: pointer;
+}
+.copy-link * {
+  pointer-events: none;
 }
 
 .copy-dialog {
@@ -31,7 +34,7 @@
   text-align: center;
   opacity: 0;
   transition: 0.3s all;
-  z-index: 200;
+  z-index: 1000;
 }
 .copy-dialog.show {
   opacity: 1;

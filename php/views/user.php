@@ -4,14 +4,14 @@
     <div class="info-summary__block card">
       <h3 class="info-summary__title contents-title">アカウント情報</h3>
       <button class="info-summary__admin"
-        data-modal="admin-account">
+              data-modal="adminAccount">
         <span class="material-symbols-outlined">
           edit
         </span>
         編集
       </button>
-      <div class="info-summary__item copy">
-        <p class="info-summary__label copy-contents">
+      <div class="info-summary__item copy copy-contents">
+        <p class="info-summary__label copy-link">
           ID
           <span class="material-symbols-outlined">
             content_copy
@@ -25,8 +25,9 @@
           <span class="pwd-value">
             ••••••••••••••
           </span>
-          <button type="button" class="btn--pwd pwd-btn"
-            data-hidden="true">
+          <button type="button"
+                  class="btn--pwd pwd-btn"
+                  data-hidden="true">
             <span class="material-symbols-outlined">
               visibility
             </span>
@@ -45,7 +46,7 @@
     <div class="info-summary__block card">
       <h3 class="info-summary__title contents-title">基本情報</h3>
       <button class="info-summary__admin"
-        data-modal="admin-user">
+              data-modal="adminUser">
         <span class="material-symbols-outlined">
           edit
         </span>
@@ -74,7 +75,8 @@
     </div>
   </div>
   <div class="user-btns">
-    <a href="<?php echo BASE_CONTEXT_PATH; ?>logout" class="btn btn--att-color-03">
+    <a href="<?php echo BASE_CONTEXT_PATH; ?>logout"
+       class="btn btn--att-color-03">
       <span class="btn__text">ログアウト</span>
     </a>
   </div>

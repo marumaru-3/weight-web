@@ -43,6 +43,9 @@
   font-weight: bold;
   padding-bottom: 32px;
 }
+.account-create .modal-text {
+  padding-bottom: 24px;
+}
 
 .modal-record__date,
 .modal-record-admin__date {
@@ -65,6 +68,7 @@
 }
 .date-next:disabled {
   opacity: 0.5;
+  pointer-events: none;
 }
 
 .modal-buttons {
@@ -94,6 +98,45 @@
 
 .modal-buttons .btn {
   height: 48px;
+}
+
+.modal-id {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: var(--blue-02);
+  border-radius: 8px;
+  padding: 8px 16px 16px;
+  margin-bottom: 24px;
+}
+.modal-id__label {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.modal-id__label .material-symbols-outlined {
+  font-size: 20px;
+}
+.modal-id__value {
+  font-size: 48px;
+  font-weight: bold;
+  letter-spacing: 4px;
+  line-height: 1.2;
+  width: 100%;
+  text-align: center;
+}
+
+.modal-att {
+  font-weight: bold;
+  padding-bottom: 32px;
+}
+.modal-att__label {
+  color: var(--att-color-01);
+  font-size: 18px;
+  margin-bottom: 8px;
 }
 
 /* ステップでの表示切り替え */
@@ -139,5 +182,19 @@
 
   .modal-title {
     font-size: 18px;
+  }
+
+  .modal-id {
+    padding-bottom: 3vw;
+  }
+  .modal-id__value {
+    font-size: 8.8vw;
+  }
+
+  .modal-att__label {
+    font-size: 16px;
+  }
+  .modal-att__text {
+    font-size: 14px;
   }
 }

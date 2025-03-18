@@ -4,14 +4,14 @@
       ○○さん、あと4.1kgで目標達成！<span class="in-bl">焦らずに頑張ろう！</span>
     </p>
     <button class="btn btn--record"
-      data-modal="record">
+            data-modal="record">
       <span class="btn__text">今日の記録を追加する</span>
     </button>
   </div>
   <div class="weight-summary">
     <div class="weight-summary__block card weight-summary__block--main">
       <button class="weight-summary__admin"
-        data-modal="record-admin">
+              data-modal="recordAdmin">
         <span class="material-symbols-outlined">
           edit
         </span>
@@ -49,7 +49,7 @@
       <p class="weight-graph__date"></p>
     </div>
     <a href="/weight-management/log"
-      class="btn btn--more">
+       class="btn btn--more">
       <span class="btn__text">もっと見る</span>
       <span class="material-symbols-outlined"> chevron_right </span>
     </a>

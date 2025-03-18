@@ -1,13 +1,13 @@
-import { userDateForm } from "../../features/form-date.js";
+import { initUserDateForm } from "../../features/forms/form-date.js";
 import {
   initValidateBtn,
   initTextLabelClick,
   initRestrictToAlphanumeric,
-} from "../../features/form-validate.js";
+} from "../../features/forms/form-validate.js";
 
 export const init = () => {
   // 日付選択処理
-  userDateForm();
+  initUserDateForm();
   // テキストラベルクリック判定
   initTextLabelClick();
 

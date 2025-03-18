@@ -8,15 +8,19 @@ import "./modules/data.js";
 import "./utils/layout.js";
 
 // components
-import "./components/accordion.js";
-import "./components/copy.js";
-import "./components/pwd-btn.js";
+import "./components/buttons/copy.js";
+import "./components/buttons/pwd-btn.js";
 import "./components/modal/modal.js";
+import "./components/accordion.js";
 import "./components/user-popup.js";
 
 // features
-import "./features/form-date.js";
-import "./features/form-validate.js";
+import "./features/forms/form-date.js";
+import "./features/forms/form-validate.js";
+import "./features/forms/form-step.js";
+import "./features/records/record-date.js";
+import "./features/records/weight-days.js";
 import "./features/graph.js";
-import "./features/record-date.js";
-import "./features/weight-days.js";
+
+// pages
+import "./pages/home.js";

@@ -4,7 +4,7 @@ import {
   initCheckBtn,
   initTextLabelClick,
   initRestrictToAlphanumeric,
-} from "../../features/form-validate.js";
+} from "../../features/forms/form-validate.js";
 
 export const init = () => {
   initTextLabelClick();

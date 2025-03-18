@@ -12,15 +12,16 @@ const showDialog = (message) => {
 };
 
 // コピーボタン用
-const copyContents = document.querySelectorAll(".copy-contents");
+document.addEventListener("click", (event) => {
+  if (event.target.classList.contains("copy-link")) {
+    const copyValue = event.target
+      .closest(".copy-contents")
+      .querySelector(".copy__value");
 
-copyContents.forEach((copy, num) => {
-  copy.addEventListener("click", () => {
-    const element = document.querySelectorAll(".copy__value");
-
-    // テキストをクリップボードにコピー
-    navigator.clipboard.writeText(element[num].textContent);
-
-    showDialog("IDをコピーしました。");
-  });
+    if (copyValue) {
+      navigator.clipboard.writeText(copyValue.textContent);
+      if (!document.querySelector(".copy-dialog"))
+        showDialog("IDをコピーしました。");
+    }
+  }
 });

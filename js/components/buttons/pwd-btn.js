@@ -1,5 +1,7 @@
-export function pwdClick() {
+export const initPwdClick = () => {
   const pwdBtns = document.querySelectorAll(".pwd-btn");
+
+  if (!pwdBtns.length) return;
 
   // 本当のパスワード（通常はサーバーから取得する）
   const actualPwd = "passwordTest";
@@ -30,5 +32,5 @@ export function pwdClick() {
       pwdBtn.dataset.hidden = !isHidden;
     });
   });
-}
-pwdClick();
+};
+initPwdClick();

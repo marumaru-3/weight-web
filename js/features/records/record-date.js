@@ -1,5 +1,5 @@
 // 体重を記録モーダル用
-function recordDateDisplay(date) {
+const recordDateDisplay = (date) => {
   const pad = (str) => ("0" + str).slice(-2);
 
   const year = date.getFullYear().toString();
@@ -7,9 +7,9 @@ function recordDateDisplay(date) {
   const day = pad(date.getDate()).toString();
 
   return `${year}/${month}/${day}`;
-}
+};
 
-export function recordDateSelect() {
+export const initRecordDateSelect = () => {
   const dateContents = document.getElementById("date-contents");
   const datePrevBtn = document.getElementById("date-prev");
   const dateNextBtn = document.getElementById("date-next");
@@ -44,4 +44,4 @@ export function recordDateSelect() {
       updateDateDisplay();
     }
   });
-}
+};

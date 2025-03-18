@@ -1,4 +1,4 @@
-import { pwdClick } from "../pwd-btn.js";
+import { initPwdClick } from "../buttons/pwd-btn.js";
 
 const bodyElement = document.querySelector("body");
 const layoutElement = document.getElementById("layout");
@@ -17,7 +17,7 @@ const openModal = (modalType) => {
       initializeModal(modalType);
 
       // パスワード表示切り替え
-      pwdClick();
+      initPwdClick();
 
       // 閉じるボタンのイベントリスナー
       const closeModalBtn = document.getElementById("close-modal");
@@ -35,7 +35,7 @@ const closeModal = () => {
     bodyElement.style.overflow = "";
 
     // パスワード表示切り替え
-    pwdClick();
+    initPwdClick();
   }
 };
 // モーダル背景クリックで閉じる
@@ -56,26 +56,27 @@ openModalBtns.forEach((btn) => {
   });
 });
 
+// アカウント作成時にモーダルを表示
+if (sessionStorage.getItem("accountCreated") === "true") {
+  openModal("accountCreated");
+  // フラグを削除（再度リロードしたときに表示しないようにする）
+  sessionStorage.removeItem("accountCreated");
+}
+
 // 各モーダルの処理関数
 const initializeModal = (modalType) => {
-  switch (modalType) {
-    case "record":
-      import("./record.js").then((module) => module.init());
-      break;
-    case "record-admin":
-      import("./record.js").then((module) => module.init());
-      break;
-    case "admin-account":
-      import("./user-info.js").then((module) => module.init());
-      break;
-    case "admin-user":
-      import("./user-info.js").then((module) => module.init());
-      break;
-    case "login":
-      import("./login.js").then((module) => module.init());
-      break;
-    case "register":
-      import("./register.js").then((module) => module.init());
-      break;
+  const modalMap = {
+    record: "./record.js",
+    recordAdmin: "./record.js",
+    adminAccount: "./user-info.js",
+    adminUser: "./user-info.js",
+    login: "./login.js",
+    register: "./register.js",
+    accountCreated: "./account-created.js",
+  };
+
+  const modulePath = modalMap[modalType];
+  if (modulePath) {
+    import(modulePath).then((module) => module.init());
   }
 };

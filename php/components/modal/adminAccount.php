@@ -2,28 +2,29 @@
   <h3 class="modal-title">パスワードを編集</h3>
   <p class="modal-text">パスワードには半角英数字を使用してください。</p>
   <form id="basic-info-form"
-    class="basic-info-form validate-form"
-    novalidate>
+        class="basic-info-form validate-form"
+        novalidate>
     <div class="basic-info-form__contents">
       <div class="basic-info-form__box">
         <div class="basic-info-form__input validate-form__input">
           <label for="password"
-            class="text-label">
+                 class="text-label">
             <div class="label-name">
               パスワード
             </div>
             <div class="label-input pwd">
               <input type="password"
-                name="password"
-                id="password"
-                class="validate-target"
-                maxlength="30"
-                pattern="[a-zA-Z0-9]+"
-                inputmode="latin"
-                data-alphanumeric
-                required>
-              <button type="button" class="btn--pwd pwd-btn"
-                data-hidden="true">
+                     name="password"
+                     id="password"
+                     class="validate-target"
+                     maxlength="30"
+                     pattern="[a-zA-Z0-9]+"
+                     inputmode="latin"
+                     data-alphanumeric
+                     required>
+              <button type="button"
+                      class="btn--pwd pwd-btn"
+                      data-hidden="true">
                 <span class="material-symbols-outlined">
                   visibility
                 </span>
@@ -36,11 +37,11 @@
 
       <div class="basic-info-form__checkbox">
         <input type="checkbox"
-          id="password-check"
-          name="password-check"
-          required>
+               id="password-check"
+               name="password-check"
+               required>
         <label for="password-check"
-          class="checkbox-label">
+               class="checkbox-label">
           パスワードの変更を確認しました。
         </label>
       </div>
@@ -49,12 +50,12 @@
     <div class="modal-buttons record-form__buttons">
       <div class="modal-buttons__group">
         <button type="button"
-          id="close-modal"
-          class="btn btn--cancel"><span class="btn__text">キャンセル</span></button>
+                id="close-modal"
+                class="btn btn--cancel"><span class="btn__text">キャンセル</span></button>
         <button type="submit"
-          class="btn btn--record submit-btn disabled"
-          id="btn--user-admin"
-          disabled><span class="btn__text">編集を保存</span></button>
+                class="btn btn--record submit-btn disabled"
+                id="btn--user-admin"
+                disabled><span class="btn__text">編集を保存</span></button>
       </div>
     </div>
   </form>

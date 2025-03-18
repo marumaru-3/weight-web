@@ -1,12 +1,12 @@
-import { recordDateSelect } from "../../features/record-date.js";
+import { initRecordDateSelect } from "../../features/records/record-date.js";
 import {
   initValidateBtn,
   initTextLabelClick,
-} from "../../features/form-validate.js";
+} from "../../features/forms/form-validate.js";
 
 export const init = () => {
   // 日付選択処理
-  recordDateSelect();
+  initRecordDateSelect();
 
   // テキストラベルクリック判定
   initTextLabelClick();

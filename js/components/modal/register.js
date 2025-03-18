@@ -4,9 +4,9 @@ import {
   initCheckBtn,
   initTextLabelClick,
   initRestrictToAlphanumeric,
-} from "../../features/form-validate.js";
-import { initUserDateForm } from "../../features/form-date.js";
-import { initStepBtn } from "../../features/form-step.js";
+} from "../../features/forms/form-validate.js";
+import { initUserDateForm } from "../../features/forms/form-date.js";
+import { initStepBtn } from "../../features/forms/form-step.js";
 
 export const init = () => {
   initUserDateForm();
@@ -43,6 +43,8 @@ export const init = () => {
           const formMessage = document.querySelector(".form-message");
 
           if (data.success) {
+            // アカウント作成後にフラグをセット
+            sessionStorage.setItem("accountCreated", "true");
             window.location.href = getUrl("/home");
           } else {
             formMessage.classList.add("error");
