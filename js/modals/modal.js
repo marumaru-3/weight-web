@@ -4,7 +4,7 @@ const bodyElement = document.querySelector("body");
 const layoutElement = document.getElementById("layout");
 
 // モーダルを開く
-const openModal = (modalType) => {
+const openModal = async (modalType) => {
   fetch(getUrl(`/index.php?modal=${modalType}`), {
     method: "GET",
   })
@@ -58,12 +58,16 @@ openModalBtns.forEach((btn) => {
   });
 });
 
-// アカウント作成時にモーダルを表示
+// アカウント作成時にID確認モーダルを表示
 if (sessionStorage.getItem("accountCreated") === "true") {
   openModal("accountCreated");
   // フラグを削除（再度リロードしたときに表示しないようにする）
   sessionStorage.removeItem("accountCreated");
 }
+
+// ログイン成功時・3日ごとにID保存してねモーダルを表示
+// if (sessionStorage.getItem('') ===  )
+openModal("idCheck");
 
 // 各モーダルの処理関数
 const initializeModal = (modalType) => {

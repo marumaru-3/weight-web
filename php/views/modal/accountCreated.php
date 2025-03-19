@@ -22,8 +22,7 @@ $user = UserModel::getSession();
     <p class="modal-att__label">注意！</p>
     <p class="modal-att__text">IDを忘れてしまった場合には、二度とアカウントにログイン出来なくなってしまうため、必ずどこかにIDを保管するようにしてください。</p>
   </div>
-  <form id="login-form"
-    class="basic-info-form validate-form"
+  <form class="basic-info-form validate-form"
     novalidate>
     <div class="basic-info-form__contents">
       <div class="basic-info-form__checkbox">

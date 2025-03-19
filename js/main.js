@@ -1,8 +1,7 @@
 import "./helper.js";
 
 // modules
-import "./modules/api.js";
-import "./modules/data.js";
+import "./modules/fetchAPI.js";
 
 // utils
 import "./utils/layout.js";

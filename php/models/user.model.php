@@ -11,6 +11,7 @@ class UserModel extends AbstractModel
     public string $gender;
     public float $height;
     public float $ideal_weight;
+    public string $id_display;
     public string $created_at;
     public string $updated_at;
 
