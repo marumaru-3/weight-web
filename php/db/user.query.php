@@ -42,4 +42,26 @@ class UserQuery
       ]
     );
   }
+
+  public static function updateIdDisplay($id)
+  {
+    $db = new DataSource();
+    $sql = "update users set id_display = now() where id = :id";
+    return $db->execute($sql, [":id" => $id]);
+  }
+
+  public static function shouldShowIdModal($id)
+  {
+    $user = self::fetchById($id);
+
+    if (!$user)  return false;
+
+    $shouldShow = strtotime($user->id_display) <= strtotime('-3 days');
+
+    if ($shouldShow) {
+      self::updateIdDisplay($id);
+    }
+
+    return $shouldShow;
+  }
 }

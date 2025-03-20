@@ -1,5 +1,12 @@
 <?php require_once SOURCE_BASE . "components/head.php"; ?>
 
+<?php
+
+use lib\Auth;
+use lib\Msg;
+
+Msg::flush();
+?>
 
 <div id="layout">
   <main class="welcome">

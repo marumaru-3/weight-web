@@ -32,7 +32,7 @@ function modal_route($modal, $method)
     $targetFile = SOURCE_BASE . "controllers/modal/{$modal}.php";
 
     if (!file_exists($targetFile)) {
-      require_once SOURCE_BASE . "controllers/404.php";
+      require_once SOURCE_BASE . "views/404.php";
       return;
     }
 

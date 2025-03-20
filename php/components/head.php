@@ -21,9 +21,3 @@
 </head>
 
 <body>
-  <?php
-
-  use lib\Msg;
-
-  Msg::flush();
-  ?>

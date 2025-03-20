@@ -66,8 +66,9 @@ if (sessionStorage.getItem("accountCreated") === "true") {
 }
 
 // ログイン成功時・3日ごとにID保存してねモーダルを表示
-// if (sessionStorage.getItem('') ===  )
-openModal("idCheck");
+if (showIdModal) {
+  openModal("idCheck");
+}
 
 // 各モーダルの処理関数
 const initializeModal = (modalType) => {

@@ -23,7 +23,6 @@ require_once SOURCE_BASE . "db/user.query.php";
 use function lib\page_route;
 use function lib\modal_route;
 
-
 session_start();
 
 try {
@@ -35,6 +34,8 @@ try {
         modal_route($_GET["modal"], $method);
         exit();
     }
+
+    modal_route("idCheck", "check");
 
     // ページ用ルーティング
     page_route($page, $method);
