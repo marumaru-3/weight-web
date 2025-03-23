@@ -8,7 +8,12 @@ function weight_days_block($user, $weight_log, $key, $weight_logs)
 {
 ?>
   <div class="weight-days__block card">
-    <p class="weight-days__date"><?php echo $weight_log->recorded_at; ?></p>
+    <p class="weight-days__date">
+      <?php
+      $recorded_at = $weight_log->recorded_at;
+      echo str_replace("-", "/", $recorded_at);
+      ?>
+    </p>
     <button class="weight-days__admin"
       data-modal="recordAdmin">
       <span class="material-symbols-outlined">

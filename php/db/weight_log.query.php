@@ -10,7 +10,7 @@ class WeightLogQuery
   public static function fetchByUserId($user)
   {
     $db = new DataSource();
-    $sql = "select * from weight_logs where user_id = :id;";
+    $sql = "select * from weight_logs where user_id = :id order by recorded_at;";
     $result = $db->select(
       $sql,
       [
