@@ -2,9 +2,13 @@
 
 namespace controller\accountCreated;
 
+use model\UserModel;
+
 function get()
 {
-  require_once SOURCE_BASE . "views/modal/modal.php";
+  $user = UserModel::getSession();
+
+  \view\modal\modal\modalContents("accountCreated", $user);
 }
 
 function post() {}

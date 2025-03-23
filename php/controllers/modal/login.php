@@ -9,7 +9,7 @@ header("Content-Type: application/json");
 
 function get()
 {
-    require_once SOURCE_BASE . "views/modal/modal.php";
+    \view\modal\modal\modalContents("login");
 }
 
 function post()
@@ -20,7 +20,8 @@ function post()
 
     $result = Auth::login($id, $pwd);
 
-    Msg::push(Msg::DEBUG, "デバッグメッセージです。");
+    // Msg::push(Msg::DEBUG, "これはデバッグメッセージです。");
+    // Msg::push(Msg::DEBUG, $result[1]);
 
     // ログイン判定
     echo json_encode([

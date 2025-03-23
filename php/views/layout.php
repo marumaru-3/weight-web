@@ -1,28 +1,36 @@
-<?php require_once SOURCE_BASE . "components/head.php"; ?>
+<?php
 
+namespace view\layout;
 
-<div id="layout"
-  class="layout">
-  <?php include "./php/components/sidebar.php"; ?>
-  <div class="layout__content">
-    <?php include "./php/components/header.php"; ?>
-    <main class="layout__main">
-      <?php
+use lib\Msg;
 
-      use lib\Auth;
-      use lib\Msg;
-
-      Msg::flush();
-
-      if (Auth::isLogin()) {
-        echo "ログイン中です。";
-      } else {
-        echo "ログインしていません。";
-      }
-      ?>
-      <?php require_once $page_content; ?>
-    </main>
+function dashboard($page, $page_title, $user = null, $weight_logs = null)
+{
+  \partials\head($page_title);
+?>
+  <div id="layout"
+    class="layout">
+    <?php \partials\sidebar($page); ?>
+    <div class="layout__content">
+      <?php \partials\header(); ?>
+      <main class="layout__main">
+        <?php Msg::flush(); ?>
+        <?php
+        $fn = "\\view\\{$page}\\index";
+        if (!empty($user) && !empty($weight_logs)) {
+          $fn($page_title, $user, $weight_logs);
+        } else if (!empty($user)) {
+          $fn($page_title, $user);
+        } else if (!empty($weight_logs)) {
+          $fn($page_title, $weight_logs);
+        } else {
+          $fn($page_title);
+        }
+        ?>
+      </main>
+    </div>
   </div>
-</div>
 
-<?php require_once SOURCE_BASE . "components/footer.php"; ?>
+<?php
+}
+?>

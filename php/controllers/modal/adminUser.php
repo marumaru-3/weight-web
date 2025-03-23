@@ -4,7 +4,7 @@ namespace controller\adminUser;
 
 function get()
 {
-  require_once SOURCE_BASE . "views/modal/modal.php";
+  \view\modal\modal\modalContents("adminUser");
 }
 
 function post() {}

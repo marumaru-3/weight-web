@@ -1,26 +1,18 @@
 <?php
 
-// モーダルのタイプを取得
-$modal_type = $_GET["modal"];
+namespace view\modal\modal;
 
-$modal_file = __DIR__ . "/{$modal_type}.php";
-
-if (!file_exists($modal_file)) {
-  http_response_code(404);
-  echo "Modal not found";
-  exit();
-}
-
-function modalContents($modal_content)
+function modalContents($modal_content, $user = null)
 {
 ?>
   <div id="modal"
     class="modal">
     <div class="modal__container">
-      <?php require_once $modal_content; ?>
+      <?php
+      $fn = "\\view\\modal\\{$modal_content}\\index";
+      empty($user) ? $fn() : $fn($user);
+      ?>
     </div>
   </div>
 <?php
 }
-
-modalContents($modal_file);

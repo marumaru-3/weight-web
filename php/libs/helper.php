@@ -21,3 +21,17 @@ function get_url($path)
 {
   return BASE_CONTEXT_PATH . trim($path, "/");
 }
+
+function age_calc($birthdate)
+{
+  $today = new DateTime();
+  $birthDateObj = new DateTime($birthdate);
+
+  $age = $today->diff($birthDateObj)->y;
+
+  if ($today->format('md') < $birthDateObj->format('md')) {
+    $age--;
+  }
+
+  return $age;
+}
