@@ -1,10 +1,10 @@
 import "./helper.js";
 
-// modules
-import "./modules/fetchAPI.js";
-
 // utils
 import "./utils/layout.js";
+
+// api
+import "./api/chart_data.js";
 
 // components
 import "./components/buttons/copy.js";

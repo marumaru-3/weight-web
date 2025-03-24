@@ -93,9 +93,15 @@ class Auth
     return true;
   }
 
-  public static function requireLogin()
+  public static function requireLogin($isApi = false)
   {
     if (!static::isLogin()) {
+      if ($isApi) {
+        header("Content-Type: application/json");
+        http_response_code(401);
+        echo json_encode(["error" => "ログインが必要です"]);
+        exit();
+      }
       Msg::push(Msg::ERROR, 'ログインしてください。');
       redirect('welcome');
     }

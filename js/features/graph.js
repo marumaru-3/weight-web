@@ -1,18 +1,13 @@
+import { fetchChartData } from "../api/chart_data.js";
+
 weightGraph();
-function weightGraph() {
+async function weightGraph() {
   const graphElement = document.getElementById("graph");
 
   if (!graphElement) return;
 
   // 体重記録の配列
-  const weightRecords = [
-    { date: "2025-03-01", weight: 68.5, bmi: 22.73, bfp: 16.83 },
-    { date: "2025-03-02", weight: 70.5, bmi: 24.73, bfp: 19.83 },
-    { date: "2025-03-03", weight: 68.5, bmi: 22.73, bfp: 16.83 },
-    { date: "2025-03-04", weight: 68.5, bmi: 22.73, bfp: 16.83 },
-    { date: "2025-03-06", weight: 66.5, bmi: 20.73, bfp: 14.83 },
-    { date: "2025-03-07", weight: 68.0, bmi: 22.03, bfp: 16.03 },
-  ];
+  const weightRecords = await fetchChartData();
 
   // 指定した範囲の日付リストを作成
   const getDateRange = (range, isPrev = false) => {
@@ -52,15 +47,20 @@ function weightGraph() {
 
   // ラベル作成＆データマッピング
   const processChartData = (range, isPrev = false) => {
-    const labels = getDateRange(range, isPrev);
+    const dates = getDateRange(range, isPrev);
     const dataMap = Object.fromEntries(
-      weightRecords.map((r) => [r.date, r.weight])
+      weightRecords.map((record) => [
+        record.date,
+        record.weight,
+        record.bmi,
+        record.bfp,
+      ])
     );
 
     // データが無い日はnullにする
-    const dataset = labels.map((date) => dataMap[date] ?? null);
+    const dataset = dates.map((date) => dataMap[date] ?? null);
 
-    return { labels, dataset };
+    return { dates, dataset };
   };
 
   // レスポンシブサイズの調整
@@ -69,8 +69,8 @@ function weightGraph() {
   let weightChart;
 
   const updateChart = (range) => {
-    const { labels, dataset } = processChartData(range);
-    const labelsReplace = labels.map((label) => label.replaceAll("-", "/"));
+    const { dates, dataset } = processChartData(range);
+    const datesReplace = dates.map((label) => label.replaceAll("-", "/"));
     const ctx = graphElement.getContext("2d");
 
     if (weightChart) weightChart.destroy();
@@ -78,7 +78,7 @@ function weightGraph() {
     weightChart = new Chart(ctx, {
       type: "line",
       data: {
-        labels: labelsReplace,
+        labels: datesReplace,
         datasets: [
           {
             label: "体重（kg）",
@@ -105,8 +105,8 @@ function weightGraph() {
             ticks: {
               autoSkip: true,
               callback(value) {
-                return labels[value]
-                  ? `${new Date(labels[value]).getDate()}日`
+                return dates[value]
+                  ? `${new Date(dates[value]).getDate()}日`
                   : "";
               },
               maxRotation: 0,
@@ -139,7 +139,7 @@ function weightGraph() {
     // データポイントの個数制限関数
     const dataPointNum = (num) => {
       const maxPoints = num;
-      const step = Math.ceil(labels.length / maxPoints);
+      const step = Math.ceil(dates.length / maxPoints);
       weightChart.data.datasets[0].data = dataset.map((_, index, arr) => {
         const lastIndex = arr.length - 1;
         const distanceFromLast = lastIndex - index;
@@ -166,7 +166,7 @@ function weightGraph() {
 
       // x軸の各月を表示
       weightChart.options.scales.x.ticks.callback = (value, i) => {
-        let date = new Date(labels[value]);
+        let date = new Date(dates[value]);
         let month = date.getMonth() + 1;
 
         if (month === lastMonth) {
@@ -235,6 +235,8 @@ function weightGraph() {
     // グラフデータ
     const chartData = processChartData(range);
     const nullNotDataset = chartData.dataset.filter((data) => data !== null);
+
+    console.log(chartData);
 
     // 比較用 前グラフデータ
     const prevChartData = processChartData(range, true);

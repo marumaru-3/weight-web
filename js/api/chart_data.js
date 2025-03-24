@@ -1,18 +1,25 @@
-fetch(getUrl("/api/chart_data.php"), {
-  method: "GET",
-})
-  // .then((response) => response.text())
-  // .then((text) => console.log(JSON.parse(text)));
-  .then((response) => response.json())
-  .then((data) => {
-    const formMessage = document.querySelector(".form-message");
+export async function fetchChartData() {
+  try {
+    const response = await fetch(getUrl("/php/api/chart_data.php"), {
+      method: "GET",
+    });
 
-    if (data.success) {
-      window.location.href = getUrl("/home");
-    } else {
-      formMessage.classList.add("error");
-      formMessage.innerHTML = `ログインに失敗しました。<br>${data.errorMessage}`;
-      formMessage.style.display = "block";
+    if (!response.ok) {
+      if (response.status === 401) {
+        alert("ログインが必要です。");
+        window.location.href = getUrl("/welcome");
+      }
+      throw new Error("APIエラー");
     }
-  })
-  .catch((error) => console.log("エラー：", error));
+
+    const contentType = response.headers.get("Content-Type");
+    if (contentType && contentType.includes("application/json")) {
+      return await response.json();
+    } else {
+      return await response.text();
+    }
+  } catch (error) {
+    console.log("エラー：", error);
+    throw error;
+  }
+}

@@ -1,27 +1,24 @@
 <?php
 
-namespace api\chart_data;
+require_once __DIR__ . "/bootstrap.php";
 
+use db\WeightLogQuery;
 use lib\weightDaysCalc;
 
-function chartData($user, $weight_logs)
-{
-  $height = $user->height;
-  $gender = $user->gender;
-  $age = age_calc($user->birthdate);
+$weight_logs = WeightLogQuery::fetchByUserId($user);
 
-  $resultArr = [];
+$resultArr = [];
+foreach ($weight_logs as $log) {
+  $bmi = weightDaysCalc::bmi($log->weight, $user->height);
+  $bfp = weightDaysCalc::bfp($bmi, $user->gender, age_calc($user->birthdate));
 
-  foreach ($weight_logs as $weight_log) {
-    $recorded_at = $weight_log->recorded_at;
-    $weight =  $weight_log->weight;
-    $bmi = weightDaysCalc::bmi($weight, $height);
-    $bfp = weightDaysCalc::bfp($bmi, $gender, $age);
-
-    $addArr = ["date" => $recorded_at, "weight" => $weight, "bmi" => $bmi, "bfp" => $bfp];
-
-    array_push($resultArr, $addArr);
-  }
-
-  print_r($resultArr);
+  $resultArr[] = [
+    "date" => $log->recorded_at,
+    "weight" => $log->weight,
+    "bmi" => $bmi,
+    "bfp" => $bfp,
+  ];
 }
+
+echo json_encode($resultArr);
+exit();
