@@ -47,20 +47,23 @@ async function weightGraph() {
 
   // ラベル作成＆データマッピング
   const processChartData = (range, isPrev = false) => {
-    const dates = getDateRange(range, isPrev);
-    const dataMap = Object.fromEntries(
-      weightRecords.map((record) => [
-        record.date,
-        record.weight,
-        record.bmi,
-        record.bfp,
-      ])
+    const labels = getDateRange(range, isPrev);
+    const dataMapWeight = Object.fromEntries(
+      weightRecords.map((record) => [record.date, record.weight])
+    );
+    const dataMapBmi = Object.fromEntries(
+      weightRecords.map((record) => [record.date, record.bmi])
+    );
+    const dataMapBfp = Object.fromEntries(
+      weightRecords.map((record) => [record.date, record.bfp])
     );
 
     // データが無い日はnullにする
-    const dataset = dates.map((date) => dataMap[date] ?? null);
+    const dataset = labels.map((date) => dataMapWeight[date] ?? null);
+    const bmi = labels.map((date) => dataMapBmi[date] ?? null);
+    const bfp = labels.map((date) => dataMapBfp[date] ?? null);
 
-    return { dates, dataset };
+    return { labels, dataset, bmi, bfp };
   };
 
   // レスポンシブサイズの調整
@@ -69,8 +72,8 @@ async function weightGraph() {
   let weightChart;
 
   const updateChart = (range) => {
-    const { dates, dataset } = processChartData(range);
-    const datesReplace = dates.map((label) => label.replaceAll("-", "/"));
+    const { labels, dataset } = processChartData(range);
+    const labelsReplace = labels.map((label) => label.replaceAll("-", "/"));
     const ctx = graphElement.getContext("2d");
 
     if (weightChart) weightChart.destroy();
@@ -78,7 +81,7 @@ async function weightGraph() {
     weightChart = new Chart(ctx, {
       type: "line",
       data: {
-        labels: datesReplace,
+        labels: labelsReplace,
         datasets: [
           {
             label: "体重（kg）",
@@ -105,8 +108,8 @@ async function weightGraph() {
             ticks: {
               autoSkip: true,
               callback(value) {
-                return dates[value]
-                  ? `${new Date(dates[value]).getDate()}日`
+                return labels[value]
+                  ? `${new Date(labels[value]).getDate()}日`
                   : "";
               },
               maxRotation: 0,
@@ -139,7 +142,7 @@ async function weightGraph() {
     // データポイントの個数制限関数
     const dataPointNum = (num) => {
       const maxPoints = num;
-      const step = Math.ceil(dates.length / maxPoints);
+      const step = Math.ceil(labels.length / maxPoints);
       weightChart.data.datasets[0].data = dataset.map((_, index, arr) => {
         const lastIndex = arr.length - 1;
         const distanceFromLast = lastIndex - index;
@@ -166,7 +169,7 @@ async function weightGraph() {
 
       // x軸の各月を表示
       weightChart.options.scales.x.ticks.callback = (value, i) => {
-        let date = new Date(dates[value]);
+        let date = new Date(labels[value]);
         let month = date.getMonth() + 1;
 
         if (month === lastMonth) {
@@ -215,11 +218,6 @@ async function weightGraph() {
     return;
   }
 
-  // ユーザー登録データ取得
-  const stature = 1.685;
-  const age = 25;
-  const isWomen = false;
-
   // 各期間切り替えスイッチのカラー制御
   weightGraphSwitchBtns.forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -235,8 +233,8 @@ async function weightGraph() {
     // グラフデータ
     const chartData = processChartData(range);
     const nullNotDataset = chartData.dataset.filter((data) => data !== null);
-
-    console.log(chartData);
+    const nullNotBmi = chartData.bmi.filter((data) => data !== null);
+    const nullNotBfp = chartData.bfp.filter((data) => data !== null);
 
     // 比較用 前グラフデータ
     const prevChartData = processChartData(range, true);
@@ -244,59 +242,24 @@ async function weightGraph() {
       (data) => data !== null
     );
 
-    // 平均体重取得関数
-    const calcWeightAverage = (nullNotDataset) => {
-      if (nullNotDataset.length) {
-        const datasetSum = nullNotDataset.reduce((arr, cur) => arr + cur);
-
-        return (datasetSum / nullNotDataset.length).toFixed(1);
-      } else {
-        return null;
-      }
-    };
-
-    // BMI配列取得関数
-    const calcBMIArr = (nullNotDataset) => {
-      if (nullNotDataset.length) {
-        return nullNotDataset.map((data) =>
-          Number((data / Math.pow(stature, 2)).toFixed(2))
+    // 平均数値取得関数
+    const calcAverage = (nullNotArr, fixedNum = 1) => {
+      if (nullNotArr.length) {
+        const arrSum = nullNotArr.reduce(
+          (acc, cur) => parseFloat(acc) + parseFloat(cur)
         );
+
+        return (arrSum / nullNotArr.length).toFixed(fixedNum);
       } else {
         return null;
       }
     };
 
-    // 平均BMI取得関数
-    const calcBMIAverage = (nullNotDataset) => {
-      if (nullNotDataset.length) {
-        const BMIArr = calcBMIArr(nullNotDataset);
-        const arrSum = BMIArr.reduce((arr, cur) => arr + cur);
-
-        return (arrSum / BMIArr.length).toFixed(2);
-      } else {
-        return null;
-      }
-    };
-
-    // 平均体脂肪率（推定）取得関数
-    const calcBFPAverage = (nullNotDataset) => {
-      if (nullNotDataset.length) {
-        const averageBMI = calcBMIAverage(nullNotDataset);
-
-        return (averageBMI * 1.2 + age * 0.23 - (isWomen ? 5.4 : 16.2)).toFixed(
-          2
-        );
-      } else {
-        return null;
-      }
-    };
-
-    // 平均の増減
+    // 前期間比(平均の増減)
     const calcAverageCompare = (nullNotDataset, prevNullNotDataset) => {
       if (nullNotDataset.length && prevNullNotDataset.length) {
         const result = (
-          calcWeightAverage(nullNotDataset) -
-          calcWeightAverage(prevNullNotDataset)
+          calcAverage(nullNotDataset) - calcAverage(prevNullNotDataset)
         ).toFixed(1);
 
         return result > 0 ? "+" + result : String(result);
@@ -324,9 +287,9 @@ async function weightGraph() {
     };
 
     const summaryOffsets = {
-      average: calcWeightAverage(nullNotDataset),
-      bfp: calcBFPAverage(nullNotDataset),
-      bmi: calcBMIAverage(nullNotDataset),
+      average: calcAverage(nullNotDataset),
+      bfp: calcAverage(nullNotBfp, 2),
+      bmi: calcAverage(nullNotBmi, 2),
       in_de: calcAverageCompare(nullNotDataset, prevNullNotDataset),
       best: maxWeightFunc(nullNotDataset),
       lowest: minWeightFunc(nullNotDataset),

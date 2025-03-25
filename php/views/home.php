@@ -2,13 +2,23 @@
 
 namespace view\home;
 
-function index()
+function index($page_title, $user = null, $weight_logs = null)
 {
+
+  $today = date("Y-m-d");
+
+  $today_logs = array_filter($weight_logs, function ($log) use ($today) {
+    return $log->recorded_at === $today;
+  });
+  $today_weight = $today_logs[0]->weight ?? null;
+  $today_memo = $today_logs[0]->memo ?? null;
+
+  print_r($today_logs);
 ?>
   <div class="page home">
     <div class="home__reminder">
       <p class="home__text">
-        ○○さん、あと4.1kgで目標達成！<span class="in-bl">焦らずに頑張ろう！</span>
+        <?php echo $user->username; ?>さん、あと4.1kgで目標達成！<span class="in-bl">焦らずに頑張ろう！</span>
       </p>
       <button class="btn btn--record"
         data-modal="record">
@@ -25,7 +35,7 @@ function index()
         </button>
         <p class="weight-summary__title">今日の体重</p>
         <p class="weight-summary__text">
-          <span class="weight-summary__num">68.1</span>
+          <span class="weight-summary__num"><?php echo $today_weight ?></span>
           <span class="weight-summary__unit">kg</span>
         </p>
       </div>
@@ -39,7 +49,7 @@ function index()
       <div class="weight-summary__block card">
         <p class="weight-summary__title">あなたの理想体重</p>
         <p class="weight-summary__text">
-          <span class="weight-summary__num">64.0</span>
+          <span class="weight-summary__num"><?php echo number_format($user->ideal_weight, 1); ?></span>
           <span class="weight-summary__unit">kg</span>
         </p>
       </div>
