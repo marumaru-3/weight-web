@@ -11,9 +11,11 @@ async function weightGraph() {
 
   // 指定した範囲の日付リストを作成
   const getDateRange = (range, isPrev = false) => {
-    const now = new Date();
-    let startDate = new Date();
-    let endDate = new Date(now);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    console.log(today);
+    let startDate = new Date(today);
+    let endDate = new Date(today);
 
     const offsets = {
       "7d": [7, 14],
@@ -25,20 +27,25 @@ async function weightGraph() {
 
     if (range === "7d") {
       startDate.setDate(
-        now.getDate() - (isPrev ? offsets[range][1] : offsets[range][0])
+        today.getDate() - (isPrev ? offsets[range][1] : offsets[range][0]) + 1
       );
-      if (isPrev) endDate.setDate(now.getDate() - offsets[range][0]);
+      if (isPrev) endDate.setDate(today.getDate() - offsets[range][0]);
     } else {
       startDate.setMonth(
-        now.getMonth() - (isPrev ? offsets[range][1] : offsets[range][0])
+        today.getMonth() - (isPrev ? offsets[range][1] : offsets[range][0])
       );
-      if (isPrev) endDate.setMonth(now.getMonth() - offsets[range][0]);
+      if (isPrev) endDate.setMonth(today.getMonth() - offsets[range][0]);
     }
 
     let dates = [];
     let current = new Date(startDate);
+
     while (current <= endDate) {
-      dates.push(current.toISOString().split("T")[0]);
+      dates.push(
+        new Date(current.getTime() - current.getTimezoneOffset() * 60000)
+          .toISOString()
+          .split("T")[0]
+      );
       current.setDate(current.getDate() + 1);
     }
 
@@ -271,7 +278,7 @@ async function weightGraph() {
     // 最高体重取得関数
     const maxWeightFunc = (nullNotDataset) => {
       if (nullNotDataset.length) {
-        return Math.max(...nullNotDataset);
+        return Math.max(...nullNotDataset).toFixed(1);
       } else {
         return null;
       }
@@ -280,7 +287,7 @@ async function weightGraph() {
     // 最低体重取得関数
     const minWeightFunc = (nullNotDataset) => {
       if (nullNotDataset.length) {
-        return Math.min(...nullNotDataset);
+        return Math.min(...nullNotDataset).toFixed(1);
       } else {
         return null;
       }

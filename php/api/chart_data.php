@@ -14,7 +14,7 @@ foreach ($weight_logs as $log) {
 
   $resultArr[] = [
     "date" => $log->recorded_at,
-    "weight" => $log->weight,
+    "weight" => $log->getWeight(),
     "bmi" => $bmi,
     "bfp" => $bfp,
   ];

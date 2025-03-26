@@ -4,9 +4,20 @@ namespace lib;
 
 class weightDaysCalc
 {
+  public static function idealDefferWeight($weight, $ideal_weight)
+  {
+    $result = number_format($weight - $ideal_weight, 1);
+    if ($result >= 0) {
+      return "-{$result}";
+    } else {
+      $result = number_format(abs($result), 1);
+      return "+{$result}";
+    }
+  }
+
   public static function dayBefore($weight, $beforeWeight)
   {
-    $result = $weight - $beforeWeight;
+    $result = number_format($weight - $beforeWeight, 1);
     if ($result >= 0) {
       return "+{$result}";
     } else {

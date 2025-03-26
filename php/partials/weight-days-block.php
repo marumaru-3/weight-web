@@ -23,7 +23,7 @@ function weight_days_block($user, $weight_log, $key, $weight_logs)
     <div class="weight-days__item weight-days__item--weight">
       <p class="weight-days__label">体重</p>
       <p class="weight-days__value">
-        <span class="weight-days__num"><?php echo $weight_log->weight; ?></span>
+        <span class="weight-days__num"><?php echo $weight_log->getWeight(); ?></span>
         <span class="weight-days__unit">kg</span>
       </p>
     </div>
