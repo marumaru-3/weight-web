@@ -4,12 +4,14 @@ import {
   initCheckBtn,
   initTextLabelClick,
   initRestrictToAlphanumeric,
+  initRestrictToNumeric,
 } from "../features/forms/form-validate.js";
 
 export const init = () => {
   initTextLabelClick();
   initValidateBtn();
   initRestrictToAlphanumeric("input[data-alphanumeric]");
+  initRestrictToNumeric("input[data-numeric]");
 
   // フォームの送信処理
   const loginForm = document.getElementById("login-form");

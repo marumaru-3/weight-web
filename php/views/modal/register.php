@@ -4,7 +4,7 @@ namespace view\modal\register;
 
 function index()
 {
-?>
+    ?>
   <button type="button"
     id="close-modal"
     class="close-logo">
@@ -18,9 +18,14 @@ function index()
       class="basic-info-form validate-form"
       novalidate>
 
-      <div id="step1" class="step visible">
+      <div id="step1"
+        class="step visible">
         <p class="modal-text">パスワードには半角英数字を使用してください。</p>
         <div class="basic-info-form__contents">
+          <input type="text"
+            name="username"
+            autocomplete="username"
+            style="display: none;">
           <div class="basic-info-form__box">
             <div class="basic-info-form__input validate-form__input">
               <label for="password"
@@ -37,8 +42,10 @@ function index()
                     pattern="[a-zA-Z0-9]+"
                     inputmode="latin"
                     data-alphanumeric
+                    autocomplete="current-password"
                     required>
-                  <button type="button" class="btn--pwd pwd-btn"
+                  <button type="button"
+                    class="btn--pwd pwd-btn"
                     data-hidden="true">
                     <span class="material-symbols-outlined">
                       visibility
@@ -70,7 +77,8 @@ function index()
           </div>
         </div>
       </div>
-      <div id="step2" class="step hidden">
+      <div id="step2"
+        class="step hidden">
         <div class="basic-info-form__contents">
           <div class="basic-info-form__box">
             <div class="basic-info-form__input validate-form__input">

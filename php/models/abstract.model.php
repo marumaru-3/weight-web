@@ -34,4 +34,19 @@ abstract class AbstractModel
             static::clearSession();
         }
     }
+
+    public static function getFloat($val)
+    {
+        return number_format($val, 1);
+    }
+
+    public static function getDate($val, $isKanji = false)
+    {
+        $timestamp = strtotime($val);
+
+        $dateSlash = date("Y/m/d", $timestamp);
+        $dateKanji = date("Y年m月d日", $timestamp);
+
+        return $isKanji ? $dateKanji : $dateSlash;
+    }
 }

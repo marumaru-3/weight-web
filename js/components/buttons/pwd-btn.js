@@ -1,12 +1,9 @@
-export const initPwdClick = () => {
+import { fetchUserData } from "../../api/user_data.js";
+
+export const initPwdClick = async () => {
   const pwdBtns = document.querySelectorAll(".pwd-btn");
 
   if (!pwdBtns.length) return;
-
-  // 本当のパスワード（通常はサーバーから取得する）
-  const actualPwd = "passwordTest";
-
-  const hiddenPwd = "••••••••••••••";
 
   pwdBtns.forEach((pwdBtn) => {
     pwdBtn.addEventListener("click", () => {
@@ -15,11 +12,9 @@ export const initPwdClick = () => {
       const pwdBtnChild = pwdBtn.firstElementChild;
       const isHidden = pwdBtn.dataset.hidden === "true";
 
-      // テキスト要素表示変更
+      // input要素表示変更
       if (pwdTextTag === "input") {
         pwdText.type = isHidden ? "text" : "password";
-      } else {
-        pwdText.textContent = isHidden ? actualPwd : hiddenPwd;
       }
 
       // アイコン変更
@@ -33,4 +28,3 @@ export const initPwdClick = () => {
     });
   });
 };
-initPwdClick();

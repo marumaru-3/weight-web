@@ -4,7 +4,7 @@ namespace view\modal\login;
 
 function index()
 {
-?>
+    ?>
   <button type="button"
     id="close-modal"
     class="close-logo">
@@ -27,11 +27,15 @@ function index()
                 ID
               </div>
               <div class="label-input">
-                <input type="number"
+                <input type="text"
                   id="user_id"
                   name="user_id"
                   class="validate-target"
                   maxlength="10"
+                  inputmode="numeric"
+                  pattern="[0-9]*"
+                  data-numeric
+                  autocomplete="user_id"
                   required>
               </div>
             </label>
@@ -51,12 +55,14 @@ function index()
                   name="password"
                   id="password"
                   class="validate-target"
+                  autocomplete="current-password"
                   maxlength="30"
                   pattern="[a-zA-Z0-9]+"
                   inputmode="latin"
                   data-alphanumeric
                   required>
-                <button type="button" class="btn--pwd pwd-btn"
+                <button type="button"
+                  class="btn--pwd pwd-btn"
                   data-hidden="true">
                   <span class="material-symbols-outlined">
                     visibility
@@ -80,5 +86,5 @@ function index()
     </form>
   </div>
 <?php
-};
+}
 ?>

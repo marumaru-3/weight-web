@@ -13,7 +13,6 @@ async function weightGraph() {
   const getDateRange = (range, isPrev = false) => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    console.log(today);
     let startDate = new Date(today);
     let endDate = new Date(today);
 
@@ -138,7 +137,7 @@ async function weightGraph() {
             callbacks: {
               label(context) {
                 let value = context.raw;
-                return ` 体重: ${value.toFixed(1)} kg`;
+                return ` 体重: ${value} kg`;
               },
             },
           },

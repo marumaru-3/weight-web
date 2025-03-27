@@ -2,9 +2,9 @@
 
 namespace view\user;
 
-function index($page_title)
+function index($page_title, $user = null)
 {
-?>
+    ?>
   <div class="page user">
     <h2 class="page-title"><?php echo $page_title; ?></h2>
     <div class="info-summary">
@@ -24,30 +24,21 @@ function index($page_title)
               content_copy
             </span>
           </p>
-          <p class="info-summary__value copy__value">0000000000</p>
-        </div>
-        <div class="info-summary__item">
-          <p class="info-summary__label">パスワード</p>
-          <p class="info-summary__value pwd">
-            <span class="pwd-value">
-              ••••••••••••••
-            </span>
-            <button type="button"
-              class="btn--pwd pwd-btn"
-              data-hidden="true">
-              <span class="material-symbols-outlined">
-                visibility
-              </span>
-            </button>
+          <p class="info-summary__value copy__value">
+            <?php echo $user->id; ?>
           </p>
         </div>
         <div class="info-summary__item">
           <p class="info-summary__label">登録日</p>
-          <p class="info-summary__value">2024年12月1日</p>
+          <p class="info-summary__value">
+            <?php echo $user->getDate($user->created_at, true); ?>
+          </p>
         </div>
         <div class="info-summary__item">
           <p class="info-summary__label">最終ログイン日</p>
-          <p class="info-summary__value">2025年1月9日</p>
+          <p class="info-summary__value">
+            <?php echo $user->getDate($user->last_login_at, true); ?>
+          </p>
         </div>
       </div>
       <div class="info-summary__block card">
@@ -61,28 +52,36 @@ function index($page_title)
         </button>
         <div class="info-summary__item copy">
           <p class="info-summary__label">ユーザー名</p>
-          <p class="info-summary__value">○○</p>
+          <p class="info-summary__value"><?php echo $user->username; ?></p>
         </div>
         <div class="info-summary__item">
           <p class="info-summary__label">生年月日</p>
-          <p class="info-summary__value">2000年1月15日</p>
+          <p class="info-summary__value">
+            <?php echo $user->getDate($user->birthdate, true); ?>
+          </p>
         </div>
         <div class="info-summary__item">
           <p class="info-summary__label">性別</p>
-          <p class="info-summary__value">男性</p>
+          <p class="info-summary__value">
+            <?php echo $user->getGender($user->gender); ?>
+          </p>
         </div>
         <div class="info-summary__item">
           <p class="info-summary__label">身長</p>
-          <p class="info-summary__value">168cm</p>
+          <p class="info-summary__value">
+            <?php echo $user->getFloat($user->height); ?> cm
+          </p>
         </div>
         <div class="info-summary__item">
           <p class="info-summary__label">理想体重</p>
-          <p class="info-summary__value">64kg</p>
+          <p class="info-summary__value">
+            <?php echo $user->getFloat($user->ideal_weight); ?> kg
+          </p>
         </div>
       </div>
     </div>
     <div class="user-btns">
-      <a href="<?php the_url('/logout'); ?>"
+      <a href="<?php the_url("/logout"); ?>"
         class="btn btn--att-color-03">
         <span class="btn__text">ログアウト</span>
       </a>

@@ -143,3 +143,12 @@ export const initRestrictToAlphanumeric = (selector) => {
     });
   });
 };
+
+// 半角数字の入力制御
+export const initRestrictToNumeric = (selector) => {
+  document.querySelectorAll(selector).forEach((input) => {
+    input.addEventListener("input", (e) => {
+      e.target.value = e.target.value.replace(/[^0-9]/g, "");
+    });
+  });
+};

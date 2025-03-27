@@ -26,6 +26,7 @@
 
 .weight-days__blocks {
   display: flex;
+  align-items: flex-start;
   flex-wrap: wrap;
   gap: 24px;
 }
@@ -34,6 +35,7 @@
   flex-wrap: wrap;
   gap: 16px;
   font-weight: bold;
+  flex-grow: 0;
   width: calc(33.3% - 16px);
 }
 .weight-days__block.show {
@@ -67,7 +69,7 @@
 .weight-days__item {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   gap: 8px;
   width: calc(50% - 8px);

@@ -9,15 +9,16 @@ $weight_logs = WeightLogQuery::fetchByUserId($user);
 
 $resultArr = [];
 foreach ($weight_logs as $log) {
-  $bmi = weightDaysCalc::bmi($log->weight, $user->height);
-  $bfp = weightDaysCalc::bfp($bmi, $user->gender, age_calc($user->birthdate));
+    $weight = $log->weight;
+    $bmi = weightDaysCalc::bmi($log->weight, $user->height);
+    $bfp = weightDaysCalc::bfp($bmi, $user->gender, age_calc($user->birthdate));
 
-  $resultArr[] = [
-    "date" => $log->recorded_at,
-    "weight" => $log->getWeight(),
-    "bmi" => $bmi,
-    "bfp" => $bfp,
-  ];
+    $resultArr[] = [
+        "date" => $log->recorded_at,
+        "weight" => $log->getFloat($weight),
+        "bmi" => $bmi,
+        "bfp" => $bfp,
+    ];
 }
 
 echo json_encode($resultArr);

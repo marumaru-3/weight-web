@@ -2,9 +2,9 @@
 
 namespace view\settings;
 
-function index($page_title)
+function index($page_title, $user = null)
 {
-?>
+    ?>
   <div class="page settings">
     <h2 class="page-title"><?php echo $page_title; ?></h2>
     <div class="settings-block card">
@@ -16,7 +16,9 @@ function index($page_title)
             content_copy
           </span>
         </p>
-        <p class="settings-block__value copy__value">0000000000</p>
+        <p class="settings-block__value copy__value">
+          <?php echo $user->id; ?>
+        </p>
       </div>
       <div class="settings-btns">
         <button class="btn btn--att-color-01">

@@ -6,46 +6,49 @@ use lib\weightDaysCalc;
 
 function index($page_title, $user = null, $weight_logs = null)
 {
+    $today = date("Y-m-d");
 
-  $today = date("Y-m-d");
+    $today_logArr = array_filter($weight_logs, function ($log) use ($today) {
+        return $log->recorded_at === $today;
+    });
+    $today_log = reset($today_logArr);
 
-  $today_logArr = array_filter($weight_logs, function ($log) use ($today) {
-    return $log->recorded_at === $today;
-  });
-  $today_log = reset($today_logArr);
+    $weight = $today_log->weight;
 
+    $today_weight = $today_log ? $today_log->getFloat($weight) : null;
+    $today_memo = $today_log ? $today_log->memo : null;
+    $today_bmi = null;
+    $today_bfp = null;
+    $idealDefferWeight = null;
 
-  $today_weight = $today_log ? $today_log->getWeight() : null;
-  $today_memo = $today_log ? $today_log->memo : null;
-  $today_bmi = null;
-  $today_bfp = null;
-  $idealDefferWeight = null;
+    if (!empty($today_weight)) {
+        $height = $user->height;
+        $today_bmi = weightDaysCalc::bmi($today_weight, $height);
 
-  if (!empty($today_weight)) {
-    $height = $user->height;
-    $today_bmi = weightDaysCalc::bmi($today_weight, $height);
+        $gender = $user->gender;
+        $age = age_calc($user->birthdate);
+        $today_bfp = weightDaysCalc::bfp($today_bmi, $gender, $age);
 
-    $gender = $user->gender;
-    $age = age_calc($user->birthdate);
-    $today_bfp = weightDaysCalc::bfp($today_bmi, $gender, $age);
+        $idealDefferWeight = weightDaysCalc::idealDefferWeight(
+            $today_weight,
+            $user->ideal_weight
+        );
+    }
 
-    $idealDefferWeight = weightDaysCalc::idealDefferWeight($today_weight, $user->ideal_weight);
-  }
-
-  function summaryNum($today_value)
-  {
-    if (!empty($today_value)) {
-      echo $today_value;
-    } else {
-      echo "--";
-    };
-  }
-?>
+    function summaryNum($today_value)
+    {
+        if (!empty($today_value)) {
+            echo $today_value;
+        } else {
+            echo "--";
+        }
+    }
+    ?>
   <div class="page home">
     <div class="home__reminder">
       <p class="home__text">
         <?php echo $user->username; ?> さん、あと
-        <?php echo $idealDefferWeight ?>
+        <?php echo $idealDefferWeight; ?>
         kgで目標達成！<span class="in-bl">焦らずに頑張ろう！</span>
       </p>
       <button class="btn btn--record"
@@ -64,7 +67,7 @@ function index($page_title, $user = null, $weight_logs = null)
         <p class="weight-summary__title">今日の体重</p>
         <p class="weight-summary__text">
           <span class="weight-summary__num">
-            <?php summaryNum($today_weight) ?>
+            <?php summaryNum($today_weight); ?>
           </span>
           <span class="weight-summary__unit">kg</span>
         </p>
@@ -73,7 +76,7 @@ function index($page_title, $user = null, $weight_logs = null)
         <p class="weight-summary__title">今日の体脂肪率(推定)</p>
         <p class="weight-summary__text">
           <span class="weight-summary__num">
-            <?php summaryNum($today_bfp) ?>
+            <?php summaryNum($today_bfp); ?>
           </span>
           <span class="weight-summary__unit">%</span>
         </p>
@@ -88,11 +91,11 @@ function index($page_title, $user = null, $weight_logs = null)
         </p>
       </div>
     </div>
-    <?php if (!empty($today_memo)) : ?>
+    <?php if (!empty($today_memo)): ?>
       <div class="today-memo card">
         <p class="today-memo__title">今日の一言メモ</p>
         <p class="today-memo__text">
-          <?php echo $today_memo ?>
+          <?php echo $today_memo; ?>
         </p>
       </div>
     <?php endif; ?>
@@ -101,7 +104,7 @@ function index($page_title, $user = null, $weight_logs = null)
         <h3 class="weight-graph__title contents-title">体重</h3>
         <p class="weight-graph__date"></p>
       </div>
-      <a href="<?php the_url('/log'); ?>"
+      <a href="<?php the_url("/log"); ?>"
         class="btn btn--more">
         <span class="btn__text">もっと見る</span>
         <span class="material-symbols-outlined"> chevron_right </span>

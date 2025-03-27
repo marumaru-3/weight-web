@@ -12,10 +12,5 @@ class WeightLogModel extends AbstractModel
     public string $created_at;
     public string $updated_at;
 
-    protected static $SESSION_NAME = '_weight_log';
-
-    public function getWeight()
-    {
-        return number_format($this->weight, 1);
-    }
+    protected static $SESSION_NAME = "_weight_log";
 }
