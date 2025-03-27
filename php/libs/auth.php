@@ -19,8 +19,8 @@ class Auth
             if (!empty($user)) {
                 if (password_verify($pwd, $user->password)) {
                     $is_success = true;
-                    UserModel::setSession($user);
                     UserQuery::updateLastLoginAt($id);
+                    UserModel::setSession($user);
                 } else {
                     $errorMessage = "パスワードが間違っています。";
                 }
@@ -54,8 +54,8 @@ class Auth
             $is_success = UserQuery::insert($user);
 
             if ($is_success) {
-                UserModel::setSession($user);
                 UserQuery::updateLastLoginAt($id);
+                UserModel::setSession($user);
             }
         } catch (Throwable $e) {
             $is_success = false;

@@ -2,7 +2,7 @@
 
 namespace view\modal\recordAdmin;
 
-function index()
+function index($weight_logs)
 {
 ?>
   <div class="modal-record-admin">

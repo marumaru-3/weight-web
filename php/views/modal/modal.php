@@ -2,7 +2,7 @@
 
 namespace view\modal\modal;
 
-function modalContents($modal_content, $user = null)
+function modalContents($modal_content, $user = null, $weight_logs = null)
 {
 ?>
   <div id="modal"
@@ -10,7 +10,15 @@ function modalContents($modal_content, $user = null)
     <div class="modal__container">
       <?php
       $fn = "\\view\\modal\\{$modal_content}\\index";
-      empty($user) ? $fn() : $fn($user);
+      if (!empty($user) && !empty($weight_logs)) {
+        $fn($user, $weight_logs);
+      } elseif (!empty($user)) {
+        $fn($user);
+      } elseif (!empty($weight_logs)) {
+        $fn($weight_logs);
+      } else {
+        $fn();
+      }
       ?>
     </div>
   </div>

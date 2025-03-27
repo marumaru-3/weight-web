@@ -12,7 +12,7 @@ class UserModel extends AbstractModel
     public float $height;
     public float $ideal_weight;
     public string $id_display;
-    public string $last_login_at;
+    public ?string $last_login_at;
     public string $created_at;
     public string $updated_at;
 

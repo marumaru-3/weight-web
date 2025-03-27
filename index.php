@@ -12,6 +12,9 @@ require_once SOURCE_BASE . "models/abstract.model.php";
 require_once SOURCE_BASE . "models/user.model.php";
 require_once SOURCE_BASE . "models/weight_log.model.php";
 
+// Service
+require_once SOURCE_BASE . "service/weight_log.service.php";
+
 // Message
 require_once SOURCE_BASE . "libs/message.php";
 

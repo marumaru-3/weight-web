@@ -2,9 +2,19 @@
 
 namespace controller\recordAdmin;
 
+use lib\Auth;
+use db\WeightLogQuery;
+use model\UserModel;
+
 function get()
 {
-  \view\modal\modal\modalContents("recordAdmin");
+  Auth::requireLogin();
+
+  $user = UserModel::getSession();
+
+  $weight_logs = WeightLogQuery::fetchByUserId($user);
+
+  \view\modal\modal\modalContents("recordAdmin", null, $weight_logs);
 }
 
 function post() {}

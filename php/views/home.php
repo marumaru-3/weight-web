@@ -3,52 +3,22 @@
 namespace view\home;
 
 use lib\weightDaysCalc;
+use service\WeightLogService;
 
 function index($page_title, $user = null, $weight_logs = null)
 {
-    $today = date("Y-m-d");
+  $todayStats = WeightLogService::getTodayStats($user, $weight_logs);
 
-    $today_logArr = array_filter($weight_logs, function ($log) use ($today) {
-        return $log->recorded_at === $today;
-    });
-    $today_log = reset($today_logArr);
-
-    $weight = $today_log->weight;
-
-    $today_weight = $today_log ? $today_log->getFloat($weight) : null;
-    $today_memo = $today_log ? $today_log->memo : null;
-    $today_bmi = null;
-    $today_bfp = null;
-    $idealDefferWeight = null;
-
-    if (!empty($today_weight)) {
-        $height = $user->height;
-        $today_bmi = weightDaysCalc::bmi($today_weight, $height);
-
-        $gender = $user->gender;
-        $age = age_calc($user->birthdate);
-        $today_bfp = weightDaysCalc::bfp($today_bmi, $gender, $age);
-
-        $idealDefferWeight = weightDaysCalc::idealDefferWeight(
-            $today_weight,
-            $user->ideal_weight
-        );
-    }
-
-    function summaryNum($today_value)
-    {
-        if (!empty($today_value)) {
-            echo $today_value;
-        } else {
-            echo "--";
-        }
-    }
-    ?>
+  function summaryNum($today_value)
+  {
+    echo !empty($today_value) ? $today_value : '--';
+  }
+?>
   <div class="page home">
     <div class="home__reminder">
       <p class="home__text">
         <?php echo $user->username; ?> さん、あと
-        <?php echo $idealDefferWeight; ?>
+        <?php echo $todayStats["idealDefferWeight"]; ?>
         kgで目標達成！<span class="in-bl">焦らずに頑張ろう！</span>
       </p>
       <button class="btn btn--record"
@@ -67,7 +37,7 @@ function index($page_title, $user = null, $weight_logs = null)
         <p class="weight-summary__title">今日の体重</p>
         <p class="weight-summary__text">
           <span class="weight-summary__num">
-            <?php summaryNum($today_weight); ?>
+            <?php summaryNum($todayStats["weight"]); ?>
           </span>
           <span class="weight-summary__unit">kg</span>
         </p>
@@ -76,7 +46,7 @@ function index($page_title, $user = null, $weight_logs = null)
         <p class="weight-summary__title">今日の体脂肪率(推定)</p>
         <p class="weight-summary__text">
           <span class="weight-summary__num">
-            <?php summaryNum($today_bfp); ?>
+            <?php summaryNum($todayStats["bfp"]); ?>
           </span>
           <span class="weight-summary__unit">%</span>
         </p>
@@ -91,11 +61,11 @@ function index($page_title, $user = null, $weight_logs = null)
         </p>
       </div>
     </div>
-    <?php if (!empty($today_memo)): ?>
+    <?php if (!empty($todayStats["memo"])): ?>
       <div class="today-memo card">
         <p class="today-memo__title">今日の一言メモ</p>
         <p class="today-memo__text">
-          <?php echo $today_memo; ?>
+          <?php echo $todayStats["memo"]; ?>
         </p>
       </div>
     <?php endif; ?>

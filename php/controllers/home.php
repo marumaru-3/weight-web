@@ -19,6 +19,6 @@ function get($page)
     if (count($weight_logs) > 0) {
         \view\layout\dashboard($page, $page_title, $user, $weight_logs);
     } else {
-        \view\layout\dashboard($page, $page_title);
+        \view\layout\dashboard($page, $page_title, $user);
     }
 }
