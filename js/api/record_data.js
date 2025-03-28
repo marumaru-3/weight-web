@@ -1,8 +1,13 @@
-export async function fetchUserData() {
+export async function fetchRecordData(clickElem) {
   try {
-    const response = await fetch(getUrl("/php/api/user_data.php"), {
-      method: "GET",
-    });
+    const date = clickElem.target.parentNode.dataset.date;
+
+    const response = await fetch(
+      getUrl(`/php/api/record_data.php?date=${date}`),
+      {
+        method: "GET",
+      }
+    );
 
     if (!response.ok) {
       if (response.status === 401) {
@@ -19,7 +24,7 @@ export async function fetchUserData() {
       return await response.text();
     }
   } catch (error) {
-    console.log("エラー：", error);
+    console.log("エラー：", await response.text());
     throw error;
   }
 }

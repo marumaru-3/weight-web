@@ -5,21 +5,25 @@ namespace view\home;
 use lib\weightDaysCalc;
 use service\WeightLogService;
 
-function index($page_title, $user = null, $weight_logs = null)
+function index($page_title, $user, $weight_logs)
 {
-  $todayStats = WeightLogService::getTodayStats($user, $weight_logs);
+    $todayStats = WeightLogService::getTodayStats($user, $weight_logs);
 
-  function summaryNum($today_value)
-  {
-    echo !empty($today_value) ? $today_value : '--';
-  }
-?>
+    function summaryNum($today_value)
+    {
+        echo !empty($today_value) ? $today_value : "--";
+    }
+    ?>
   <div class="page home">
     <div class="home__reminder">
       <p class="home__text">
-        <?php echo $user->username; ?> さん、あと
-        <?php echo $todayStats["idealDefferWeight"]; ?>
-        kgで目標達成！<span class="in-bl">焦らずに頑張ろう！</span>
+        <?php echo $user->username; ?> さん、
+        <?php if (!empty($todayStats["weight"])): ?>
+          あと<?php echo $todayStats["idealDefferWeight"]; ?>
+          kgで目標達成！<span class="in-bl">焦らずに頑張ろう！</span>
+        <?php else: ?>
+          体重測定の時間です！
+        <?php endif; ?>
       </p>
       <button class="btn btn--record"
         data-modal="record">
@@ -27,13 +31,16 @@ function index($page_title, $user = null, $weight_logs = null)
       </button>
     </div>
     <div class="weight-summary">
-      <div class="weight-summary__block card weight-summary__block--main">
-        <button class="weight-summary__admin"
-          data-modal="recordAdmin">
-          <span class="material-symbols-outlined">
-            edit
-          </span>
-        </button>
+      <div class="weight-summary__block card weight-summary__block--main"
+        data-date="<?php echo $todayStats["today"]; ?>">
+        <?php if (!empty($todayStats["weight"])): ?>
+          <button class="weight-summary__admin"
+            data-modal="recordAdmin">
+            <span class="material-symbols-outlined">
+              edit
+            </span>
+          </button>
+        <?php endif; ?>
         <p class="weight-summary__title">今日の体重</p>
         <p class="weight-summary__text">
           <span class="weight-summary__num">

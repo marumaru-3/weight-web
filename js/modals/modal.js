@@ -1,10 +1,17 @@
+import { fetchRecordData } from "../api/record_data.js";
 import { initPwdClick } from "../components/buttons/pwd-btn.js";
 
 const bodyElement = document.querySelector("body");
 const layoutElement = document.getElementById("layout");
 
 // モーダルを開く
-const openModal = async (modalType) => {
+const openModal = async (modalType, clickElem = null) => {
+  // モーダルを開く前にデータを取得
+  let recordData = null;
+  if (modalType === "recordAdmin" && clickElem) {
+    recordData = await fetchRecordData(clickElem);
+  }
+
   fetch(getUrl(`/index.php?modal=${modalType}`), {
     method: "GET",
   })
@@ -16,7 +23,7 @@ const openModal = async (modalType) => {
       bodyElement.style.overflow = "hidden";
 
       // 各モーダルの処理
-      initializeModal(modalType);
+      initializeModal(modalType, recordData);
 
       // パスワード表示切り替え
       initPwdClick();
@@ -51,10 +58,10 @@ document.addEventListener("click", (e) => {
 // モーダルを開くボタンのイベントリスナー
 const openModalBtns = document.querySelectorAll("[data-modal]");
 openModalBtns.forEach((btn) => {
-  btn.addEventListener("click", () => {
+  btn.addEventListener("click", (clickElem) => {
     const modalType = btn.getAttribute("data-modal");
     const modal = document.getElementById("modal");
-    if (!modal) openModal(modalType);
+    if (!modal) openModal(modalType, clickElem);
   });
 });
 
@@ -71,10 +78,10 @@ if (showIdModal) {
 }
 
 // 各モーダルの処理関数
-const initializeModal = (modalType) => {
+const initializeModal = (modalType, recordData) => {
   const modalMap = {
     record: "./record.js",
-    recordAdmin: "./record.js",
+    recordAdmin: "./recordAdmin.js",
     adminAccount: "./user-info.js",
     adminUser: "./user-info.js",
     login: "./login.js",
@@ -84,6 +91,6 @@ const initializeModal = (modalType) => {
 
   const modulePath = modalMap[modalType];
   if (modulePath) {
-    import(modulePath).then((module) => module.init());
+    import(modulePath).then((module) => module.init(recordData));
   }
 };

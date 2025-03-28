@@ -27,6 +27,7 @@
 .material-symbols-outlined {
   font-family: "Material Symbols Outlined";
   font-display: swap;
+  pointer-events: none;
 }
 
 .sp-only {

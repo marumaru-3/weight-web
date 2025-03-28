@@ -1,5 +1,3 @@
-import { fetchUserData } from "../../api/user_data.js";
-
 export const initPwdClick = async () => {
   const pwdBtns = document.querySelectorAll(".pwd-btn");
 
