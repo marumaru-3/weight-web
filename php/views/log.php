@@ -2,7 +2,7 @@
 
 namespace view\log;
 
-function index($page_title, $user = null, $weight_logs = null)
+function index($page_title, $user, $weight_logs = null)
 {
 ?>
   <div class="page log">
@@ -60,12 +60,11 @@ function index($page_title, $user = null, $weight_logs = null)
         <p class="weight-summary__title"><span class="period">1ヶ月</span>の平均BMI</p>
         <p class="weight-summary__text">
           <span class="weight-summary__num"></span>
-          <span class="weight-summary__unit">%</span>
         </p>
       </div>
       <div class="weight-summary__block card"
         data-summary="in_de">
-        <p class="weight-summary__title">前期間比 <span class="in-bl">(<span class="period">1ヶ月</span>の平均)</span></p>
+        <p class="weight-summary__title"><span class="period">1ヶ月</span>前と比較</p>
         <p class="weight-summary__text">
           <span class="weight-summary__num"></span>
           <span class="weight-summary__unit">kg</span>

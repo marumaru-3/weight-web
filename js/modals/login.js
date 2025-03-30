@@ -35,7 +35,7 @@ export const init = () => {
         body: formData,
       })
         // .then((response) => response.text())
-        // .then((text) => console.log(JSON.parse(text)));
+        // .then((text) => console.log(text));
         .then((response) => response.json())
         .then((data) => {
           const formMessage = document.querySelector(".form-message");

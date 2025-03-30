@@ -62,6 +62,8 @@
 .date__contents {
   font-size: 18px;
   font-weight: bold;
+  width: 112px;
+  text-align: center;
 }
 .date-next {
   transform: scale(-1, 1);

@@ -4,6 +4,8 @@ namespace lib;
 
 use Throwable;
 
+use model\UserModel;
+
 function page_route($page, $method)
 {
   try {
@@ -23,11 +25,11 @@ function page_route($page, $method)
   } catch (Throwable $e) {
     Msg::push(Msg::DEBUG, $e->getMessage());
     Msg::push(Msg::ERROR, '何かがおかしいようです。。');
-    require_once SOURCE_BASE . "views/404.php";
+    redirect('404');
   }
 }
 
-function modal_route($modal, $method)
+function modal_route($modal, $method, $user = null)
 {
   try {
     $targetFile = SOURCE_BASE . "controllers/modal/{$modal}.php";
@@ -42,10 +44,14 @@ function modal_route($modal, $method)
     $modal = str_replace('/', '\\', $modal);
     $fn = "\\controller\\{$modal}\\{$method}";
 
-    $fn();
+    if ($modal === 'record') {
+      $fn($user);
+    } else {
+      $fn();
+    }
   } catch (Throwable $e) {
     Msg::push(Msg::DEBUG, $e->getMessage());
     Msg::push(Msg::ERROR, '何かがおかしいようです。。');
-    require_once SOURCE_BASE . "views/404.php";
+    redirect('404');
   }
 }

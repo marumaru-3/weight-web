@@ -5,28 +5,50 @@ namespace controller\recordAdmin;
 use db\WeightLogQuery;
 use lib\Msg;
 use lib\Auth;
-use model\UserModel;
 use model\WeightLogModel;
+use model\UserModel;
 use Throwable;
+
+header("Content-Type: application/json");
 
 function get()
 {
-    Auth::requireLogin();
+  Auth::requireLogin();
 
-    \view\modal\modal\modalContents("recordAdmin");
+  \view\modal\modal\modalContents("recordAdmin");
 }
 
 function post()
 {
-    $weight_log = new WeightLogModel();
-    $weight_log->id = get_param("log_id", null);
-    $weight_log->weight = get_param("weight", null);
-    $weight_log->memo = get_param("memo", null);
+  $weight_log = new WeightLogModel();
+  $weight_log->recorded_at = get_param("recorded_at", null);
+  $weight_log->weight = get_param("weight", null);
+  $weight_log->memo = get_param("memo", null);
 
-    try {
-        $is_success = WeightLogQuery::update($weight_log);
-    } catch (Throwable $e) {
-        Msg::push(Msg::DEBUG, $e->getMessage());
-        $is_success = false;
-    }
+  try {
+    $user = UserModel::getSession();
+    $is_success = WeightLogQuery::update($user, $weight_log);
+  } catch (Throwable $e) {
+    Msg::push(Msg::DEBUG, $e->getMessage());
+    $is_success = false;
+  }
+
+  if ($is_success) {
+    Msg::push(Msg::INFO, '体重記録を更新しました。');
+  } else {
+    Msg::push(Msg::ERROR, '体重記録の更新に失敗しました。');
+  }
+
+  // JSに渡す処理
+  $message = "";
+  if ($is_success) {
+    $message = "体重記録を更新しました。";
+  } else {
+    $message = "体重記録の更新に失敗しました。";
+  }
+  echo json_encode([
+    "success" => $is_success,
+    "message" => $message,
+  ]);
+  exit();
 }

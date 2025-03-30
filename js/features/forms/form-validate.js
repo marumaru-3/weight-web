@@ -152,3 +152,14 @@ export const initRestrictToNumeric = (selector) => {
     });
   });
 };
+
+// 半角数字(小数点あり)の入力制御
+export const initRestrictToFloat = (selector) => {
+  document.querySelectorAll(selector).forEach((input) => {
+    input.addEventListener("input", (e) => {
+      e.target.value = e.target.value
+        .replace(/[^0-9.]/g, "")
+        .replace(/(\..*)\./g, "$1");
+    });
+  });
+};

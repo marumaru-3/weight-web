@@ -58,10 +58,10 @@ use lib\Msg;
 
 session_start();
 
-
 try {
     $page = $_GET["page"] ?? "home";
     $method = strtolower($_SERVER["REQUEST_METHOD"]);
+
 
     // モーダル用ルーティング
     if (isset($_GET["modal"])) {

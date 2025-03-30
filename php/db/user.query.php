@@ -41,6 +41,24 @@ class UserQuery
         ]);
     }
 
+    public static function updateUser($user)
+    {
+        $db = new DataSource();
+        $sql = "update users set username = :username, birthdate = :birthdate gender = :gender height = :height ideal_weight = :ideal_weight where id = :id";
+
+        return $db->execute(
+            $sql,
+            [
+                ":id" => $user->id,
+                ":username" => $user->username,
+                ":birthdate" => $user->birthdate,
+                ":gender" => $user->gender,
+                ":height" => $user->height,
+                ":ideal_weight" => $user->ideal_weight,
+            ]
+        );
+    }
+
     public static function updateIdDisplay($id)
     {
         $db = new DataSource();

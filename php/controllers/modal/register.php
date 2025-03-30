@@ -31,7 +31,7 @@ function post()
 
     $result = Auth::regist($user);
 
-    // ログイン判定
+    // 登録判定
     echo json_encode([
         "success" => $result[0],
         "errorMessage" => $result[1],

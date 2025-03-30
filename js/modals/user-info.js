@@ -5,11 +5,13 @@ import {
   initRestrictToAlphanumeric,
 } from "../features/forms/form-validate.js";
 
-export const init = () => {
+export const init = (userData) => {
   // 日付選択処理
   initUserDateForm();
   // テキストラベルクリック判定
   initTextLabelClick();
+
+  console.log(userData);
 
   // 半角英数字バリデーション
   initRestrictToAlphanumeric("input[data-alphanumeric]");

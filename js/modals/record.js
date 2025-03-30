@@ -1,15 +1,20 @@
+import { fetchInsertRecord } from "../api/record_data.js";
 import { initRecordDateSelect } from "../features/records/record-date.js";
 import {
+  initValidateForm,
   initValidateBtn,
+  initCheckBtn,
   initTextLabelClick,
+  initRestrictToFloat,
 } from "../features/forms/form-validate.js";
 
-export const init = () => {
+export const init = async () => {
   // 日付選択処理
   initRecordDateSelect();
 
   // テキストラベルクリック判定
   initTextLabelClick();
+  initRestrictToFloat("input[data-float]");
 
   // バリデーションボタン制御
   initValidateBtn();
@@ -19,9 +24,26 @@ export const init = () => {
   // フォームの送信処理
   const recordForm = document.getElementById("record-form");
   if (recordForm) {
-    recordForm.addEventListener("submit", (e) => {
+    recordForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      console.log("記録フォーム送信");
+
+      // バリデーションチェックを実行
+      initCheckBtn();
+      const isValid = initValidateForm(recordForm);
+
+      if (!isValid) {
+        console.log("バリデーションエラー： フォーム送信をキャンセル");
+        return;
+      }
+
+      const formData = new FormData(recordForm);
+      const result = await fetchInsertRecord(formData);
+
+      window.history.scrollRestoration = "manual";
+      window.location.reload();
+      if (!result.success) {
+        alert(result.message);
+      }
     });
   }
 };

@@ -21,9 +21,13 @@ export const initRecordDateSelect = () => {
   today.setHours(0, 0, 0, 0);
   let selectedDate = new Date(today);
 
+  // input 日付要素
+  const inputRecordedAt = document.getElementById("recorded_at");
+
   // 日付を表示する関数
   const updateDateDisplay = () => {
     dateContents.textContent = recordDateDisplay(selectedDate);
+    inputRecordedAt.value = recordDateDisplay(selectedDate);
     // 次の日が今日を超えたら無効化
     dateNextBtn.disabled = selectedDate.getTime() >= today.getTime();
   };

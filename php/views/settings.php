@@ -2,9 +2,9 @@
 
 namespace view\settings;
 
-function index($page_title, $user = null)
+function index($page_title, $user)
 {
-    ?>
+?>
   <div class="page settings">
     <h2 class="page-title"><?php echo $page_title; ?></h2>
     <div class="settings-block card">

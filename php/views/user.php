@@ -2,9 +2,9 @@
 
 namespace view\user;
 
-function index($page_title, $user = null)
+function index($page_title, $user)
 {
-    ?>
+?>
   <div class="page user">
     <h2 class="page-title"><?php echo $page_title; ?></h2>
     <div class="info-summary">

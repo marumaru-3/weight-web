@@ -18,13 +18,13 @@ async function weightGraph() {
 
     const offsets = {
       "7d": [7, 14],
-      "1m": [1, 2],
+      "1m": [31, 62],
       "3m": [3, 6],
       "6m": [6, 12],
       "1y": [12, 24],
     };
 
-    if (range === "7d") {
+    if (range === "7d" || range === "1m") {
       startDate.setDate(
         today.getDate() - (isPrev ? offsets[range][1] : offsets[range][0]) + 1
       );
@@ -250,15 +250,14 @@ async function weightGraph() {
 
     // 平均数値取得関数
     const calcAverage = (nullNotArr, fixedNum = 1) => {
-      if (nullNotArr.length) {
-        const arrSum = nullNotArr.reduce(
-          (acc, cur) => parseFloat(acc) + parseFloat(cur)
-        );
+      const filteredArr = nullNotArr
+        .filter((num) => num !== null && num !== undefined)
+        .map((num) => parseFloat(num.replace(/,/g, "")));
 
-        return (arrSum / nullNotArr.length).toFixed(fixedNum);
-      } else {
-        return null;
-      }
+      if (!filteredArr.length) return null;
+
+      const arrSum = filteredArr.reduce((acc, cur) => acc + cur, 0);
+      return (arrSum / filteredArr.length).toFixed(fixedNum);
     };
 
     // 前期間比(平均の増減)
@@ -291,6 +290,8 @@ async function weightGraph() {
         return null;
       }
     };
+
+    console.log(nullNotBmi);
 
     const summaryOffsets = {
       average: calcAverage(nullNotDataset),

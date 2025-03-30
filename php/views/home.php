@@ -5,15 +5,15 @@ namespace view\home;
 use lib\weightDaysCalc;
 use service\WeightLogService;
 
-function index($page_title, $user, $weight_logs)
+function index($page_title, $user, $weight_logs = null)
 {
-    $todayStats = WeightLogService::getTodayStats($user, $weight_logs);
+  $todayStats = WeightLogService::getTodayStats($user, $weight_logs);
 
-    function summaryNum($today_value)
-    {
-        echo !empty($today_value) ? $today_value : "--";
-    }
-    ?>
+  function summaryNum($today_value)
+  {
+    echo !empty($today_value) ? $today_value : "--";
+  }
+?>
   <div class="page home">
     <div class="home__reminder">
       <p class="home__text">

@@ -1,3 +1,4 @@
+import { fetchUserData } from "../api/user_data.js";
 import { fetchRecordData } from "../api/record_data.js";
 import { initPwdClick } from "../components/buttons/pwd-btn.js";
 
@@ -7,13 +8,19 @@ const layoutElement = document.getElementById("layout");
 // モーダルを開く
 const openModal = async (modalType, clickElem = null) => {
   // モーダルを開く前にデータを取得
-  let recordData = null;
+  let fetchData = null;
+
   if (modalType === "recordAdmin" && clickElem) {
-    recordData = await fetchRecordData(clickElem);
+    fetchData = await fetchRecordData(clickElem);
+  }
+
+  if (modalType === "adminUser") {
+    fetchData = await fetchUserData();
   }
 
   fetch(getUrl(`/index.php?modal=${modalType}`), {
     method: "GET",
+    credentials: "include",
   })
     .then((response) => response.text())
     .then((html) => {
@@ -23,7 +30,7 @@ const openModal = async (modalType, clickElem = null) => {
       bodyElement.style.overflow = "hidden";
 
       // 各モーダルの処理
-      initializeModal(modalType, recordData);
+      initializeModal(modalType, fetchData);
 
       // パスワード表示切り替え
       initPwdClick();
