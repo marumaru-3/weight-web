@@ -58,7 +58,9 @@
 
 .btn--att-color-03,
 .btn--att-color-01,
-.btn--att-color-02 {
+.btn--att-color-02,
+.btn--acc-delete:hover,
+.btn--rec-reset:hover {
   background-color: #fff;
   border: 2px solid var(--att-color-03);
   justify-content: center;
@@ -72,7 +74,9 @@
 .btn--att-color-01:hover .btn__text,
 .btn--att-color-02:hover .btn__text,
 .btn--att-color-02:hover .btn__text,
-.btn--account .btn__text {
+.btn--account .btn__text,
+.btn--acc-delete .btn__text,
+.btn--rec-reset .btn__text {
   color: #fff;
 }
 
@@ -86,23 +90,29 @@
   background-color: var(--att-color-03);
 }
 
-.btn--att-color-01 {
+.btn--att-color-01,
+.btn--acc-delete:hover {
   border-color: var(--att-color-01);
 }
-.btn--att-color-01 .btn__text {
+.btn--att-color-01 .btn__text,
+.btn--acc-delete:hover .btn__text {
   color: var(--att-color-01);
 }
-.btn--att-color-01:hover {
+.btn--att-color-01:hover,
+.btn--acc-delete {
   background-color: var(--att-color-01);
 }
 
-.btn--att-color-02 {
+.btn--att-color-02,
+.btn--rec-reset:hover {
   border-color: var(--att-color-02);
 }
-.btn--att-color-02 .btn__text {
+.btn--att-color-02 .btn__text,
+.btn--rec-reset:hover .btn__text {
   color: var(--att-color-02);
 }
-.btn--att-color-02:hover {
+.btn--att-color-02:hover,
+.btn--rec-reset {
   background-color: var(--att-color-02);
 }
 

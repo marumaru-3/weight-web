@@ -291,8 +291,6 @@ async function weightGraph() {
       }
     };
 
-    console.log(nullNotBmi);
-
     const summaryOffsets = {
       average: calcAverage(nullNotDataset),
       bfp: calcAverage(nullNotBfp, 2),

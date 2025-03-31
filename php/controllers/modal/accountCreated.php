@@ -6,9 +6,11 @@ use model\UserModel;
 
 function get()
 {
-  $user = UserModel::getSession();
+    $user = UserModel::getSession();
 
-  \view\modal\modal\modalContents("accountCreated", $user);
+    \view\modal\modal\modalContents("accountCreated", $user);
 }
 
-function post() {}
+function post()
+{
+}

@@ -4,12 +4,12 @@ namespace view\modal\adminAccount;
 
 function index()
 {
-?>
+    ?>
   <div class="user-admin modal-width">
     <h3 class="modal-title">パスワードを変更</h3>
     <p class="modal-text">パスワードには半角英数字を使用してください。</p>
-    <form id="basic-info-form"
-      class="basic-info-form validate-form"
+    <form id="user-info-form"
+      class="admin-account-form basic-info-form validate-form"
       novalidate>
       <div class="basic-info-form__contents">
         <input type="text"

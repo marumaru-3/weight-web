@@ -4,7 +4,7 @@ namespace view\help;
 
 function index($page_title)
 {
-?>
+    ?>
   <div class="page help">
     <h2 class="page-title"><?php echo $page_title; ?></h2>
     <ul class="help-summary">
@@ -55,7 +55,7 @@ function index($page_title)
           <li>
             <p class="ul__list-title">IDの表示・管理について</p>
             <p class="ul__list-text">画面右上、またはユーザー情報のアカウント情報にIDの記載があります。IDはどこかに必ず保管するようにしてください。<br>
-              IDはアカウントにログインするために必要な唯一の情報です。IDを忘れてしまった場合には、二度とアカウントにログイン出来なくなってしまいます。</p>
+              IDはアカウントにログインするために必要な情報です。IDを忘れてしまった場合には、二度とアカウントにログイン出来なくなってしまいます。</p>
           </li>
           <li>
             <p class="ul__list-title">ログアウトやアカウントの削除方法</p>
@@ -105,7 +105,8 @@ function index($page_title)
                 一般的な計算式を用いた参考値となります。<br>
                 ※ 計算式（例）<br>
                 男性「BMI × 1.2 + 年齢 × 0.23 - 16.2」<br>
-                女性「BMI × 1.2 + 年齢 × 0.23 - 5.4」
+                女性「BMI × 1.2 + 年齢 × 0.23 - 5.4」<br>
+                その他「BMI × 1.2 + 年齢 × 0.23 - 10.8」
               </span></p>
           </li>
           <li>

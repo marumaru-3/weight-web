@@ -5,6 +5,9 @@ require_once __DIR__ . "/bootstrap.php";
 $birthdate = $user->birthdate;
 list($birth_year, $birth_month, $birth_day) = explode("-", $birthdate);
 
+$birth_month = ltrim($birth_month, "0") ?: "0";
+$birth_day = ltrim($birth_day, "0") ?: "0";
+
 echo json_encode([
     "username" => $user->username,
     "birth_year" => $birth_year,

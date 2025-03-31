@@ -7,7 +7,7 @@ import {
   initRestrictToFloat,
 } from "../features/forms/form-validate.js";
 
-export const init = async (recordData) => {
+export const init = (recordData) => {
   // テキストラベルクリック判定
   initTextLabelClick();
   initRestrictToFloat("input[data-float]");

@@ -141,6 +141,16 @@
   margin-bottom: 8px;
 }
 
+.modal-att--settings {
+  padding-bottom: 0;
+}
+.modal-att__text--height {
+  line-height: 1.8;
+}
+.modal-att__text--last {
+  padding-top: 16px;
+}
+
 /* ステップでの表示切り替え */
 .step {
   /* position: absolute; */

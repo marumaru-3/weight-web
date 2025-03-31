@@ -62,12 +62,6 @@ export const fetchInsertRecord = async (formData) => {
       return await response.text();
     }
   } catch (error) {
-    // const response = await fetch(getUrl("/index.php?modal=record"), {
-    //   method: "POST",
-    //   body: formData,
-    //   credentials: "include",
-    // });
-    // console.error("エラー", await response.text());
     return { success: false, message: "通信エラーが発生しました。" };
   }
 };
@@ -86,12 +80,23 @@ export const fetchDeleteRecord = async (formData) => {
       return await response.text();
     }
   } catch (error) {
-    // const response = await fetch(getUrl("/index.php?modal=record"), {
-    //   method: "POST",
-    //   body: formData,
-    //   credentials: "include",
-    // });
-    // console.error("エラー", await response.text());
+    return { success: false, message: "通信エラーが発生しました。" };
+  }
+};
+
+export const fetchResetRecord = async () => {
+  try {
+    const response = await fetch(getUrl("/index.php?modal=recordReset"), {
+      method: "POST",
+    });
+
+    const contentType = response.headers.get("Content-Type");
+    if (contentType && contentType.includes("application/json")) {
+      return await response.json();
+    } else {
+      return await response.text();
+    }
+  } catch (error) {
     return { success: false, message: "通信エラーが発生しました。" };
   }
 };

@@ -4,6 +4,7 @@ import {
   initCheckBtn,
   initTextLabelClick,
   initRestrictToAlphanumeric,
+  initRestrictToFloat,
 } from "../features/forms/form-validate.js";
 import { initUserDateForm } from "../features/forms/form-date.js";
 import { initStepBtn } from "../features/forms/form-step.js";
@@ -13,6 +14,7 @@ export const init = () => {
   initTextLabelClick();
   initValidateBtn();
   initRestrictToAlphanumeric("input[data-alphanumeric]");
+  initRestrictToFloat("input[data-float]");
   initStepBtn();
 
   // フォームの送信処理

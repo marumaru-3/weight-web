@@ -51,5 +51,7 @@ export const initUserDateForm = () => {
   monthSelect.addEventListener("change", updateDays);
 
   // 関数呼び出し時に日付を設定
-  updateDays();
+  requestAnimationFrame(() => {
+    updateDays();
+  });
 };

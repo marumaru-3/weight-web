@@ -18,7 +18,7 @@ const openModal = async (modalType, clickElem = null) => {
     fetchData = await fetchUserData();
   }
 
-  fetch(getUrl(`/index.php?modal=${modalType}`), {
+  await fetch(getUrl(`/index.php?modal=${modalType}`), {
     method: "GET",
     credentials: "include",
   })
@@ -88,12 +88,14 @@ if (showIdModal) {
 const initializeModal = (modalType, recordData) => {
   const modalMap = {
     record: "./record.js",
-    recordAdmin: "./recordAdmin.js",
+    recordAdmin: "./record-admin.js",
+    recordReset: "./record-reset.js",
     adminAccount: "./user-info.js",
     adminUser: "./user-info.js",
     login: "./login.js",
     register: "./register.js",
     accountCreated: "./account-created.js",
+    accountDelete: "./account-delete.js",
   };
 
   const modulePath = modalMap[modalType];

@@ -42,26 +42,27 @@ require_once SOURCE_BASE . "views/welcome.php";
 // View modal
 require_once SOURCE_BASE . "views/modal/modal.php";
 require_once SOURCE_BASE . "views/modal/accountCreated.php";
+require_once SOURCE_BASE . "views/modal/accountDelete.php";
 require_once SOURCE_BASE . "views/modal/adminAccount.php";
 require_once SOURCE_BASE . "views/modal/adminUser.php";
 require_once SOURCE_BASE . "views/modal/idCheck.php";
 require_once SOURCE_BASE . "views/modal/login.php";
 require_once SOURCE_BASE . "views/modal/record.php";
 require_once SOURCE_BASE . "views/modal/recordAdmin.php";
+require_once SOURCE_BASE . "views/modal/recordReset.php";
 require_once SOURCE_BASE . "views/modal/register.php";
-
 
 use function lib\page_route;
 use function lib\modal_route;
 
 use lib\Msg;
+use model\UserModel;
 
 session_start();
 
 try {
     $page = $_GET["page"] ?? "home";
     $method = strtolower($_SERVER["REQUEST_METHOD"]);
-
 
     // モーダル用ルーティング
     if (isset($_GET["modal"])) {
@@ -75,5 +76,5 @@ try {
 
     \partials\footer();
 } catch (Throwable $e) {
-    die('<h1>何かがすごくおかしいようです。</h1>');
+    die("<h1>何かがすごくおかしいようです。</h1>");
 }
