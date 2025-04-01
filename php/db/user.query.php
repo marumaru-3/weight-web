@@ -70,6 +70,19 @@ class UserQuery
         ]);
     }
 
+    public static function deleteUser($user)
+    {
+        $db = new DataSource();
+        $sql = "delete from users where id = :id;";
+        $result = $db->execute(
+            $sql,
+            [
+                ":id" => $user->id,
+            ]
+        );
+        return $result;
+    }
+
     public static function updateIdDisplay($id)
     {
         $db = new DataSource();

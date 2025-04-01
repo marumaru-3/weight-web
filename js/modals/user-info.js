@@ -25,7 +25,9 @@ export const init = (userData) => {
     modal.querySelector("#username").value = userData.username;
     modal.querySelector("#birth-year").value = userData.birth_year;
     modal.querySelector("#birth-month").value = userData.birth_month;
-    modal.querySelector("#birth-day").value = userData.birth_day;
+    requestAnimationFrame(() => {
+      modal.querySelector("#birth-day").value = userData.birth_day;
+    });
 
     const genderRadio = document.querySelector(
       `input[name="gender"][value="${userData.gender}`

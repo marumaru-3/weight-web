@@ -55,6 +55,7 @@ class Auth
 
             if ($is_success) {
                 UserQuery::updateLastLoginAt($id);
+                $user = UserQuery::fetchById($id);
                 UserModel::setSession($user);
             }
         } catch (Throwable $e) {
@@ -109,7 +110,7 @@ class Auth
                 echo json_encode(["error" => "ログインが必要です"]);
                 exit();
             }
-            Msg::push(Msg::ERROR, "ログインしてください。");
+            // Msg::push(Msg::ERROR, "ログインしてください。");
             redirect("welcome");
         }
     }

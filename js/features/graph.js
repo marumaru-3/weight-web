@@ -12,10 +12,10 @@ async function weightGraph() {
   // 指定した範囲の日付リストを作成
   const getDateRange = (range, isPrev = false) => {
     const today = new Date();
+
     today.setHours(0, 0, 0, 0);
     let startDate = new Date(today);
     let endDate = new Date(today);
-
     const offsets = {
       "7d": [7, 14],
       "1m": [31, 62],
@@ -174,11 +174,12 @@ async function weightGraph() {
       let lastMonth = null;
 
       // x軸の各月を表示
-      weightChart.options.scales.x.ticks.callback = (value, i) => {
+      weightChart.options.scales.x.ticks.callback = (value) => {
         let date = new Date(labels[value]);
         let month = date.getMonth() + 1;
+        let day = date.getDate();
 
-        if (month === lastMonth) {
+        if (month === lastMonth || day !== 1) {
           return;
         }
 

@@ -62,6 +62,7 @@ export const fetchInsertRecord = async (formData) => {
       return await response.text();
     }
   } catch (error) {
+    console.error("エラー", error);
     return { success: false, message: "通信エラーが発生しました。" };
   }
 };
@@ -80,6 +81,7 @@ export const fetchDeleteRecord = async (formData) => {
       return await response.text();
     }
   } catch (error) {
+    console.error("エラー", error);
     return { success: false, message: "通信エラーが発生しました。" };
   }
 };
@@ -97,6 +99,7 @@ export const fetchResetRecord = async () => {
       return await response.text();
     }
   } catch (error) {
+    console.error("エラー", error);
     return { success: false, message: "通信エラーが発生しました。" };
   }
 };
