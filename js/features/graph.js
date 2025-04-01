@@ -7,12 +7,11 @@ async function weightGraph() {
   if (!graphElement) return;
 
   // 体重記録の配列
-  const weightRecords = await fetchChartData();
+  const chartData = await fetchChartData();
+  const weightRecords = chartData.chart_arr;
+  const idealWeight = chartData.ideal_weight;
 
-  console.log(weightRecords);
-
-  // 仮の目標体重
-  const goalWeight = 65;
+  Chart.register(window["chartjs-plugin-annotation"]);
 
   // 指定した範囲の日付リストを作成
   const getDateRange = (range, isPrev = false) => {
@@ -129,6 +128,8 @@ async function weightGraph() {
             },
           },
           y: {
+            suggestedMax: Math.max(...dataset) + 1,
+            suggestedMin: idealWeight - 1,
             ticks: {
               maxTicksLimit: mediaQueryChart.matches ? 6 : 8,
             },
@@ -139,10 +140,35 @@ async function weightGraph() {
             display: false,
           },
           tooltip: {
+            titleFont: {
+              size: mediaQueryChart.matches ? 10 : 12,
+              family: "Inter, Noto Sans JP, sans-serif",
+            },
+            bodyFont: {
+              size: mediaQueryChart.matches ? 12 : 14,
+              family: "Inter, Noto Sans JP, sans-serif",
+            },
             callbacks: {
               label(context) {
                 let value = context.raw;
                 return ` 体重: ${value} kg`;
+              },
+            },
+          },
+          annotation: {
+            annotations: {
+              goalLine: {
+                type: "line",
+                yMin: idealWeight,
+                yMax: idealWeight,
+                borderColor: "#e65100",
+                borderWidth: 2,
+                borderDash: [6, 6],
+                label: {
+                  content: "目標体重",
+                  enabled: true,
+                  position: "end",
+                },
               },
             },
           },

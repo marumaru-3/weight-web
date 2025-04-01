@@ -4,7 +4,7 @@ namespace partials;
 
 function head($page_title)
 {
-    ?>
+?>
   <!DOCTYPE html>
   <html lang="ja">
 
@@ -32,4 +32,4 @@ function head($page_title)
   <body>
   <?php
 }
-?>
+  ?>

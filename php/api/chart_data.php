@@ -7,7 +7,7 @@ use lib\weightDaysCalc;
 
 $weight_logs = WeightLogQuery::fetchByUserId($user);
 
-$user_id = $user->id;
+$ideal_weight = $user->ideal_weight;
 
 $resultArr = [];
 foreach ($weight_logs as $log) {
@@ -23,5 +23,5 @@ foreach ($weight_logs as $log) {
     ];
 }
 
-echo json_encode(["chart_arr" => $resultArr, "ideal_weight" => $user_id]);
+echo json_encode(["chart_arr" => $resultArr, "ideal_weight" => $ideal_weight]);
 exit();

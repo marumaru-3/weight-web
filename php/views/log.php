@@ -64,7 +64,7 @@ function index($page_title, $user, $weight_logs = null)
       </div>
       <div class="weight-summary__block card"
         data-summary="in_de">
-        <p class="weight-summary__title"><span class="period">1ヶ月</span>前と比較</p>
+        <p class="weight-summary__title"><span class="period">1ヶ月</span>前平均と比較</p>
         <p class="weight-summary__text">
           <span class="weight-summary__num"></span>
           <span class="weight-summary__unit">kg</span>
