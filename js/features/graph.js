@@ -9,24 +9,29 @@ async function weightGraph() {
   // 体重記録の配列
   const weightRecords = await fetchChartData();
 
+  console.log(weightRecords);
+
+  // 仮の目標体重
+  const goalWeight = 65;
+
   // 指定した範囲の日付リストを作成
   const getDateRange = (range, isPrev = false) => {
     const today = new Date();
 
     today.setHours(0, 0, 0, 0);
-    let startDate = new Date(today);
+    let startDate = new Date(today.setDate(today.getDate() + 1));
     let endDate = new Date(today);
     const offsets = {
       "7d": [7, 14],
-      "1m": [31, 62],
+      "1m": [1, 2],
       "3m": [3, 6],
       "6m": [6, 12],
       "1y": [12, 24],
     };
 
-    if (range === "7d" || range === "1m") {
+    if (range === "7d") {
       startDate.setDate(
-        today.getDate() - (isPrev ? offsets[range][1] : offsets[range][0]) + 1
+        today.getDate() - (isPrev ? offsets[range][1] : offsets[range][0])
       );
       if (isPrev) endDate.setDate(today.getDate() - offsets[range][0]);
     } else {
@@ -39,7 +44,7 @@ async function weightGraph() {
     let dates = [];
     let current = new Date(startDate);
 
-    while (current <= endDate) {
+    while (current < endDate) {
       dates.push(
         new Date(current.getTime() - current.getTimezoneOffset() * 60000)
           .toISOString()
@@ -149,19 +154,36 @@ async function weightGraph() {
     const dataPointNum = (num) => {
       const maxPoints = num;
       const step = Math.ceil(labels.length / maxPoints);
+      let beforeIndex = 0;
+
       weightChart.data.datasets[0].data = dataset.map((_, index, arr) => {
         const lastIndex = arr.length - 1;
         const distanceFromLast = lastIndex - index;
 
         if (index === lastIndex || distanceFromLast % step === 0) {
-          return dataset[index];
+          let group = dataset.slice(beforeIndex, index + 1);
+          let groupFilter = group.filter((num) => num);
+          let sum = groupFilter.reduce(
+            (acc, val) => parseFloat(acc) + parseFloat(val),
+            0
+          );
+
+          if (!sum) {
+            return null;
+          }
+
+          let avg = (sum / groupFilter.length).toFixed(1);
+
+          beforeIndex = index + 1;
+
+          return avg;
         } else {
           return null;
         }
       });
     };
 
-    // レスポンシブポイント表示数変更
+    // // レスポンシブポイント表示数変更
     if (mediaQueryChart.matches) {
       dataPointNum(12);
       weightChart.update();

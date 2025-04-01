@@ -4,7 +4,7 @@ namespace partials;
 
 function head($page_title)
 {
-?>
+    ?>
   <!DOCTYPE html>
   <html lang="ja">
 
@@ -25,9 +25,11 @@ function head($page_title)
     <link rel="stylesheet"
       href="<?php echo BASE_CSS_PATH; ?>style.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+
   </head>
 
   <body>
   <?php
-};
-  ?>
+}
+?>
