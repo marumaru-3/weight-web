@@ -81,6 +81,7 @@ body {
 }
 
 @media (max-width: 599px) {
+  .layout__sidebar,
   .layout__sidebar.open,
   .layout__sidebar.close {
     position: fixed;

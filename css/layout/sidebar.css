@@ -22,8 +22,11 @@
 }
 
 .sidebar__list .btn,
-.sidebar__list .btn.btn--record {
+.layout__sidebar .btn.btn--record {
   height: 56px;
+  width: 100%;
+  justify-content: flex-start;
+  padding: 12px 24px;
   transition: 0.3s all;
 }
 .layout__sidebar.close .sidebar__list .btn,
@@ -32,12 +35,6 @@
   padding: 14px 16px;
   width: 56px;
   height: 56px;
-}
-.layout__sidebar.open .sidebar__list .btn,
-.layout__sidebar.open .btn.btn--record {
-  justify-content: flex-start;
-  padding: 12px 24px;
-  width: 100%;
 }
 
 .layout__sidebar .btn--nav.sidebar__link--active,
@@ -55,6 +52,24 @@
 }
 .layout__sidebar.open .btn__text {
   display: block;
+}
+
+@media (max-width: 1299px) {
+  .layout__sidebar .sidebar__list .btn,
+  .layout__sidebar .btn.btn--record {
+    justify-content: center;
+    padding: 14px 16px;
+    width: 56px;
+    height: 56px;
+    gap: 0;
+  }
+  .layout__sidebar.open .sidebar__list .btn,
+  .layout__sidebar.open .btn.btn--record {
+    gap: 16px;
+    width: 100%;
+    justify-content: flex-start;
+    padding: 12px 24px;
+  }
 }
 
 @media (max-width: 599px) {
@@ -76,6 +91,8 @@
     justify-content: space-around;
   }
 
+  .layout__sidebar .sidebar__list .btn,
+  .layout__sidebar .btn.btn--record,
   .layout__sidebar.close .sidebar__list .btn,
   .layout__sidebar.close .btn.btn--record,
   .layout__sidebar.open .sidebar__list .btn,
@@ -88,9 +105,10 @@
     width: 56px;
     height: 56px;
   }
+  .layout__sidebar .sidebar__link .btn__text,
   .layout__sidebar.open .sidebar__link .btn__text,
   .layout__sidebar.close .sidebar__link .btn__text {
     display: block;
-    font-size: 10px;
+    font-size: 8px;
   }
 }
