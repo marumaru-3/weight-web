@@ -65,6 +65,15 @@
   margin-top: 16px;
 }
 
+@media (max-width: 699px) {
+  .info-summary__admin {
+    padding: 8px;
+  }
+  .info-summary__admin .admin-text {
+    display: none;
+  }
+}
+
 @media (max-width: 599px) {
   .info-summary__block {
     width: 100%;
@@ -72,5 +81,12 @@
 
   .info-summary__label {
     font-size: 16px;
+  }
+
+  .info-summary__admin {
+    padding: 8px 16px;
+  }
+  .info-summary__admin .admin-text {
+    display: inline-block;
   }
 }
