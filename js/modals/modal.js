@@ -1,5 +1,4 @@
-import { fetchUserData } from "../api/user_data.js";
-import { fetchRecordData } from "../api/record_data.js";
+import { fetchUserData, fetchRecordData } from "../api/fetch_data.js";
 import { initPwdClick } from "../components/buttons/pwd-btn.js";
 
 const bodyElement = document.querySelector("body");
@@ -19,6 +18,7 @@ const openModal = async (modalType, clickElem = null) => {
   let fetchData = null;
 
   if (modalType === "recordAdmin" && clickElem) {
+    console.log(clickElem);
     fetchData = await fetchRecordData(clickElem);
   }
 

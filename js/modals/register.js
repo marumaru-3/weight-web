@@ -1,3 +1,4 @@
+import { fetchRegister } from "../api/fetch_data.js";
 import {
   initValidateForm,
   initValidateBtn,
@@ -20,7 +21,7 @@ export const init = () => {
   // フォームの送信処理
   const registerForm = document.getElementById("register-form");
   if (registerForm) {
-    registerForm.addEventListener("submit", function (e) {
+    registerForm.addEventListener("submit", async function (e) {
       e.preventDefault();
 
       // バリデーションチェックを実行
@@ -33,28 +34,41 @@ export const init = () => {
       }
 
       const formData = new FormData(this);
+      const result = await fetchRegister(formData);
 
-      fetch(getUrl("/index.php?modal=register"), {
-        method: "POST",
-        body: formData,
-      })
-        // .then((response) => response.text())
-        // .then((text) => console.log(JSON.parse(text)));
-        .then((response) => response.json())
-        .then((data) => {
-          const formMessage = document.querySelector(".form-message");
+      const formMessage = document.querySelector(".form-message");
 
-          if (data.success) {
-            // アカウント作成後にフラグをセット
-            sessionStorage.setItem("accountCreated", "true");
-            window.location.href = getUrl("/home");
-          } else {
-            formMessage.classList.add("error");
-            formMessage.innerHTML = `新規登録に失敗しました。<br>${data.errorMessage}`;
-            formMessage.style.display = "block";
-          }
-        })
-        .catch((error) => console.log("エラー：", error));
+      if (result.success) {
+        // アカウント作成後にフラグをセット
+        sessionStorage.setItem("accountCreated", "true");
+        window.location.href = getUrl("/home");
+      } else {
+        formMessage.classList.add("error");
+        formMessage.innerHTML = `新規登録に失敗しました。<br>${result.errorMessage}`;
+        formMessage.style.display = "block";
+      }
+
+      // fetch(getUrl("/index.php?modal=register"), {
+      //   method: "POST",
+      //   body: formData,
+      // })
+      //   // .then((response) => response.text())
+      //   // .then((text) => console.log(JSON.parse(text)));
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     const formMessage = document.querySelector(".form-message");
+
+      //     if (data.success) {
+      //       // アカウント作成後にフラグをセット
+      //       sessionStorage.setItem("accountCreated", "true");
+      //       window.location.href = getUrl("/home");
+      //     } else {
+      //       formMessage.classList.add("error");
+      //       formMessage.innerHTML = `新規登録に失敗しました。<br>${data.errorMessage}`;
+      //       formMessage.style.display = "block";
+      //     }
+      //   })
+      //   .catch((error) => console.log("エラー：", error));
     });
   }
 };

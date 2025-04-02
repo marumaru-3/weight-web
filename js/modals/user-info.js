@@ -1,4 +1,4 @@
-import { fetchUpdateAccount, fetchUpdateUser } from "../api/user_data.js";
+import { fetchUpdateAccount, fetchUpdateUser } from "../api/fetch_data.js";
 import { initUserDateForm } from "../features/forms/form-date.js";
 import {
   initValidateForm,

@@ -4,7 +4,7 @@ import "./helper.js";
 import "./utils/layout.js";
 
 // api
-import "./api/chart_data.js";
+import "./api/fetch_data.js";
 
 // components
 import "./components/buttons/copy.js";

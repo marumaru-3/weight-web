@@ -1,4 +1,4 @@
-import { fetchChartData } from "../api/chart_data.js";
+import { fetchChartData } from "../api/fetch_data.js";
 
 weightGraph();
 async function weightGraph() {
