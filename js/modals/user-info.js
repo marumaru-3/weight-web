@@ -5,6 +5,7 @@ import {
   initValidateBtn,
   initCheckBtn,
   initTextLabelClick,
+  initRestrictToAlphanumeric,
   initRestrictToFloat,
 } from "../features/forms/form-validate.js";
 
@@ -14,6 +15,7 @@ export const init = (userData) => {
 
   // テキストラベルクリック判定
   initTextLabelClick();
+  initRestrictToAlphanumeric("input[data-alphanumeric]");
   initRestrictToFloat("input[data-float]");
 
   const userInfoForm = document.querySelector("#user-info-form");

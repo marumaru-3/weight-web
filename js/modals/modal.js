@@ -44,8 +44,10 @@ const openModal = async (modalType, clickElem = null) => {
       initPwdClick();
 
       // 閉じるボタンのイベントリスナー
-      const closeModalBtn = document.getElementById("close-modal");
-      if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
+      const closeModalBtns = document.querySelectorAll(".close-modal");
+      closeModalBtns.forEach((btn) => {
+        if (btn) btn.addEventListener("click", closeModal);
+      });
     })
     .catch((error) => console.error("モーダルの読み込みに失敗:", error))
     .finally(() => {
@@ -77,7 +79,9 @@ openModalBtns.forEach((btn) => {
 
 // モーダル背景クリックで閉じる（recordモーダルのみ）
 document.addEventListener("click", (e) => {
-  const modalRecord = document.querySelector("#modal[class*='record']");
+  const modalRecord = document.querySelector(
+    "#modal.record, #modal.recordAdmin"
+  );
   if (modalRecord && e.target === modalRecord) {
     closeModal();
   }

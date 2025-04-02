@@ -4,7 +4,7 @@ namespace view\modal\accountCreated;
 
 function index($user)
 {
-?>
+    ?>
 
   <div class="account-create modal-width">
     <h3 class="modal-title">アカウントを作成しました！</h3>
@@ -40,13 +40,12 @@ function index($user)
       <div class="modal-buttons record-form__buttons">
         <div class="modal-buttons__group--columns">
           <button type="submit"
-            class="btn btn--record submit-btn btn--w-100 disabled"
-            id="close-modal"
+            class="close-modal btn btn--record submit-btn btn--w-100 disabled"
             disabled><span class="btn__text">体重管理を始める</span></button>
         </div>
       </div>
     </form>
   </div>
 <?php
-};
+}
 ?>

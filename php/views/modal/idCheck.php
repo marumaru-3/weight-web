@@ -4,7 +4,7 @@ namespace view\modal\idCheck;
 
 function index($user)
 {
-?>
+    ?>
   <div class="id-check modal-width">
     <h3 class="modal-title">IDをどこかに保管していますか？</h3>
     <div class="modal-att">
@@ -23,8 +23,7 @@ function index($user)
     <div class="modal-buttons record-form__buttons">
       <div class="modal-buttons__group--columns">
         <button type="submit"
-          class="btn btn--record submit-btn btn--w-100"
-          id="close-modal"><span class="btn__text">閉じる</span></button>
+          class="close-modal btn btn--record submit-btn btn--w-100"><span class="btn__text">閉じる</span></button>
       </div>
     </div>
   </div>

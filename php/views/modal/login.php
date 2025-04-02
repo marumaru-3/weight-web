@@ -6,8 +6,7 @@ function index()
 {
     ?>
   <button type="button"
-    id="close-modal"
-    class="close-logo">
+    class="close-modal close-logo">
     <span class="material-symbols-outlined">
       add_circle
     </span>

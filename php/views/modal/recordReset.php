@@ -5,7 +5,12 @@ namespace view\modal\recordReset;
 function index()
 {
     ?>
-
+  <button type="button"
+    class="close-modal close-logo">
+    <span class="material-symbols-outlined">
+      add_circle
+    </span>
+  </button>
   <div class="record-reset modal-width">
     <h3 class="modal-title">本当に体重記録を初期化しますか？</h3>
     <div class="modal-att modal-att--settings">
@@ -25,8 +30,7 @@ function index()
       <div class="modal-buttons record-form__buttons">
         <div class="modal-buttons__group--columns">
           <button type="submit"
-            class="btn btn--cancel submit-btn btn--w-100 "
-            id="close-modal"><span class="btn__text">キャンセル</span></button>
+            class="close-modal btn btn--cancel submit-btn btn--w-100"><span class="btn__text">キャンセル</span></button>
           <button type="submit"
             class="btn btn--rec-reset submit-btn btn--w-100"
             id="reset-btn"><span class="btn__text">体重記録を初期化する</span></button>

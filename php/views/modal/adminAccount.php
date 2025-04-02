@@ -5,6 +5,12 @@ namespace view\modal\adminAccount;
 function index()
 {
     ?>
+  <button type="button"
+    class="close-modal close-logo">
+    <span class="material-symbols-outlined">
+      add_circle
+    </span>
+  </button>
   <div class="user-admin modal-width">
     <h3 class="modal-title">パスワードを変更</h3>
     <p class="modal-text">パスワードには半角英数字を使用してください。</p>
@@ -62,8 +68,7 @@ function index()
       <div class="modal-buttons record-form__buttons">
         <div class="modal-buttons__group">
           <button type="button"
-            id="close-modal"
-            class="btn btn--cancel"><span class="btn__text">キャンセル</span></button>
+            class="close-modal btn btn--cancel"><span class="btn__text">キャンセル</span></button>
           <button type="submit"
             class="btn btn--record submit-btn disabled"
             id="btn--user-admin"
