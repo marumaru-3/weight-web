@@ -8,10 +8,10 @@ use lib\Auth;
 use model\UserModel;
 use Throwable;
 
-header("Content-Type: application/json");
-
 function get()
 {
+    header("Content-Type: text/html");
+
     Auth::requireLogin();
 
     \view\modal\modal\modalContents("adminAccount");
@@ -19,6 +19,8 @@ function get()
 
 function post()
 {
+    header("Content-Type: application/json");
+
     $user = new UserModel();
 
     $session_user = UserModel::getSession();

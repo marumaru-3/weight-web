@@ -9,46 +9,48 @@ use model\WeightLogModel;
 use model\UserModel;
 use Throwable;
 
-header("Content-Type: application/json");
-
 function get()
 {
-  Auth::requireLogin();
+    header("Content-Type: text/html");
 
-  \view\modal\modal\modalContents("recordAdmin");
+    Auth::requireLogin();
+
+    \view\modal\modal\modalContents("recordAdmin");
 }
 
 function post()
 {
-  $weight_log = new WeightLogModel();
-  $weight_log->recorded_at = get_param("recorded_at", null);
-  $weight_log->weight = get_param("weight", null);
-  $weight_log->memo = get_param("memo", null);
+    header("Content-Type: application/json");
 
-  try {
-    $user = UserModel::getSession();
-    $is_success = WeightLogQuery::update($user, $weight_log);
-  } catch (Throwable $e) {
-    Msg::push(Msg::DEBUG, $e->getMessage());
-    $is_success = false;
-  }
+    $weight_log = new WeightLogModel();
+    $weight_log->recorded_at = get_param("recorded_at", null);
+    $weight_log->weight = get_param("weight", null);
+    $weight_log->memo = get_param("memo", null);
 
-  if ($is_success) {
-    Msg::push(Msg::INFO, '体重記録を更新しました。');
-  } else {
-    Msg::push(Msg::ERROR, '体重記録の更新に失敗しました。');
-  }
+    try {
+        $user = UserModel::getSession();
+        $is_success = WeightLogQuery::update($user, $weight_log);
+    } catch (Throwable $e) {
+        Msg::push(Msg::DEBUG, $e->getMessage());
+        $is_success = false;
+    }
 
-  // JSに渡す処理
-  $message = "";
-  if ($is_success) {
-    $message = "体重記録を更新しました。";
-  } else {
-    $message = "体重記録の更新に失敗しました。";
-  }
-  echo json_encode([
-    "success" => $is_success,
-    "message" => $message,
-  ]);
-  exit();
+    if ($is_success) {
+        Msg::push(Msg::INFO, "体重記録を更新しました。");
+    } else {
+        Msg::push(Msg::ERROR, "体重記録の更新に失敗しました。");
+    }
+
+    // JSに渡す処理
+    $message = "";
+    if ($is_success) {
+        $message = "体重記録を更新しました。";
+    } else {
+        $message = "体重記録の更新に失敗しました。";
+    }
+    echo json_encode([
+        "success" => $is_success,
+        "message" => $message,
+    ]);
+    exit();
 }

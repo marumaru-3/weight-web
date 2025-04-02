@@ -26,6 +26,12 @@ const fetchData = async (url, method = "GET", body = null, options = {}) => {
   }
 };
 
+// Modal html
+export const fetchModalHtml = async (modalType) => {
+  return fetchData(getUrl(`/index.php?modal=${modalType}`));
+};
+// / Modal html
+
 // Login data
 export const fetchLogin = async (formData) => {
   return fetchData(getUrl("/index.php?modal=login"), "POST", formData);

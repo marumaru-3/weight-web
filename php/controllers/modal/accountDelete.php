@@ -9,42 +9,46 @@ use lib\Auth;
 use model\UserModel;
 use Throwable;
 
-header("Content-Type: application/json");
-
 function get()
 {
-  Auth::requireLogin();
+    header("Content-Type: text/html");
 
-  \view\modal\modal\modalContents("accountDelete");
+    Auth::requireLogin();
+
+    \view\modal\modal\modalContents("accountDelete");
 }
 
 function post()
 {
-  try {
-    $user = UserModel::getSession();
-    $is_success = WeightLogQuery::deleteAllByUserId($user) && UserQuery::deleteUser($user);
-  } catch (Throwable $e) {
-    Msg::push(Msg::DEBUG, $e->getMessage());
-    $is_success = false;
-  }
+    header("Content-Type: application/json");
 
-  if ($is_success) {
-    Msg::push(Msg::INFO, "アカウントを削除しました。");
-  } else {
-    Msg::push(Msg::ERROR, "アカウントの削除に失敗しました。");
-  }
+    try {
+        $user = UserModel::getSession();
+        $is_success =
+            WeightLogQuery::deleteAllByUserId($user) &&
+            UserQuery::deleteUser($user);
+    } catch (Throwable $e) {
+        Msg::push(Msg::DEBUG, $e->getMessage());
+        $is_success = false;
+    }
 
-  // JSに渡す処理
-  $message = "";
-  if ($is_success) {
-    Auth::logout();
-    $message = "アカウントを削除しました。";
-  } else {
-    $message = "アカウントの削除に失敗しました。";
-  }
-  echo json_encode([
-    "success" => $is_success,
-    "message" => $message,
-  ]);
-  exit();
+    if ($is_success) {
+        Msg::push(Msg::INFO, "アカウントを削除しました。");
+    } else {
+        Msg::push(Msg::ERROR, "アカウントの削除に失敗しました。");
+    }
+
+    // JSに渡す処理
+    $message = "";
+    if ($is_success) {
+        Auth::logout();
+        $message = "アカウントを削除しました。";
+    } else {
+        $message = "アカウントの削除に失敗しました。";
+    }
+    echo json_encode([
+        "success" => $is_success,
+        "message" => $message,
+    ]);
+    exit();
 }

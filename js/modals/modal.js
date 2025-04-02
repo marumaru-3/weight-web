@@ -1,4 +1,8 @@
-import { fetchUserData, fetchRecordData } from "../api/fetch_data.js";
+import {
+  fetchUserData,
+  fetchRecordData,
+  fetchModalHtml,
+} from "../api/fetch_data.js";
 import { initPwdClick } from "../components/buttons/pwd-btn.js";
 
 const bodyElement = document.querySelector("body");
@@ -26,33 +30,26 @@ const openModal = async (modalType, clickElem = null) => {
     fetchData = await fetchUserData();
   }
 
-  await fetch(getUrl(`/index.php?modal=${modalType}`), {
-    method: "GET",
-    credentials: "include",
-  })
-    .then((response) => response.text())
-    .then((html) => {
-      layoutElement.insertAdjacentHTML("afterend", html);
+  const modalHtml = await fetchModalHtml(modalType);
 
-      // 背景スクロールさせない
-      bodyElement.style.overflow = "hidden";
+  layoutElement.insertAdjacentHTML("afterend", modalHtml);
 
-      // 各モーダルの処理
-      initializeModal(modalType, fetchData);
+  // 背景スクロールさせない
+  bodyElement.style.overflow = "hidden";
 
-      // パスワード表示切り替え
-      initPwdClick();
+  // 各モーダルの処理
+  initializeModal(modalType, fetchData);
 
-      // 閉じるボタンのイベントリスナー
-      const closeModalBtns = document.querySelectorAll(".close-modal");
-      closeModalBtns.forEach((btn) => {
-        if (btn) btn.addEventListener("click", closeModal);
-      });
-    })
-    .catch((error) => console.error("モーダルの読み込みに失敗:", error))
-    .finally(() => {
-      isModalOpen = false;
-    });
+  // パスワード表示切り替え
+  initPwdClick();
+
+  // 閉じるボタンのイベントリスナー
+  const closeModalBtns = document.querySelectorAll(".close-modal");
+  closeModalBtns.forEach((btn) => {
+    if (btn) btn.addEventListener("click", closeModal);
+  });
+
+  isModalOpen = false;
 };
 
 // モーダル削除関数
