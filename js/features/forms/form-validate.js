@@ -31,6 +31,9 @@ export const initValidateForm = (form) => {
     if (field.type === "radio" || field.type === "checkbox") {
       // ラジオボタンは同じ name のどれかが選択されていればOK
       return form.querySelector(`input[name="${field.name}"]:checked`);
+    } else if (field.id === "password") {
+      // パスワードは4文字以上でOK
+      return field.value.length > 3;
     } else {
       // input や select は value が空でなければOK
       return field.value.trim() !== "";
@@ -85,17 +88,31 @@ const inputValidateCheck = (element, form) => {
     ? labelName.substr(0, labelName.indexOf("（"))
     : labelName;
 
-  if (
+  // パスワードの特別ルール
+  if (element.id === "password") {
+    if (element.validity.valueMissing) {
+      formValidate.textContent = `${labelNameSprit}を入力してください`;
+      form.classList.add("no-text");
+      return false;
+    } else if (element.value.length < 4) {
+      formValidate.textContent = `${labelNameSprit}は4文字以上で入力してください`;
+      form.classList.add("no-text");
+      return false;
+    }
+  }
+  // 共通のバリデーション
+  else if (
     (element.tagName === "INPUT" && element.validity.valueMissing) ||
     (element.tagName === "SELECT" && element.value === "")
   ) {
     formValidate.textContent = `${labelNameSprit}を入力してください`;
     form.classList.add("no-text");
     return false;
-  } else {
-    formValidate.textContent = "";
-    form.classList.remove("no-text");
   }
+
+  formValidate.textContent = "";
+  form.classList.remove("no-text");
+  return true;
 };
 
 // テキストラベル判定関数
@@ -139,7 +156,10 @@ export const initTextLabelClick = () => {
 export const initRestrictToAlphanumeric = (selector) => {
   document.querySelectorAll(selector).forEach((input) => {
     input.addEventListener("input", (e) => {
-      e.target.value = e.target.value.replace(/[^a-zA-Z0-9]/g, "");
+      e.target.value = e.target.value.replace(
+        /[^a-zA-Z0-9 !@#$%^&*()=+\-_.`,]/g,
+        ""
+      );
     });
   });
 };
