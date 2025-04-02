@@ -26,7 +26,7 @@
   transition: 0.3s all;
 }
 .info-summary__admin .material-symbols-outlined {
-  font-size: 24px;
+  font-size: 22px;
 }
 .info-summary__admin:hover {
   background-color: var(--blue-01);
@@ -51,6 +51,9 @@
   gap: 16px;
 }
 
+.info-summary__item.copy .material-symbols-outlined {
+  font-size: 24px;
+}
 .info-summary__item.copy .info-summary__value {
   font-size: 18px;
 }

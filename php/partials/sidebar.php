@@ -4,7 +4,7 @@ namespace partials;
 
 function sidebar($page)
 {
-?>
+    ?>
   <aside class="layout__sidebar">
     <button id="menu-toggle"
       class="btn sidebar__menu-toggle">
@@ -18,19 +18,19 @@ function sidebar($page)
     <nav class="sidebar__nav">
       <ul class="sidebar__list">
         <li class="sidebar__item">
-          <a href="<?php the_url('/home'); ?>"
+          <a href="<?php the_url("/home"); ?>"
             class="sidebar__link btn btn--nav <?php echo $page === "home"
-                                                ? "sidebar__link--active"
-                                                : ""; ?>">
+                ? "sidebar__link--active"
+                : ""; ?>">
             <span class="material-symbols-outlined"> home </span>
             <span class="btn__text">ホーム</span>
           </a>
         </li>
         <li class="sidebar__item">
-          <a href="<?php the_url('/log'); ?>"
+          <a href="<?php the_url("/log"); ?>"
             class="sidebar__link btn btn--nav <?php echo $page === "log"
-                                                ? "sidebar__link--active"
-                                                : ""; ?>">
+                ? "sidebar__link--active"
+                : ""; ?>">
             <span class="material-symbols-outlined">
               accessibility_new
             </span>
@@ -38,29 +38,29 @@ function sidebar($page)
           </a>
         </li>
         <li class="sidebar__item">
-          <a href="<?php the_url('/user'); ?>"
+          <a href="<?php the_url("/user"); ?>"
             class="sidebar__link btn btn--nav <?php echo $page === "user"
-                                                ? "sidebar__link--active"
-                                                : ""; ?>">
+                ? "sidebar__link--active"
+                : ""; ?>">
             <span class="material-symbols-outlined"> account_circle </span>
             <span class="btn__text sp-none">ユーザー情報</span>
             <span class="btn__text sp-only">ユーザー</span>
           </a>
         </li>
         <li class="sidebar__item">
-          <a href="<?php the_url('/help'); ?>"
+          <a href="<?php the_url("/help"); ?>"
             class="sidebar__link btn btn--nav <?php echo $page === "help"
-                                                ? "sidebar__link--active"
-                                                : ""; ?>">
+                ? "sidebar__link--active"
+                : ""; ?>">
             <span class="material-symbols-outlined"> help </span>
             <span class="btn__text">ヘルプ</span>
           </a>
         </li>
         <li class="sidebar__item">
-          <a href="<?php the_url('/settings'); ?>"
+          <a href="<?php the_url("/settings"); ?>"
             class="sidebar__link btn btn--nav <?php echo $page === "settings"
-                                                ? "sidebar__link--active"
-                                                : ""; ?>">
+                ? "sidebar__link--active"
+                : ""; ?>">
             <span class="material-symbols-outlined"> settings </span>
             <span class="btn__text">設定</span>
           </a>

@@ -69,7 +69,7 @@ try {
         modal_route($_GET["modal"], $method);
         exit();
     }
-    modal_route("idCheck", "check");
+    // modal_route("idCheck", "check");
 
     // ページ用ルーティング
     page_route($page, $method);

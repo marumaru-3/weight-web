@@ -6,14 +6,13 @@ use lib\Msg;
 
 function index($page_title)
 {
-  \partials\head($page_title);
-?>
+    \partials\head($page_title); ?>
 
   <div id="layout">
     <main class="welcome">
       <?php Msg::flush(); ?>
       <h1 class="welcome__title">
-        <img src="<?php echo BASE_IMAGE_PATH; ?>main-logo.svg"
+        <img src="<?php echo BASE_IMAGE_PATH; ?>header/main-logo.svg"
           alt="体重Web ロゴ" />
         体重Web
       </h1>
@@ -27,7 +26,7 @@ function index($page_title)
           </p>
         </div>
         <div class="weight-summary__arrow">
-          <img src="<?php echo BASE_IMAGE_PATH; ?>arrow-right.svg"
+          <img src="<?php echo BASE_IMAGE_PATH; ?>welcome/arrow-right.svg"
             alt="" />
         </div>
         <div class="weight-summary__block card">

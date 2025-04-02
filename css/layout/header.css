@@ -66,6 +66,9 @@
 .copy__label {
   gap: 8px;
 }
+.copy__label .material-symbols-outlined {
+  font-size: 22px;
+}
 .user-popup__copy .copy__value {
   font-size: 20px;
 }

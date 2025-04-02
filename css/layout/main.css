@@ -15,6 +15,7 @@
 
 .copy-link {
   cursor: pointer;
+  font-size: 18px;
 }
 .copy-link * {
   pointer-events: none;

@@ -11,7 +11,7 @@ function header($user)
       <h1 class="header__logo">
         <a href="<?php the_url("/home"); ?>"
           title="体重Web">
-          <img src="<?php echo BASE_IMAGE_PATH; ?>main-logo.svg"
+          <img src="<?php echo BASE_IMAGE_PATH; ?>header/main-logo.svg"
             alt="体重Web ロゴ" />
           体重Web
         </a>
@@ -21,7 +21,7 @@ function header($user)
       class="header__info">
       <button id="header__profile"
         class="header__profile">
-        <img src="<?php echo BASE_IMAGE_PATH; ?>header-user.svg"
+        <img src="<?php echo BASE_IMAGE_PATH; ?>header/header-user.svg"
           alt="ユーザー" />
       </button>
       <span class="header__user-id">ID : <?php echo $user->id; ?></span>

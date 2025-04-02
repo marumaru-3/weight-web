@@ -4,7 +4,7 @@ namespace view\user;
 
 function index($page_title, $user)
 {
-?>
+    ?>
   <div class="page user">
     <h2 class="page-title"><?php echo $page_title; ?></h2>
     <div class="info-summary">
@@ -29,6 +29,12 @@ function index($page_title, $user)
           </p>
         </div>
         <div class="info-summary__item">
+          <p class="info-summary__label">パスワード</p>
+          <p class="info-summary__value">
+            ••••••••••••••
+          </p>
+        </div>
+        <div class="info-summary__item">
           <p class="info-summary__label">登録日</p>
           <p class="info-summary__value">
             <?php echo $user->getDate($user->created_at, true); ?>
@@ -50,7 +56,7 @@ function index($page_title, $user)
           </span>
           編集
         </button>
-        <div class="info-summary__item copy">
+        <div class="info-summary__item">
           <p class="info-summary__label">ユーザー名</p>
           <p class="info-summary__value"><?php echo $user->username; ?></p>
         </div>

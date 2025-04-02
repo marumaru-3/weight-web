@@ -26,20 +26,24 @@
 
 .weight-days__blocks {
   display: flex;
-  align-items: flex-start;
+  align-items: stretch;
   flex-wrap: wrap;
   gap: 24px;
 }
 .weight-days__block {
   display: none;
-  flex-wrap: wrap;
-  gap: 16px;
-  font-weight: bold;
   flex-grow: 0;
   width: calc(33.3% - 16px);
 }
 .weight-days__block.show {
+  display: block;
+}
+
+.days-block__inner {
   display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-weight: bold;
 }
 
 .weight-days__date {

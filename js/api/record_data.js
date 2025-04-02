@@ -1,6 +1,10 @@
 export const fetchRecordData = async (clickElem) => {
   try {
-    const date = clickElem.target.parentNode.dataset.date;
+    let date;
+    const targetElem = clickElem.target.closest("[data-date]");
+    if (targetElem) {
+      date = targetElem.dataset.date;
+    }
 
     const response = await fetch(
       getUrl(`/php/api/record_data.php?date=${date}`),

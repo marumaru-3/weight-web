@@ -5,8 +5,16 @@ import { initPwdClick } from "../components/buttons/pwd-btn.js";
 const bodyElement = document.querySelector("body");
 const layoutElement = document.getElementById("layout");
 
+// モーダル表示中フラグ
+let isModalOpen = false;
+
 // モーダルを開く
 const openModal = async (modalType, clickElem = null) => {
+  if (isModalOpen) {
+    return;
+  }
+  isModalOpen = true;
+
   // モーダルを開く前にデータを取得
   let fetchData = null;
 
@@ -39,7 +47,10 @@ const openModal = async (modalType, clickElem = null) => {
       const closeModalBtn = document.getElementById("close-modal");
       if (closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
     })
-    .catch((error) => console.error("モーダルの読み込みに失敗:", error));
+    .catch((error) => console.error("モーダルの読み込みに失敗:", error))
+    .finally(() => {
+      isModalOpen = false;
+    });
 };
 
 // モーダル削除関数
@@ -54,22 +65,22 @@ const closeModal = () => {
     initPwdClick();
   }
 };
-// モーダル背景クリックで閉じる
-document.addEventListener("click", (e) => {
-  const modal = document.getElementById("modal");
-  if (modal && e.target === modal) {
-    closeModal();
-  }
-});
 
 // モーダルを開くボタンのイベントリスナー
 const openModalBtns = document.querySelectorAll("[data-modal]");
 openModalBtns.forEach((btn) => {
   btn.addEventListener("click", (clickElem) => {
     const modalType = btn.getAttribute("data-modal");
-    const modal = document.getElementById("modal");
-    if (!modal) openModal(modalType, clickElem);
+    openModal(modalType, clickElem);
   });
+});
+
+// モーダル背景クリックで閉じる（recordモーダルのみ）
+document.addEventListener("click", (e) => {
+  const modalRecord = document.querySelector("#modal[class*='record']");
+  if (modalRecord && e.target === modalRecord) {
+    closeModal();
+  }
 });
 
 // アカウント作成時にID確認モーダルを表示

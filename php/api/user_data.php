@@ -17,4 +17,5 @@ echo json_encode([
     "height" => $user->height,
     "ideal_weight" => $user->ideal_weight,
 ]);
+
 exit();

@@ -230,6 +230,9 @@
   font-size: 20px;
   width: 104px;
 }
+.record-form__input #weight::placeholder {
+  font-size: 18px;
+}
 .record-form__input #memo {
   width: 100%;
   min-height: 40px;
@@ -249,7 +252,7 @@
     padding: 4px;
   }
   .record-form__input #memo {
-    min-height: 64px;
+    min-height: 60px;
   }
 
   .basic-info-form__checkbox .checkbox-label {
