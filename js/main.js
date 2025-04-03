@@ -23,6 +23,3 @@ import "./features/graph.js";
 
 // modals
 import "./modals/modal.js";
-
-// pages
-import "./pages/home.js";
