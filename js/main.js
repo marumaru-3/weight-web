@@ -4,6 +4,7 @@ import "./helper.js";
 import "./utils/layout.js";
 
 // api
+import "./api/fetch.js";
 import "./api/fetch_data.js";
 
 // components

@@ -2,6 +2,14 @@
 
 require_once __DIR__ . "/bootstrap.php";
 
+use lib\Auth;
+use model\UserModel;
+
+Auth::requireLogin(true);
+$user = UserModel::getSession();
+
+header("Content-Type: application/json");
+
 $birthdate = $user->birthdate;
 list($birth_year, $birth_month, $birth_day) = explode("-", $birthdate);
 

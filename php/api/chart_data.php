@@ -2,8 +2,15 @@
 
 require_once __DIR__ . "/bootstrap.php";
 
+use lib\Auth;
+use model\UserModel;
 use db\WeightLogQuery;
 use lib\weightDaysCalc;
+
+Auth::requireLogin(true);
+$user = UserModel::getSession();
+
+header("Content-Type: application/json");
 
 $weight_logs = WeightLogQuery::fetchByUserId($user);
 
