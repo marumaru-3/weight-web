@@ -4,7 +4,7 @@ namespace partials;
 
 function head($page_title)
 {
-    ?>
+?>
   <!DOCTYPE html>
   <html lang="ja">
 
@@ -13,6 +13,7 @@ function head($page_title)
     <meta name="viewport"
       content="width=device-width, initial-scale=1.0" />
     <title><?php echo $page_title; ?> / 体重Web</title>
+    <link rel="icon" href="<?php echo BASE_IMAGE_PATH; ?>favicon/favicon.ico">
     <link rel="preconnect"
       href="https://fonts.googleapis.com">
     <link rel="preconnect"
@@ -20,8 +21,6 @@ function head($page_title)
       crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans+JP:wght@100..900&display=swap"
       rel="stylesheet">
-    <!-- <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block" /> -->
     <link rel="stylesheet"
       href="<?php echo BASE_CSS_PATH; ?>style.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -32,4 +31,4 @@ function head($page_title)
   <body>
   <?php
 }
-?>
+  ?>
