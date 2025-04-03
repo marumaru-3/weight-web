@@ -1,0 +1,66 @@
+/* 体重情報カード */
+.weight-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.weight-summary__block {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  width: calc(33.3% - 16px);
+  height: 120px;
+}
+.weight-summary__admin {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: var(--blue-02);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  transition: background-color 0.3s;
+}
+.weight-summary__admin .material-symbols-outlined {
+  font-size: 20px;
+}
+.weight-summary__admin:hover {
+  background-color: var(--blue-01);
+}
+.weight-summary__title {
+  text-align: center;
+}
+.weight-summary__text {
+  font-size: 24px;
+}
+.weight-summary__num {
+  font-size: 32px;
+}
+/* / 体重情報カード */
+
+@media (max-width: 999px) {
+  /* 体重情報カード */
+  .weight-summary__block {
+    width: calc(50% - 24px / 2);
+  }
+  .weight-summary__block--main {
+    width: 100%;
+  }
+  /* / 体重情報カード */
+}
+
+@media (max-width: 599px) {
+  /* 体重情報カード */
+  .weight-summary {
+    gap: 16px;
+  }
+  .weight-summary__block {
+    width: 100%;
+  }
+  /* / 体重情報カード */
+}

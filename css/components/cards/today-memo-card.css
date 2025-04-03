@@ -1,0 +1,24 @@
+/* 今日の一言メモカード */
+.today-memo {
+  display: flex;
+  align-items: flex-start;
+  gap: 64px;
+}
+.today-memo__title {
+  width: 120px;
+  font-weight: bold;
+}
+.today-memo__text {
+  flex: 1;
+}
+/* / 今日の一言メモカード */
+
+@media (max-width: 599px) {
+  /* 今日の一言メモカード */
+  .today-memo {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  /* / 今日の一言メモカード */
+}

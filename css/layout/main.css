@@ -41,21 +41,6 @@
   opacity: 1;
 }
 
-#messages {
-  width: 100%;
-}
-.alert {
-  border-radius: 16px;
-  padding: 16px;
-  margin-bottom: 24px;
-}
-.alert-info {
-  background-color: #a2ffee;
-}
-.alert-danger {
-  background-color: #ffc8dc;
-}
-
 @media (max-width: 599px) {
   .page {
     gap: 24px;

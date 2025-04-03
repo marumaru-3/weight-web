@@ -1,0 +1,103 @@
+/* 体重グラフカード */
+.weight-graph {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px 8px;
+  padding: 32px 24px;
+}
+.home .weight-graph {
+  padding-top: 16px;
+}
+
+.weight-graph__meta {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-weight: bold;
+}
+
+.weight-graph__switch {
+  display: flex;
+  gap: 4px;
+}
+.weight-graph__switch .btn {
+  justify-content: center;
+  border-radius: 8px;
+  font-weight: 500;
+  width: 64px;
+  padding: 8px;
+}
+
+.weight-graph__graph {
+  aspect-ratio: 2 / 1;
+  width: 100%;
+  padding: 0 8px;
+}
+.weight-graph__canvas {
+  width: 100%;
+}
+/* / 体重グラフカード */
+
+@media (max-width: 999px) {
+  /* 体重グラフカード */
+  .weight-graph__graph {
+    padding: 0;
+  }
+  .weight-graph .btn--more {
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+  }
+  .weight-graph .btn--more .btn__text {
+    display: none;
+  }
+  /* / 体重グラフカード */
+}
+
+@media (max-width: 599px) {
+  /* 体重グラフカード */
+  .weight-graph {
+    padding: 16px 16px 24px;
+  }
+  .weight-graph__meta {
+    order: 1;
+    gap: 16px;
+  }
+  .weight-graph__title {
+    font-size: 18px;
+  }
+  .weight-graph__date {
+    font-size: 14px;
+  }
+  .weight-graph .btn {
+    order: 2;
+  }
+  .weight-graph__switch {
+    order: 3;
+  }
+  .weight-graph__switch {
+    justify-content: space-between;
+    width: 100%;
+  }
+  .weight-graph__switch .btn {
+    width: 60px;
+  }
+  .weight-graph__graph {
+    order: 2;
+    aspect-ratio: 4 / 3;
+  }
+  /* / 体重グラフカード */
+}
+
+@media (max-width: 399px) {
+  /* 体重グラフカード */
+  .weight-graph__switch {
+    font-size: 3.6vw;
+  }
+  .weight-graph__switch .btn {
+    width: 15vw;
+  }
+  /* / 体重グラフカード */
+}

@@ -143,16 +143,20 @@
 /* / 日ごとの体重記録カード */
 
 @media (max-width: 999px) {
+  /* 日ごとの体重記録カード */
   .weight-days__block {
     width: calc(50% - 24px / 2);
   }
+  /* / 日ごとの体重記録カード */
 }
 
 @media (max-width: 599px) {
+  /* 日ごとの体重記録カード */
   .weight-days__blocks {
     gap: 16px;
   }
   .weight-days__block {
     width: 100%;
   }
+  /* / 日ごとの体重記録カード */
 }

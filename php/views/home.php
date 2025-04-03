@@ -91,7 +91,7 @@ function index($_, $user, $weight_logs = null)
         <span class="material-symbols-outlined"> chevron_right </span>
       </a>
       <div class="weight-graph__graph">
-        <canvas id="graph"></canvas>
+        <canvas id="graph" class="weight-graph__canvas"></canvas>
       </div>
     </div>
   </div>
