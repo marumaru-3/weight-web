@@ -37,9 +37,9 @@ function post()
         );
 
         if ($existing_log) {
-            $is_success = WeightLogQuery::update($user, $weight_log);
+            $is_success = WeightLogQuery::update($user->id, $weight_log);
         } else {
-            $is_success = WeightLogQuery::insert($user, $weight_log);
+            $is_success = WeightLogQuery::insert($user->id, $weight_log);
         }
     } catch (Throwable $e) {
         Msg::push(Msg::DEBUG, $e->getMessage());

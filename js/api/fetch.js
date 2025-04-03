@@ -4,13 +4,13 @@ export const fetchData = async (
   body = null,
   options = {}
 ) => {
-  try {
-    const response = await fetch(url, {
-      method,
-      body,
-      ...options,
-    });
+  const response = await fetch(url, {
+    method,
+    body,
+    ...options,
+  });
 
+  try {
     if (!response.ok) {
       if (response.status === 401) {
         alert("ログインが必要です。");
@@ -27,6 +27,7 @@ export const fetchData = async (
     }
   } catch (error) {
     console.log("エラー:", error);
+    console.log("デバッグ:", await response.text());
     return { success: false, message: "通信エラーが発生しました。" };
   }
 };

@@ -29,7 +29,7 @@ function post()
 
     try {
         $user = UserModel::getSession();
-        $is_success = WeightLogQuery::update($user, $weight_log);
+        $is_success = WeightLogQuery::update($user->id, $weight_log);
     } catch (Throwable $e) {
         Msg::push(Msg::DEBUG, $e->getMessage());
         $is_success = false;

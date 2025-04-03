@@ -7,7 +7,7 @@ use model\WeightLogModel;
 
 class WeightLogQuery
 {
-    public static function fetchByUserId($user)
+    public static function fetchByUserId($user_id)
     {
         $db = new DataSource();
         $sql =
@@ -15,7 +15,7 @@ class WeightLogQuery
         $result = $db->select(
             $sql,
             [
-                ":id" => $user->id,
+                ":id" => $user_id,
             ],
             DataSource::CLS,
             WeightLogModel::class
@@ -44,53 +44,53 @@ class WeightLogQuery
         return $result;
     }
 
-    public static function update($user, $weight_log)
+    public static function update($user_id, $weight_log)
     {
         $db = new DataSource();
         $sql =
             "update weight_logs set weight = :weight, memo = :memo where user_id = :user_id and recorded_at = :recorded_at";
 
         return $db->execute($sql, [
-            ":user_id" => $user->id,
+            ":user_id" => $user_id,
             ":weight" => $weight_log->weight,
             ":memo" => $weight_log->memo,
             ":recorded_at" => $weight_log->recorded_at,
         ]);
     }
 
-    public static function insert($user, $weight_log)
+    public static function insert($user_id, $weight_log)
     {
         $db = new DataSource();
         $sql =
             "insert into weight_logs(user_id, weight, memo, recorded_at) values (:user_id, :weight, :memo, :recorded_at)";
 
         return $db->execute($sql, [
-            ":user_id" => $user->id,
+            ":user_id" => $user_id,
             ":weight" => $weight_log->weight,
             ":memo" => $weight_log->memo,
             ":recorded_at" => $weight_log->recorded_at,
         ]);
     }
 
-    public static function delete($user, $recorded_at)
+    public static function delete($user_id, $recorded_at)
     {
         $db = new DataSource();
         $sql =
             "delete from weight_logs where user_id = :user_id and recorded_at = :recorded_at";
 
         return $db->execute($sql, [
-            ":user_id" => $user->id,
+            ":user_id" => $user_id,
             ":recorded_at" => $recorded_at,
         ]);
     }
 
-    public static function deleteAllByUserId($user)
+    public static function deleteAllByUserId($user_id)
     {
         $db = new DataSource();
         $sql = "delete from weight_logs where user_id = :user_id";
 
         return $db->execute($sql, [
-            ":user_id" => $user->id,
+            ":user_id" => $user_id,
         ]);
     }
 }

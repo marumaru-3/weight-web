@@ -8,12 +8,11 @@ use model\UserModel;
 
 function get($page)
 {
-
     Auth::requireLogin();
 
     $user = UserModel::getSession();
 
-    $weight_logs = WeightLogQuery::fetchByUserId($user);
+    $weight_logs = WeightLogQuery::fetchByUserId($user->id);
 
     $page_title = "ホーム";
     if (count($weight_logs) > 0) {

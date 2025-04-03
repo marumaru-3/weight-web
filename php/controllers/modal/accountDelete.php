@@ -25,8 +25,8 @@ function post()
     try {
         $user = UserModel::getSession();
         $is_success =
-            WeightLogQuery::deleteAllByUserId($user) &&
-            UserQuery::deleteUser($user);
+            WeightLogQuery::deleteAllByUserId($user->id) &&
+            UserQuery::deleteUser($user->id);
     } catch (Throwable $e) {
         Msg::push(Msg::DEBUG, $e->getMessage());
         $is_success = false;

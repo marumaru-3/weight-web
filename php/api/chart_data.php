@@ -12,7 +12,7 @@ $user = UserModel::getSession();
 
 header("Content-Type: application/json");
 
-$weight_logs = WeightLogQuery::fetchByUserId($user);
+$weight_logs = WeightLogQuery::fetchByUserId($user->id);
 
 $ideal_weight = $user->ideal_weight;
 
