@@ -4,7 +4,7 @@ namespace view\help;
 
 function index($page_title)
 {
-    ?>
+?>
   <div class="page help">
     <h2 class="page-title"><?php echo $page_title; ?></h2>
     <ul class="help-summary">
@@ -86,7 +86,7 @@ function index($page_title)
         </button>
         <ul class="help-summary__ul accordion-content">
           <li>
-            <p class="ul__list-text">このアプリはログインIDや体重データ、生年月日を管理しますが、第三者と共有することはありません。<br>
+            <p class="ul__list-text">このWebアプリはログインIDや体重データ、生年月日を管理しますが、第三者と共有することはありません。<br>
               生年月日は、年齢に応じた体重管理の参考データとして利用します。<br>
               体重データはユーザー自身が削除できます。<br>
               また、アカウントを削除すると、生年月日を含むすべてのデータが完全に削除されます。</p>
@@ -139,7 +139,7 @@ function index($page_title)
         </button>
         <ul class="help-summary__ul accordion-content">
           <li>
-            <p class="ul__list-text">体重管理ステーションについて疑問点や改善点等ありましたら、<br>
+            <p class="ul__list-text">体重Webについて疑問点や改善点等ありましたら、<br>
               こちらのXアカウントのDMでご連絡ください。 <a href="#"
                 class="ul__link">@twitter.com/acoount</a></p>
           </li>
