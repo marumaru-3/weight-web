@@ -34,8 +34,6 @@ export const init = async () => {
 
       const formMessage = document.querySelector(".form-message");
 
-      console.log(result);
-
       if (result.success) {
         window.location.href = getUrl("/home");
       } else {
@@ -43,26 +41,6 @@ export const init = async () => {
         formMessage.innerHTML = `ログインに失敗しました。<br>${result.errorMessage}`;
         formMessage.style.display = "block";
       }
-
-      // fetch(getUrl("/index.php?modal=login"), {
-      //   method: "POST",
-      //   body: formData,
-      // })
-      //   // .then((response) => response.text())
-      //   // .then((text) => console.log(text));
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     const formMessage = document.querySelector(".form-message");
-
-      //     if (data.success) {
-      //       window.location.href = getUrl("/home");
-      //     } else {
-      //       formMessage.classList.add("error");
-      //       formMessage.innerHTML = `ログインに失敗しました。<br>${data.errorMessage}`;
-      //       formMessage.style.display = "block";
-      //     }
-      //   })
-      //   .catch((error) => console.log("エラー：", error));
     });
   }
 };

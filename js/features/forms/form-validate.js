@@ -157,7 +157,7 @@ export const initRestrictToAlphanumeric = (selector) => {
   document.querySelectorAll(selector).forEach((input) => {
     input.addEventListener("input", (e) => {
       e.target.value = e.target.value.replace(
-        /[^a-zA-Z0-9 !@#$%^&*()=+\-_.`,]/g,
+        /[^a-zA-Z0-9 !"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]/g,
         ""
       );
     });

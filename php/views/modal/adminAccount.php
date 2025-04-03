@@ -36,7 +36,7 @@ function index()
                      class="validate-target"
                      autocomplete="current-password"
                      maxlength="30"
-                     pattern="[a-zA-Z0-9 !@#$%^&*()=+\-_.`,]+"
+                     pattern="[a-zA-Z0-9 !#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]+"
                      inputmode="latin"
                      data-alphanumeric
                      required>

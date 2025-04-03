@@ -22,7 +22,6 @@ const openModal = async (modalType, clickElem = null) => {
   let fetchData = null;
 
   if (modalType === "recordAdmin" && clickElem) {
-    console.log(clickElem);
     fetchData = await fetchRecordData(clickElem);
   }
 
