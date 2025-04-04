@@ -1,4 +1,4 @@
-import { fetchRegister } from "../api/fetch_data.js";
+import { fetchRegister } from "../../api/fetch_data.js";
 import {
   initValidateForm,
   initValidateBtn,
@@ -6,9 +6,9 @@ import {
   initTextLabelClick,
   initRestrictToAlphanumeric,
   initRestrictToFloat,
-} from "../features/forms/form-validate.js";
-import { initUserDateForm } from "../features/forms/form-date.js";
-import { initStepBtn } from "../features/forms/form-step.js";
+} from "../../features/forms/form-validate.js";
+import { initUserDateForm } from "../../features/forms/form-date.js";
+import { initStepBtn } from "../../features/forms/form-step.js";
 
 export const init = () => {
   initUserDateForm();
@@ -21,7 +21,7 @@ export const init = () => {
   // フォームの送信処理
   const registerForm = document.getElementById("register-form");
   if (registerForm) {
-    registerForm.addEventListener("submit", async function (e) {
+    registerForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       // バリデーションチェックを実行
@@ -33,7 +33,7 @@ export const init = () => {
         return;
       }
 
-      const formData = new FormData(this);
+      const formData = new FormData(registerForm);
       const result = await fetchRegister(formData);
 
       const formMessage = document.querySelector(".form-message");

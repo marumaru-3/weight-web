@@ -1,5 +1,4 @@
-weightDays();
-function weightDays() {
+export const initWeightDays = () => {
   // 日ごとの体重記録用
   const weightDaysBlocksParent = document.querySelector(".weight-days__blocks");
   const weightDaysBlocks = document.querySelectorAll(".weight-days__block");
@@ -70,4 +69,4 @@ function weightDays() {
       moreWeightDays(sortWeightDaysBlocks(isOld));
     });
   });
-}
+};

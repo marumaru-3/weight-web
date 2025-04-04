@@ -1,4 +1,4 @@
-import { initValidateBtn } from "../features/forms/form-validate.js";
+import { initValidateBtn } from "../../features/forms/form-validate.js";
 
 export const init = () => {
   // バリデーションボタン制御

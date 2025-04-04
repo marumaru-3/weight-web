@@ -1,5 +1,4 @@
-accordionMove();
-function accordionMove() {
+export const initAccordion = () => {
   const accordionBtns = document.querySelectorAll(".accordion-btn");
 
   if (!accordionBtns) return;
@@ -29,4 +28,4 @@ function accordionMove() {
       }
     });
   });
-}
+};

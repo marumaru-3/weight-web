@@ -1,25 +1,39 @@
 import "./helper.js";
 
-// utils
-import "./utils/layout.js";
-
-// api
-import "./api/fetch.js";
-import "./api/fetch_data.js";
-
-// components
+// buttons
 import "./components/buttons/copy.js";
-import "./components/buttons/pwd-btn.js";
-import "./components/accordion.js";
-import "./components/user-popup.js";
-
-// features
-import "./features/forms/form-date.js";
-import "./features/forms/form-validate.js";
-import "./features/forms/form-step.js";
-import "./features/records/record-date.js";
-import "./features/records/weight-days.js";
-import "./features/graph.js";
 
 // modals
 import "./modals/modal.js";
+
+// utils
+import { initLayout } from "./utils/layout.js";
+
+// components
+import { initAccordion } from "./components/accordion.js";
+import { userPopup } from "./components/user-popup.js";
+
+// features
+import { initWeightDays } from "./features/records/weight-days.js";
+import { initWeightGraph } from "./features/graph.js";
+
+// ======== 条件付きで初期化実行 ========
+if (document.querySelector("#header")) {
+  initLayout();
+}
+
+if (document.querySelector(".accordion")) {
+  initAccordion();
+}
+
+if (document.querySelector("#header__info")) {
+  userPopup();
+}
+
+if (document.querySelector(".weight-days__blocks")) {
+  initWeightDays();
+}
+
+if (document.querySelector("#graph")) {
+  initWeightGraph();
+}

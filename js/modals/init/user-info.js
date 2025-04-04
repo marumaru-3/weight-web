@@ -1,5 +1,5 @@
-import { fetchUpdateAccount, fetchUpdateUser } from "../api/fetch_data.js";
-import { initUserDateForm } from "../features/forms/form-date.js";
+import { fetchUpdateAccount, fetchUpdateUser } from "../../api/fetch_data.js";
+import { initUserDateForm } from "../../features/forms/form-date.js";
 import {
   initValidateForm,
   initValidateBtn,
@@ -7,7 +7,7 @@ import {
   initTextLabelClick,
   initRestrictToAlphanumeric,
   initRestrictToFloat,
-} from "../features/forms/form-validate.js";
+} from "../../features/forms/form-validate.js";
 
 export const init = (userData) => {
   // 日付選択処理

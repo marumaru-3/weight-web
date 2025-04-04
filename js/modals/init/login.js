@@ -1,4 +1,4 @@
-import { fetchLogin } from "../api/fetch_data.js";
+import { fetchLogin } from "../../api/fetch_data.js";
 import {
   initValidateForm,
   initValidateBtn,
@@ -6,7 +6,7 @@ import {
   initTextLabelClick,
   initRestrictToAlphanumeric,
   initRestrictToNumeric,
-} from "../features/forms/form-validate.js";
+} from "../../features/forms/form-validate.js";
 
 export const init = async () => {
   initTextLabelClick();
@@ -17,7 +17,7 @@ export const init = async () => {
   // フォームの送信処理
   const loginForm = document.getElementById("login-form");
   if (loginForm) {
-    loginForm.addEventListener("submit", async function (e) {
+    loginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       // バリデーションチェックを実行
@@ -29,7 +29,7 @@ export const init = async () => {
         return;
       }
 
-      const formData = new FormData(this);
+      const formData = new FormData(loginForm);
       const result = await fetchLogin(formData);
 
       const formMessage = document.querySelector(".form-message");

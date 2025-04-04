@@ -98,15 +98,15 @@ if (showIdModal) {
 // 各モーダルの処理関数
 const initializeModal = (modalType, recordData) => {
   const modalMap = {
-    record: "./record.js",
-    recordAdmin: "./record-admin.js",
-    recordReset: "./record-reset.js",
-    adminAccount: "./user-info.js",
-    adminUser: "./user-info.js",
-    login: "./login.js",
-    register: "./register.js",
-    accountCreated: "./account-created.js",
-    accountDelete: "./account-delete.js",
+    record: "./init/record.js",
+    recordAdmin: "./init/record-admin.js",
+    recordReset: "./init/record-reset.js",
+    adminAccount: "./init/user-info.js",
+    adminUser: "./init/user-info.js",
+    login: "./init/login.js",
+    register: "./init/register.js",
+    accountCreated: "./init/account-created.js",
+    accountDelete: "./init/account-delete.js",
   };
 
   const modulePath = modalMap[modalType];

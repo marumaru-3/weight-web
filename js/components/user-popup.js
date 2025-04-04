@@ -1,5 +1,4 @@
-userPopup();
-function userPopup() {
+export const userPopup = () => {
   const headerInfo = document.getElementById("header__info");
   const headerProfile = document.getElementById("header__profile");
   const userPopup = document.getElementById("user-popup");
@@ -22,4 +21,4 @@ function userPopup() {
       headerInfo.classList.remove("click");
     }
   });
-}
+};

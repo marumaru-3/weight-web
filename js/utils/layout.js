@@ -1,5 +1,4 @@
-layout();
-function layout() {
+export const initLayout = () => {
   // ヘッダースクロール非表示
   const header = document.getElementById("header");
 
@@ -38,7 +37,7 @@ function layout() {
   // サイドバーレスポンシブ表示切り替え
   const mediaQueryTB = window.matchMedia("(max-width: 1299px)");
 
-  function sidebarResponse(mediaQuery) {
+  const sidebarResponse = (mediaQuery) => {
     if (mediaQuery.matches) {
       sidebar.classList.remove("open");
       sidebar.classList.add("close");
@@ -46,7 +45,7 @@ function layout() {
       sidebar.classList.remove("close");
       sidebar.classList.add("open");
     }
-  }
+  };
 
   // 初回適用
   sidebarResponse(mediaQueryTB);
@@ -62,4 +61,4 @@ function layout() {
       }
     }
   });
-}
+};

@@ -1,11 +1,11 @@
-import { fetchUpdateRecord, fetchDeleteRecord } from "../api/fetch_data.js";
+import { fetchUpdateRecord, fetchDeleteRecord } from "../../api/fetch_data.js";
 import {
   initValidateForm,
   initValidateBtn,
   initCheckBtn,
   initTextLabelClick,
   initRestrictToFloat,
-} from "../features/forms/form-validate.js";
+} from "../../features/forms/form-validate.js";
 
 export const init = (recordData) => {
   // テキストラベルクリック判定

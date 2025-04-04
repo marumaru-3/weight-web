@@ -1,7 +1,6 @@
 import { fetchChartData } from "../api/fetch_data.js";
 
-weightGraph();
-async function weightGraph() {
+export const initWeightGraph = async () => {
   const graphElement = document.getElementById("graph");
 
   if (!graphElement) return;
@@ -412,4 +411,4 @@ async function weightGraph() {
       weightGraphDate.innerHTML = titleDate(range);
       weightSummaryUpdate(range);
     });
-}
+};
