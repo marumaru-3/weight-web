@@ -1,6 +1,6 @@
 <?php
 
-namespace controller\accountDelete;
+namespace controller\modal\accountDelete;
 
 use db\WeightLogQuery;
 use db\UserQuery;

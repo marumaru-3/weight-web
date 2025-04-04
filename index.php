@@ -40,23 +40,20 @@ require_once SOURCE_BASE . "views/settings.php";
 require_once SOURCE_BASE . "views/welcome.php";
 
 // View modal
-require_once SOURCE_BASE . "views/modal/modal.php";
-require_once SOURCE_BASE . "views/modal/accountCreated.php";
-require_once SOURCE_BASE . "views/modal/accountDelete.php";
-require_once SOURCE_BASE . "views/modal/adminAccount.php";
-require_once SOURCE_BASE . "views/modal/adminUser.php";
-require_once SOURCE_BASE . "views/modal/idCheck.php";
-require_once SOURCE_BASE . "views/modal/login.php";
-require_once SOURCE_BASE . "views/modal/record.php";
-require_once SOURCE_BASE . "views/modal/recordAdmin.php";
-require_once SOURCE_BASE . "views/modal/recordReset.php";
-require_once SOURCE_BASE . "views/modal/register.php";
+require_once SOURCE_BASE . "views/modals/modal.php";
+require_once SOURCE_BASE . "views/modals/content/accountCreated.php";
+require_once SOURCE_BASE . "views/modals/content/accountDelete.php";
+require_once SOURCE_BASE . "views/modals/content/adminAccount.php";
+require_once SOURCE_BASE . "views/modals/content/adminUser.php";
+require_once SOURCE_BASE . "views/modals/content/idCheck.php";
+require_once SOURCE_BASE . "views/modals/content/login.php";
+require_once SOURCE_BASE . "views/modals/content/record.php";
+require_once SOURCE_BASE . "views/modals/content/recordAdmin.php";
+require_once SOURCE_BASE . "views/modals/content/recordReset.php";
+require_once SOURCE_BASE . "views/modals/content/register.php";
 
 use function lib\page_route;
 use function lib\modal_route;
-
-use lib\Msg;
-use model\UserModel;
 
 session_start();
 

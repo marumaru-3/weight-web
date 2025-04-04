@@ -1,6 +1,6 @@
 <?php
 
-namespace controller\login;
+namespace controller\modal\login;
 
 use lib\Auth;
 

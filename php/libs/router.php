@@ -32,7 +32,7 @@ function page_route($page, $method)
 function modal_route($modal, $method, $user = null)
 {
     try {
-        $targetFile = SOURCE_BASE . "controllers/modal/{$modal}.php";
+        $targetFile = SOURCE_BASE . "controllers/modals/{$modal}.php";
 
         if (!file_exists($targetFile)) {
             require_once SOURCE_BASE . "views/404.php";
@@ -42,7 +42,7 @@ function modal_route($modal, $method, $user = null)
         require_once $targetFile;
 
         $modal = str_replace("/", "\\", $modal);
-        $fn = "\\controller\\{$modal}\\{$method}";
+        $fn = "\\controller\\modal\\{$modal}\\{$method}";
 
         if ($modal === "record") {
             $fn($user);

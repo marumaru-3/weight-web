@@ -1,6 +1,6 @@
 <?php
 
-namespace controller\recordReset;
+namespace controller\modal\recordReset;
 
 use db\WeightLogQuery;
 use lib\Msg;

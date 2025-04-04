@@ -1,6 +1,6 @@
 <?php
 
-namespace controller\idCheck;
+namespace controller\modal\idCheck;
 
 use lib\Auth;
 use model\UserModel;

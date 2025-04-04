@@ -1,6 +1,6 @@
 <?php
 
-namespace controller\accountCreated;
+namespace controller\modal\accountCreated;
 
 use model\UserModel;
 

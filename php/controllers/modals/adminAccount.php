@@ -1,6 +1,6 @@
 <?php
 
-namespace controller\adminAccount;
+namespace controller\modal\adminAccount;
 
 use db\UserQuery;
 use lib\Msg;

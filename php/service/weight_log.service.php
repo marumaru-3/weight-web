@@ -3,7 +3,6 @@
 namespace service;
 
 use lib\weightDaysCalc;
-use model\WeightLogModel;
 
 class WeightLogService
 {
@@ -67,11 +66,4 @@ class WeightLogService
             "idealDefferWeight" => null,
         ];
     }
-
-    // public static function getByDate($user_id, $date)
-    // {
-    //   return WeightLogModel::findOneBy([
-
-    //   ])
-    // }
 }

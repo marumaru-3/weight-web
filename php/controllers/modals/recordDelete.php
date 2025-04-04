@@ -1,6 +1,6 @@
 <?php
 
-namespace controller\recordDelete;
+namespace controller\modal\recordDelete;
 
 use db\WeightLogQuery;
 use lib\Msg;

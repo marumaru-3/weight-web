@@ -1,6 +1,6 @@
 <?php
 
-namespace controller\register;
+namespace controller\modal\register;
 
 use lib\Auth;
 use model\UserModel;

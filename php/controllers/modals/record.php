@@ -1,6 +1,6 @@
 <?php
 
-namespace controller\recordAdmin;
+namespace controller\modal\record;
 
 use db\WeightLogQuery;
 use lib\Msg;
@@ -15,7 +15,7 @@ function get()
 
     Auth::requireLogin();
 
-    \view\modal\modal\modalContents("recordAdmin");
+    \view\modal\modal\modalContents("record");
 }
 
 function post()
@@ -29,28 +29,40 @@ function post()
 
     try {
         $user = UserModel::getSession();
-        $is_success = WeightLogQuery::update($user->id, $weight_log);
+
+        // すでに記録があるか確認
+        $existing_log = WeightLogQuery::fetchByDate(
+            $user->id,
+            $weight_log->recorded_at
+        );
+
+        if ($existing_log) {
+            $is_success = WeightLogQuery::update($user->id, $weight_log);
+        } else {
+            $is_success = WeightLogQuery::insert($user->id, $weight_log);
+        }
     } catch (Throwable $e) {
         Msg::push(Msg::DEBUG, $e->getMessage());
         $is_success = false;
     }
 
     if ($is_success) {
-        Msg::push(Msg::INFO, "体重記録を更新しました。");
+        Msg::push(Msg::INFO, "体重記録を追加しました。");
     } else {
-        Msg::push(Msg::ERROR, "体重記録の更新に失敗しました。");
+        Msg::push(Msg::ERROR, "体重記録の追加に失敗しました。");
     }
 
     // JSに渡す処理
     $message = "";
     if ($is_success) {
-        $message = "体重記録を更新しました。";
+        $message = "体重記録を追加しました。";
     } else {
-        $message = "体重記録の更新に失敗しました。";
+        $message = "体重記録の追加に失敗しました。";
     }
     echo json_encode([
         "success" => $is_success,
         "message" => $message,
+        "debug" => $user,
     ]);
     exit();
 }
