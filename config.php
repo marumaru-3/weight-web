@@ -1,5 +1,8 @@
 <?php
-define("BASE_CONTEXT_PATH", "/" . basename(__DIR__) . "/");
+// URL用のベースパス（Herokuやローカルで動的に変わる）
+$scriptName = $_SERVER['SCRIPT_NAME'];
+$basePath = rtrim(str_replace(basename($scriptName), '', $scriptName), '/');
+define("BASE_CONTEXT_PATH", $basePath . "/");
 
 define("BASE_IMAGE_PATH", BASE_CONTEXT_PATH . "images/");
 define("BASE_JS_PATH", BASE_CONTEXT_PATH . "js/");
