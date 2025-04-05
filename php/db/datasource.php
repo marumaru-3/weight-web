@@ -11,12 +11,19 @@ class DataSource
     public const CLS = "cls";
 
     public function __construct(
-        $host = "localhost",
-        $port = "8889",
-        $dbName = "weightweb",
-        $username = "develop_user",
-        $password = "developKaihatsu0310"
+        $host = null,
+        $port = null,
+        $dbName = null,
+        $username = null,
+        $password = null
     ) {
+        // デフォルト値は環境変数から取得 or ローカル開発用に fallback
+        $host = $host ?? getenv('DB_HOST') ?: 'localhost';
+        $port = $port ?? getenv('DB_PORT') ?: '8889';
+        $dbName = $dbName ?? getenv('DB_NAME') ?: 'weightweb';
+        $username = $username ?? getenv('DB_USER') ?: 'develop_user';
+        $password = $password ?? getenv('DB_PASS') ?: 'developKaihatsu0310';
+
         $dsn = "mysql:host={$host};port={$port};dbname={$dbName};";
         $this->conn = new PDO($dsn, $username, $password);
         $this->conn->setAttribute(
