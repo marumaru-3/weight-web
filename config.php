@@ -23,3 +23,12 @@ if (file_exists($envPath)) {
     putenv(trim($key) . '=' . trim($value));
   }
 }
+
+if (getenv("JAWSDB_URL")) {
+  $url = parse_url(getenv("JAWSDB_URL"));
+  putenv("DB_HOST=" . $url["host"]);
+  putenv("DB_PORT=" . ($url["port"] ?? 3306));
+  putenv("DB_NAME=" . ltrim($url["path"], "/"));
+  putenv("DB_USERNAME=" . $url["user"]);
+  putenv("DB_PASSWORD=" . $url["pass"]);
+}
