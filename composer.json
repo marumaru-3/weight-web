@@ -1,0 +1,7 @@
+{
+  "name": "marumaru-3/weight-web",
+  "description": "体重管理アプリ",
+  "require": {
+    "php": "^8.2"
+  }
+}
