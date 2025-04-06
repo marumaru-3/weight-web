@@ -21,8 +21,8 @@ class DataSource
         $host = $host ?? getenv('DB_HOST') ?: 'localhost';
         $port = $port ?? getenv('DB_PORT') ?: '8889';
         $dbName = $dbName ?? getenv('DB_NAME') ?: 'weightweb';
-        $username = $username ?? getenv('DB_USER') ?: 'develop_user';
-        $password = $password ?? getenv('DB_PASS') ?: 'developKaihatsu0310';
+        $username = $username ?? getenv('DB_USERNAME') ?: 'develop_user';
+        $password = $password ?? getenv('DB_PASSWORD') ?: 'developKaihatsu0310';
 
         $dsn = "mysql:host={$host};port={$port};dbname={$dbName};";
         $this->conn = new PDO($dsn, $username, $password);
