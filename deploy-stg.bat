@@ -1,14 +1,14 @@
 @echo off
-echo === ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ³ã‚°ç”¨ã«åˆ‡ã‚Šæ›¿ãˆä¸­ ===
+echo === ƒXƒe[ƒWƒ“ƒO—p‚ÉØ‚è‘Ö‚¦’† ===
 
 copy /Y .htaccess.heroku-stg .htaccess
 
 git add .htaccess
-git commit -m "chore: ã‚¹ãƒ†ãƒ¼ã‚¸ãƒ³ã‚°ç”¨ã® .htaccess ã«åˆ‡ã‚Šæ›¿ãˆ"
+git commit -m "chore: ƒXƒe[ƒWƒ“ƒO—p‚Ì .htaccess ‚ÉØ‚è‘Ö‚¦"
 git push heroku-stg main
 
-echo === ãƒ­ãƒ¼ã‚«ãƒ«ç”¨ã«æˆ»ã—ã¾ã™ ===
+echo === ƒ[ƒJƒ‹—p‚É–ß‚µ‚Ü‚· ===
 copy /Y .htaccess.local .htaccess
 
-echo === å®Œäº†ï¼ã¾ãŸé–‹ç™ºç¶šã‘ã¦OKã§ã™ ===
+echo === Š®—¹I‚Ü‚½ŠJ”­‘±‚¯‚ÄOK‚Å‚· ===
 pause
