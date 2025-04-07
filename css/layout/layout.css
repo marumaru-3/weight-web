@@ -1,6 +1,8 @@
 .layout {
+  position: relative;
   display: flex;
   justify-content: flex-end;
+  height: calc(var(--sidebar-sp_vh) * 100);
 }
 
 .layout__sidebar {
