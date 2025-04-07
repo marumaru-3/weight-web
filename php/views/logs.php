@@ -4,7 +4,7 @@ namespace view\logs;
 
 function index($page_title, $user, $weight_logs = null)
 {
-    ?>
+?>
   <div class="page logs">
     <h2 class="page-title"><?php echo $page_title; ?></h2>
     <div class="weight-graph card">
@@ -103,17 +103,17 @@ function index($page_title, $user, $weight_logs = null)
         </div>
         <div class="weight-days__blocks">
           <?php foreach ($weight_logs as $key => $weight_log) {
-              \partials\weight_days_block(
-                  $user,
-                  $weight_log,
-                  $key,
-                  $weight_logs
-              );
+            \partials\weight_days_block(
+              $user,
+              $weight_log,
+              $key,
+              $weight_logs
+            );
           } ?>
         </div>
         <button class="btn btn--more">
           もっと見る
-          <span class="material-symbols-outlined">
+          <span class="material-symbols-outlined" data-icon="keyboard_arrow_down">
             keyboard_arrow_down
           </span>
         </button>

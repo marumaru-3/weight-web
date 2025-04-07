@@ -6,7 +6,7 @@ use lib\weightDaysCalc;
 
 function weight_days_block($user, $weight_log, $key, $weight_logs)
 {
-    ?>
+?>
   <div class="weight-days__block card"
     data-date="<?php echo $weight_log->recorded_at; ?>">
     <div class="days-block__inner">
@@ -15,7 +15,7 @@ function weight_days_block($user, $weight_log, $key, $weight_logs)
       </p>
       <button class="weight-days__admin"
         data-modal="recordAdmin">
-        <span class="material-symbols-outlined">
+        <span class="material-symbols-outlined" data-icon="edit">
           edit
         </span>
       </button>
@@ -37,10 +37,10 @@ function weight_days_block($user, $weight_log, $key, $weight_logs)
         <p class="weight-days__value">
           <span class="weight-days__num">
             <?php if (!($key === 0)) {
-                $beforeWeight = $weight_logs[$key - 1]->weight;
-                echo weightDaysCalc::dayBefore($weight, $beforeWeight);
+              $beforeWeight = $weight_logs[$key - 1]->weight;
+              echo weightDaysCalc::dayBefore($weight, $beforeWeight);
             } else {
-                echo "--";
+              echo "--";
             } ?>
           </span>
           <span class="weight-days__unit">kg</span>

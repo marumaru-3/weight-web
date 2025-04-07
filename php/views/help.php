@@ -13,7 +13,7 @@ function index($page_title)
         <button class="accordion-btn"
           type="button">
           基本的な使い方について
-          <span class="material-symbols-outlined">
+          <span class="material-symbols-outlined" data-icon="add_circle">
             add_circle
           </span>
         </button>
@@ -49,7 +49,7 @@ function index($page_title)
         <button class="accordion-btn"
           type="button">
           アカウント関連について
-          <span class="material-symbols-outlined">
+          <span class="material-symbols-outlined" data-icon="add_circle">
             add_circle
           </span>
         </button>
@@ -80,7 +80,7 @@ function index($page_title)
         <button class="accordion-btn"
           type="button">
           プライバシーについて
-          <span class="material-symbols-outlined">
+          <span class="material-symbols-outlined" data-icon="add_circle">
             add_circle
           </span>
         </button>
@@ -98,7 +98,7 @@ function index($page_title)
         <button class="accordion-btn"
           type="button">
           よくある質問（FAQ）
-          <span class="material-symbols-outlined">
+          <span class="material-symbols-outlined" data-icon="add_circle">
             add_circle
           </span>
         </button>
@@ -133,7 +133,7 @@ function index($page_title)
         <button class="accordion-btn"
           type="button">
           お問い合わせ
-          <span class="material-symbols-outlined">
+          <span class="material-symbols-outlined" data-icon="add_circle">
             add_circle
           </span>
         </button>

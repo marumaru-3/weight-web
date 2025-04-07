@@ -4,10 +4,10 @@ namespace view\modal\adminUser;
 
 function index()
 {
-    ?>
+?>
   <button type="button"
     class="close-modal close-logo">
-    <span class="material-symbols-outlined">
+    <span class="material-symbols-outlined" data-icon="add_circle">
       add_circle
     </span>
   </button>

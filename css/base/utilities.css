@@ -18,6 +18,19 @@
   -webkit-font-feature-settings: "liga";
   -webkit-font-smoothing: antialiased;
   pointer-events: none;
+
+  /* ←ここから追加！ */
+  position: relative;
+  visibility: hidden;
+}
+.material-symbols-outlined::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  content: attr(data-icon);
+  visibility: visible;
+  display: inline-block;
 }
 
 .sp-only {

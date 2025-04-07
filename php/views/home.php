@@ -40,7 +40,7 @@ function index($_, $user, $weight_logs = null)
         <?php if (!empty($todayStats["weight"])): ?>
           <button class="weight-summary__admin"
             data-modal="recordAdmin">
-            <span class="material-symbols-outlined">
+            <span class="material-symbols-outlined" data-icon="edit">
               edit
             </span>
           </button>
@@ -88,7 +88,7 @@ function index($_, $user, $weight_logs = null)
       <a href="<?php the_url("/log"); ?>"
         class="btn btn--more">
         <span class="btn__text">もっと見る</span>
-        <span class="material-symbols-outlined"> chevron_right </span>
+        <span class="material-symbols-outlined" data-icon="chevron_right"> chevron_right </span>
       </a>
       <div class="weight-graph__graph">
         <canvas id="graph" class="weight-graph__canvas"></canvas>

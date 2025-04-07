@@ -4,7 +4,7 @@ namespace partials;
 
 function header($user)
 {
-    ?>
+?>
   <header id="header"
     class="layout__header">
     <div class="header__left">
@@ -32,7 +32,7 @@ function header($user)
         <div class="user-popup__copy copy-contents">
           <p class="copy__label copy-link">
             ID
-            <span class="material-symbols-outlined">
+            <span class="material-symbols-outlined" data-icon="content_copy">
               content_copy
             </span>
           </p>

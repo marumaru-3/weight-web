@@ -4,7 +4,7 @@ namespace view\modal\accountCreated;
 
 function index($user)
 {
-    ?>
+?>
 
   <div class="account-create modal-width">
     <h3 class="modal-title">アカウントを作成しました！</h3>
@@ -12,7 +12,7 @@ function index($user)
     <div class="modal-id copy-contents">
       <p class="modal-id__label copy-link">
         ID
-        <span class="material-symbols-outlined">
+        <span class="material-symbols-outlined" data-icon="content_copy">
           content_copy
         </span>
       </p>
