@@ -2,7 +2,7 @@
   position: relative;
   display: flex;
   justify-content: flex-end;
-  height: calc(var(--sidebar-sp_vh) * 100);
+  /* height: calc(var(--sidebar-sp_vh) * 100); */
 }
 
 .layout__sidebar {
@@ -79,10 +79,13 @@
 }
 
 @media (max-width: 599px) {
+  .layout {
+    flex-direction: column-reverse;
+  }
   .layout__sidebar,
   .layout__sidebar.open,
   .layout__sidebar.close {
-    position: fixed;
+    position: sticky;
     top: auto;
     bottom: 0;
     width: 100%;
@@ -100,6 +103,6 @@
     padding: 16px;
   }
   .layout__main {
-    padding: 24px 16px 152px;
+    padding: 24px 16px 88px;
   }
 }
