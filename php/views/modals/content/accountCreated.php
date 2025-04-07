@@ -12,9 +12,7 @@ function index($user)
     <div class="modal-id copy-contents">
       <p class="modal-id__label copy-link">
         ID
-        <span class="material-symbols-outlined" data-icon="content_copy">
-          content_copy
-        </span>
+        <span class="material-symbols-outlined" data-icon="content_copy"></span>
       </p>
       <p class="modal-id__value copy__value"><?php echo $user->id; ?></p>
     </div>

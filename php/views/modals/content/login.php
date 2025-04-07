@@ -7,9 +7,7 @@ function index()
 ?>
   <button type="button"
     class="close-modal close-logo">
-    <span class="material-symbols-outlined" data-icon="add_circle">
-      add_circle
-    </span>
+    <span class="material-symbols-outlined" data-icon="add_circle"></span>
   </button>
   <div class="login modal-width few-forms">
     <h3 class="modal-title">体重Webにログイン</h3>
@@ -63,9 +61,7 @@ function index()
                 <button type="button"
                   class="btn--pwd pwd-btn"
                   data-hidden="true">
-                  <span class="material-symbols-outlined" data-icon="visibility">
-                    visibility
-                  </span>
+                  <span class="material-symbols-outlined" data-icon="visibility"></span>
                 </button>
               </div>
             </label>

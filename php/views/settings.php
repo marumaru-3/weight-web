@@ -12,9 +12,7 @@ function index($page_title, $user)
       <div class="settings-block__item copy-contents">
         <p class="settings-block__label copy-link">
           ID
-          <span class="material-symbols-outlined" data-icon="content_copy">
-            content_copy
-          </span>
+          <span class="material-symbols-outlined" data-icon="content_copy"></span>
         </p>
         <p class="settings-block__value copy__value">
           <?php echo $user->id; ?>

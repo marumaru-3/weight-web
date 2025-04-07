@@ -15,9 +15,7 @@ function weight_days_block($user, $weight_log, $key, $weight_logs)
       </p>
       <button class="weight-days__admin"
         data-modal="recordAdmin">
-        <span class="material-symbols-outlined" data-icon="edit">
-          edit
-        </span>
+        <span class="material-symbols-outlined" data-icon="edit"></span>
       </button>
       <div class="weight-days__item weight-days__item--weight">
         <p class="weight-days__label">体重</p>

@@ -113,9 +113,7 @@ function index($page_title, $user, $weight_logs = null)
         </div>
         <button class="btn btn--more">
           もっと見る
-          <span class="material-symbols-outlined" data-icon="keyboard_arrow_down">
-            keyboard_arrow_down
-          </span>
+          <span class="material-symbols-outlined" data-icon="keyboard_arrow_down"></span>
         </button>
       </div>
     <?php endif; ?>

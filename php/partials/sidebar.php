@@ -8,11 +8,11 @@ function sidebar($page)
   <aside class="layout__sidebar">
     <button id="menu-toggle"
       class="btn sidebar__menu-toggle">
-      <span class="material-symbols-outlined" data-icon="menu_open"> menu_open </span>
+      <span class="material-symbols-outlined" data-icon="menu_open"></span>
     </button>
     <button class="btn btn--record"
       data-modal="record">
-      <span class="material-symbols-outlined" data-icon="edit_square"> edit_square </span>
+      <span class="material-symbols-outlined" data-icon="edit_square"></span>
       <span class="btn__text">記録を追加</span>
     </button>
     <nav class="sidebar__nav">
@@ -22,7 +22,7 @@ function sidebar($page)
             class="sidebar__link btn btn--nav <?php echo $page === "home"
                                                 ? "sidebar__link--active"
                                                 : ""; ?>">
-            <span class="material-symbols-outlined" data-icon="home"> home </span>
+            <span class="material-symbols-outlined" data-icon="home"></span>
             <span class="btn__text">ホーム</span>
           </a>
         </li>
@@ -31,9 +31,7 @@ function sidebar($page)
             class="sidebar__link btn btn--nav <?php echo $page === "logs"
                                                 ? "sidebar__link--active"
                                                 : ""; ?>">
-            <span class="material-symbols-outlined" data-icon="accessibility_new">
-              accessibility_new
-            </span>
+            <span class="material-symbols-outlined" data-icon="accessibility_new"></span>
             <span class="btn__text">体重ログ</span>
           </a>
         </li>
@@ -42,7 +40,7 @@ function sidebar($page)
             class="sidebar__link btn btn--nav <?php echo $page === "user"
                                                 ? "sidebar__link--active"
                                                 : ""; ?>">
-            <span class="material-symbols-outlined" data-icon="account_circle"> account_circle </span>
+            <span class="material-symbols-outlined" data-icon="account_circle"></span>
             <span class="btn__text sp-none">ユーザー情報</span>
             <span class="btn__text sp-only">ユーザー</span>
           </a>
@@ -52,7 +50,7 @@ function sidebar($page)
             class="sidebar__link btn btn--nav <?php echo $page === "help"
                                                 ? "sidebar__link--active"
                                                 : ""; ?>">
-            <span class="material-symbols-outlined" data-icon="help"> help </span>
+            <span class="material-symbols-outlined" data-icon="help"></span>
             <span class="btn__text">ヘルプ</span>
           </a>
         </li>
@@ -61,7 +59,7 @@ function sidebar($page)
             class="sidebar__link btn btn--nav <?php echo $page === "settings"
                                                 ? "sidebar__link--active"
                                                 : ""; ?>">
-            <span class="material-symbols-outlined" data-icon="settings"> settings </span>
+            <span class="material-symbols-outlined" data-icon="settings"></span>
             <span class="btn__text">設定</span>
           </a>
         </li>

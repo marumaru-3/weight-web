@@ -12,17 +12,13 @@ function index($page_title, $user)
         <h3 class="info-summary__title contents-title">アカウント情報</h3>
         <button class="info-summary__admin"
           data-modal="adminAccount">
-          <span class="material-symbols-outlined" data-icon="edit">
-            edit
-          </span>
+          <span class="material-symbols-outlined" data-icon="edit"></span>
           <span class="admin-text">編集</span>
         </button>
         <div class="info-summary__item copy copy-contents">
           <p class="info-summary__label copy-link">
             ID
-            <span class="material-symbols-outlined" data-icon="content_copy">
-              content_copy
-            </span>
+            <span class="material-symbols-outlined" data-icon="content_copy"></span>
           </p>
           <p class="info-summary__value copy__value">
             <?php echo $user->id; ?>
@@ -51,9 +47,7 @@ function index($page_title, $user)
         <h3 class="info-summary__title contents-title">基本情報</h3>
         <button class="info-summary__admin"
           data-modal="adminUser">
-          <span class="material-symbols-outlined" data-icon="edit">
-            edit
-          </span>
+          <span class="material-symbols-outlined" data-icon="edit"></span>
           <span class="admin-text">編集</span>
         </button>
         <div class="info-summary__item">

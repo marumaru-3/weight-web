@@ -32,9 +32,7 @@ function header($user)
         <div class="user-popup__copy copy-contents">
           <p class="copy__label copy-link">
             ID
-            <span class="material-symbols-outlined" data-icon="content_copy">
-              content_copy
-            </span>
+            <span class="material-symbols-outlined" data-icon="content_copy"></span>
           </p>
           <p class="copy__value"><?php echo $user->id; ?></p>
         </div>

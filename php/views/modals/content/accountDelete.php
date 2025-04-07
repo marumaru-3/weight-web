@@ -7,9 +7,7 @@ function index()
 ?>
   <button type="button"
     class="close-modal close-logo">
-    <span class="material-symbols-outlined" data-icon="add_circle">
-      add_circle
-    </span>
+    <span class="material-symbols-outlined" data-icon="add_circle"></span>
   </button>
   <div class="account-delete modal-width">
     <h3 class="modal-title">本当にアカウントを削除しますか？</h3>
