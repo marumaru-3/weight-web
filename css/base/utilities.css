@@ -34,8 +34,14 @@
   display: inline-block;
 }
 
-.d-none {
-  display: none;
+.must-hidden {
+  position: absolute;
+  top: -100px;
+  left: -100px;
+  z-index: -1;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 .sp-only {
