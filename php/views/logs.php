@@ -1,11 +1,11 @@
 <?php
 
-namespace view\log;
+namespace view\logs;
 
 function index($page_title, $user, $weight_logs = null)
 {
-?>
-  <div class="page log">
+    ?>
+  <div class="page logs">
     <h2 class="page-title"><?php echo $page_title; ?></h2>
     <div class="weight-graph card">
       <div class="weight-graph__meta">
@@ -35,7 +35,8 @@ function index($page_title, $user, $weight_logs = null)
         </li>
       </ul>
       <div class="weight-graph__graph">
-        <canvas id="graph" class="weight-graph__canvas"></canvas>
+        <canvas id="graph"
+          class="weight-graph__canvas"></canvas>
       </div>
     </div>
     <div class="weight-summary">
@@ -102,7 +103,12 @@ function index($page_title, $user, $weight_logs = null)
         </div>
         <div class="weight-days__blocks">
           <?php foreach ($weight_logs as $key => $weight_log) {
-            \partials\weight_days_block($user, $weight_log, $key, $weight_logs);
+              \partials\weight_days_block(
+                  $user,
+                  $weight_log,
+                  $key,
+                  $weight_logs
+              );
           } ?>
         </div>
         <button class="btn btn--more">

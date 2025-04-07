@@ -1,6 +1,6 @@
 <?php
 
-namespace controller\log;
+namespace controller\logs;
 
 use lib\Auth;
 use db\WeightLogQuery;

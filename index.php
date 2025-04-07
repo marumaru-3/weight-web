@@ -33,7 +33,7 @@ require_once SOURCE_BASE . "partials/footer.php";
 // View
 require_once SOURCE_BASE . "views/layout.php";
 require_once SOURCE_BASE . "views/home.php";
-require_once SOURCE_BASE . "views/log.php";
+require_once SOURCE_BASE . "views/logs.php";
 require_once SOURCE_BASE . "views/user.php";
 require_once SOURCE_BASE . "views/help.php";
 require_once SOURCE_BASE . "views/settings.php";
