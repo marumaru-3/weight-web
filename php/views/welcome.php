@@ -6,7 +6,7 @@ use lib\Msg;
 
 function index($page_title)
 {
-    \partials\head($page_title); ?>
+  \partials\head($page_title); ?>
 
   <div id="layout">
     <main class="welcome">

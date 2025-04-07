@@ -34,6 +34,10 @@
   display: inline-block;
 }
 
+.d-none {
+  display: none;
+}
+
 .sp-only {
   display: none !important;
 }
