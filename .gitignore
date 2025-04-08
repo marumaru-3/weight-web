@@ -1,2 +1,12 @@
+# node_modulesは除外
+node_modules/
+
+# 開発用のVite出力は基本除外（本番で使うならコミット）
+dist/
+assets/
+
+# その他の不要ファイル
+.DS_Store
 .env
 /vendor/
+*.log
