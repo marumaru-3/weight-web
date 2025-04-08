@@ -27,6 +27,7 @@ define("BASE_CONTEXT_PATH", $basePath . "/");
 
 define("BASE_IMAGE_PATH", BASE_CONTEXT_PATH . "images/");
 define("BASE_SRC_PATH", BASE_CONTEXT_PATH . "src/");
+define("BASE_PUBLIC_PATH", BASE_CONTEXT_PATH . "public/");
 define("SOURCE_BASE", __DIR__ . "/php/");
 
 define('GO_HOME', 'home');

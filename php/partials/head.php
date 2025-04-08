@@ -22,8 +22,10 @@ function head($page_title)
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans+JP:wght@100..900&display=swap"
       rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+    <!-- <link rel="stylesheet"
+      href="<?php echo BASE_SRC_PATH; ?>style.css" /> -->
     <link rel="stylesheet"
-      href="<?php echo BASE_SRC_PATH; ?>style.css" />
+      href="<?php echo BASE_PUBLIC_PATH; ?>assets/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
 

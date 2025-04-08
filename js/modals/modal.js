@@ -109,8 +109,12 @@ const initializeModal = (modalType, recordData) => {
     accountDelete: "./init/account-delete.js",
   };
 
+  const modalModules = import.meta.glob("./init/*.js");
+
   const modulePath = modalMap[modalType];
-  if (modulePath) {
-    import(modulePath).then((module) => module.init(recordData));
+  if (modulePath && modalModules[modulePath]) {
+    modalModules[modulePath]().then((module) => module.init(recordData));
+  } else {
+    console.warn(`未対応のモーダルタイプ: ${modalType}`);
   }
 };
