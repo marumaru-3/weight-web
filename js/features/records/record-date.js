@@ -17,8 +17,19 @@ export const initRecordDateSelect = () => {
   if (!dateContents) return;
 
   // 今日の日付を取得
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  const now = new Date();
+  const dateFormatter = new Intl.DateTimeFormat("ja-JP", {
+    timeZone: "Asia/Tokyo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+  const dateParts = dateFormatter.formatToParts(now);
+  const year = dateParts.find((p) => p.type === "year").value;
+  const month = dateParts.find((p) => p.type === "month").value;
+  const day = dateParts.find((p) => p.type === "day").value;
+
+  const today = new Date(`${year}-${month}-${day}T00:00:00+09:00`);
   let selectedDate = new Date(today);
 
   // input 日付要素

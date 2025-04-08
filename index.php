@@ -57,6 +57,8 @@ use function lib\modal_route;
 
 session_start();
 
+date_default_timezone_set("Asia/Tokyo");
+
 try {
     $page = $_GET["page"] ?? "home";
     $method = strtolower($_SERVER["REQUEST_METHOD"]);
