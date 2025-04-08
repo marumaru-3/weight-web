@@ -1,3 +1,5 @@
+import { initGetUrl } from "../helper.js";
+
 export const fetchData = async (
   url,
   method = "GET",
@@ -14,7 +16,7 @@ export const fetchData = async (
     if (!response.ok) {
       if (response.status === 401) {
         alert("ログインが必要です。");
-        window.location.href = getUrl("/welcome");
+        window.location.href = initGetUrl("/welcome");
       }
       throw new Error(`APIエラー: ${response.status}`);
     }

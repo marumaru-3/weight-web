@@ -1,3 +1,4 @@
+import { initGetUrl } from "../../helper.js";
 import { fetchRegister } from "../../api/fetch_data.js";
 import {
   initValidateForm,
@@ -41,7 +42,7 @@ export const init = () => {
       if (result.success) {
         // アカウント作成後にフラグをセット
         sessionStorage.setItem("accountCreated", "true");
-        window.location.href = getUrl("/home");
+        window.location.href = initGetUrl("/home");
       } else {
         formMessage.classList.add("error");
         formMessage.innerHTML = `新規登録に失敗しました。<br>${result.errorMessage}`;

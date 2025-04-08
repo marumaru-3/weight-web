@@ -1,3 +1,4 @@
+import { initGetUrl } from "../../helper.js";
 import { fetchLogin } from "../../api/fetch_data.js";
 import {
   initValidateForm,
@@ -35,7 +36,7 @@ export const init = async () => {
       const formMessage = document.querySelector(".form-message");
 
       if (result.success) {
-        window.location.href = getUrl("/home");
+        window.location.href = initGetUrl("/home");
       } else {
         formMessage.classList.add("error");
         formMessage.innerHTML = `ログインに失敗しました。<br>${result.errorMessage}`;
