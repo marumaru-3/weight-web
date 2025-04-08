@@ -98,12 +98,6 @@
     padding: 16px;
   }
   .layout__main {
-    padding: 24px 16px 168px;
-  }
-}
-
-@media (max-width: 399px) {
-  .layout__main {
-    padding-bottom: 152px;
+    padding: 24px 16px 152px;
   }
 }
