@@ -87,7 +87,7 @@
     height: auto;
     flex-direction: row;
     box-shadow: none;
-    padding: 8px;
+    padding: 0;
     transition: none;
   }
   .layout__content,
@@ -98,6 +98,12 @@
     padding: 16px;
   }
   .layout__main {
-    padding: 24px 16px 152px;
+    padding: 24px 16px 168px;
+  }
+}
+
+@media (max-width: 399px) {
+  .layout__main {
+    padding-bottom: 152px;
   }
 }
