@@ -4,7 +4,7 @@ namespace view\help;
 
 function index($page_title)
 {
-?>
+    ?>
   <div class="page help">
     <h2 class="page-title"><?php echo $page_title; ?></h2>
     <ul class="help-summary">
@@ -13,7 +13,8 @@ function index($page_title)
         <button class="accordion-btn"
           type="button">
           基本的な使い方について
-          <span class="material-symbols-outlined" data-icon="add_circle"></span>
+          <span class="material-symbols-outlined"
+            data-icon="add_circle"></span>
         </button>
         <ul class="help-summary__ul accordion-content">
           <li>
@@ -47,7 +48,8 @@ function index($page_title)
         <button class="accordion-btn"
           type="button">
           アカウント関連について
-          <span class="material-symbols-outlined" data-icon="add_circle"></span>
+          <span class="material-symbols-outlined"
+            data-icon="add_circle"></span>
         </button>
         <ul class="help-summary__ul accordion-content">
           <li>
@@ -76,7 +78,8 @@ function index($page_title)
         <button class="accordion-btn"
           type="button">
           プライバシーについて
-          <span class="material-symbols-outlined" data-icon="add_circle"></span>
+          <span class="material-symbols-outlined"
+            data-icon="add_circle"></span>
         </button>
         <ul class="help-summary__ul accordion-content">
           <li>
@@ -92,7 +95,8 @@ function index($page_title)
         <button class="accordion-btn"
           type="button">
           よくある質問（FAQ）
-          <span class="material-symbols-outlined" data-icon="add_circle"></span>
+          <span class="material-symbols-outlined"
+            data-icon="add_circle"></span>
         </button>
         <ul class="help-summary__ul accordion-content">
           <li>
@@ -104,6 +108,10 @@ function index($page_title)
                 女性「BMI × 1.2 + 年齢 × 0.23 - 5.4」<br>
                 その他「BMI × 1.2 + 年齢 × 0.23 - 10.8」
               </span></p>
+          </li>
+          <li>
+            <p class="ul__list-question">日付の指定は環境や端末によって変わりますか？</p>
+            <p class="ul__list-answer">いいえ。どの環境であっても、日本時間に合わせた日付設定になります。</p>
           </li>
           <li>
             <p class="ul__list-question">スマホとパソコンで同じアカウントを使えますか？</p>
@@ -125,7 +133,8 @@ function index($page_title)
         <button class="accordion-btn"
           type="button">
           お問い合わせ
-          <span class="material-symbols-outlined" data-icon="add_circle"></span>
+          <span class="material-symbols-outlined"
+            data-icon="add_circle"></span>
         </button>
         <ul class="help-summary__ul accordion-content">
           <li>
