@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . "/../../config.php";
+require_once __DIR__ . "/../../config/config.php";
 
 require_once SOURCE_BASE . "libs/weight-days_calc.php";
 require_once SOURCE_BASE . "libs/helper.php";

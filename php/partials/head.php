@@ -25,7 +25,7 @@ function head($page_title)
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
         rel="stylesheet" />
   <link rel="stylesheet"
-        href="<?php echo BASE_PUBLIC_PATH; ?>assets/style.css" />
+        href="<?php echo BASE_ASSETS_PATH; ?>style.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
 
