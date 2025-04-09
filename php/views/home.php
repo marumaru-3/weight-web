@@ -90,7 +90,7 @@ function index($_, $user, $weight_logs = null)
       <h3 class="weight-graph__title contents-title">体重</h3>
       <p class="weight-graph__date"></p>
     </div>
-    <a href="<?php the_url("/log"); ?>"
+    <a href="<?php the_url("/logs"); ?>"
        class="btn btn--more">
       <span class="btn__text">もっと見る</span>
       <span class="material-symbols-outlined"
