@@ -8,5 +8,7 @@ dist/
 # その他の不要ファイル
 .DS_Store
 .env
+.env.local
+.env.*.local
 /vendor/
 *.log
