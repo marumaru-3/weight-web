@@ -1,14 +1,14 @@
 @echo off
-echo === �X�e�[�W���O�p�ɐ؂�ւ��� ===
+echo === ステージング用に差し替えます ===
 
 copy /Y .htaccess.heroku-stg public/.htaccess
 
-git add .htaccess
-git commit -m "chore: �X�e�[�W���O�p�� .htaccess �ɐ؂�ւ�"
+git add public/.htaccess
+git commit -m "chore: ステージング用の .htaccess に差し替え"
 git push heroku-stg main
 
-echo === ���[�J���p�ɖ߂��܂� ===
+echo === ローカル用に戻します ===
 copy /Y .htaccess.local public/.htaccess
 
-echo === �����I�܂��J��������OK�ł� ===
+echo === 作業完了！お疲れさまでした ===
 pause
