@@ -1,23 +1,21 @@
 import "./style.css";
 
-import "../js/helper.js";
-
 // buttons
-import "../js/components/buttons/copy.js";
+import "./js/components/buttons/copy.js";
 
 // modals
-import "../js/modals/modal.js";
+import "./js/modals/modal.js";
 
 // utils
-import { initLayout } from "../js/utils/layout.js";
+import { initLayout } from "./js/utils/layout.js";
 
 // components
-import { initAccordion } from "../js/components/accordion.js";
-import { userPopup } from "../js/components/user-popup.js";
+import { initAccordion } from "./js/components/accordion.js";
+import { userPopup } from "./js/components/user-popup.js";
 
 // features
-import { initWeightDays } from "../js/features/records/weight-days.js";
-import { initWeightGraph } from "../js/features/graph.js";
+import { initWeightDays } from "./js/features/records/weight-days.js";
+import { initWeightGraph } from "./js/features/graph.js";
 
 // ======== 条件付きで初期化実行 ========
 if (document.querySelector("#header")) {

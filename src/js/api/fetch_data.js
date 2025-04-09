@@ -21,7 +21,7 @@ export const fetchRegister = async (formData) => {
 
 // Chart data
 export const fetchChartData = async () => {
-  return fetchData(initGetUrl("/php/api/chart_data.php"));
+  return fetchData(initGetUrl("/api/chart_data.php"));
 };
 // / Chart data
 
@@ -40,7 +40,7 @@ export const fetchRecordData = async (clickElem) => {
     console.log("日付を取得できませんでした。");
     return { success: false, message: "日付を取得できませんでした。" };
   }
-  return fetchData(initGetUrl(`/php/api/record_data.php?date=${date}`));
+  return fetchData(initGetUrl(`/api/record_data.php?date=${date}`));
 };
 export const fetchUpdateRecord = async (formData) => {
   return fetchData(
@@ -70,7 +70,7 @@ export const fetchResetRecord = async (formData) => {
 
 // User data
 export const fetchUserData = async () => {
-  return fetchData(initGetUrl("/php/api/user_data.php"));
+  return fetchData(initGetUrl("/api/user_data.php"));
 };
 export const fetchUpdateUser = async (formData) => {
   return fetchData(initGetUrl("/index.php?modal=adminUser"), "POST", formData);

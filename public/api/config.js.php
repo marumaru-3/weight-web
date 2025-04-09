@@ -2,7 +2,7 @@
 
 require_once __DIR__ . "/../../php/api/bootstrap.php";
 
-$basePath = str_replace("/php/api/config.js.php", "", $scriptName);
+$basePath = str_replace("/api/config.js.php", "", $scriptName);
 
 header("Content-Type: application/javascript");
 

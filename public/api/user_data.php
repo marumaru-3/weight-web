@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . "/bootstrap.php";
+require_once __DIR__ . "/../../php/api/bootstrap.php";
 
 use lib\Auth;
 use model\UserModel;

@@ -6,6 +6,18 @@ RewriteBase /
 # RewriteRule ^$ /home [R=301,L]
 
 # 「/home」や「/log」などのアクセスを「index.php?page=home」に変換
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule ^([^/]+)/?$ index.php?page=$1 [QSA,L]
+
+
+# ✅ 静的ファイル（JS, CSS, 画像など）はスルー！
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# ✅ ディレクトリもスルー（例：/assets/）
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# ✅ それ以外のパスは index.php にルーティング
 RewriteRule ^([^/]+)/?$ index.php?page=$1 [QSA,L]
