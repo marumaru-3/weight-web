@@ -1,0 +1,11 @@
+RewriteEngine On
+RewriteBase /weight-web/
+
+# ルート（例: http://localhost/weight-web/）に来たら「/weight-web/home」にリダイレクト
+# RewriteCond %{REQUEST_URI} ^/weight-web/$
+# RewriteRule ^$ /weight-web/home [R=301,L]
+
+# 「/home」や「/log」などのアクセスを「index.php?page=home」に変換
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/?$ index.php?page=$1 [QSA,L]

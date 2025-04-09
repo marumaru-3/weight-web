@@ -1,5 +1,5 @@
 <?php
-require_once "config.php";
+require_once "../config/config.php";
 
 // library
 require_once SOURCE_BASE . "libs/weight-days_calc.php";
