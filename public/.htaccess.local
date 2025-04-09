@@ -1,9 +1,9 @@
 RewriteEngine On
-RewriteBase /weight-web/
+RewriteBase /
 
-# ルート（例: http://localhost/weight-web/）に来たら「/weight-web/home」にリダイレクト
-# RewriteCond %{REQUEST_URI} ^/weight-web/$
-# RewriteRule ^$ /weight-web/home [R=301,L]
+# ルートに来たら「/home」にリダイレクト
+# RewriteCond %{REQUEST_URI} ^/$
+# RewriteRule ^$ /home [R=301,L]
 
 # 「/home」や「/log」などのアクセスを「index.php?page=home」に変換
 RewriteCond %{REQUEST_FILENAME} !-f
