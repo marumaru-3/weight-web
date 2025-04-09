@@ -1,0 +1,1 @@
+import{f as c}from"./main.js";const l=()=>{document.querySelector(".account-delete")&&document.getElementById("acc-delete-btn").addEventListener("click",async t=>{t.preventDefault();const e=await c();window.history.scrollRestoration="manual",window.location.reload(),e.success||alert(e.message)})};export{l as init};

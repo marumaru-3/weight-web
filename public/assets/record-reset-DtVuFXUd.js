@@ -1,0 +1,1 @@
+import{d as r}from"./main.js";const c=()=>{document.querySelector(".record-reset")&&document.getElementById("reset-btn").addEventListener("click",async t=>{t.preventDefault();const e=await r();window.history.scrollRestoration="manual",window.location.reload(),e.success||alert(e.message)})};export{c as init};

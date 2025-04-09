@@ -3,7 +3,7 @@ node_modules/
 
 # 開発用のVite出力は基本除外（本番で使うならコミット）
 dist/
-assets/
+# assets/
 
 # その他の不要ファイル
 .DS_Store
