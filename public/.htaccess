@@ -10,7 +10,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^/]+)/?$ index.php?page=$1 [QSA,L]
 
-# AuthType Basic
+AuthType Basic
 AuthName "Staging Access"
 AuthUserFile /app/public/.htpasswd
 Require valid-user
