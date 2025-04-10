@@ -4,6 +4,7 @@ import {
   fetchModalHtml,
 } from "../api/fetch_data.js";
 import { initPwdClick } from "../components/buttons/pwd-btn.js";
+import { initPreloadImage } from "../helper.js";
 
 const bodyElement = document.querySelector("body");
 const layoutElement = document.getElementById("layout");
@@ -59,13 +60,18 @@ openModalBtns.forEach((btn) => {
   btn.addEventListener("click", async (clickElem) => {
     const modalType = btn.getAttribute("data-modal");
 
-    // モーダルを開く前にデータを取得
+    // モーダルを開く前にAPIデータを取得
     let fetchData = null;
     if (modalType === "recordAdmin" && clickElem) {
       fetchData = await fetchRecordData(clickElem);
     }
     if (modalType === "adminUser") {
       fetchData = await fetchUserData();
+    }
+
+    // モーダルを開く前に画像データを読み込み
+    if (modalType === "record") {
+      initPreloadImage("/images/date-arrow.svg");
     }
 
     openModal(modalType, fetchData);
