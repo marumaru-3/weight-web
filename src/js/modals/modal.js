@@ -12,22 +12,11 @@ const layoutElement = document.getElementById("layout");
 let isModalOpen = false;
 
 // モーダルを開く
-const openModal = async (modalType, clickElem = null) => {
+const openModal = async (modalType, fetchData) => {
   if (isModalOpen) {
     return;
   }
   isModalOpen = true;
-
-  // モーダルを開く前にデータを取得
-  let fetchData = null;
-
-  if (modalType === "recordAdmin" && clickElem) {
-    fetchData = await fetchRecordData(clickElem);
-  }
-
-  if (modalType === "adminUser") {
-    fetchData = await fetchUserData();
-  }
 
   const modalHtml = await fetchModalHtml(modalType);
 
@@ -67,9 +56,19 @@ const closeModal = () => {
 // モーダルを開くボタンのイベントリスナー
 const openModalBtns = document.querySelectorAll("[data-modal]");
 openModalBtns.forEach((btn) => {
-  btn.addEventListener("click", (clickElem) => {
+  btn.addEventListener("click", async (clickElem) => {
     const modalType = btn.getAttribute("data-modal");
-    openModal(modalType, clickElem);
+
+    // モーダルを開く前にデータを取得
+    let fetchData = null;
+    if (modalType === "recordAdmin" && clickElem) {
+      fetchData = await fetchRecordData(clickElem);
+    }
+    if (modalType === "adminUser") {
+      fetchData = await fetchUserData();
+    }
+
+    openModal(modalType, fetchData);
   });
 });
 
