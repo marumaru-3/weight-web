@@ -34,13 +34,25 @@ const getDateFromClick = (clickElem) => {
   return null;
 };
 
+let recordCache = {};
 export const fetchRecordData = async (clickElem) => {
   const date = getDateFromClick(clickElem);
-  if (!date) {
-    console.log("日付を取得できませんでした。");
-    return { success: false, message: "日付を取得できませんでした。" };
+  if (!date) return null;
+
+  if (recordCache[date]) {
+    return recordCache[date];
   }
-  return fetchData(initGetUrl(`/api/record_data.php?date=${date}`));
+
+  const result = await fetchData(
+    initGetUrl(`/api/record_data.php?date=${date}`)
+  );
+
+  if (result && result.date) {
+    recordCache[date] = result;
+    return recordCache[date];
+  }
+
+  return null;
 };
 export const fetchUpdateRecord = async (formData) => {
   return fetchData(
@@ -69,8 +81,17 @@ export const fetchResetRecord = async (formData) => {
 // / Record data
 
 // User data
+let cachedUserData = null;
 export const fetchUserData = async () => {
-  return fetchData(initGetUrl("/api/user_data.php"));
+  if (cachedUserData) return cachedUserData;
+  const result = await fetchData(initGetUrl("/api/user_data.php"));
+
+  if (result && result.username) {
+    cachedUserData = result;
+    return cachedUserData;
+  }
+
+  return null;
 };
 export const fetchUpdateUser = async (formData) => {
   return fetchData(initGetUrl("/index.php?modal=adminUser"), "POST", formData);
