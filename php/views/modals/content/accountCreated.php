@@ -4,7 +4,7 @@ namespace view\modal\accountCreated;
 
 function index($user)
 {
-    ?>
+?>
 
   <div class="account-create modal-width">
     <h3 class="modal-title">アカウントを作成しました！</h3>
@@ -21,8 +21,7 @@ function index($user)
       <p class="modal-att__label">注意！</p>
       <p class="modal-att__text">IDを忘れてしまった場合には、二度とアカウントにログイン出来なくなってしまうため、必ずどこかにIDを保管するようにしてください。</p>
     </div>
-    <form class="basic-info-form validate-form"
-      novalidate>
+    <div class="basic-info-form validate-form">
       <div class="basic-info-form__contents">
         <div class="basic-info-form__checkbox">
           <input type="checkbox"
@@ -43,7 +42,7 @@ function index($user)
             disabled><span class="btn__text">体重管理を始める</span></button>
         </div>
       </div>
-    </form>
+    </div>
   </div>
 <?php
 }

@@ -22,19 +22,17 @@ function index()
         本当に初期化しますか？
       </p>
     </div>
-    <form class="basic-info-form validate-form"
-      novalidate>
-
+    <div class="basic-info-form">
       <div class="modal-buttons record-form__buttons">
         <div class="modal-buttons__group--columns">
-          <button type="submit"
+          <button
             class="close-modal btn btn--cancel submit-btn btn--w-100"><span class="btn__text">キャンセル</span></button>
           <button type="submit"
             class="btn btn--rec-reset submit-btn btn--w-100"
             id="reset-btn"><span class="btn__text">体重記録を初期化する</span></button>
         </div>
       </div>
-    </form>
+    </div>
   </div>
 <?php
 }
