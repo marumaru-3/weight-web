@@ -31,13 +31,13 @@ const openModal = async (modalType, clickElem = null) => {
 
   const modalHtml = await fetchModalHtml(modalType);
 
+  // 各モーダルの処理
+  initializeModal(modalType, fetchData);
+
   layoutElement.insertAdjacentHTML("afterend", modalHtml);
 
   // 背景スクロールさせない
   bodyElement.style.overflow = "hidden";
-
-  // 各モーダルの処理
-  initializeModal(modalType, fetchData);
 
   // パスワード表示切り替え
   initPwdClick();
