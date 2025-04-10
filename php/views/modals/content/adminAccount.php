@@ -4,10 +4,11 @@ namespace view\modal\adminAccount;
 
 function index()
 {
-?>
+    ?>
   <button type="button"
     class="close-modal close-logo">
-    <span class="material-symbols-outlined" data-icon="add_circle"></span>
+    <span class="material-symbols-outlined"
+      data-icon="add_circle"></span>
   </button>
   <div class="user-admin modal-width">
     <h3 class="modal-title">パスワードを変更</h3>
@@ -34,14 +35,14 @@ function index()
                   class="validate-target"
                   autocomplete="current-password"
                   maxlength="30"
-                  pattern="[a-zA-Z0-9 !#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]+"
                   inputmode="latin"
                   data-alphanumeric
                   required>
                 <button type="button"
                   class="btn--pwd pwd-btn"
                   data-hidden="true">
-                  <span class="material-symbols-outlined" data-icon="visibility"></span>
+                  <span class="material-symbols-outlined"
+                    data-icon="visibility"></span>
                 </button>
               </div>
             </label>

@@ -4,10 +4,11 @@ namespace view\modal\register;
 
 function index()
 {
-?>
+    ?>
   <button type="button"
     class="close-modal close-logo">
-    <span class="material-symbols-outlined" data-icon="add_circle"></span>
+    <span class="material-symbols-outlined"
+      data-icon="add_circle"></span>
   </button>
   <div class="user-admin modal-width">
     <h3 class="modal-title">アカウントを作成</h3>
@@ -37,7 +38,6 @@ function index()
                     id="password"
                     class="validate-target"
                     maxlength="30"
-                    pattern="[a-zA-Z0-9 !#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]+"
                     inputmode="latin"
                     data-alphanumeric
                     autocomplete="current-password"
@@ -45,7 +45,8 @@ function index()
                   <button type="button"
                     class="btn--pwd pwd-btn"
                     data-hidden="true">
-                    <span class="material-symbols-outlined" data-icon="visibility"></span>
+                    <span class="material-symbols-outlined"
+                      data-icon="visibility"></span>
                   </button>
                 </div>
               </label>
