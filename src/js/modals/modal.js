@@ -20,9 +20,6 @@ const openModal = async (modalType, fetchData) => {
 
   const modalHtml = await fetchModalHtml(modalType);
 
-  // 各モーダルの処理
-  initializeModal(modalType, fetchData);
-
   layoutElement.insertAdjacentHTML("afterend", modalHtml);
 
   // 背景スクロールさせない
@@ -30,6 +27,9 @@ const openModal = async (modalType, fetchData) => {
 
   // パスワード表示切り替え
   initPwdClick();
+
+  // 各モーダルの処理
+  initializeModal(modalType, fetchData);
 
   // 閉じるボタンのイベントリスナー
   const closeModalBtns = document.querySelectorAll(".close-modal");
@@ -108,12 +108,11 @@ const initializeModal = (modalType, recordData) => {
     accountDelete: "./init/account-delete.js",
   };
 
-  const modalModules = import.meta.glob("./init/*.js");
+  const modalModules = import.meta.glob("./init/*.js", { eager: true });
 
   const modulePath = modalMap[modalType];
-  if (modulePath && modalModules[modulePath]) {
-    modalModules[modulePath]().then((module) => module.init(recordData));
-  } else {
-    console.warn(`未対応のモーダルタイプ: ${modalType}`);
+  const module = modalModules[modulePath];
+  if (modulePath && typeof module.init === "function") {
+    module.init(recordData);
   }
 };

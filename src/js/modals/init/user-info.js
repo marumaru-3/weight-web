@@ -22,6 +22,8 @@ export const init = (userData) => {
   const adminAccFrom = document.querySelector(".admin-account-form");
   const adminUserFrom = document.querySelector(".admin-user-form");
 
+  const modal = document.querySelector(".modal");
+
   // モーダルに取得した要素を表示
   if (userData) {
     modal.querySelector("#username").value = userData.username;
