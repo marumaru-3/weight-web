@@ -2,15 +2,10 @@ RewriteEngine On
 RewriteBase /
 
 # ルートに来たら「/home」にリダイレクト
-# RewriteCond %{REQUEST_URI} ^/$
-# RewriteRule ^$ /home [R=301,L]
+RewriteCond %{REQUEST_URI} ^/$
+RewriteRule ^$ /home [R=301,L]
 
 # 「/home」や「/log」などのアクセスを「index.php?page=home」に変換
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^/]+)/?$ index.php?page=$1 [QSA,L]
-
-# AuthType Basic
-# AuthName "Staging Access"
-# AuthUserFile /app/.htpasswd
-# Require valid-user
