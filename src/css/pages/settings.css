@@ -34,3 +34,10 @@
   gap: 24px;
   margin-top: 8px;
 }
+
+.settings-btns .btn {
+  font-size: 14px;
+  width: 160px;
+  height: 40px;
+  padding: 8px 16px;
+}
