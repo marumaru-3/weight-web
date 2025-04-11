@@ -61,6 +61,13 @@ use function lib\modal_route;
 
 $handler = new DBSessionHandler((new DataSource())->getPdo());
 session_set_save_handler($handler, true);
+session_set_cookie_params([
+    "lifetime" => 0,
+    "path" => "/",
+    "secure" => true,
+    "httponly" => true,
+    "samesite" => "None",
+]);
 session_start();
 
 date_default_timezone_set("Asia/Tokyo");
