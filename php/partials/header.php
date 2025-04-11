@@ -37,7 +37,7 @@ function header($user)
           <p class="copy__value"><?php echo $user->id; ?></p>
         </div>
         <div class="user-popup__buttons">
-          <a href="/weight-management/user"
+          <a href="<?php the_url("/user"); ?>"
             class="btn btn--user">
             <span class="btn__text">ユーザー情報</span>
           </a>
