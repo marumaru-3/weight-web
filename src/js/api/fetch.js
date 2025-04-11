@@ -9,6 +9,7 @@ export const fetchData = async (
   const response = await fetch(url, {
     method,
     body,
+    credentials: "include",
     ...options,
   });
 
