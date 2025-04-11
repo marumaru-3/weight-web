@@ -18,11 +18,11 @@ class DataSource
         $password = null
     ) {
         // デフォルト値は環境変数から取得 or ローカル開発用に fallback
-        $host = $host ?? getenv('DB_HOST') ?: 'localhost';
-        $port = $port ?? getenv('DB_PORT') ?: '8889';
-        $dbName = $dbName ?? getenv('DB_NAME') ?: 'weightweb';
-        $username = $username ?? getenv('DB_USERNAME') ?: 'develop_user';
-        $password = $password ?? getenv('DB_PASSWORD') ?: 'developKaihatsu0310';
+        $host = $host ?? getenv("DB_HOST") ?: "localhost";
+        $port = $port ?? getenv("DB_PORT") ?: "8889";
+        $dbName = $dbName ?? getenv("DB_NAME") ?: "weightweb";
+        $username = $username ?? getenv("DB_USERNAME") ?: "develop_user";
+        $password = $password ?? getenv("DB_PASSWORD") ?: "developKaihatsu0310";
 
         $dsn = "mysql:host={$host};port={$port};dbname={$dbName};";
         $this->conn = new PDO($dsn, $username, $password);
@@ -76,5 +76,10 @@ class DataSource
         $stmt = $this->conn->prepare($sql);
         $this->sqlResult = $stmt->execute($params);
         return $stmt;
+    }
+
+    public function getPdo()
+    {
+        return $this->conn;
     }
 }

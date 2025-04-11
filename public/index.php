@@ -1,8 +1,11 @@
 <?php
 
+use db\DataSource;
+
 require_once __DIR__ . "/../config/config.php";
 
 // library
+require_once SOURCE_BASE . "libs/db_session_handler.php";
 require_once SOURCE_BASE . "libs/weight-days_calc.php";
 require_once SOURCE_BASE . "libs/helper.php";
 require_once SOURCE_BASE . "libs/auth.php";
@@ -56,6 +59,8 @@ require_once SOURCE_BASE . "views/modals/content/register.php";
 use function lib\page_route;
 use function lib\modal_route;
 
+$handler = new DBSessionHandler((new DataSource())->getPdo());
+session_set_save_handler($handler, true);
 session_start();
 
 date_default_timezone_set("Asia/Tokyo");
