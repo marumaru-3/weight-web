@@ -9,7 +9,7 @@ export const fetchData = async (
   const response = await fetch(url, {
     method,
     body,
-    credentials: "include",
+    // credentials: "include",
     ...options,
   });
 
@@ -23,10 +23,10 @@ export const fetchData = async (
     }
 
     const contentType = response.headers.get("Content-Type");
-    return await response.text();
     if (contentType && contentType.includes("application/json")) {
       return await response.json();
     } else {
+      return await response.text();
     }
   } catch (error) {
     console.log("エラー:", error);

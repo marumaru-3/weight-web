@@ -7,6 +7,11 @@ $basePath = str_replace("/api/config.js.php", "", $scriptName);
 header("Content-Type: application/javascript");
 
 echo "const BASE_PATH = '" . $basePath . "/';";
-$showIdModal = isset($_SESSION["show_id_modal"]) ? "true" : "false";
+$showIdModal = "false";
+
+if (isset($_SESSION["show_id_modal"])) {
+  $showIdModal = $_SESSION["show_id_modal"] ? "true" : "false";
+}
+
 echo "let showIdModal = {$showIdModal};";
 exit();
