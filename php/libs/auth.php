@@ -73,7 +73,7 @@ class Auth
         try {
             $user = UserModel::getSession();
         } catch (Throwable $e) {
-            UserModel::clearSession();
+            // UserModel::clearSession();
             Msg::push(Msg::DEBUG, $e->getMessage());
             Msg::push(
                 Msg::ERROR,

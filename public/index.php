@@ -1,7 +1,5 @@
 <?php
 
-use db\DataSource;
-
 require_once __DIR__ . "/../config/config.php";
 
 // library
@@ -56,18 +54,12 @@ require_once SOURCE_BASE . "views/modals/content/recordAdmin.php";
 require_once SOURCE_BASE . "views/modals/content/recordReset.php";
 require_once SOURCE_BASE . "views/modals/content/register.php";
 
+use db\DataSource;
 use function lib\page_route;
 use function lib\modal_route;
 
 $handler = new DBSessionHandler((new DataSource())->getPdo());
 session_set_save_handler($handler, true);
-session_set_cookie_params([
-    "lifetime" => 0,
-    "path" => "/",
-    "secure" => true,
-    "httponly" => true,
-    "samesite" => "None",
-]);
 session_start();
 
 date_default_timezone_set("Asia/Tokyo");

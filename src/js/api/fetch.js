@@ -16,17 +16,17 @@ export const fetchData = async (
   try {
     if (!response.ok) {
       if (response.status === 401) {
-        alert("ログインが必要です。");
-        window.location.href = initGetUrl("/welcome");
+        // alert("ログインが必要です。");
+        // window.location.href = initGetUrl("/welcome");
       }
       throw new Error(`APIエラー: ${response.status}`);
     }
 
     const contentType = response.headers.get("Content-Type");
+    return await response.text();
     if (contentType && contentType.includes("application/json")) {
       return await response.json();
     } else {
-      return await response.text();
     }
   } catch (error) {
     console.log("エラー:", error);
