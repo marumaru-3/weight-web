@@ -4,9 +4,9 @@ namespace view\welcome;
 
 use lib\Msg;
 
-function index($page_title)
+function index($page_title, $page_desc)
 {
-  \partials\head($page_title); ?>
+  \partials\head($page_title, $page_desc); ?>
 
   <div id="layout">
     <main class="welcome">

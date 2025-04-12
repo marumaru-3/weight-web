@@ -12,5 +12,7 @@ function get($page)
     $user = UserModel::getSession();
 
     $page_title = "ヘルプ";
-    \view\layout\dashboard($page, $page_title, $user);
+    $page_desc = "体重の記録方法やグラフの見方、体脂肪率の計算ルールなどをわかりやすく解説。アプリの使い方がすぐにわかるサポートページ。";
+
+    \view\layout\dashboard($page, $page_title, $page_desc, $user);
 }
