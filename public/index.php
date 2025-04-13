@@ -53,6 +53,7 @@ require_once SOURCE_BASE . "views/modals/content/record.php";
 require_once SOURCE_BASE . "views/modals/content/recordAdmin.php";
 require_once SOURCE_BASE . "views/modals/content/recordReset.php";
 require_once SOURCE_BASE . "views/modals/content/register.php";
+require_once SOURCE_BASE . "views/modals/content/notifications.php";
 
 use db\DataSource;
 use function lib\page_route;

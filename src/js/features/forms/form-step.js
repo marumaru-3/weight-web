@@ -1,8 +1,17 @@
 // ステップでフォームの表示切り替え
 export const initStepBtn = () => {
-  document
-    .getElementById("btn--go-to-step2")
-    .addEventListener("click", goToStep);
+  const classBtnGoToStep2 = document.querySelectorAll(".btn--go-to-step2");
+  if (classBtnGoToStep2) {
+    document.querySelectorAll(".btn--go-to-step2").forEach((btn) => {
+      btn.addEventListener("click", goToStep);
+    });
+  }
+  const idBtnGoToStep2 = document.getElementById("btn--go-to-step2");
+  if (idBtnGoToStep2) {
+    document
+      .getElementById("btn--go-to-step2")
+      .addEventListener("click", goToStep);
+  }
   document
     .getElementById("btn--back-to-step1")
     .addEventListener("click", backToStep);

@@ -112,6 +112,7 @@ const initializeModal = (modalType, recordData) => {
     register: "./init/register.js",
     accountCreated: "./init/account-created.js",
     accountDelete: "./init/account-delete.js",
+    notifications: "./init/notifications.js",
   };
 
   const modalModules = import.meta.glob("./init/*.js", { eager: true });

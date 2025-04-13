@@ -19,8 +19,13 @@ function header($user)
     </div>
     <div id="header__info"
       class="header__info">
+      <button id="header__notifications"
+        class="header__button" data-modal="notifications">
+        <span class="material-symbols-outlined"
+          data-icon="notifications"></span>
+      </button>
       <button id="header__profile"
-        class="header__profile">
+        class="header__button">
         <img src="<?php echo BASE_IMAGE_PATH; ?>header/header-user.svg"
           alt="ユーザー" />
       </button>

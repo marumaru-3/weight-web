@@ -14,20 +14,24 @@
 }
 .header__info {
   position: relative;
+  gap: 8px;
 }
 .header__logo img {
   width: 40px;
   height: 40px;
 }
 
-.header__profile {
+.header__button {
   border-radius: 50%;
   line-height: 0;
   padding: 8px;
   transition: 0.3s all;
 }
-.header__info.click .header__profile,
-.header__profile:hover {
+.header__button span {
+  font-size: 32px;
+}
+.header__info.click .header__button,
+.header__button:hover {
   background-color: var(--blue-02);
 }
 
@@ -88,9 +92,26 @@
 }
 
 @media (max-width: 599px) {
-  .header__profile,
+  .header__logo {
+    font-size: 18px;
+  }
+  .header__logo a {
+    gap: 8px;
+  }
+  .header__logo img {
+    width: 32px;
+    height: 32px;
+  }
+
+  #header__profile,
   .header__info.click .user-popup {
     display: none;
+  }
+  .header__button {
+    padding: 4px;
+  }
+  .header__button span {
+    font-size: 24px;
   }
   .header__user-id {
     font-size: 14px;
