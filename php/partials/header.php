@@ -2,7 +2,7 @@
 
 namespace partials;
 
-function header($user)
+function header($notice_unread, $user)
 {
 ?>
   <header id="header"
@@ -21,8 +21,13 @@ function header($user)
       class="header__info">
       <button id="header__notifications"
         class="header__button" data-modal="notifications">
-        <span class="material-symbols-outlined"
-          data-icon="notifications"></span>
+        <?php if ($notice_unread) : ?>
+          <span class="material-symbols-outlined"
+            data-icon="notifications_unread"></span>
+        <?php else : ?>
+          <span class="material-symbols-outlined"
+            data-icon="notifications"></span>
+        <?php endif; ?>
       </button>
       <button id="header__profile"
         class="header__button">

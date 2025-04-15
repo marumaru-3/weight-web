@@ -4,14 +4,14 @@ namespace view\layout;
 
 use lib\Msg;
 
-function dashboard($page, $page_title, $page_desc, $user = null, $weight_logs = null)
+function dashboard($page, $page_title, $page_desc, $notice_unread, $user = null, $weight_logs = null)
 {
   \partials\head($page_title, $page_desc); ?>
   <div id="layout"
     class="layout">
     <?php \partials\sidebar($page); ?>
     <div class="layout__content">
-      <?php \partials\header($user); ?>
+      <?php \partials\header($notice_unread, $user); ?>
       <main class="layout__main">
         <?php Msg::flush(); ?>
         <?php

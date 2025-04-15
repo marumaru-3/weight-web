@@ -18,4 +18,7 @@ export const init = () => {
       showNoticeDetail(content.dataset.notice);
     });
   });
+
+  const noticeIcon = document.querySelector("#header__notifications span");
+  noticeIcon.dataset.icon = "notifications";
 };

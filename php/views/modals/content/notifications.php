@@ -2,9 +2,11 @@
 
 namespace view\modal\notifications;
 
+use function config\notices;
+
 function index()
 {
-  $notices = require_once __DIR__ . '/notices.php';
+  $notices = notices();
 ?>
   <button type="button"
     class="close-modal close-logo">
@@ -40,63 +42,24 @@ function index()
     <div id="step2"
       class="step hidden">
       <div class="notice-wrapper">
-        <div class="notice-detail visible" id="notice01">
-          <div class="notice-detail__header">
-            <div class="notice-detail__flex">
-              <div class="notice-contents__label notice-contents__label--info">インフォメーション</div>
-              <p class="notice-contents__date">2025/04/12 11:00</p>
+        <?php foreach ($notices as $key => $notice) : ?>
+          <div class="notice-detail" id="<?php echo $key; ?>">
+            <div class="notice-detail__header">
+              <div class="notice-detail__flex">
+                <?php if ($notice['type'] === 'info') : ?>
+                  <div class="notice-contents__label notice-contents__label--info">インフォメーション</div>
+                <?php elseif ($notice['type'] === 'defect') : ?>
+                  <div class="notice-contents__label notice-contents__label--defect">不具合</div>
+                <?php endif; ?>
+                <p class="notice-contents__date"><?php echo $notice['date']; ?></p>
+              </div>
+              <p class="notice-contents__title"><?php echo $notice['title']; ?></p>
             </div>
-            <p class="notice-contents__title">アップデートのお知らせ【4/12 11:00公開】</p>
-          </div>
-          <div class="notice-detail__body">
-            <p>
-              4/12 11:00にアップデートを行いました。<br>
-              アップデート内容の詳細は下記のとおりです。
-            </p>
-            <ul>
-              <li>今日の記録を追加モーダルの日付選択のとき、日付をクリックした際にカレンダーが表示できるようになりました。</li>
-              <li>モーダル表示速度を改善しました。</li>
-            </ul>
-          </div>
-        </div>
-        <div class="notice-detail hidden" id="notice02">
-          <div class="notice-detail__header">
-            <div class="notice-detail__flex">
-              <div class="notice-contents__label notice-contents__label--defect">不具合</div>
-              <p class="notice-contents__date">2025/04/12 11:00</p>
+            <div class="notice-detail__body">
+              <?php echo $notice['body']; ?>
             </div>
-            <p class="notice-contents__title">アップデートのお知らせ【4/12 11:00公開】</p>
           </div>
-          <div class="notice-detail__body">
-            <p>
-              4/12 11:00にアップデートを行いました。<br>
-              アップデート内容の詳細は下記のとおりです。
-            </p>
-            <ul>
-              <li>今日の記録を追加モーダルの日付選択のとき、日付をクリックした際にカレンダーが表示できるようになりました。</li>
-              <li>モーダル表示速度を改善しました。</li>
-            </ul>
-          </div>
-        </div>
-        <div class="notice-detail hidden" id="notice03">
-          <div class="notice-detail__header">
-            <div class="notice-detail__flex">
-              <div class="notice-contents__label notice-contents__label--info">インフォメーション</div>
-              <p class="notice-contents__date">2025/04/22 11:00</p>
-            </div>
-            <p class="notice-contents__title">アップデートのお知らせ【4/22 11:00公開】</p>
-          </div>
-          <div class="notice-detail__body">
-            <p>
-              4/12 11:00にアップデートを行いました。<br>
-              アップデート内容の詳細は下記のとおりです。
-            </p>
-            <ul>
-              <li>今日の記録を追加モーダルの日付選択のとき、日付をクリックした際にカレンダーが表示できるようになりました。</li>
-              <li>モーダル表示速度を改善しました。</li>
-            </ul>
-          </div>
-        </div>
+        <?php endforeach; ?>
       </div>
       <div class="basic-info-form validate-form">
         <div class="modal-buttons record-form__buttons">
