@@ -46,6 +46,7 @@ require_once SOURCE_BASE . "views/user.php";
 require_once SOURCE_BASE . "views/help.php";
 require_once SOURCE_BASE . "views/settings.php";
 require_once SOURCE_BASE . "views/welcome.php";
+require_once SOURCE_BASE . "views/terms.php";
 
 // View modal
 require_once SOURCE_BASE . "views/modals/modal.php";

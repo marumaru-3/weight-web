@@ -4,7 +4,7 @@ namespace view\modal\register;
 
 function index()
 {
-    ?>
+?>
   <button type="button"
     class="close-modal close-logo">
     <span class="material-symbols-outlined"
@@ -262,6 +262,9 @@ function index()
             <button type="button"
               class="btn btn--cancel prev-btn btn--w-100"
               id="btn--back-to-step1"><span class="btn__text">前に戻る</span></button>
+            <p class="form-agreement">
+              アカウントを作成することで、<a href="<?php the_url("/terms"); ?>" target="_blank">利用規約</a>に<span class="in-bl">同意したものとみなします。</span>
+            </p>
           </div>
         </div>
       </div>

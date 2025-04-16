@@ -15,10 +15,6 @@ export const fetchData = async (
 
   try {
     if (!response.ok) {
-      if (response.status === 401) {
-        // alert("ログインが必要です。");
-        // window.location.href = initGetUrl("/welcome");
-      }
       throw new Error(`APIエラー: ${response.status}`);
     }
 

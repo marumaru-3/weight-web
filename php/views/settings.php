@@ -29,6 +29,12 @@ function index($page_title, $user)
         </button>
       </div>
     </div>
+    <div class="settings-block card">
+      <h3 class="settings-block__title contents-title">その他</h3>
+      <div class="settings-btns">
+        <a class="settings-link" href="<?php the_url("/terms"); ?>" target="_blank">利用規約</a>
+      </div>
+    </div>
   </div>
 <?php
 }

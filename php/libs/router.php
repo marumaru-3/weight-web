@@ -35,7 +35,9 @@ function modal_route($modal, $method, $user = null)
         $targetFile = SOURCE_BASE . "controllers/modals/{$modal}.php";
 
         if (!file_exists($targetFile)) {
-            require_once SOURCE_BASE . "views/404.php";
+            http_response_code(404);
+            header("Content-Type: application/json");
+            echo json_encode(["error" => "モーダルが見つかりませんでした"]);
             return;
         }
 

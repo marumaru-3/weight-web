@@ -45,6 +45,9 @@ function index($page_title, $page_desc)
             アカウントを作成
           </span>
         </button>
+        <p class="form-agreement">
+          アカウントを作成することで、<a href="<?php the_url("/terms"); ?>" target="_blank">利用規約</a>に<span class="in-bl">同意したものとみなします。</span>
+        </p>
       </div>
       <div class="welcome__btn-text">
         <p class="welcome__text">アカウントをお持ちの場合</p>

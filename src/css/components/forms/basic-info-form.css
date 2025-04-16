@@ -169,6 +169,16 @@
   padding-top: 72px;
 }
 /* / フォームが少ないとき */
+
+.form-agreement {
+  font-size: 13px;
+  text-align: center;
+  font-weight: bold;
+}
+.form-agreement a {
+  color: var(--blue-01);
+  text-decoration: underline;
+}
 /* / ベーシックフォーム */
 
 @media (max-width: 599px) {
