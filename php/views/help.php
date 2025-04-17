@@ -4,7 +4,7 @@ namespace view\help;
 
 function index($page_title)
 {
-    ?>
+?>
   <div class="page help">
     <h2 class="page-title"><?php echo $page_title; ?></h2>
     <ul class="help-summary">
@@ -123,8 +123,8 @@ function index($page_title)
           </li>
           <li>
             <p class="ul__list-question">データが正しく保存されない場合は？</p>
-            <p class="ul__list-answer"><span>こちらのXアカウントのDMでご連絡ください。 <a href="#"
-                  class="ul__link">@twitter.com/acoount</a></span></p>
+            <p class="ul__list-answer"><span>こちらのXアカウントのDMでご連絡ください。 <a href="https://x.com/yukipyy3007" target="_blank"
+                  class="ul__link">https://x.com/yukipyy3007</a></span></p>
           </li>
         </ul>
       </li>
@@ -139,8 +139,8 @@ function index($page_title)
         <ul class="help-summary__ul accordion-content">
           <li>
             <p class="ul__list-text">体重Webについて疑問点や改善点等ありましたら、<br>
-              こちらのXアカウントのDMでご連絡ください。 <a href="#"
-                class="ul__link">@twitter.com/acoount</a></p>
+              こちらのXアカウントのDMでご連絡ください。 <a href="https://x.com/yukipyy3007" target="_blank"
+                class="ul__link">https://x.com/yukipyy3007</a></p>
           </li>
         </ul>
       </li>
