@@ -1,5 +1,3 @@
-import { initGetUrl } from "../helper.js";
-
 export const fetchData = async (
   url,
   method = "GET",
@@ -26,7 +24,13 @@ export const fetchData = async (
     }
   } catch (error) {
     console.log("エラー:", error);
-    console.log("デバッグ:", await response.text());
+    const contentType = response.headers.get("Content-Type");
+    if (contentType && contentType.includes("application/json")) {
+      console.log(await response.json());
+      alert("モーダルの読み込みに失敗しました。\n" + error.message);
+    } else {
+      console.log(await response.text());
+    }
     return { success: false, message: "通信エラーが発生しました。" };
   }
 };

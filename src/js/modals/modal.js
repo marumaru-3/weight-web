@@ -21,6 +21,11 @@ const openModal = async (modalType, fetchData) => {
 
   const modalHtml = await fetchModalHtml(modalType);
 
+  if (modalHtml.success === false) {
+    isModalOpen = false;
+    return;
+  }
+
   layoutElement.insertAdjacentHTML("afterend", modalHtml);
 
   // 背景スクロールさせない

@@ -31,7 +31,7 @@
 .header__button span {
   font-size: 32px;
 }
-.header__info.click .header__button,
+.header__info.click #header__profile,
 .header__button:hover {
   background-color: var(--blue-02);
 }
