@@ -16,8 +16,8 @@ function head($page_title, $page_desc)
     <meta name="description" content="<?php echo $page_desc; ?>">
     <meta property="og:title" content="体重Web" />
     <meta property="og:description" content="体重を記録するだけで、BMIや体脂肪率・目標体重の差がひと目でわかる！" />
-    <meta property="og:image" content="https://example.com/images/ogp.png" />
-    <meta property="og:url" content="https://example.com/" />
+    <meta property="og:image" content="https://weight-web.site/images/ogp.png" />
+    <meta property="og:url" content="https://weight-web.site/" />
     <meta property="og:type" content="website" />
     <link rel="icon"
       href="<?php echo BASE_IMAGE_PATH; ?>favicon/favicon.ico">
