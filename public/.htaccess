@@ -9,3 +9,7 @@ RewriteRule ^$ /home [R=301,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^/]+)/?$ index.php?page=$1 [QSA,L]
+
+# wwwなしでアクセスされたら、www付きにリダイレクト
+RewriteCond %{HTTP_HOST} ^weight-web\.site [NC]
+RewriteRule ^(.*)$ https://www.weight-web.site/$1 [R=301,L]

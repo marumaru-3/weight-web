@@ -14,10 +14,10 @@ function head($page_title, $page_desc)
       content="width=device-width, initial-scale=1.0" />
     <title><?php echo $page_title; ?> / 体重Web</title>
     <meta name="description" content="<?php echo $page_desc; ?>">
-    <meta property="og:title" content="体重Web" />
+    <meta property="og:title" content="体重Web - シンプルな体重記録アプリ" />
     <meta property="og:description" content="体重を記録するだけで、BMIや体脂肪率・目標体重の差がひと目でわかる！" />
-    <meta property="og:image" content="https://weight-web.site/images/ogp.png" />
-    <meta property="og:url" content="https://weight-web.site/" />
+    <meta property="og:image" content="https://www.weight-web.site/images/ogp.png" />
+    <meta property="og:url" content="https://www.weight-web.site/" />
     <meta property="og:type" content="website" />
     <link rel="icon"
       href="<?php echo BASE_IMAGE_PATH; ?>favicon/favicon.ico">
