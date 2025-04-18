@@ -19,6 +19,7 @@ function head($page_title, $page_desc)
     <meta property="og:image" content="https://www.weight-web.site/images/ogp.png" />
     <meta property="og:url" content="https://www.weight-web.site/" />
     <meta property="og:type" content="website" />
+    <meta name="robots" content="noindex, nofollow">
     <link rel="icon"
       href="<?php echo BASE_IMAGE_PATH; ?>favicon/favicon.ico">
     <link rel="preconnect"
