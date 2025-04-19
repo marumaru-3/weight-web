@@ -1,3 +1,8 @@
+AuthType Basic
+AuthName "Staging Access"
+AuthUserFile /app/public/.htpasswd
+Require valid-user
+
 RewriteEngine On
 RewriteBase /
 
@@ -13,8 +18,3 @@ RewriteRule ^([^/]+)/?$ index.php?page=$1 [QSA,L]
 # wwwなしでアクセスされたら、www付きにリダイレクト
 RewriteCond %{HTTP_HOST} ^weight-web\.site [NC]
 RewriteRule ^(.*)$ https://www.weight-web.site/$1 [R=301,L]
-
-AuthType Basic
-AuthName "Staging Access"
-AuthUserFile /app/public/.htpasswd
-Require valid-user
