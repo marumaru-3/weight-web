@@ -17,9 +17,9 @@ export const initPwdClick = async () => {
 
       // アイコン変更
       if (isHidden) {
-        pwdBtnChild.innerHTML = "visibility_off";
+        pwdBtnChild.dataset.icon = "visibility_off";
       } else {
-        pwdBtnChild.innerHTML = "visibility";
+        pwdBtnChild.dataset.icon = "visibility";
       }
 
       pwdBtn.dataset.hidden = !isHidden;
