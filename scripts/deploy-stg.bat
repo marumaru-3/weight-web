@@ -13,7 +13,8 @@ echo === ローカル用に戻します ===
 copy /Y ".htaccess.public" "public\.htaccess"
 
 echo 書き込み中...（Heroku側に.htpasswd配置）
-heroku run "echo 'weight-test:$apr1$wgensxtp$Z94QAvyIyP87Oj869.61i1' > public/.htpasswd" --app weight-web-stg
+heroku run --app weight-web-stg --command "echo 'weight-test:$apr1$wgensxtp$Z94QAvyIyP87Oj869.61i1' > public/.htpasswd"
+
 
 echo === 作業完了！お疲れさまでした ===
 pause
