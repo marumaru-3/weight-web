@@ -6,6 +6,7 @@ dist/
 # assets/
 
 # その他の不要ファイル
+.htpasswd
 .DS_Store
 .env
 .env.local
