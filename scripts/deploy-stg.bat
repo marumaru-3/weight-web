@@ -12,8 +12,5 @@ git push heroku-stg main
 echo === ローカル用に戻します ===
 copy /Y ".htaccess.public" "public\.htaccess"
 
-echo 書き込み中...（Heroku側に.htpasswd配置）
-heroku run bash --app weight-web-stg
-
 echo === 作業完了！お疲れさまでした ===
 pause
