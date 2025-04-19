@@ -12,4 +12,5 @@ dist/
 .env.*.local
 /vendor/
 *.log
+.htpasswd*
 public/.htpasswd
