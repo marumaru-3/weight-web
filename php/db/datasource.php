@@ -26,6 +26,7 @@ class DataSource
 
         $dsn = "mysql:host={$host};port={$port};dbname={$dbName};";
         $this->conn = new PDO($dsn, $username, $password);
+        $this->conn->exec("SET time_zone = '+09:00'");
         $this->conn->setAttribute(
             PDO::ATTR_DEFAULT_FETCH_MODE,
             PDO::FETCH_ASSOC
