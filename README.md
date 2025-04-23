@@ -79,6 +79,28 @@ Password: test
 
 ---
 
+## インフラ構成図
+
+Web Dyno と JawsDB は Heroku 上の同一プラットフォーム内で動作しており、
+ユーザー情報や体重記録、セッション情報などの双方向通信を行っています。
+
+![インフラ構成図](./screenshots/infra-image.png)
+
+---
+
+## データベース設計
+
+以下のように、ユーザー・体重記録・通知の既読管理・セッションを管理するテーブル設計としています。
+
+![ER図](./screenshots/er-image.png)
+
+### 補足：sessions テーブルについて
+
+Heroku 環境では、サーバー再起動時にセッション情報が失われるため、PHP のセッションをファイルではなく、データベースで管理しています。
+このテーブルはセッションのキーと値のみを保存するもので、ユーザー ID とのリレーションは設けていません（PHP セッションの使用に準拠）
+
+---
+
 ## スクリーンショット
 
 ※以下はすべて PC 版の画面です。スマホでもレスポンシブ対応済み。
@@ -92,13 +114,16 @@ Password: test
 ![アカウント作成モーダル01](./screenshots/account-modal01.png)
 ![アカウント作成モーダル02](./screenshots/account-modal02.png)
 
-### アカウント作成完了モーダル
-
-![アカウント作成完了モーダル](./screenshots/account-created-modal.png)
-
 ### トップページ
 
 ![トップページ](./screenshots/top.png)
+
+<details>
+<summary>その他の画面（モーダル・ログ・設定・ヘルプ など）</summary>
+
+### アカウント作成完了モーダル
+
+![アカウント作成完了モーダル](./screenshots/account-created-modal.png)
 
 ### 体重記録モーダル
 
@@ -119,6 +144,8 @@ Password: test
 ### 設定ページ
 
 ![設定ページ](./screenshots/settings.png)
+
+</details>
 
 ---
 
