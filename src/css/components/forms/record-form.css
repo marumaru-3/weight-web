@@ -5,6 +5,7 @@
 }
 .record-form__contents:first-child {
   border-top: 1px solid var(--line-color);
+  padding-bottom: 16px;
 }
 
 .record-form__contents .basic-info-form__box {
@@ -16,15 +17,30 @@
 .record-form__contents label {
   font-weight: bold;
   font-size: 18px;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
-.label-att {
+.label-name {
+  border-radius: 30px;
+}
+.label-name__weight {
+  display: inline-block;
+  background-color: var(--blue-01);
+  color: #fff;
+  padding: 6px 32px;
+}
+.label-name__memo {
+  display: inline-block;
+  background-color: #eee;
+  font-size: 16px;
+  padding: 6px 24px;
+}
+.record-form__contents .label-att {
   font-size: 14px;
   margin-left: 8px;
 }
 .record-form__input {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 8px;
   width: 100%;
 }
@@ -35,11 +51,13 @@
 }
 .record-form__input #weight {
   font-weight: bold;
-  font-size: 20px;
-  width: 104px;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1;
+  width: 144px;
 }
 .record-form__input #weight::placeholder {
-  font-size: 18px;
+  font-size: 40px;
 }
 .record-form__input #memo {
   width: 100%;
@@ -50,7 +68,7 @@
 }
 .weight__unit {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 20px;
 }
 /* / 体重メモフォーム */
 
