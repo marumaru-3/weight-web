@@ -2,6 +2,7 @@ import {
   fetchUserData,
   fetchRecordData,
   fetchModalHtml,
+  getDateFromClick,
 } from "../api/fetch_data.js";
 import { initPwdClick } from "../components/buttons/pwd-btn.js";
 import { initPreloadImage } from "../helper.js";
@@ -12,14 +13,69 @@ const layoutElement = document.getElementById("layout");
 // モーダル表示中フラグ
 let isModalOpen = false;
 
-// モーダルを開く
-const openModal = async (modalType, fetchData) => {
-  if (isModalOpen) {
-    return;
+// モーダル用キャッシュ
+const modalCache = new Map();
+
+// 各モーダルの処理関数
+const initializeModal = (modalType, recordData) => {
+  const modalMap = {
+    record: "./init/record.js",
+    recordAdmin: "./init/record-admin.js",
+    recordReset: "./init/record-reset.js",
+    adminAccount: "./init/user-info.js",
+    adminUser: "./init/user-info.js",
+    login: "./init/login.js",
+    register: "./init/register.js",
+    accountCreated: "./init/account-created.js",
+    accountDelete: "./init/account-delete.js",
+    notifications: "./init/notifications.js",
+  };
+
+  const modalModules = import.meta.glob("./init/*.js", { eager: true });
+
+  const modulePath = modalMap[modalType];
+  const module = modalModules[modulePath];
+  if (modulePath && typeof module.init === "function") {
+    module.init(recordData);
   }
-  isModalOpen = true;
+};
+
+// 事前fetchしてキャッシュする
+const preloadModal = async (modalType, triggerElem = null) => {
+  let cacheKey = modalType;
+  let fetchData = null;
+
+  if (modalType === "recordAdmin" && triggerElem) {
+    const date = getDateFromClick(triggerElem);
+    if (!date) return;
+    cacheKey = `recordAdmin-${date}`;
+    fetchData = await fetchRecordData(triggerElem);
+  }
+
+  if (modalType === "adminUser") {
+    fetchData = await fetchUserData();
+  }
+
+  if (modalCache.has(cacheKey)) return;
 
   const modalHtml = await fetchModalHtml(modalType);
+  modalCache.set(cacheKey, { modalHtml, fetchData });
+};
+
+// モーダルを開く
+const openModal = async (modalType, fetchData, cacheKey = null) => {
+  if (isModalOpen) return;
+  isModalOpen = true;
+
+  let modalHtml = null;
+
+  if (cacheKey && modalCache.has(cacheKey)) {
+    const cached = modalCache.get(cacheKey);
+    modalHtml = cached.modalHtml;
+    fetchData = cached.fetchData;
+  } else {
+    modalHtml = await fetchModalHtml(modalType);
+  }
 
   if (modalHtml.success === false) {
     isModalOpen = false;
@@ -46,32 +102,42 @@ const openModal = async (modalType, fetchData) => {
   isModalOpen = false;
 };
 
-// モーダル削除関数
+// モーダル閉じる関数
 const closeModal = () => {
   const modal = document.getElementById("modal");
   if (modal) {
     modal.remove();
     // 背景スクロール
     bodyElement.style.overflow = "";
-
-    // パスワード表示切り替え
-    initPwdClick();
   }
 };
 
 // モーダルを開くボタンのイベントリスナー
 const openModalBtns = document.querySelectorAll("[data-modal]");
 openModalBtns.forEach((btn) => {
-  btn.addEventListener("click", async (clickElem) => {
+  btn.addEventListener("click", async () => {
     const modalType = btn.getAttribute("data-modal");
-
-    // モーダルを開く前にAPIデータを取得
     let fetchData = null;
-    if (modalType === "recordAdmin" && clickElem) {
-      fetchData = await fetchRecordData(clickElem);
+    let cacheKey = modalType;
+
+    if (modalType === "recordAdmin") {
+      const date = getDateFromClick(btn);
+      if (date) {
+        cacheKey = `recordAdmin-${date}`;
+      }
     }
-    if (modalType === "adminUser") {
-      fetchData = await fetchUserData();
+
+    // キャッシュがある場合はそちらを使う
+    if (modalCache.has(cacheKey)) {
+      const cached = modalCache.get(cacheKey);
+      fetchData = cached.fetchData;
+    } else {
+      if (modalType === "recordAdmin") {
+        fetchData = await fetchRecordData(btn);
+      }
+      if (modalType === "adminUser") {
+        fetchData = await fetchUserData();
+      }
     }
 
     // モーダルを開く前に画像データを読み込み
@@ -79,7 +145,9 @@ openModalBtns.forEach((btn) => {
       initPreloadImage("/images/date-arrow.svg");
     }
 
-    openModal(modalType, fetchData);
+    console.log(modalCache);
+
+    openModal(modalType, fetchData, cacheKey);
   });
 });
 
@@ -93,6 +161,13 @@ document.addEventListener("click", (e) => {
   }
 });
 
+// ページ読み込み直後のプリフェッチ
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    preloadModal("record");
+  }, 1000);
+});
+
 // アカウント作成時にID確認モーダルを表示
 if (sessionStorage.getItem("accountCreated") === "true") {
   openModal("accountCreated");
@@ -104,27 +179,3 @@ if (sessionStorage.getItem("accountCreated") === "true") {
 if (showIdModal) {
   openModal("idCheck");
 }
-
-// 各モーダルの処理関数
-const initializeModal = (modalType, recordData) => {
-  const modalMap = {
-    record: "./init/record.js",
-    recordAdmin: "./init/record-admin.js",
-    recordReset: "./init/record-reset.js",
-    adminAccount: "./init/user-info.js",
-    adminUser: "./init/user-info.js",
-    login: "./init/login.js",
-    register: "./init/register.js",
-    accountCreated: "./init/account-created.js",
-    accountDelete: "./init/account-delete.js",
-    notifications: "./init/notifications.js",
-  };
-
-  const modalModules = import.meta.glob("./init/*.js", { eager: true });
-
-  const modulePath = modalMap[modalType];
-  const module = modalModules[modulePath];
-  if (modulePath && typeof module.init === "function") {
-    module.init(recordData);
-  }
-};
