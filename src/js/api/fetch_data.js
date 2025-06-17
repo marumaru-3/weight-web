@@ -27,7 +27,7 @@ export const fetchChartData = async () => {
 
 // Record data
 export const getDateFromClick = (clickElem) => {
-  const targetElem = clickElem.target.closest("[data-date]");
+  const targetElem = clickElem.closest("[data-date]");
   if (targetElem) {
     return targetElem.dataset.date;
   }

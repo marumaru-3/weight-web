@@ -13,8 +13,10 @@ const layoutElement = document.getElementById("layout");
 // モーダル表示中フラグ
 let isModalOpen = false;
 
-// モーダル用キャッシュ
-const modalCache = new Map();
+// モーダル用HTMLキャッシュ
+const modalHtmlCache = new Map();
+// モーダル用データキャッシュ
+const modalDataCache = new Map();
 
 // 各モーダルの処理関数
 const initializeModal = (modalType, recordData) => {
@@ -42,45 +44,44 @@ const initializeModal = (modalType, recordData) => {
 
 // 事前fetchしてキャッシュする
 const preloadModal = async (modalType, triggerElem = null) => {
-  let cacheKey = modalType;
+  const htmlKey = modalType;
+  let dataKey = modalType;
   let fetchData = null;
 
   if (modalType === "recordAdmin" && triggerElem) {
     const date = getDateFromClick(triggerElem);
     if (!date) return;
-    cacheKey = `recordAdmin-${date}`;
-    fetchData = await fetchRecordData(triggerElem);
+    dataKey = `recordAdmin-${date}`;
+    if (!modalDataCache.has(dataKey)) {
+      fetchData = await fetchRecordData(triggerElem);
+      modalDataCache.set(dataKey, fetchData);
+    }
   }
 
-  if (modalType === "adminUser") {
+  if (modalType === "adminUser" && !modalDataCache.has(dataKey)) {
     fetchData = await fetchUserData();
+    modalDataCache.set(dataKey, fetchData);
   }
 
-  if (modalCache.has(cacheKey)) return;
+  // 画像データを先読み込み
+  if (modalType === "record") {
+    initPreloadImage("/images/date-arrow.svg");
+  }
+
+  if (modalHtmlCache.has(htmlKey)) return;
 
   const modalHtml = await fetchModalHtml(modalType);
-  modalCache.set(cacheKey, { modalHtml, fetchData });
+  modalHtmlCache.set(htmlKey, modalHtml);
 };
 
 // モーダルを開く
-const openModal = async (modalType, fetchData, cacheKey = null) => {
+const openModal = async (modalType, dataKey = null) => {
   if (isModalOpen) return;
   isModalOpen = true;
 
-  let modalHtml = null;
-
-  if (cacheKey && modalCache.has(cacheKey)) {
-    const cached = modalCache.get(cacheKey);
-    modalHtml = cached.modalHtml;
-    fetchData = cached.fetchData;
-  } else {
-    modalHtml = await fetchModalHtml(modalType);
-  }
-
-  if (modalHtml.success === false) {
-    isModalOpen = false;
-    return;
-  }
+  const modalHtml =
+    modalHtmlCache.get(modalType) || (await fetchModalHtml(modalType));
+  const fetchData = dataKey ? modalDataCache.get(dataKey) : null;
 
   layoutElement.insertAdjacentHTML("afterend", modalHtml);
 
@@ -112,42 +113,27 @@ const closeModal = () => {
   }
 };
 
-// モーダルを開くボタンのイベントリスナー
 const openModalBtns = document.querySelectorAll("[data-modal]");
+// モーダルを開くボタンのイベントリスナー
 openModalBtns.forEach((btn) => {
   btn.addEventListener("click", async () => {
     const modalType = btn.getAttribute("data-modal");
-    let fetchData = null;
-    let cacheKey = modalType;
+    let dataKey = modalType;
 
     if (modalType === "recordAdmin") {
       const date = getDateFromClick(btn);
       if (date) {
-        cacheKey = `recordAdmin-${date}`;
+        dataKey = `recordAdmin-${date}`;
       }
     }
 
-    // キャッシュがある場合はそちらを使う
-    if (modalCache.has(cacheKey)) {
-      const cached = modalCache.get(cacheKey);
-      fetchData = cached.fetchData;
-    } else {
-      if (modalType === "recordAdmin") {
-        fetchData = await fetchRecordData(btn);
-      }
-      if (modalType === "adminUser") {
-        fetchData = await fetchUserData();
-      }
+    // データキャッシュがなければfetchして保持
+    if (!modalDataCache.has(dataKey)) {
+      const fetchData = await fetchRecordData(btn);
+      modalDataCache.set(dataKey, fetchData);
     }
 
-    // モーダルを開く前に画像データを読み込み
-    if (modalType === "record") {
-      initPreloadImage("/images/date-arrow.svg");
-    }
-
-    console.log(modalCache);
-
-    openModal(modalType, fetchData, cacheKey);
+    openModal(modalType, dataKey);
   });
 });
 
@@ -161,10 +147,25 @@ document.addEventListener("click", (e) => {
   }
 });
 
-// ページ読み込み直後のプリフェッチ
+const modalTypesToPreload = new Set();
+
+openModalBtns.forEach((btn) => {
+  const modalType = btn.getAttribute("data-modal");
+  modalTypesToPreload.add(modalType);
+});
+
+// ページ読み込み直後の各モーダルをプリフェッチ
+const recordAdminBtns = document.querySelectorAll('[data-modal="recordAdmin"]');
 window.addEventListener("load", () => {
-  setTimeout(() => {
-    preloadModal("record");
+  setTimeout(async () => {
+    const preloadPromises = [...modalTypesToPreload].map((type) =>
+      preloadModal(type)
+    );
+    await Promise.all(preloadPromises);
+
+    for (const btn of recordAdminBtns) {
+      await preloadModal("recordAdmin", btn);
+    }
   }, 1000);
 });
 
