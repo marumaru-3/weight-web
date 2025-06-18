@@ -44,6 +44,12 @@
   pointer-events: none;
 }
 
+.indent {
+  padding-left: 1em;
+  text-indent: -1em;
+  display: block;
+}
+
 .sp-only {
   display: none !important;
 }
