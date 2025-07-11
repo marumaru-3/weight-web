@@ -220,3 +220,24 @@ npx vite build    # JS/CSSをビルド（出力先：public/assets/）
 
 - ビルド後、`public/assets/`フォルダに出力されたファイルが PHP から読み込まれます
 - Vite の開発用サーバー（`npm run dev`）は使用していません
+
+---
+
+## PHPUnit の導入とテスト実行方法（任意）
+
+このプロジェクトでは、PHPUnit を使用してバックエンドのユニットテストを行います。  
+Git では `vendor/` ディレクトリが除外されているため、初回は以下の手順でインストールしてください。
+
+```bash
+composer install
+composer require --dev phpunit/phpunit
+```
+
+テストを実行するには以下のコマンドを使用します。
+
+```bash
+php ./vendor/bin/phpunit
+```
+
+- テストは `tests/` ディレクトリ内に配置されています。
+- `phpunit.xml` に設定を記載しています（例：bootstrap の読み込みなど）。
