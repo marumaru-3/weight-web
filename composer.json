@@ -3,5 +3,8 @@
   "description": "体重管理アプリ",
   "require": {
     "php": "^8.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^11.5"
   }
 }
