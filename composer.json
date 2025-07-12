@@ -6,5 +6,10 @@
   },
   "require-dev": {
     "phpunit/phpunit": "^11.5"
+  },
+  "autoload": {
+    "files": [
+      "php/libs/helper.php"
+    ]
   }
 }
