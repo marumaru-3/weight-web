@@ -1,1 +1,1 @@
-{"version":1,"defects":[],"times":{"SampleTest::testOnePlusOneEqualsTwo":0.005}}
+{"version":1,"defects":{"HelperTest::testAgeCalc":7},"times":{"SampleTest::testOnePlusOneEqualsTwo":0,"HelperTest::testAgeCalc":0.328}}

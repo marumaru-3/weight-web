@@ -35,9 +35,5 @@ function age_calc($birthdate)
 
   $age = $today->diff($birthDateObj)->y;
 
-  if ($today->format('md') < $birthDateObj->format('md')) {
-    $age--;
-  }
-
   return $age;
 }
