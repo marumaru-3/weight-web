@@ -2,7 +2,7 @@
 
 namespace lib;
 
-class weightDaysCalc
+class WeightDaysCalc
 {
   public static function idealDefferWeight($weight, $ideal_weight)
   {

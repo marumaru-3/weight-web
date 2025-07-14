@@ -2,16 +2,20 @@
 
 require_once __DIR__ . "/../config/config.php";
 
-// config
+// Config
 require_once SOURCE_BASE . '../config/notices.php';
 
-// library
-require_once SOURCE_BASE . "libs/db_session_handler.php";
-require_once SOURCE_BASE . "libs/weight-days_calc.php";
-require_once SOURCE_BASE . "libs/helper.php";
-require_once SOURCE_BASE . "libs/auth.php";
-require_once SOURCE_BASE . "libs/router.php";
-require_once SOURCE_BASE . "libs/notice.php";
+// Globals
+require_once SOURCE_BASE . "globals/DBSessionHandler.php";
+
+// Library
+require_once SOURCE_BASE . "libs/Auth.php";
+require_once SOURCE_BASE . "libs/WeightDaysCalc.php";
+
+// Functions
+require_once SOURCE_BASE . "functions/helper.php";
+require_once SOURCE_BASE . "functions/router.php";
+require_once SOURCE_BASE . "functions/notice.php";
 
 // Models
 require_once SOURCE_BASE . "models/abstract.model.php";
@@ -23,7 +27,7 @@ require_once SOURCE_BASE . "models/notice_read.model.php";
 require_once SOURCE_BASE . "service/weight_log.service.php";
 
 // Message
-require_once SOURCE_BASE . "libs/message.php";
+require_once SOURCE_BASE . "libs/Msg.php";
 
 // DB
 require_once SOURCE_BASE . "db/datasource.php";
