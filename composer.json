@@ -8,8 +8,21 @@
     "phpunit/phpunit": "^11.5"
   },
   "autoload": {
+    "psr-4": {
+      "lib\\": "php/libs/"
+    },
     "files": [
-      "php/libs/helper.php"
+      "php/functions/helper.php",
+      "php/functions/notice.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "": "tests/helpers/",
+      "db\\": "tests/helpers/db/"
+    },
+    "files": [
+      "tests/helpers/config/notices.php"
     ]
   }
 }
