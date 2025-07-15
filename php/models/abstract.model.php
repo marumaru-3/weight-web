@@ -37,7 +37,7 @@ abstract class AbstractModel
 
     public static function getFloat($val)
     {
-        return number_format($val, 1);
+        return number_format($val, 1, '.', '');
     }
 
     public static function getDate($val, $isKanji = false)
