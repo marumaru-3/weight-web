@@ -29,4 +29,27 @@ class WeightDaysCalcTest extends TestCase
     $this->assertSame('27.40', WeightDaysCalc::bfp(22.54, 'female', 25));
     $this->assertSame('22.00', WeightDaysCalc::bfp(22.54, 'other', 25));
   }
+
+  // 大きな値でのテスト
+  public function testIdealDefferWeightLargeNumber()
+  {
+    $this->assertSame('-1500.0', WeightDaysCalc::idealDefferWeight(11500.0, 10000.0));
+    $this->assertSame('+1500.0', WeightDaysCalc::idealDefferWeight(8500.0, 10000.0));
+  }
+  public function testDayBeforeLargeNumber()
+  {
+    $this->assertSame('+1500.0', WeightDaysCalc::dayBefore(11500.0, 10000.0));
+    $this->assertSame('-1500.0', WeightDaysCalc::dayBefore(8500.0, 10000.0));
+  }
+  public function testBmiLargeNumber()
+  {
+    $this->assertSame('89106.71', WeightDaysCalc::bmi(90000.0, 100.5));
+    $this->assertSame('2500.00', WeightDaysCalc::bmi(10000.0, 200.0));
+  }
+  public function testBfpLargeNumber()
+  {
+    $this->assertSame('11989.55', WeightDaysCalc::bfp(10000.00, 'male', 25));
+    $this->assertSame('12000.35', WeightDaysCalc::bfp(10000.00, 'female', 25));
+    $this->assertSame('11994.95', WeightDaysCalc::bfp(10000.00, 'other', 25));
+  }
 }
