@@ -5,7 +5,7 @@ import {
   initValidateBtn,
   initCheckBtn,
   initTextLabelClick,
-  initRestrictToFloat,
+  initRestrictWeight,
 } from "../../features/forms/form-validate.js";
 
 export const init = async () => {
@@ -14,7 +14,7 @@ export const init = async () => {
 
   // テキストラベルクリック判定
   initTextLabelClick();
-  initRestrictToFloat("input[data-float]");
+  initRestrictWeight("input[data-weight-input]");
 
   // バリデーションボタン制御
   initValidateBtn();
