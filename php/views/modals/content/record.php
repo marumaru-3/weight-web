@@ -32,12 +32,8 @@ function index()
               id="weight"
               name="weight"
               placeholder="---.-"
-              maxlength="5"
-              step="0.1"
               inputmode="decimal"
-              pattern="[0-9]+(\.[0-9]+)?"
-              value=""
-              data-float
+              data-weight-input
               required> <span class="weight__unit">kg</span>
           </div>
           <div class="validate-text"></div>

@@ -16,6 +16,7 @@ require_once SOURCE_BASE . "libs/WeightDaysCalc.php";
 require_once SOURCE_BASE . "functions/helper.php";
 require_once SOURCE_BASE . "functions/router.php";
 require_once SOURCE_BASE . "functions/notice.php";
+require_once SOURCE_BASE . "functions/validators.php";
 
 // Models
 require_once SOURCE_BASE . "models/abstract.model.php";

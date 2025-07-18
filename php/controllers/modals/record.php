@@ -7,6 +7,7 @@ use lib\Msg;
 use lib\Auth;
 use model\WeightLogModel;
 use model\UserModel;
+use function lib\validate_weight;
 use Throwable;
 
 function get()
@@ -26,6 +27,18 @@ function post()
     $weight_log->recorded_at = get_param("recorded_at", null);
     $weight_log->weight = get_param("weight", null);
     $weight_log->memo = get_param("memo", null);
+
+    // 体重バリデーション
+    [$ok, $err] = validate_weight($weight_log->weight);
+
+    if (!$ok) {
+        Msg::push(Msg::ERROR, $err);
+        echo json_encode([
+            'success' => false,
+            'message' => $err
+        ]);
+        exit();
+    }
 
     try {
         $user = UserModel::getSession();
