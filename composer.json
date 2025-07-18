@@ -13,7 +13,8 @@
     },
     "files": [
       "php/functions/helper.php",
-      "php/functions/notice.php"
+      "php/functions/notice.php",
+      "php/functions/validators.php"
     ]
   },
   "autoload-dev": {
