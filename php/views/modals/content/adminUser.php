@@ -154,12 +154,8 @@ function index()
                   <input type="text"
                     id="height"
                     name="height"
-                    maxlength="10"
-                    step="0.1"
                     inputmode="decimal"
-                    pattern="[0-9]+(\.[0-9]+)?"
-                    value=""
-                    data-float
+                    data-height-input
                     required>
                 </div>
               </label>
