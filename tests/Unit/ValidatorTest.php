@@ -1,25 +1,25 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use function lib\validate_weight;
+use function lib\validate_decimal;
 
 class ValidatorTest extends TestCase
 {
   /**
    * @dataProvider okCases
    */
-  public function testWeightValid(string $input): void
+  public function testDecimalValid(string $input): void
   {
-    [$ok] = validate_weight($input);
+    [$ok] = validate_decimal($input);
     $this->assertTrue($ok);
   }
 
   /**
    * @dataProvider ngCases
    */
-  public function testWeightInvalid(string $input): void
+  public function testDecimalInvalid(string $input): void
   {
-    [$ok] = validate_weight($input);
+    [$ok] = validate_decimal($input);
     $this->assertFalse($ok);
   }
 
