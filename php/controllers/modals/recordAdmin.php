@@ -8,6 +8,7 @@ use lib\Auth;
 use model\WeightLogModel;
 use model\UserModel;
 use function lib\validate_decimal;
+use function lib\json_validation_error;
 use Throwable;
 
 function get()
@@ -29,15 +30,9 @@ function post()
     $weight_log->memo = get_param("memo", null);
 
     // 体重バリデーション
-    [$ok, $err] = validate_decimal($weight_log->weight);
-
-    if (!$ok) {
-        Msg::push(Msg::ERROR, $err);
-        echo json_encode([
-            'success' => false,
-            'message' => $err
-        ]);
-        exit();
+    [$weight_ok, $weight_err] = validate_decimal($weight_log->weight);
+    if (!$weight_ok) {
+        json_validation_error($weight_err);
     }
 
     try {

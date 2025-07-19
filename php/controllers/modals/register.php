@@ -4,6 +4,8 @@ namespace controller\modal\register;
 
 use lib\Auth;
 use model\UserModel;
+use function lib\validate_decimal;
+use function lib\json_validation_error;
 
 function get()
 {
@@ -30,6 +32,18 @@ function post()
     $user->gender = get_param("gender", "");
     $user->height = get_param("height", "");
     $user->ideal_weight = get_param("ideal-weight", "");
+
+    // 身長バリデーション
+    [$height_ok, $height_err] = validate_decimal($user->height);
+    if (!$height_ok) {
+        json_validation_error($height_err);
+    }
+
+    // 理想体重バリデーション
+    [$ideal_weight_ok, $ideal_weight_err] = validate_decimal($user->ideal_weight);
+    if (!$ideal_weight_ok) {
+        json_validation_error($ideal_weight_err);
+    }
 
     $result = Auth::regist($user);
 
