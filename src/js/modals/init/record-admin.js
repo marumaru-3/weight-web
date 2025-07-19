@@ -4,13 +4,13 @@ import {
   initValidateBtn,
   initCheckBtn,
   initTextLabelClick,
-  initRestrictWeight,
+  initRestrictDecimal,
 } from "../../features/forms/form-validate.js";
 
 export const init = (recordData) => {
   // テキストラベルクリック判定
   initTextLabelClick();
-  initRestrictWeight("input[data-weight-input]");
+  initRestrictDecimal("input[data-weight-input]");
 
   const modal = document.querySelector(".modal-record-admin");
 

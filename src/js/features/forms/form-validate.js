@@ -185,12 +185,13 @@ export const initRestrictToFloat = (selector) => {
 };
 
 /**
- * 体重入力用リアルタイムフィルター
+ * 数値入力用リアルタイムフィルター
  * - 整数部 0〜3 桁
  * - 小数部 0〜1 桁（末尾ドットも許容）
  * - 最大 999.9 kg
+ * initRestrictWeight
  */
-export const initRestrictWeight = (selector) => {
+export const initRestrictDecimal = (selector) => {
   document.querySelectorAll(selector).forEach((input) => {
     input.addEventListener("input", () => {
       let newValue = input.value;

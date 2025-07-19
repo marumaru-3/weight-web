@@ -177,12 +177,8 @@ function index()
                   <input type="text"
                     id="ideal-weight"
                     name="ideal-weight"
-                    maxlength="10"
-                    step="0.1"
                     inputmode="decimal"
-                    pattern="[0-9]+(\.[0-9]+)?"
-                    value=""
-                    data-float
+                    data-weight-input
                     required>
                 </div>
               </label>

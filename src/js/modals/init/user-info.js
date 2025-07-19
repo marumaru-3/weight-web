@@ -7,6 +7,7 @@ import {
   initTextLabelClick,
   initRestrictToAlphanumeric,
   initRestrictToFloat,
+  initRestrictDecimal,
 } from "../../features/forms/form-validate.js";
 
 export const init = (userData) => {
@@ -17,6 +18,7 @@ export const init = (userData) => {
   initTextLabelClick();
   initRestrictToAlphanumeric("input[data-alphanumeric]");
   initRestrictToFloat("input[data-float]");
+  initRestrictDecimal("input[data-weight-input]");
 
   const userInfoForm = document.querySelector("#user-info-form");
   const adminAccFrom = document.querySelector(".admin-account-form");
