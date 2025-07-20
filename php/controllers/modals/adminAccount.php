@@ -6,6 +6,8 @@ use db\UserQuery;
 use lib\Msg;
 use lib\Auth;
 use model\UserModel;
+use function lib\validate_password;
+use function lib\json_validation_error;
 use Throwable;
 
 function get()
@@ -27,6 +29,12 @@ function post()
     $user->id = $session_user->id;
 
     $user->password = get_param("password", "");
+
+    // パスワードバリデーション
+    [$password_ok, $password_err] = validate_password($user->password);
+    if (!$password_ok) {
+        json_validation_error($password_err);
+    }
 
     try {
         $is_success = UserQuery::updateAccount($user);
