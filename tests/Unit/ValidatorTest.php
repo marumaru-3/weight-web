@@ -2,11 +2,54 @@
 
 use PHPUnit\Framework\TestCase;
 use function lib\validate_decimal;
+use function lib\validate_password;
 
 class ValidatorTest extends TestCase
 {
+  // ===== Password validation =====
+
   /**
-   * @dataProvider okCases
+   * @dataProvider passwordOkCases
+   */
+  public function testPasswordValid(string $input): void
+  {
+    [$ok] = validate_password($input);
+    $this->assertTrue($ok);
+  }
+
+  /**
+   * @dataProvider passwordNgCases
+   */
+  public function testPasswordInValid(string $input): void
+  {
+    [$ok] = validate_password($input);
+    $this->assertFalse($ok);
+  }
+
+  public static function passwordOkCases(): array
+  {
+    return [
+      ['Abc4'],
+      [str_repeat('a', 30)],
+      ['passWORD123#'],
+    ];
+  }
+
+  public static function passwordNgCases(): array
+  {
+    return [
+      [''],
+      ['abc'],
+      [str_repeat('a', 31)],
+      ['あBCD'],
+      ["abc\t"]
+    ];
+  }
+
+  // ===== Decimal validation =====
+
+  /**
+   * @dataProvider decimalOkCases
    */
   public function testDecimalValid(string $input): void
   {
@@ -15,7 +58,7 @@ class ValidatorTest extends TestCase
   }
 
   /**
-   * @dataProvider ngCases
+   * @dataProvider decimalNgCases
    */
   public function testDecimalInvalid(string $input): void
   {
@@ -23,7 +66,7 @@ class ValidatorTest extends TestCase
     $this->assertFalse($ok);
   }
 
-  public static function okCases(): array
+  public static function decimalOkCases(): array
   {
     return [
       ["0"],
@@ -34,7 +77,7 @@ class ValidatorTest extends TestCase
     ];
   }
 
-  public static function ngCases(): array
+  public static function decimalNgCases(): array
   {
     return [
       [""],
