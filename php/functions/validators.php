@@ -68,7 +68,7 @@ function json_validation_error(string $message): void
   Msg::push(Msg::ERROR, $message);
   echo json_encode([
     'success' => false,
-    'message' => $message
+    'errorMessage' => $message
   ]);
   exit;
 }
