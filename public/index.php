@@ -25,7 +25,7 @@ require_once SOURCE_BASE . "models/weight_log.model.php";
 require_once SOURCE_BASE . "models/notice_read.model.php";
 
 // Service
-require_once SOURCE_BASE . "service/weight_log.service.php";
+require_once SOURCE_BASE . "service/WeightLogService.php";
 
 // Message
 require_once SOURCE_BASE . "libs/Msg.php";
