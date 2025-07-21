@@ -9,7 +9,8 @@
   },
   "autoload": {
     "psr-4": {
-      "lib\\": "php/libs/"
+      "lib\\": "php/libs/",
+      "service\\": "php/service/"
     },
     "files": [
       "php/functions/helper.php",
