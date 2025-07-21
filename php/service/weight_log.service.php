@@ -6,9 +6,9 @@ use lib\weightDaysCalc;
 
 class WeightLogService
 {
-    public static function getTodayStats($user, $weight_logs)
+    public static function getTodayStats($user, $weight_logs, $today = null)
     {
-        $today = date("Y-m-d");
+        $today = $today ?? date("Y-m-d");
 
         if (empty($weight_logs)) {
             return self::nullReturn($today);
@@ -55,7 +55,7 @@ class WeightLogService
         ];
     }
 
-    public static function nullReturn($today)
+    private static function nullReturn($today)
     {
         return [
             "today" => $today,
