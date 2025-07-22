@@ -1,6 +1,8 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+
 use function lib\hasUnreadNotice;   // 本番関数
 use config\TestFixtures;            // notice フィクスチャ
 use db\NoticeReadQuery as MockNoticeReadQuery; // わかりづらいためもモックを強調
@@ -14,45 +16,42 @@ final class NoticeTest extends TestCase
     MockNoticeReadQuery::$row = null;
   }
 
-  /** ① 初回ログイン（既読レコードなし）→ 未読あり */
-  public function testFirstLoginIsUnread(): void
+  #[DataProvider('hasUnreadCases')]
+  public function testHasUnreadNotice(array $notices, ?string $lastReadAt, bool $expected): void
   {
-    TestFixtures::$notices = [
-      'n1' => ['date' => '2025/07/14 00:00']
-    ];
-    MockNoticeReadQuery::$row = null;       // ← 既読なし
+    // フィクスチャ設定
+    TestFixtures::$notices = $notices;
+    MockNoticeReadQuery::$row = $lastReadAt
+      ? (object)['last_read_at' => $lastReadAt]
+      : null;
 
-    $this->assertTrue(hasUnreadNotice(1));
+    // ユーザーIDはモック内で使われないので任意
+    $this->assertSame($expected, hasUnreadNotice(1));
   }
 
-  /** ② 未読あり → true */
-  public function testUnreadNoticeExists(): void
+  public static function hasUnreadCases(): array
   {
-    TestFixtures::$notices = [
-      'n2' => ['date' => '2025/07/14 00:00']
+    return [
+      'first login (no read record)' => [
+        ['n1' => ['date' => '2025/07/14 00:00']],
+        null,
+        true
+      ],
+      'unread exists' => [
+        ['n2' => ['date' => '2025/07/14 00:00']],
+        '2025/07/12 00:00',
+        true
+      ],
+      'all read' => [
+        ['n3' => ['date' => '2025/07/12 00:00']],
+        '2025/07/14 00:00',
+        false
+      ],
+      'no notices' => [
+        [],
+        null,
+        false
+      ],
     ];
-    MockNoticeReadQuery::$row = (object)['last_read_at' => '2025/07/12 00:00'];
-
-    $this->assertTrue(hasUnreadNotice(99));
-  }
-
-  /** ③ すべて既読 → false */
-  public function testAllRead(): void
-  {
-    TestFixtures::$notices = [
-      'n3' => ['date' => '2025/07/12 00:00']
-    ];
-    MockNoticeReadQuery::$row = (object)['last_read_at' => '2025/07/14 00:00'];
-
-    $this->assertFalse(hasUnreadNotice(123456));
-  }
-
-  /** ④ お知らせゼロ → false（仕様：未読なしと判定） */
-  public function testNoNoticeReturnFalse(): void
-  {
-    TestFixtures::$notices = [];
-    MockNoticeReadQuery::$row = null;
-
-    $this->assertFalse(hasUnreadNotice(42));
   }
 }

@@ -1,55 +1,80 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 use lib\WeightDaysCalc;
 
 class WeightDaysCalcTest extends TestCase
 {
-  public function testIdealDefferWeight()
+
+  #[DataProvider('idealDiffCases')]
+  public function testIdealDefferWeight(float $current, float $ideal, string $expected): void
   {
-    $this->assertSame('-0.5', WeightDaysCalc::idealDefferWeight(63.0, 62.5));
-    $this->assertSame('+0.5', WeightDaysCalc::idealDefferWeight(62.0, 62.5));
-    $this->assertSame('+0.0', WeightDaysCalc::idealDefferWeight(62.5, 62.5));
-  }
-  public function testDayBefore()
-  {
-    $this->assertSame('+0.5', WeightDaysCalc::dayBefore(63.0, 62.5));
-    $this->assertSame('-0.5', WeightDaysCalc::dayBefore(62.0, 62.5));
-    $this->assertSame('+0.0', WeightDaysCalc::dayBefore(62.5, 62.5));
-  }
-  public function testBmi()
-  {
-    $this->assertSame('22.54', WeightDaysCalc::bmi(64.0, 168.5));
-    $this->assertSame('26.26', WeightDaysCalc::bmi(95.3, 190.5));
-  }
-  public function testBfp()
-  {
-    $this->assertSame('16.60', WeightDaysCalc::bfp(22.54, 'male', 25));
-    $this->assertSame('27.40', WeightDaysCalc::bfp(22.54, 'female', 25));
-    $this->assertSame('22.00', WeightDaysCalc::bfp(22.54, 'other', 25));
+    $this->assertSame($expected, WeightDaysCalc::idealDefferWeight($current, $ideal));
   }
 
-  // 大きな値でのテスト
-  public function testIdealDefferWeightLargeNumber()
+  public static function idealDiffCases(): array
   {
-    $this->assertSame('-1500.0', WeightDaysCalc::idealDefferWeight(11500.0, 10000.0));
-    $this->assertSame('+1500.0', WeightDaysCalc::idealDefferWeight(8500.0, 10000.0));
+    return [
+      'normal minus' => [63.0, 62.5, '-0.5'],
+      'normal plus' => [62.0, 62.5, '+0.5'],
+      'normal zero' => [62.5, 62.5, '+0.0'],
+      'large minus'  => [11500.0, 10000.0, '-1500.0'],
+      'large plus'   => [8500.0, 10000.0, '+1500.0'],
+    ];
   }
-  public function testDayBeforeLargeNumber()
+
+  #[DataProvider('dayBeforeCases')]
+  public function testDayBefore(float $today, float $yesterday, string $expected): void
   {
-    $this->assertSame('+1500.0', WeightDaysCalc::dayBefore(11500.0, 10000.0));
-    $this->assertSame('-1500.0', WeightDaysCalc::dayBefore(8500.0, 10000.0));
+    $this->assertSame($expected, WeightDaysCalc::dayBefore($today, $yesterday));
   }
-  public function testBmiLargeNumber()
+
+  public static function dayBeforeCases(): array
   {
-    $this->assertSame('89106.71', WeightDaysCalc::bmi(90000.0, 100.5));
-    $this->assertSame('2500.00', WeightDaysCalc::bmi(10000.0, 200.0));
+    return [
+      'normal plus' => [63.0, 62.5, '+0.5'],
+      'normal minus' => [62.0, 62.5, '-0.5'],
+      'normal zero' => [62.5, 62.5, '+0.0'],
+      'large plus'  => [11500.0, 10000.0, '+1500.0'],
+      'large minus'   => [8500.0, 10000.0, '-1500.0'],
+    ];
   }
-  public function testBfpLargeNumber()
+
+
+  #[DataProvider('bmiCases')]
+  public function testBmi(float $weight, float $height, string $expected): void
   {
-    $this->assertSame('11989.55', WeightDaysCalc::bfp(10000.00, 'male', 25));
-    $this->assertSame('12000.35', WeightDaysCalc::bfp(10000.00, 'female', 25));
-    $this->assertSame('11994.95', WeightDaysCalc::bfp(10000.00, 'other', 25));
+    $this->assertSame($expected, WeightDaysCalc::bmi($weight, $height));
+  }
+
+  public static function bmiCases(): array
+  {
+    return [
+      'normal 1' => [64.0, 168.5, '22.54'],
+      'normal 2' => [95.3, 190.5, '26.26'],
+      'large 1'  => [90000.0, 100.5, '89106.71'],
+      'large 2'   => [10000.0, 200.0, '2500.00'],
+    ];
+  }
+
+
+  #[DataProvider('bfpCases')]
+  public function testBfp(float $bmi, string $gender, int $age, string $expected): void
+  {
+    $this->assertSame($expected, WeightDaysCalc::bfp($bmi, $gender, $age));
+  }
+
+  public static function bfpCases(): array
+  {
+    return [
+      'male normal'   => [22.54, 'male', 25, '16.60'],
+      'female normal' => [22.54, 'female', 25, '27.40'],
+      'other normal'  => [22.54, 'other', 25, '22.00'],
+      'male large'    => [10000.00, 'male', 25, '11989.55'],
+      'female large'  => [10000.00, 'female', 25, '12000.35'],
+      'other large'   => [10000.00, 'other', 25, '11994.95'],
+    ];
   }
 }

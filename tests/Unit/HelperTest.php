@@ -1,12 +1,22 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
+
 
 class HelperTest extends TestCase
 {
-  public function testAgeCalc()
+  #[DataProvider('ageCalcCases')]
+  public function testAgeCalc(string $birthdate, int $expected): void
   {
-    $this->assertEquals(25, age_calc("2000-07-11"));
-    $this->assertEquals(24, age_calc("2000-12-31"));
+    $this->assertSame($expected, age_calc($birthdate));
+  }
+
+  public static function ageCalcCases(): array
+  {
+    return [
+      'birthday passed' => ['2000-07-11', 25],
+      'birthday not yet' => ['2000-12-31', 24]
+    ];
   }
 }

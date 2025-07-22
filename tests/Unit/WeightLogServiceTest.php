@@ -1,6 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 use db\DummyUser;
 use db\DummyWeightLog;
@@ -10,9 +11,7 @@ class WeightLogServiceTest extends TestCase
 {
   private const TODAY = '2025-07-21';
 
-  /**
-   * @dataProvider validCases
-   */
+  #[DataProvider('validCases')]
   public function testTodayStatsValid(array $weight_logs, float $expect_weight): void
   {
     $user = new DummyUser();
@@ -20,18 +19,6 @@ class WeightLogServiceTest extends TestCase
 
     $this->assertSame($expect_weight, (float)$res['weight']);
     $this->assertNotNull($res['bmi']);
-  }
-
-  /**
-   * @dataProvider nullCases
-   */
-  public function testTodayStatsNullReturn(array $weight_logs): void
-  {
-    $user = new DummyUser();
-    $res = WeightLogService::getTodayStats($user, $weight_logs, self::TODAY);
-
-    $this->assertNull($res['weight']);
-    $this->assertNull($res['bmi']);
   }
 
   public static function validCases(): array
@@ -50,6 +37,17 @@ class WeightLogServiceTest extends TestCase
         70.0
       ]
     ];
+  }
+
+
+  #[DataProvider('nullCases')]
+  public function testTodayStatsNullReturn(array $weight_logs): void
+  {
+    $user = new DummyUser();
+    $res = WeightLogService::getTodayStats($user, $weight_logs, self::TODAY);
+
+    $this->assertNull($res['weight']);
+    $this->assertNull($res['bmi']);
   }
 
   public static function nullCases(): array
