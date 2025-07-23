@@ -1,10 +1,6 @@
 RewriteEngine On
 RewriteBase /
 
-# .htpasswd や .htaccess は書き換え対象から除外
-RewriteCond %{REQUEST_URI} \.(htaccess|htpasswd)$ [NC]
-RewriteRule .* - [L]
-
 # ルートに来たら「/home」にリダイレクト
 RewriteCond %{REQUEST_URI} ^/$
 RewriteRule ^$ /home [R=301,L]
@@ -14,7 +10,6 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^([^/]+)/?$ index.php?page=$1 [QSA,L]
 
-AuthType Basic
-AuthName "Staging Access"
-AuthUserFile /app/public/.htpasswd
-Require valid-user
+# wwwなしでアクセスされたら、www付きにリダイレクト
+RewriteCond %{HTTP_HOST} ^weight-web\.site [NC]
+RewriteRule ^(.*)$ https://www.weight-web.site/$1 [R=301,L]
