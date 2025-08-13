@@ -1,3 +1,5 @@
+import { handleFetchErrorUI } from "./ui-error-handler";
+
 export const fetchData = async (
   url,
   method = "GET",
@@ -7,7 +9,6 @@ export const fetchData = async (
   const response = await fetch(url, {
     method,
     body,
-    // credentials: "include",
     ...options,
   });
 
@@ -23,14 +24,7 @@ export const fetchData = async (
       return await response.text();
     }
   } catch (error) {
-    console.log("エラー:", error);
-    const contentType = response.headers.get("Content-Type");
-    if (contentType && contentType.includes("application/json")) {
-      console.log(await response.json());
-      alert("モーダルの読み込みに失敗しました。\n" + error.message);
-    } else {
-      console.log(await response.text());
-    }
+    await handleFetchErrorUI(error, response);
     return { success: false, message: "通信エラーが発生しました。" };
   }
 };
