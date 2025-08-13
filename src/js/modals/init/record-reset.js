@@ -1,4 +1,4 @@
-import { fetchResetRecord } from "../../api/fetch_data.js";
+import { fetchResetRecord } from "../../api/fetch-data.js";
 
 export const init = () => {
   // フォームの送信処理

@@ -3,7 +3,7 @@ import {
   fetchRecordData,
   fetchModalHtml,
   getDateFromClick,
-} from "../api/fetch_data.js";
+} from "../api/fetch-data.js";
 import { initPwdClick } from "../components/buttons/pwd-btn.js";
 import { initPreloadImage } from "../helper.js";
 

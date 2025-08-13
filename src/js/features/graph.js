@@ -1,4 +1,4 @@
-import { fetchChartData } from "../api/fetch_data.js";
+import { fetchChartData } from "../api/fetch-data.js";
 
 export const initWeightGraph = async () => {
   const graphElement = document.getElementById("graph");
