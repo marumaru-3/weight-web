@@ -1,4 +1,4 @@
-import { fetchInsertRecord } from "../../api/fetch-data.js";
+import { fetchInsertRecord } from "../../api/api.js";
 import { initRecordDateSelect } from "../../features/records/record-date.js";
 import {
   initValidateForm,

@@ -1,4 +1,4 @@
-import { fetchDeleteAccount } from "../../api/fetch-data.js";
+import { fetchDeleteAccount } from "../../api/api.js";
 
 export const init = () => {
   // フォームの送信処理

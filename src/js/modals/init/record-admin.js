@@ -1,4 +1,4 @@
-import { fetchUpdateRecord, fetchDeleteRecord } from "../../api/fetch-data.js";
+import { fetchUpdateRecord, fetchDeleteRecord } from "../../api/api.js";
 import {
   initValidateForm,
   initValidateBtn,

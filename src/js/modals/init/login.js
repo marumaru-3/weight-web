@@ -1,5 +1,5 @@
 import { initGetUrl } from "../../helper.js";
-import { fetchLogin } from "../../api/fetch-data.js";
+import { fetchLogin } from "../../api/api.js";
 import {
   initValidateForm,
   initValidateBtn,
