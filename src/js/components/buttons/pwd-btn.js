@@ -36,12 +36,28 @@ const getHidden = (pwdBtn) => pwdBtn.dataset.hidden === "true";
 const syncPwdState = (pwdBtn, pwdText = getPwdInput(pwdBtn)) => {
   if (!pwdText) return;
 
+  const hidden = getHidden(pwdBtn);
+
   // input要素表示変更
-  pwdText.type = getHidden(pwdBtn) ? "password" : "text";
+  pwdText.type = hidden ? "password" : "text";
 
   // アイコン変更
   const icon = pwdBtn.firstElementChild;
   if (icon) {
     icon.dataset.icon = getHidden(pwdBtn) ? "visibility" : "visibility_off";
   }
+
+  // アクセシビリティ対応
+  syncPwdA11y(pwdBtn, pwdText, hidden);
+};
+
+const syncPwdA11y = (pwdBtn, pwdText, hidden) => {
+  if (pwdText.id) {
+    pwdBtn.setAttribute("aria-controls", pwdText.id);
+  }
+  pwdBtn.setAttribute("aria-pressed", String(!hidden));
+  pwdBtn.setAttribute(
+    "aria-label",
+    hidden ? "パスワードを表示" : "パスワードを非表示"
+  );
 };
