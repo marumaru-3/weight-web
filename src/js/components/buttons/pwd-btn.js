@@ -1,28 +1,47 @@
-export const initPwdClick = async () => {
+export const initPwdClick = () => {
   const pwdBtns = document.querySelectorAll(".pwd-btn");
 
   if (!pwdBtns.length) return;
 
   pwdBtns.forEach((pwdBtn) => {
+    if (pwdBtn.dataset.inited === "1") return;
+    pwdBtn.dataset.inited = "1";
+
+    syncPwdState(pwdBtn);
+
     pwdBtn.addEventListener("click", () => {
-      const pwdText = pwdBtn.previousElementSibling;
-      const pwdTextTag = pwdText.tagName.toLowerCase();
-      const pwdBtnChild = pwdBtn.firstElementChild;
-      const isHidden = pwdBtn.dataset.hidden === "true";
-
-      // input要素表示変更
-      if (pwdTextTag === "input") {
-        pwdText.type = isHidden ? "text" : "password";
-      }
-
-      // アイコン変更
-      if (isHidden) {
-        pwdBtnChild.dataset.icon = "visibility_off";
-      } else {
-        pwdBtnChild.dataset.icon = "visibility";
-      }
-
-      pwdBtn.dataset.hidden = !isHidden;
+      pwdToggle(pwdBtn);
     });
   });
+};
+
+const pwdToggle = (pwdBtn) => {
+  const pwdText = getPwdInput(pwdBtn);
+  if (!pwdText) return;
+
+  setHidden(pwdBtn, !getHidden(pwdBtn));
+
+  syncPwdState(pwdBtn, pwdText);
+};
+
+const getPwdInput = (pwdBtn) => {
+  const el = pwdBtn.previousElementSibling;
+  return el && el.tagName.toLowerCase() === "input" ? el : null;
+};
+
+const setHidden = (pwdBtn, hidden) => (pwdBtn.dataset.hidden = String(hidden));
+
+const getHidden = (pwdBtn) => pwdBtn.dataset.hidden === "true";
+
+const syncPwdState = (pwdBtn, pwdText = getPwdInput(pwdBtn)) => {
+  if (!pwdText) return;
+
+  // input要素表示変更
+  pwdText.type = getHidden(pwdBtn) ? "password" : "text";
+
+  // アイコン変更
+  const icon = pwdBtn.firstElementChild;
+  if (icon) {
+    icon.dataset.icon = getHidden(pwdBtn) ? "visibility" : "visibility_off";
+  }
 };
