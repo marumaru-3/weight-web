@@ -14,21 +14,21 @@ export const initPwdClick = () => {
 
     syncPwdState(pwdBtn);
 
-    pwdBtn.addEventListener("click", () => {
-      pwdToggle(pwdBtn);
-    });
+    const onClick = () => pwdToggle(pwdBtn);
+    pwdBtn.addEventListener("click", onClick);
   });
 };
 
 const pwdToggle = (pwdBtn) => {
-  const pwdText = getPwdInput(pwdBtn);
-  if (!pwdText) return;
+  const input = getPwdInput(pwdBtn);
+  if (!input) return;
 
   setHidden(pwdBtn, !getHidden(pwdBtn));
 
-  syncPwdState(pwdBtn, pwdText);
+  syncPwdState(pwdBtn, input);
 };
 
+// 前提：ボタン直前に input が存在する
 const getPwdInput = (pwdBtn) => {
   const el = pwdBtn.previousElementSibling;
   return el && el.tagName.toLowerCase() === "input" ? el : null;
@@ -38,28 +38,31 @@ const setHidden = (pwdBtn, hidden) => (pwdBtn.dataset.hidden = String(hidden));
 
 const getHidden = (pwdBtn) => pwdBtn.dataset.hidden === "true";
 
-const syncPwdState = (pwdBtn, pwdText = getPwdInput(pwdBtn)) => {
-  if (!pwdText) return;
+// data-hidden の値を基準に input / icon / A11y を同期する
+const syncPwdState = (pwdBtn, input = getPwdInput(pwdBtn)) => {
+  if (!input) return;
 
   const hidden = getHidden(pwdBtn);
 
-  // input要素表示変更
-  pwdText.type = hidden ? "password" : "text";
-
-  // アイコン変更
-  const icon = pwdBtn.firstElementChild;
-  if (icon) {
-    icon.dataset.icon = hidden ? ICON_VISIBLE : ICON_HIDDEN;
-  }
-
-  // アクセシビリティ対応
-  syncPwdA11y(pwdBtn, pwdText, hidden);
+  syncType(input, hidden);
+  syncIcon(pwdBtn, hidden);
+  syncPwdA11y(pwdBtn, input, hidden);
 };
 
-const syncPwdA11y = (pwdBtn, pwdText, hidden) => {
-  if (pwdText.id) {
-    pwdBtn.setAttribute("aria-controls", pwdText.id);
-  }
+const syncType = (input, hidden) => {
+  input.type = hidden ? "password" : "text";
+};
+
+const syncIcon = (pwdBtn, hidden) => {
+  const icon = pwdBtn.querySelector("[data-icon]");
+  if (!icon) return;
+  icon.dataset.icon = hidden ? ICON_VISIBLE : ICON_HIDDEN;
+};
+
+const syncPwdA11y = (pwdBtn, input, hidden) => {
+  if (input.id) pwdBtn.setAttribute("aria-controls", input.id);
   pwdBtn.setAttribute("aria-pressed", String(!hidden));
-  pwdBtn.setAttribute("aria-label", hidden ? LABEL_SHOW : LABEL_HIDE);
+  pwdBtn.setAttribute("aria-label", labelFor(hidden));
 };
+
+const labelFor = (hidden) => (hidden ? LABEL_SHOW : LABEL_HIDE);
