@@ -1,3 +1,8 @@
+const ICON_VISIBLE = "visibility";
+const ICON_HIDDEN = "visibility_off";
+const LABEL_SHOW = "パスワードを表示";
+const LABEL_HIDE = "パスワードを非表示";
+
 export const initPwdClick = () => {
   const pwdBtns = document.querySelectorAll(".pwd-btn");
 
@@ -44,7 +49,7 @@ const syncPwdState = (pwdBtn, pwdText = getPwdInput(pwdBtn)) => {
   // アイコン変更
   const icon = pwdBtn.firstElementChild;
   if (icon) {
-    icon.dataset.icon = getHidden(pwdBtn) ? "visibility" : "visibility_off";
+    icon.dataset.icon = hidden ? ICON_VISIBLE : ICON_HIDDEN;
   }
 
   // アクセシビリティ対応
@@ -56,8 +61,5 @@ const syncPwdA11y = (pwdBtn, pwdText, hidden) => {
     pwdBtn.setAttribute("aria-controls", pwdText.id);
   }
   pwdBtn.setAttribute("aria-pressed", String(!hidden));
-  pwdBtn.setAttribute(
-    "aria-label",
-    hidden ? "パスワードを表示" : "パスワードを非表示"
-  );
+  pwdBtn.setAttribute("aria-label", hidden ? LABEL_SHOW : LABEL_HIDE);
 };
