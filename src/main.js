@@ -1,8 +1,5 @@
 import "./style.css";
 
-// buttons
-import "./js/components/buttons/copy.js";
-
 // modals
 import "./js/modals/modal.js";
 
@@ -12,6 +9,7 @@ import { initLayout } from "./js/utils/layout.js";
 // components
 import { initAccordion } from "./js/components/accordion.js";
 import { userPopup } from "./js/components/user-popup.js";
+import { initCopy } from "./js/components/buttons/copy-btn.js";
 
 // features
 import { initWeightDays } from "./js/features/records/weight-days.js";
@@ -29,6 +27,8 @@ if (document.querySelector(".accordion")) {
 if (document.querySelector("#header__info")) {
   userPopup();
 }
+
+initCopy();
 
 if (document.querySelector(".weight-days__blocks")) {
   initWeightDays();
