@@ -1,3 +1,4 @@
+const DIALOG_CLASS = "copy-dialog";
 const DEFAULT_MESSAGE = "IDをコピーしました。";
 const SHOW_DELAY_MS = 10;
 const HIDE_AFTER_MS = 1500;
@@ -24,13 +25,29 @@ export const initCopy = (
   root.addEventListener("click", onClick);
 };
 
-// ダイアログ表示
 const showDialog = (message) => {
-  const dialog = document.createElement("div");
-  dialog.textContent = message;
-  dialog.classList.add("copy-dialog");
+  const dialog = ensureDialog();
+  showToast(dialog, message);
+};
 
-  document.body.appendChild(dialog);
+const ensureDialog = () => {
+  let dialog = document.querySelector(`.${DIALOG_CLASS}`);
+  if (!dialog) {
+    dialog = document.createElement("div");
+    dialog.classList.add(DIALOG_CLASS);
+
+    // スクリーンリーダーにコピー完了を通知するための属性
+    dialog.setAttribute("role", "status");
+    dialog.setAttribute("aria-live", "polite");
+    dialog.setAttribute("aria-atomic", "true");
+    document.body.appendChild(dialog);
+  }
+
+  return dialog;
+};
+
+const showToast = (dialog, message) => {
+  dialog.textContent = message;
 
   setTimeout(() => dialog.classList.add("show"), SHOW_DELAY_MS);
   setTimeout(() => dialog.classList.remove("show"), HIDE_AFTER_MS);
