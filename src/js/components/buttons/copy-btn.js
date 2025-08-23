@@ -1,8 +1,8 @@
-const DIALOG_CLASS = "copy-dialog";
 const DEFAULT_MESSAGE = "IDをコピーしました。";
-const SHOW_DELAY_MS = 10;
-const HIDE_AFTER_MS = 1500;
-const REMOVE_AFTER_MS = 2000;
+export const DIALOG_CLASS = "copy-dialog";
+export const SHOW_DELAY_MS = 10;
+export const HIDE_AFTER_MS = 1500;
+export const REMOVE_AFTER_MS = 2000;
 
 export const initCopy = (
   root = document,
@@ -16,9 +16,11 @@ export const initCopy = (
     const valueEl = container?.querySelector(".copy__value");
     if (!valueEl) return;
 
+    if (document.querySelector(`.${DIALOG_CLASS}`)) return;
+
     try {
       await navigator.clipboard.writeText(valueEl.textContent);
-      if (!root.querySelector(".copy-dialog")) showDialog(message);
+      showDialog(message);
     } catch {}
   };
 
