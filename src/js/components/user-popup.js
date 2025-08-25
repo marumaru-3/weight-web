@@ -1,24 +1,41 @@
-export const userPopup = () => {
-  const headerInfo = document.getElementById("header__info");
-  const headerProfile = document.getElementById("header__profile");
-  const userPopup = document.getElementById("user-popup");
+export const initUserPopup = () => {
+  const popupWrapper = document.getElementById("header__info");
+  const popupBtn = document.getElementById("header__profile");
+  const popupPanel = document.getElementById("user-popup");
 
-  if (!headerInfo) return;
+  if (!popupWrapper || !popupBtn || !popupPanel) return;
 
-  headerProfile.addEventListener("click", (e) => {
-    if (headerInfo.classList.contains("click")) {
-      headerInfo.classList.remove("click");
-    } else {
-      headerInfo.classList.add("click");
-    }
+  initA11y(popupBtn, popupPanel);
 
-    // 親要素へのイベント伝播を防ぐ
+  popupBtn.addEventListener("click", (e) => {
     e.stopPropagation();
+    toggle(popupWrapper, popupBtn);
   });
 
   document.addEventListener("click", (e) => {
-    if (!userPopup.contains(e.target) && e.target !== headerInfo) {
-      headerInfo.classList.remove("click");
+    if (!popupPanel.contains(e.target)) {
+      popupWrapper.classList.remove("click");
+      popupBtn.setAttribute("aria-expanded", "false");
     }
   });
+};
+
+const initA11y = (popupBtn, popupPanel) => {
+  popupBtn.setAttribute("aria-controls", popupPanel.id);
+  popupBtn.setAttribute("aria-expanded", "false");
+};
+
+const toggle = (popupWrapper, popupBtn) => {
+  const isClick = popupWrapper.classList.contains("click");
+  isClick ? close(popupWrapper, popupBtn) : open(popupWrapper, popupBtn);
+};
+
+const open = (popupWrapper, popupBtn) => {
+  popupWrapper.classList.add("click");
+  popupBtn.setAttribute("aria-expanded", "true");
+};
+
+const close = (popupWrapper, popupBtn) => {
+  popupWrapper.classList.remove("click");
+  popupBtn.setAttribute("aria-expanded", "false");
 };

@@ -8,7 +8,7 @@ import { initLayout } from "./js/utils/layout.js";
 
 // components
 import { initAccordion } from "./js/components/accordion.js";
-import { userPopup } from "./js/components/user-popup.js";
+import { initUserPopup } from "./js/components/user-popup.js";
 import { initCopy } from "./js/components/buttons/copy-btn.js";
 
 // features
@@ -25,7 +25,7 @@ if (document.querySelector(".accordion")) {
 }
 
 if (document.querySelector("#header__info")) {
-  userPopup();
+  initUserPopup();
 }
 
 initCopy();
