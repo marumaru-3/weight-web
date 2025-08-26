@@ -14,8 +14,7 @@ export const initUserPopup = () => {
 
   document.addEventListener("click", (e) => {
     if (!popupPanel.contains(e.target)) {
-      popupWrapper.classList.remove("click");
-      popupBtn.setAttribute("aria-expanded", "false");
+      close(popupWrapper, popupBtn);
     }
   });
 };
