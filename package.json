@@ -11,6 +11,7 @@
     "test:ui": "vitest --ui"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.8.0",
     "@vitest/ui": "^3.2.4",
     "happy-dom": "^18.0.1",
     "vite": "^6.2.0",
