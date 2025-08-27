@@ -15,6 +15,7 @@ const getLabelText = (container) => {
 export const applyValidation = (container, result) => {
   const msgEl =
     container.querySelector(".validate-text") || container.nextElementSibling;
+  if (!msgEl) return;
   const label = getLabelText(container);
 
   if (!result.ok) {
@@ -28,4 +29,39 @@ export const applyValidation = (container, result) => {
     container.classList.remove("no-text");
     container.removeAttribute("aria-invalid");
   }
+};
+
+// テキストラベル判定関数
+export const initTextLabelClick = (root = document, onValidate) => {
+  const validateForms = root.querySelectorAll(".validate-form__input");
+
+  validateForms.forEach((validateForm) => {
+    const input = validateForm.querySelector("input");
+    const select = validateForm.querySelector("select");
+    const button = validateForm.querySelector("button");
+
+    // クリック時にクラスを追加
+    validateForm.addEventListener("click", (e) => {
+      if (e.target === input) {
+        validateForm.classList.add("click", "text-on");
+        if (onValidate) onValidate(input, validateForm);
+      } else if (e.target === select) {
+        validateForm.classList.add("click");
+        if (onValidate) onValidate(select, validateForm);
+      }
+    });
+
+    // フォーカスが外れたときにクラスを削除
+    document.addEventListener("click", (e) => {
+      if (input && e.target !== input && e.target !== button) {
+        validateForm.classList.remove("click");
+
+        if (input.value.trim() === "") {
+          validateForm.classList.remove("text-on");
+        }
+      } else if (select && e.target !== select) {
+        validateForm.classList.remove("click");
+      }
+    });
+  });
 };
