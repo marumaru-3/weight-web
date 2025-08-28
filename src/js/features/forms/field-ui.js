@@ -1,6 +1,6 @@
 const MESSAGES = {
   required: (label) => `${label}を入力してください`,
-  too_short: (label) => `${label}は4文字以上で入力してください`,
+  too_short: (label, p) => `${label}は${p?.min ?? 4}文字以上で入力してください`,
 };
 
 const getLabelText = (container) => {
@@ -20,7 +20,7 @@ export const applyValidation = (container, result) => {
 
   if (!result.ok) {
     const fn = MESSAGES[result.code] || (() => "");
-    const text = fn(label);
+    const text = fn(label, result.payload);
     msgEl.textContent = text;
     container.classList.add("no-text");
     container.setAttribute("aria-invalid", "true");
