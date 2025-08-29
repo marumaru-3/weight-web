@@ -12,7 +12,8 @@ const getLabelText = (container) => {
   return labelElSprit;
 };
 
-export const applyValidation = (container, result) => {
+// バリデーション結果をUIに反映（エラーメッセージ表示・スタイル切り替え）
+export const bindValidationUI = (container, result) => {
   const msgEl =
     container.querySelector(".validate-text") || container.nextElementSibling;
   if (!msgEl) return;
@@ -31,37 +32,51 @@ export const applyValidation = (container, result) => {
   }
 };
 
-// テキストラベル判定関数
-export const initTextLabelClick = (root = document, onValidate) => {
-  const validateForms = root.querySelectorAll(".validate-form__input");
+// root要素ごとの「バインド済み状態」と解除関数を記録するWeakMap
+const textLabelRegistry = new WeakMap();
 
-  validateForms.forEach((validateForm) => {
-    const input = validateForm.querySelector("input");
-    const select = validateForm.querySelector("select");
-    const button = validateForm.querySelector("button");
+// テキストラベルの見た目制御（クリックでON、外側クリックでOFF）
+export const bindTextLabelUI = (root = document) => {
+  if (textLabelRegistry.has(root)) {
+    return textLabelRegistry.get(root);
+  }
 
-    // クリック時にクラスを追加
-    validateForm.addEventListener("click", (e) => {
-      if (e.target === input) {
-        validateForm.classList.add("click", "text-on");
-        if (onValidate) onValidate(input, validateForm);
-      } else if (e.target === select) {
-        validateForm.classList.add("click");
-        if (onValidate) onValidate(select, validateForm);
+  const onRootClick = (e) => {
+    const el = e.target.closest("input, select, textarea");
+    if (!el || !root.contains(el)) return;
+    const box = el.closest(".validate-form__input");
+    if (!box) return;
+    box.classList.add("click");
+    if (el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA")) {
+      box.classList.add("text-on");
+    }
+  };
+
+  const onDocClick = (e) => {
+    if (e.target.closest("input, select, textarea")) return;
+
+    // いまアクティブなものだけ解除（通常0～1個）
+    root.querySelectorAll(".validate-form__input.click").forEach((box) => {
+      const el = box.querySelector("input, textarea, select");
+      box.classList.remove("click");
+      if (el && (el.tagName === "INPUT" || el.tagName === "TEXTAREA")) {
+        const v = (el.value ?? "").trim();
+        if (v === "") box.classList.remove("text-on");
       }
     });
+  };
 
-    // フォーカスが外れたときにクラスを削除
-    document.addEventListener("click", (e) => {
-      if (input && e.target !== input && e.target !== button) {
-        validateForm.classList.remove("click");
+  root.addEventListener("click", onRootClick);
+  document.addEventListener("click", onDocClick);
 
-        if (input.value.trim() === "") {
-          validateForm.classList.remove("text-on");
-        }
-      } else if (select && e.target !== select) {
-        validateForm.classList.remove("click");
-      }
-    });
-  });
+  document.querySelectorAll("");
+
+  const unbind = () => {
+    root.removeEventListener("click", onRootClick);
+    document.removeEventListener("click", onDocClick);
+    textLabelRegistry.delete(root);
+  };
+
+  textLabelRegistry.set(root, unbind);
+  return unbind;
 };

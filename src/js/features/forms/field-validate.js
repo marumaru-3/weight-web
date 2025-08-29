@@ -1,59 +1,55 @@
 import { validateInput } from "./field-validators";
-import { applyValidation } from "./field-ui";
+import { bindValidationUI, bindTextLabelUI } from "./field-ui";
 
-// ボタンクリック時のチェック
-export const initCheckBtn = () => {
-  const formBoxes = document.querySelectorAll(".basic-info-form__box");
+// 送信直前：全フィールドを判定 → エラーUI反映（最終チェック）
+export const initCheckBtn = (form) => {
+  const formBoxes = form.querySelectorAll(".basic-info-form__box");
   formBoxes.forEach((formBox) => {
-    const input = formBox.querySelector("input");
-    const selects = formBox.querySelectorAll("select");
-
-    if (input) inputValidateCheck(input, formBox);
-    if (selects.length) {
-      selects.forEach((select) => {
-        inputValidateCheck(select, formBox);
-      });
-    }
+    const controls = formBox.querySelectorAll("input, select, textarea");
+    controls.forEach((el) => {
+      inputValidateCheck(el, formBox, form);
+    });
   });
 };
 
 const inputValidateCheck = (element, formBox, root) => {
   const result = validateInput(element, { root });
-  applyValidation(formBox, result);
+  bindValidationUI(formBox, result);
   return result.ok;
 };
 
-// ボタン制御バリデーション
+// 入力・変更のたびにフォーム全体の妥当性を再計算して送信ボタンを制御する
 export const initValidateBtn = (form) => {
-  initValidateForm(form.querySelector(".validate-form"));
-  form.addEventListener("input", () =>
-    initValidateForm(form.querySelector(".validate-form"))
-  );
-  form.addEventListener("change", () =>
-    initValidateForm(form.querySelector(".validate-form"))
-  );
+  const validateForm = form.querySelector(".validate-form");
+
+  const recalc = () => initValidateForm(validateForm);
+
+  recalc();
+  form.addEventListener("input", recalc);
+  form.addEventListener("change", recalc);
 
   // ステップがある場合のバリデーション更新
   form.querySelectorAll(".next-btn, .prev-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      initValidateForm(form.querySelector(".validate-form"));
-    });
+    btn.addEventListener("click", recalc);
   });
 };
 
+// ラベルの見た目だけを初期化（クリックでON・外側クリックでOFF）
+export const initTextLabelUI = (form) => {
+  bindTextLabelUI(form);
+};
+
+// フォーム全体の妥当性を判定し、送信ボタンの有効・無効を切り替える
 export const initValidateForm = (form) => {
   if (!form) return false;
 
-  // '.step'がある場合は、現在アクティブな'.step'を対象にする
   const activeStep = form.querySelector(".step.visible");
   const target = activeStep || form;
 
-  // required なフィールドをすべて取得
   const requiredFields = [...target.querySelectorAll("[required]")];
 
-  // すべての必須項目が入力済みか判定
   const isValid = requiredFields.every((field) => {
-    const ok = validateInput(element, { root: target }).ok;
+    const ok = validateInput(field, { root: target }).ok;
     return ok;
   });
 
