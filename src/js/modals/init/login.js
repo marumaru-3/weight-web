@@ -4,25 +4,31 @@ import {
   initValidateForm,
   initValidateBtn,
   initCheckBtn,
-  initTextLabelClick,
+  initTextLabelUI,
+  initRealtimeOnClick,
+} from "../../features/forms/field-validate.js";
+import {
   initRestrictToAlphanumeric,
   initRestrictToNumeric,
-} from "../../features/forms/form-validate.js";
+} from "../../features/forms/input-filters.js";
 
 export const init = async () => {
-  initTextLabelClick();
-  initValidateBtn();
+  const loginForm = document.getElementById("login-form");
+
+  initValidateBtn(loginForm);
+  initRealtimeOnClick(loginForm);
+  initTextLabelUI(loginForm);
+
   initRestrictToAlphanumeric("input[data-alphanumeric]");
   initRestrictToNumeric("input[data-numeric]");
 
   // フォームの送信処理
-  const loginForm = document.getElementById("login-form");
   if (loginForm) {
     loginForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       // バリデーションチェックを実行
-      initCheckBtn();
+      initCheckBtn(loginForm);
       const isValid = initValidateForm(loginForm);
 
       if (!isValid) {

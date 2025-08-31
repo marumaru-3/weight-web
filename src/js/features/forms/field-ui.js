@@ -14,21 +14,39 @@ const getLabelText = (container) => {
 
 // バリデーション結果をUIに反映（エラーメッセージ表示・スタイル切り替え）
 export const bindValidationUI = (container, result) => {
+  if (!container || !result) return;
+
+  // .validate-form__input を採用
+  const uiClassName = "validate-form__input";
+  let uiBox = null;
+  if (container.classList && container.classList.contains(uiClassName)) {
+    uiBox = container;
+  }
+  if (!uiBox && container.querySelector) {
+    const child = container.querySelector(`.${uiClassName}`);
+    if (child) uiBox = child;
+  }
+  if (!uiBox && container.closest) {
+    const anc = container.querySelector(`.${uiClassName}`);
+    if (anc) uiBox = anc;
+  }
+  if (!uiBox) uiBox = container;
+
   const msgEl =
-    container.querySelector(".validate-text") || container.nextElementSibling;
+    uiBox.querySelector(".validate-text") || uiBox.nextElementSibling;
   if (!msgEl) return;
-  const label = getLabelText(container);
+  const label = getLabelText(uiBox);
 
   if (!result.ok) {
     const fn = MESSAGES[result.code] || (() => "");
     const text = fn(label, result.payload);
     msgEl.textContent = text;
-    container.classList.add("no-text");
-    container.setAttribute("aria-invalid", "true");
+    uiBox.classList.add("no-text");
+    uiBox.setAttribute("aria-invalid", "true");
   } else {
     msgEl.textContent = "";
-    container.classList.remove("no-text");
-    container.removeAttribute("aria-invalid");
+    uiBox.classList.remove("no-text");
+    uiBox.removeAttribute("aria-invalid");
   }
 };
 
@@ -68,8 +86,6 @@ export const bindTextLabelUI = (root = document) => {
 
   root.addEventListener("click", onRootClick);
   document.addEventListener("click", onDocClick);
-
-  document.querySelectorAll("");
 
   const unbind = () => {
     root.removeEventListener("click", onRootClick);

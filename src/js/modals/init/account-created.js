@@ -1,11 +1,12 @@
-import { initValidateBtn } from "../../features/forms/form-validate.js";
+import { initValidateBtn } from "../../features/forms/field-validate.js";
 
 export const init = () => {
+  const userInfoForm = document.querySelector(".basic-info-form");
+
   // バリデーションボタン制御
-  initValidateBtn();
+  initValidateBtn(userInfoForm);
 
   // フォームの送信処理
-  const userInfoForm = document.querySelector(".basic-info-form");
   if (userInfoForm) {
     userInfoForm.addEventListener("submit", (e) => {
       e.preventDefault();

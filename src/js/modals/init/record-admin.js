@@ -3,16 +3,17 @@ import {
   initValidateForm,
   initValidateBtn,
   initCheckBtn,
-  initTextLabelClick,
-  initRestrictDecimal,
-} from "../../features/forms/form-validate.js";
+  initTextLabelUI,
+} from "../../features/forms/field-validate.js";
+import { initRestrictDecimal } from "../../features/forms/input-filters.js";
 
 export const init = (recordData) => {
-  // テキストラベルクリック判定
-  initTextLabelClick();
-  initRestrictDecimal("input[data-weight-input]");
-
   const modal = document.querySelector(".modal-record-admin");
+  const recordForm = document.getElementById("record-form");
+
+  // テキストラベルクリック判定
+  initTextLabelUI(recordForm);
+  initRestrictDecimal("input[data-weight-input]");
 
   // モーダルに取得した要素を表示
   if (recordData) {
@@ -25,18 +26,17 @@ export const init = (recordData) => {
   }
 
   // バリデーションボタン制御
-  initValidateBtn();
-  document.addEventListener("input", initValidateBtn);
-  document.addEventListener("change", initValidateBtn);
+  initValidateBtn(recordForm);
+  document.addEventListener("input", initValidateBtn(recordForm));
+  document.addEventListener("change", initValidateBtn(recordForm));
 
   // フォームの送信処理
-  const recordForm = document.getElementById("record-form");
   if (recordForm) {
     recordForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       // バリデーションチェックを実行
-      initCheckBtn();
+      initCheckBtn(recordForm);
       const isValid = initValidateForm(recordForm);
 
       if (!isValid) {

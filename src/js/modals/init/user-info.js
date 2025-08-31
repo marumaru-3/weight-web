@@ -4,22 +4,25 @@ import {
   initValidateForm,
   initValidateBtn,
   initCheckBtn,
-  initTextLabelClick,
+  initTextLabelUI,
+} from "../../features/forms/field-validate.js";
+import {
   initRestrictToAlphanumeric,
   initRestrictDecimal,
-} from "../../features/forms/form-validate.js";
+} from "../../features/forms/input-filters.js";
 
 export const init = (userData) => {
+  const userInfoForm = document.querySelector("#user-info-form");
+
   // 日付選択処理
   initUserDateForm();
 
   // テキストラベルクリック判定
-  initTextLabelClick();
+  initTextLabelUI(userInfoForm);
   initRestrictToAlphanumeric("input[data-alphanumeric]");
   initRestrictDecimal("input[data-height-input]");
   initRestrictDecimal("input[data-weight-input]");
 
-  const userInfoForm = document.querySelector("#user-info-form");
   const adminAccFrom = document.querySelector(".admin-account-form");
   const adminUserFrom = document.querySelector(".admin-user-form");
 
@@ -44,9 +47,9 @@ export const init = (userData) => {
   }
 
   // バリデーションボタン制御
-  initValidateBtn();
-  document.addEventListener("input", initValidateBtn);
-  document.addEventListener("change", initValidateBtn);
+  initValidateBtn(userInfoForm);
+  document.addEventListener("input", initValidateBtn(userInfoForm));
+  document.addEventListener("change", initValidateBtn(userInfoForm));
 
   // フォームの送信処理
   if (userInfoForm) {
@@ -54,7 +57,7 @@ export const init = (userData) => {
       e.preventDefault();
 
       // バリデーションチェックを実行
-      initCheckBtn();
+      initCheckBtn(userInfoForm);
       const isValid = initValidateForm(userInfoForm);
 
       if (!isValid) {

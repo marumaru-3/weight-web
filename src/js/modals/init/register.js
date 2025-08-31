@@ -4,30 +4,33 @@ import {
   initValidateForm,
   initValidateBtn,
   initCheckBtn,
-  initTextLabelClick,
+  initTextLabelUI,
+} from "../../features/forms/field-validate.js";
+import {
   initRestrictToAlphanumeric,
   initRestrictDecimal,
-} from "../../features/forms/form-validate.js";
+} from "../../features/forms/input-filters.js";
 import { initUserDateForm } from "../../features/forms/form-date.js";
 import { initStepBtn } from "../../features/forms/form-step.js";
 
 export const init = () => {
+  const registerForm = document.getElementById("register-form");
+
   initUserDateForm();
-  initTextLabelClick();
-  initValidateBtn();
+  initTextLabelUI(registerForm);
+  initValidateBtn(registerForm);
   initRestrictToAlphanumeric("input[data-alphanumeric]");
   initRestrictDecimal("input[data-height-input]");
   initRestrictDecimal("input[data-weight-input]");
   initStepBtn();
 
   // フォームの送信処理
-  const registerForm = document.getElementById("register-form");
   if (registerForm) {
     registerForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       // バリデーションチェックを実行
-      initCheckBtn();
+      initCheckBtn(registerForm);
       const isValid = initValidateForm(registerForm);
 
       if (!isValid) {

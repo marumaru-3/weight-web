@@ -4,31 +4,32 @@ import {
   initValidateForm,
   initValidateBtn,
   initCheckBtn,
-  initTextLabelClick,
-  initRestrictDecimal,
-} from "../../features/forms/form-validate.js";
+  initTextLabelUI,
+} from "../../features/forms/field-validate.js";
+import { initRestrictDecimal } from "../../features/forms/input-filters.js";
 
 export const init = async () => {
+  const recordForm = document.getElementById("record-form");
+
   // 日付選択処理
   initRecordDateSelect();
 
   // テキストラベルクリック判定
-  initTextLabelClick();
+  initTextLabelUI(recordForm);
   initRestrictDecimal("input[data-weight-input]");
 
   // バリデーションボタン制御
-  initValidateBtn();
-  document.addEventListener("input", initValidateBtn);
-  document.addEventListener("change", initValidateBtn);
+  initValidateBtn(recordForm);
+  document.addEventListener("input", initValidateBtn(recordForm));
+  document.addEventListener("change", initValidateBtn(recordForm));
 
   // フォームの送信処理
-  const recordForm = document.getElementById("record-form");
   if (recordForm) {
     recordForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
       // バリデーションチェックを実行
-      initCheckBtn();
+      initCheckBtn(recordForm);
       const isValid = initValidateForm(recordForm);
 
       if (!isValid) {
