@@ -14,9 +14,28 @@ export const initCheckBtn = (form) => {
 };
 
 const inputValidateCheck = (element, formBox, root) => {
+  if (element.disabled) return true;
   const result = validateInput(element, { root });
   bindValidationUI(formBox, result);
   return result.ok;
+};
+
+// 入力・変更のたびにフォーム全体の妥当性を再計算して送信ボタンを制御する
+export const initValidateBtn = (form) => {
+  if (!form) return;
+
+  const recalc = () => initValidateForm(form);
+
+  recalc();
+  form.addEventListener("input", recalc);
+  form.addEventListener("change", recalc);
+
+  // ステップがある場合のバリデーション更新
+  form.querySelectorAll(".next-btn, .prev-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      requestAnimationFrame(recalc);
+    });
+  });
 };
 
 // フォーム全体の妥当性を判定し、送信ボタンの有効・無効を切り替える
@@ -46,22 +65,6 @@ export const initValidateForm = (form) => {
   return isValid;
 };
 
-// 入力・変更のたびにフォーム全体の妥当性を再計算して送信ボタンを制御する
-export const initValidateBtn = (form) => {
-  if (!form) return;
-
-  const recalc = () => initValidateForm(form);
-
-  recalc();
-  form.addEventListener("input", recalc);
-  form.addEventListener("change", recalc);
-
-  // ステップがある場合のバリデーション更新
-  form.querySelectorAll(".next-btn, .prev-btn").forEach((btn) => {
-    btn.addEventListener("click", recalc);
-  });
-};
-
 // ラベルの見た目だけを初期化（クリックでON・外側クリックでOFF）
 export const initTextLabelUI = (root) => {
   if (!root) return;
@@ -84,6 +87,7 @@ export const initRealtimeOnClick = (form) => {
     const el = e.target?.closest("input, select, textarea");
     if (!el || !form.contains(el)) return;
 
+    if (el.disabled) return;
     if (boundSet.has(el)) return;
 
     initRealtimeValidation(el, form);
@@ -108,5 +112,4 @@ const initRealtimeValidation = (element, form) => {
   };
 
   element.addEventListener(eventType, handler);
-  handler();
 };

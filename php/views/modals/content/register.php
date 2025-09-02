@@ -160,45 +160,47 @@ function index()
 
           <div class="basic-info-form__box basic-info-form__gender">
             <p class="label-title">性別</p>
-            <div class="basic-info-form__flex">
-              <div class="basic-info-form__radio">
-                <label for="gender-man"
-                  class="gender-label">
-                  <input type="radio"
-                    id="gender-man"
-                    name="gender"
-                    value="male"
-                    required>
-                  <div class="radio-name">
-                    男性
-                  </div>
-                </label>
-              </div>
-              <div class="basic-info-form__radio">
-                <label for="gender-women"
-                  class="gender-label">
-                  <input type="radio"
-                    id="gender-women"
-                    name="gender"
-                    value="female"
-                    required>
-                  <div class="radio-name">
-                    女性
-                  </div>
-                </label>
-              </div>
-              <div class="basic-info-form__radio">
-                <label for="gender-other"
-                  class="gender-label">
-                  <input type="radio"
-                    id="gender-other"
-                    name="gender"
-                    value="other"
-                    required>
-                  <div class="radio-name">
-                    その他
-                  </div>
-                </label>
+            <div class="validate-form__input">
+              <div class="basic-info-form__flex">
+                <div class="basic-info-form__radio">
+                  <label for="gender-man"
+                    class="gender-label">
+                    <input type="radio"
+                      id="gender-man"
+                      name="gender"
+                      value="male"
+                      required>
+                    <div class="radio-name">
+                      男性
+                    </div>
+                  </label>
+                </div>
+                <div class="basic-info-form__radio">
+                  <label for="gender-women"
+                    class="gender-label">
+                    <input type="radio"
+                      id="gender-women"
+                      name="gender"
+                      value="female"
+                      required>
+                    <div class="radio-name">
+                      女性
+                    </div>
+                  </label>
+                </div>
+                <div class="basic-info-form__radio">
+                  <label for="gender-other"
+                    class="gender-label">
+                    <input type="radio"
+                      id="gender-other"
+                      name="gender"
+                      value="other"
+                      required>
+                    <div class="radio-name">
+                      その他
+                    </div>
+                  </label>
+                </div>
               </div>
             </div>
             <div class="validate-text"></div>

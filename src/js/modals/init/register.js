@@ -5,6 +5,7 @@ import {
   initValidateBtn,
   initCheckBtn,
   initTextLabelUI,
+  initRealtimeOnClick,
 } from "../../features/forms/field-validate.js";
 import {
   initRestrictToAlphanumeric,
@@ -19,6 +20,7 @@ export const init = () => {
   initUserDateForm();
   initTextLabelUI(registerForm);
   initValidateBtn(registerForm);
+  initRealtimeOnClick(registerForm);
   initRestrictToAlphanumeric("input[data-alphanumeric]");
   initRestrictDecimal("input[data-height-input]");
   initRestrictDecimal("input[data-weight-input]");

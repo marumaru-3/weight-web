@@ -22,20 +22,20 @@ export const bindValidationUI = (container, result) => {
   if (container.classList && container.classList.contains(uiClassName)) {
     uiBox = container;
   }
-  if (!uiBox && container.querySelector) {
-    const child = container.querySelector(`.${uiClassName}`);
-    if (child) uiBox = child;
-  }
   if (!uiBox && container.closest) {
     const anc = container.querySelector(`.${uiClassName}`);
     if (anc) uiBox = anc;
   }
+  if (!uiBox && container.querySelector) {
+    const child = container.querySelector(`.${uiClassName}`);
+    if (child) uiBox = child;
+  }
   if (!uiBox) uiBox = container;
 
-  const msgEl =
-    uiBox.querySelector(".validate-text") || uiBox.nextElementSibling;
+  const fieldBox = uiBox.closest(".basic-info-form__box") || null;
+  const msgEl = fieldBox.querySelector(".validate-text") || null;
   if (!msgEl) return;
-  const label = getLabelText(uiBox);
+  const label = getLabelText(fieldBox);
 
   if (!result.ok) {
     const fn = MESSAGES[result.code] || (() => "");
@@ -46,7 +46,7 @@ export const bindValidationUI = (container, result) => {
   } else {
     msgEl.textContent = "";
     uiBox.classList.remove("no-text");
-    uiBox.removeAttribute("aria-invalid");
+    uiBox.setAttribute("aria-invalid", "false");
   }
 };
 
