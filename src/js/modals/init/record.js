@@ -5,6 +5,7 @@ import {
   initValidateBtn,
   initCheckBtn,
   initTextLabelUI,
+  initRealtimeOnClick,
 } from "../../features/forms/field-validate.js";
 import { initRestrictDecimal } from "../../features/forms/input-filters.js";
 
@@ -16,6 +17,7 @@ export const init = async () => {
 
   // テキストラベルクリック判定
   initTextLabelUI(recordForm);
+  initRealtimeOnClick(recordForm);
   initRestrictDecimal("input[data-weight-input]");
 
   // バリデーションボタン制御
