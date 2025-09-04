@@ -23,7 +23,7 @@ export const bindValidationUI = (container, result) => {
     uiBox = container;
   }
   if (!uiBox && container.closest) {
-    const anc = container.querySelector(`.${uiClassName}`);
+    const anc = container.closest(`.${uiClassName}`);
     if (anc) uiBox = anc;
   }
   if (!uiBox && container.querySelector) {

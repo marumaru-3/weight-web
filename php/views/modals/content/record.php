@@ -23,8 +23,8 @@ function index()
     <form id="record-form"
       class="record-form validate-form"
       novalidate>
-      <div class="record-form__contents validate-form__input">
-        <div class="basic-info-form__box">
+      <div class="record-form__contents basic-info-form__box">
+        <div class="validate-form__input">
           <label for="weight"
             class="label-name label-name__weight">体重</label>
           <div class="record-form__input">
