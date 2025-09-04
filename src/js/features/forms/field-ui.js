@@ -71,7 +71,7 @@ export const bindTextLabelUI = (root = document) => {
   };
 
   const onDocClick = (e) => {
-    if (e.target.closest("input, select, textarea")) return;
+    if (e.target.closest("input, select, textarea, .pwd-btn")) return;
 
     // いまアクティブなものだけ解除（通常0～1個）
     root.querySelectorAll(".validate-form__input.click").forEach((box) => {
