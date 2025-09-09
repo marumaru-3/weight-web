@@ -60,7 +60,16 @@ export const bindTextLabelUI = (root = document) => {
   }
 
   const onRootClick = (e) => {
-    const el = e.target.closest("input, select, textarea");
+    let el = e.target.closest("input, select, textarea");
+    if (!el) {
+      const label = e.target.closest("label");
+      if (label) {
+        const forId = label.getAttribute("for");
+        el = forId
+          ? root.querySelector(`#${forId}`)
+          : label.querySelector("input, select, textarea");
+      }
+    }
     if (!el || !root.contains(el)) return;
     const box = el.closest(".validate-form__input");
     if (!box) return;
