@@ -20,9 +20,15 @@ const inputValidateCheck = (element, formBox, root) => {
   return result.ok;
 };
 
+// フォーム単位で初期化済みを記録するWeakMap
+const validateBtnRegistry = new WeakSet();
+
 // 入力・変更のたびにフォーム全体の妥当性を再計算して送信ボタンを制御する
 export const initValidateBtn = (form) => {
   if (!form) return;
+
+  if (validateBtnRegistry.has(form)) return;
+  validateBtnRegistry.add(form);
 
   const recalc = () => initValidateForm(form);
 
