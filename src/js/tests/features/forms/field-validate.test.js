@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { describe, it, expect, beforeEach, vi, afterEach } from "vitest";
 
 const PATH_VALIDATE = "../../../features/forms/field-validate";
 const PATH_VALIDATORS = "../../../features/forms/field-validators";
@@ -10,6 +10,8 @@ vi.mock("../../../features/forms/field-validators", () => ({
 vi.mock("../../../features/forms/field-ui", () => ({
   bindValidationUI: vi.fn(),
 }));
+
+import * as validators from "../../../features/forms/field-validators.js";
 
 const load = async () => {
   const validate = await import(PATH_VALIDATE);
@@ -46,12 +48,17 @@ describe("field-validate.js", () => {
         <div class="basic-info-form__box">
           <div class="validate-form__input">
             <div class="label-name">内容</div>
-            <textarea id="content" name="content" rows="5" cols="33">
+            <textarea id="content" name="content" rows="5" cols="33" required>
             </textarea>
           </div>
         </div>
+
       </form>
     `;
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
   });
 
   describe("initCheckBtn", () => {
@@ -135,7 +142,135 @@ describe("field-validate.js", () => {
       expect(bindValidationUI).toHaveBeenCalledTimes(0);
     });
   });
-  // describe("initValidateBtn", () => {});
+
+  describe("initValidateBtn", () => {
+    let mod;
+    let form;
+
+    const REQ_SELECTOR =
+      "input[required], select[required], textarea[required]";
+
+    const getRequiredCount = (root) =>
+      root.querySelectorAll(REQ_SELECTOR).length;
+
+    beforeEach(async () => {
+      form = document.querySelector("#test-form");
+      validators.validateInput.mockReturnValue({ ok: true, message: "" });
+      mod = await import(PATH_VALIDATE);
+    });
+
+    it("初期化時に全 required を1回だけ再計算する", () => {
+      // Act
+      mod.initValidateBtn(form);
+
+      // Assert
+      expect(validators.validateInput).toHaveBeenCalledTimes(
+        getRequiredCount(form)
+      );
+    });
+
+    it("inputイベントで再計算する", () => {
+      // Arrange
+      mod.initValidateBtn(form);
+      validators.validateInput.mockClear();
+
+      // Act
+      const input = form.querySelector("#username");
+      input.value = "Alice";
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+
+      // Assert
+      expect(validators.validateInput).toHaveBeenCalledTimes(
+        getRequiredCount(form)
+      );
+    });
+
+    it("changeイベントで再計算する", () => {
+      // Arrange
+      mod.initValidateBtn(form);
+      validators.validateInput.mockClear();
+
+      // Act
+      const select = form.querySelector("#birth-year");
+      select.value = "2025";
+      select.dispatchEvent(new Event("change", { bubbles: true }));
+
+      // Assert
+      expect(validators.validateInput).toHaveBeenCalledTimes(
+        getRequiredCount(form)
+      );
+    });
+
+    it("nextボタンクリックで再計算する", () => {
+      // Arrange
+      form.insertAdjacentHTML(
+        "beforeend",
+        `<button type="button" class="next-btn">next</button>`
+      );
+      vi.spyOn(window, "requestAnimationFrame").mockImplementation((cb) => {
+        cb(0);
+        return 1;
+      });
+      mod.initValidateBtn(form);
+      validators.validateInput.mockClear();
+
+      // Act
+      form.querySelector(".next-btn").click();
+
+      // Assert
+      expect(validators.validateInput).toHaveBeenCalledTimes(
+        getRequiredCount(form)
+      );
+    });
+
+    it("prevボタンクリックで再計算する", () => {
+      // Arrange
+      form.insertAdjacentHTML(
+        "beforeend",
+        `<button type="button" class="prev-btn">prev</button>`
+      );
+      vi.spyOn(window, "requestAnimationFrame").mockImplementation((cb) => {
+        cb(0);
+        return 1;
+      });
+      mod.initValidateBtn(form);
+      validators.validateInput.mockClear();
+
+      // Act
+      form.querySelector(".prev-btn").click();
+
+      // Assert
+      expect(validators.validateInput).toHaveBeenCalledTimes(
+        getRequiredCount(form)
+      );
+    });
+
+    it("引数がnullの場合は何もしない", () => {
+      // Act
+      mod.initValidateBtn(null);
+
+      // Assert
+      expect(validators.validateInput).toHaveBeenCalledTimes(0);
+    });
+
+    it("二重初期化してもイベントは重複しない", () => {
+      // Arrange
+      mod.initValidateBtn(form);
+      mod.initValidateBtn(form);
+      validators.validateInput.mockClear();
+
+      // Act
+      const input = form.querySelector("#username");
+      input.value = "Alice";
+      input.dispatchEvent(new Event("input", { bubbles: true }));
+
+      // Assert
+      expect(validators.validateInput).toHaveBeenCalledTimes(
+        getRequiredCount(form)
+      );
+    });
+  });
+
   // describe("initValidateForm", () => {});
   // describe("initTextLabelUI", () => {});
   // describe("initRealtimeOnClick", () => {
