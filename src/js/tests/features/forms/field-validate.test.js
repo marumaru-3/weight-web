@@ -271,8 +271,122 @@ describe("field-validate.js", () => {
     });
   });
 
-  // describe("initValidateForm", () => {});
+  describe("initValidateForm", () => {
+    let form;
+    let mod;
+
+    const addSubmit = (state = "disabled") => {
+      const disabledAttr = state === "disabled" ? "disabled" : "";
+      const disabledClass = state === "disabled" ? "disabled" : "";
+      form.insertAdjacentHTML(
+        "beforeend",
+        `<button type="button" class="submit-btn ${disabledClass}" ${disabledAttr}>送信</button>`
+      );
+      return form.querySelector(".submit-btn");
+    };
+
+    beforeEach(async () => {
+      form = document.querySelector("#test-form");
+      validators.validateInput.mockReturnValue({ ok: true, message: "" });
+      mod = await import(PATH_VALIDATE);
+    });
+
+    it("必須がすべてOKなら true を返し、ボタンを有効化する", () => {
+      // Arrange
+      const btn = addSubmit("disabled");
+
+      // Act
+      const res = mod.initValidateForm(form);
+
+      // Assert
+      expect(res).toBe(true);
+      expect(btn.disabled).toBe(false);
+      expect(btn.classList.contains("disabled")).toBe(false);
+      expect(
+        validators.validateInput.mock.calls.every(([, o]) => o?.root === form)
+      );
+    });
+
+    it("NGが1つでもあれば false を返し、ボタンを無効化する", () => {
+      // Arrange
+      const btn = addSubmit("disabled");
+      validators.validateInput
+        .mockReturnValueOnce({ ok: false, message: "入力してください" })
+        .mockReturnValue({ ok: true, message: "" });
+
+      // Act
+      const res = mod.initValidateForm(form);
+
+      // Assert
+      expect(res).toBe(false);
+      expect(btn.disabled).toBe(true);
+      expect(btn.classList.contains("disabled")).toBe(true);
+    });
+
+    it(".step.visible があればそのステップのみ判定", () => {
+      // Arrange
+      form.innerHTML = `
+        <div id="step1" class="step visible">
+          <input type="text" id="one" required />
+          <input type="text" id="two" required />
+          <button type="button" id="btn--go-to-step2" class="submit-btn disabled" disabled>次に進む</button>
+        </div>
+        <div id="step2" class="step hidden">
+          <input type="text" id="three" required />
+          <button type="button" class="submit-btn disabled" disabled>送信</button>
+        </div>
+      `;
+      const step1 = document.querySelector(".step.visible");
+      const requiredInStep1 = step1.querySelectorAll("[required]").length;
+
+      // Act
+      const res = mod.initValidateForm(form);
+
+      // Assert
+      expect(res).toBe(true);
+
+      // ① 呼び出し回数＝可視ステップ内の required 個数
+      expect(validators.validateInput).toHaveBeenCalledTimes(requiredInStep1);
+      // ② 呼ばれた要素は全部 step 配下
+      const calls = validators.validateInput.mock.calls;
+      const calledEls = calls.map(([el]) => el);
+      expect(calledEls.every((el) => step1.contains(el))).toBe(true);
+      // ③ すべて root は step
+      expect(calls.every(([, o]) => o?.root === step1)).toBe(true);
+    });
+
+    it("ボタンが存在しなくてもエラーなく実行できる", () => {
+      // Arrange
+      const requiredCount = form.querySelectorAll("[required]").length;
+
+      // Act
+      const res = mod.initValidateForm(form);
+
+      // Assert
+      expect(res).toBe(true);
+      expect(validators.validateInput).toHaveBeenCalledTimes(requiredCount);
+    });
+
+    it("必須が0件なら true を返し、ボタンを有効化する", () => {
+      // Arrange
+      form.querySelectorAll("[required]").forEach((field) => {
+        field.removeAttribute("required");
+      });
+      const btn = addSubmit("disabled");
+
+      // Act
+      const res = mod.initValidateForm(form);
+
+      // Assert
+      expect(res).toBe(true);
+      expect(btn.disabled).toBe(false);
+      expect(btn.classList.contains("disabled")).toBe(false);
+      expect(validators.validateInput).not.toHaveBeenCalled();
+    });
+  });
+
   // describe("initTextLabelUI", () => {});
+
   // describe("initRealtimeOnClick", () => {
   //   let initCheckBtn, validateInput, bindValidationUI;
 
