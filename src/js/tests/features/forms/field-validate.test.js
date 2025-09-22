@@ -9,6 +9,7 @@ vi.mock("../../../features/forms/field-validators", () => ({
 }));
 vi.mock("../../../features/forms/field-ui", () => ({
   bindValidationUI: vi.fn(),
+  bindTextLabelUI: vi.fn(),
 }));
 
 import * as validators from "../../../features/forms/field-validators.js";
@@ -385,7 +386,32 @@ describe("field-validate.js", () => {
     });
   });
 
-  // describe("initTextLabelUI", () => {});
+  describe("initTextLabelUI", () => {
+    let form;
+    let mod;
+    let ui;
+
+    beforeEach(async () => {
+      form = document.querySelector("#test-form");
+      mod = await import(PATH_VALIDATE);
+      ui = await import(PATH_UI);
+    });
+
+    it("引数 root があるときbindTextLabelUIを実行", () => {
+      // Act
+      mod.initTextLabelUI(form);
+      // Assert
+      expect(ui.bindTextLabelUI).toHaveBeenCalledTimes(1);
+      expect(ui.bindTextLabelUI).toHaveBeenCalledWith(form);
+    });
+
+    it("引数 root がnullの場合は実行しない", () => {
+      // Act
+      mod.initTextLabelUI(null);
+      // Assert
+      expect(ui.bindTextLabelUI).not.toHaveBeenCalled();
+    });
+  });
 
   // describe("initRealtimeOnClick", () => {
   //   let initCheckBtn, validateInput, bindValidationUI;
