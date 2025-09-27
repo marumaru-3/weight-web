@@ -29,31 +29,36 @@ describe("field-validate.js", () => {
       <form id="test-form">
         <div class="basic-info-form__box">
           <div class="validate-form__input">
-            <div class="label-name">ユーザー名</div>
-            <input type="text" id="username" required />
+            <label for="username" class="text-label">
+              <div class="label-name">ユーザー名</div>
+              <input type="text" id="username" required />
+            </label>
           </div>
         </div>
         <div class="basic-info-form__box">
           <div class="validate-form__input">
-            <div class="label-name">年</div>
-            <select name="birth-year"
-              id="birth-year"
-              class="label-input"
-              required>
-              <option value disabled selected></option>
-              <option value="2025">2025</option>
-              <option value="2024">2024</option>
-            </select>
+            <label for="birth-year" class="text-label">
+              <div class="label-name">年</div>
+              <select name="birth-year"
+                id="birth-year"
+                class="label-input"
+                required>
+                <option value disabled selected></option>
+                <option value="2025">2025</option>
+                <option value="2024">2024</option>
+              </select>
+            </label>
           </div>
         </div>
         <div class="basic-info-form__box">
           <div class="validate-form__input">
-            <div class="label-name">内容</div>
-            <textarea id="content" name="content" rows="5" cols="33" required>
-            </textarea>
+            <label for="content" class="text-label">
+              <div class="label-name">内容</div>
+              <textarea id="content" name="content" rows="5" cols="33" required>
+              </textarea>
+            </label>
           </div>
         </div>
-
       </form>
     `;
   });
@@ -273,8 +278,8 @@ describe("field-validate.js", () => {
   });
 
   describe("initValidateForm", () => {
-    let form;
     let mod;
+    let form;
 
     const addSubmit = (state = "disabled") => {
       const disabledAttr = state === "disabled" ? "disabled" : "";
@@ -387,8 +392,8 @@ describe("field-validate.js", () => {
   });
 
   describe("initTextLabelUI", () => {
-    let form;
     let mod;
+    let form;
     let ui;
 
     beforeEach(async () => {
@@ -413,14 +418,210 @@ describe("field-validate.js", () => {
     });
   });
 
-  // describe("initRealtimeOnClick", () => {
-  //   let initCheckBtn, validateInput, bindValidationUI;
+  describe("initRealtimeOnClick", () => {
+    let form;
+    let initRealtimeOnClick, validateInput, bindValidationUI;
+    let result;
+    let containsSpy;
 
-  //   beforeEach(async () => {
-  //     ({ initCheckBtn, validateInput, bindValidationUI } = await load());
-  //   });
+    beforeEach(async () => {
+      form = document.querySelector("#test-form");
 
-  //   it("テスト1", () => {});
-  //   it("テスト2", () => {});
-  // });
+      ({ initRealtimeOnClick, validateInput, bindValidationUI } = await load());
+      result = { ok: true, message: "" };
+      validateInput.mockReturnValue(result);
+
+      containsSpy = vi.spyOn(form, "contains").mockReturnValue(true);
+    });
+
+    afterEach(() => {
+      containsSpy.mockRestore();
+    });
+
+    it("text: click→input で validateInput & bindValidationUI が呼ばれる", () => {
+      // Arrange
+      initRealtimeOnClick(form);
+      const el = form.querySelector("#username");
+      const box = el.closest(".validate-form__input");
+
+      // Act
+      el.click();
+
+      // Assert
+      el.dispatchEvent(new Event("input", { bubbles: true }));
+      expect(validateInput).toHaveBeenCalledWith(el, { root: form });
+      expect(bindValidationUI).toHaveBeenCalledWith(box, result);
+    });
+
+    it("select: click→change で呼ばれ、inputイベントは反応しない", () => {
+      // Arrange
+      initRealtimeOnClick(form);
+      const el = form.querySelector("#birth-year");
+      const box = el.closest(".validate-form__input");
+
+      // Act
+      el.click();
+
+      // Assert
+      // input では反応しない
+      validateInput.mockClear();
+      el.dispatchEvent(new Event("input", { bubbles: true }));
+      expect(validateInput).not.toHaveBeenCalled();
+      // change では反応する
+      validateInput.mockClear();
+      el.dispatchEvent(new Event("change", { bubbles: true }));
+      expect(validateInput).toHaveBeenCalledWith(el, { root: form });
+      expect(bindValidationUI).toHaveBeenCalledWith(box, result);
+    });
+
+    it("checkbox: click→change で呼ばれ、inputイベントは反応しない", () => {
+      // Arrange
+      form.insertAdjacentHTML(
+        "beforeend",
+        `<div class="basic-info-form__checkbox">
+          <input type="checkbox" id="password-check" name="password-check" required>
+          <label for="password-check" class="checkbox-label">
+            パスワードの変更を確認しました。
+          </label>
+         </div>`
+      );
+
+      initRealtimeOnClick(form);
+      const el = form.querySelector("#password-check");
+
+      // Act
+      el.click();
+
+      // Assert
+      // input では反応しない
+      validateInput.mockClear();
+      el.dispatchEvent(new Event("input", { bubbles: true }));
+      expect(validateInput).not.toHaveBeenCalled();
+      // change では反応する
+      validateInput.mockClear();
+      el.dispatchEvent(new Event("change", { bubbles: true }));
+      expect(validateInput).toHaveBeenCalledWith(el, { root: form });
+      expect(bindValidationUI).toHaveBeenCalledWith(null, result);
+    });
+
+    it("text: label 内の子クリックでも対応 input にリアタイを仕込む", () => {
+      // Arrange
+      initRealtimeOnClick(form);
+      const clickEl = form.querySelector("label[for='username']");
+      const inputEl = form.querySelector("#username");
+      const box = inputEl.closest(".validate-form__input");
+
+      // Act
+      clickEl.click();
+
+      // Assert
+      inputEl.dispatchEvent(new Event("input", { bubbles: true }));
+      expect(validateInput).toHaveBeenCalledWith(inputEl, { root: form });
+      expect(bindValidationUI).toHaveBeenCalledWith(box, result);
+    });
+
+    it("ステップがあれば、root は .step.visible", () => {
+      // Arrange
+      form.innerHTML = `
+        <div id="step1" class="step visible">
+          <div class="basic-info-form__box">
+            <div class="validate-form__input">
+              <label for="username" class="text-label">
+                <div class="label-name">ユーザー名</div>
+                <input type="text" id="username" required />
+              </label>
+            </div>
+          </div>
+          <button type="button" id="btn--go-to-step2" class="submit-btn disabled" disabled>次に進む</button>
+        </div>
+        <div id="step2" class="step hidden">
+          <div class="basic-info-form__box">
+            <div class="validate-form__input">
+              <label for="username2" class="text-label">
+                <div class="label-name">ユーザー名2</div>
+                <input type="text" id="username2" required />
+              </label>
+            </div>
+          </div>
+          <button type="button" class="submit-btn disabled" disabled>送信</button>
+        </div>
+      `;
+      initRealtimeOnClick(form);
+      const el = form.querySelector("#username");
+      const box = el.closest(".validate-form__input");
+      const step = form.querySelector(".step.visible");
+
+      // Act
+      el.click();
+
+      // Assert
+      el.dispatchEvent(new Event("input", { bubbles: true }));
+      expect(validateInput).toHaveBeenCalledWith(el, { root: step });
+      expect(bindValidationUI).toHaveBeenCalledWith(box, result);
+    });
+
+    it("root が null なら何もしない", () => {
+      // Arrange
+      initRealtimeOnClick(null);
+      const el = form.querySelector("#username");
+
+      // Act
+      el.click();
+
+      // Assert
+      el.dispatchEvent(new Event("input", { bubbles: true }));
+      expect(validateInput).not.toHaveBeenCalled();
+      expect(bindValidationUI).not.toHaveBeenCalled();
+    });
+
+    it("フォーム外のクリックは無視する", () => {
+      // Arrange
+      initRealtimeOnClick(form);
+      const body = document.querySelector("body");
+
+      // Act
+      body.click();
+
+      // Assert
+      expect(validateInput).not.toHaveBeenCalled();
+      expect(bindValidationUI).not.toHaveBeenCalled();
+    });
+
+    it("disabled 要素はスキップする", () => {
+      // Arrange
+      initRealtimeOnClick(form);
+      const el = form.querySelector("#username");
+      el.disabled = true;
+
+      // Act
+      el.click();
+
+      // Assert
+      el.dispatchEvent(new Event("input", { bubbles: true }));
+      expect(validateInput).not.toHaveBeenCalled();
+      expect(bindValidationUI).not.toHaveBeenCalled();
+    });
+
+    it("同じ要素を2回クリックしても2回目は呼ばれない", () => {
+      // Arrange
+      initRealtimeOnClick(form);
+      const el = form.querySelector("#username");
+      const addSpy = vi.spyOn(el, "addEventListener");
+
+      // Act
+      el.click();
+      el.click();
+
+      // Assert
+      // input ハンドラの登録は1回だけ
+      const inputRegistrations = addSpy.mock.calls.filter(
+        ([type]) => type === "input"
+      );
+      expect(inputRegistrations.length).toBe(1);
+
+      el.dispatchEvent(new Event("input", { bubbles: true }));
+      expect(validateInput).toHaveBeenCalledTimes(1);
+      expect(bindValidationUI).toHaveBeenCalledTimes(1);
+    });
+  });
 });
