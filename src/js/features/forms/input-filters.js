@@ -1,9 +1,13 @@
-// 多重バインド防止用
+// 多重バインド防止
 const boundInputs = new WeakSet();
+// IME中の要素を覚える
+const composingInputs = new WeakSet();
 
 /**
- * 共通入力制御ヘルパー
- * - 同一要素への多重バインドを防止（WeakSet）
+ * 入力フィルタ用バインダー
+ * - selectorに input/change を紐づけ
+ * - 多重バインド防止
+ * - IME中は何もしない、compositionendで1回だけ正規化
  */
 const bindInputFilter = (selector, handler) => {
   const inputs = document.querySelectorAll(selector);
@@ -11,13 +15,61 @@ const bindInputFilter = (selector, handler) => {
     if (boundInputs.has(input)) return;
     boundInputs.add(input);
 
-    const onHandler = (e) => {
-      handler(e.target);
+    const onInput = (e) => {
+      const el = e.target;
+      // IME中はスキップ
+      if (composingInputs.has(el) || e.isComposing === true) return;
+      handler(el);
     };
 
-    input.addEventListener("input", onHandler);
-    input.addEventListener("change", onHandler);
+    const onCompStart = (e) => {
+      composingInputs.add(e.target);
+    };
+
+    const onCompEnd = (e) => {
+      const el = e.target;
+      composingInputs.delete(el);
+      handler(el);
+    };
+
+    input.addEventListener("input", onInput);
+    input.addEventListener("change", onInput);
+    input.addEventListener("compositionstart", onCompStart);
+    input.addEventListener("compositionend", onCompEnd);
+    input.addEventListener("compositioncancel", onCompEnd);
   });
+};
+
+/**
+ * 値更新ヘルパー
+ * - 変更時のみ代入
+ * - キャレット位置を維持
+ */
+const setValuePreserveCaret = (el, next) => {
+  const prev = el.value;
+  if (next === prev) return;
+
+  const hasSel =
+    typeof el.selectionStart === "number" &&
+    typeof el.selectionEnd === "number";
+  const s = hasSel ? el.selectionStart : null;
+  const e = hasSel ? el.selectionEnd : null;
+  const atEnd = hasSel && s === prev.length && e === prev.length;
+
+  el.value = next;
+
+  if (!hasSel) return;
+
+  if (atEnd) {
+    el.selectionStart = el.selectionEnd = next.length;
+    return;
+  }
+
+  const diff = next.length - prev.length;
+  const ns = Math.max(0, Math.min(next.length, (s ?? 0) + diff));
+  const ne = Math.max(0, Math.min(next.length, (e ?? 0) + diff));
+  el.selectionStart = ns;
+  el.selectionEnd = ne;
 };
 
 /**
@@ -25,10 +77,11 @@ const bindInputFilter = (selector, handler) => {
  */
 export const initRestrictToAlphanumeric = (selector) => {
   bindInputFilter(selector, (el) => {
-    el.value = el.value.replace(
+    const next = el.value.replace(
       /[^a-zA-Z0-9 !"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]/g,
       ""
     );
+    setValuePreserveCaret(el, next);
   });
 };
 
@@ -37,7 +90,8 @@ export const initRestrictToAlphanumeric = (selector) => {
  */
 export const initRestrictToNumeric = (selector) => {
   bindInputFilter(selector, (el) => {
-    el.value = el.value.replace(/[^0-9]/g, "");
+    const next = el.value.replace(/[^0-9]/g, "");
+    setValuePreserveCaret(el, next);
   });
 };
 
@@ -47,7 +101,8 @@ export const initRestrictToNumeric = (selector) => {
  */
 export const initRestrictToFloat = (selector) => {
   bindInputFilter(selector, (el) => {
-    el.value = el.value.replace(/[^0-9.]/g, "").replace(/(\..*)\./g, "$1");
+    const next = el.value.replace(/[^0-9.]/g, "").replace(/(\..*)\./g, "$1");
+    setValuePreserveCaret(el, next);
   });
 };
 
@@ -55,35 +110,35 @@ export const initRestrictToFloat = (selector) => {
  * 数値入力用リアルタイムフィルター
  * - 整数部 0〜3 桁
  * - 小数部 0〜1 桁（末尾ドットも許容）
- * - 最大 999.9 kg
+ * - 最大 999.9 kg/cm
  *  - 非数字/余分なドット除去
  */
 export const initRestrictDecimal = (selector) => {
   bindInputFilter(selector, (el) => {
-    let newValue = el.value;
+    let next = el.value;
 
     // 数字とドット以外を除去
-    newValue = newValue.replace(/[^0-9.]/g, "");
+    next = next.replace(/[^0-9.]/g, "");
 
     // ドットは1個だけ許容（2個目以降を消す）
-    newValue = newValue.replace(/(\..*)\./g, "$1");
+    next = next.replace(/(\..*)\./g, "$1");
 
     // 整数部 3桁まで、小数部 1桁までにトリム
-    const [intPart = "", decPart = ""] = newValue.split(".");
+    const [intPart = "", decPart = ""] = next.split(".");
     const trimmedInt = intPart.slice(0, 3);
     const trimmedDec = decPart.slice(0, 1);
 
-    newValue =
-      trimmedDec !== "" || newValue.includes(".")
+    next =
+      trimmedDec !== "" || next.includes(".")
         ? `${trimmedInt}.${trimmedDec}`
         : trimmedInt;
 
     // 999.9 超えたら強制 999.9 に
-    const num = parseFloat(newValue);
+    const num = parseFloat(next);
     if (!isNaN(num) && num > 999.9) {
-      newValue = "999.9";
+      next = "999.9";
     }
 
-    el.value = newValue;
+    setValuePreserveCaret(el, next);
   });
 };
