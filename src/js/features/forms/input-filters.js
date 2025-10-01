@@ -96,17 +96,6 @@ export const initRestrictToNumeric = (selector) => {
 };
 
 /**
- * 小数点を1個まで許可（単純な小数入力）
- * - 非数字/余分なドット除去
- */
-export const initRestrictToFloat = (selector) => {
-  bindInputFilter(selector, (el) => {
-    const next = el.value.replace(/[^0-9.]/g, "").replace(/(\..*)\./g, "$1");
-    setValuePreserveCaret(el, next);
-  });
-};
-
-/**
  * 数値入力用リアルタイムフィルター
  * - 整数部 0〜3 桁
  * - 小数部 0〜1 桁（末尾ドットも許容）
