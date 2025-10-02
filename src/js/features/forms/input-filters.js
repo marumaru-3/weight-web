@@ -110,7 +110,17 @@ export const initRestrictDecimal = (selector) => {
     next = next.replace(/[^0-9.]/g, "");
 
     // ドットは1個だけ許容（2個目以降を消す）
-    next = next.replace(/(\..*)\./g, "$1");
+    const i = next.indexOf(".");
+    if (i !== -1) {
+      next = next.slice(0, i + 1) + next.slice(i + 1).replace(/\./g, "");
+    }
+
+    // 999.9 超えたら強制 999.9 に
+    const rawNum = parseFloat(next);
+    if (!isNaN(rawNum) && rawNum > 999.9) {
+      setValuePreserveCaret(el, "999.9");
+      return;
+    }
 
     // 整数部 3桁まで、小数部 1桁までにトリム
     const [intPart = "", decPart = ""] = next.split(".");
@@ -121,12 +131,6 @@ export const initRestrictDecimal = (selector) => {
       trimmedDec !== "" || next.includes(".")
         ? `${trimmedInt}.${trimmedDec}`
         : trimmedInt;
-
-    // 999.9 超えたら強制 999.9 に
-    const num = parseFloat(next);
-    if (!isNaN(num) && num > 999.9) {
-      next = "999.9";
-    }
 
     setValuePreserveCaret(el, next);
   });
