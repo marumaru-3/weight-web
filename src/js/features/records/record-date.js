@@ -1,22 +1,42 @@
 // 体重を記録モーダル用
-const recordDateDisplay = (date) => {
-  const pad = (str) => ("0" + str).slice(-2);
-
-  const year = date.getFullYear().toString();
-  const month = pad(date.getMonth() + 1).toString();
-  const day = pad(date.getDate()).toString();
-
-  return `${year}/${month}/${day}`;
-};
-
 export const initRecordDateSelect = () => {
   const dateContents = document.getElementById("date-contents");
   const datePrevBtn = document.getElementById("date-prev");
   const dateNextBtn = document.getElementById("date-next");
+  const inputRecordedAt = document.getElementById("recorded_at");
 
-  if (!dateContents) return;
+  if (!dateContents && !inputRecordedAt && !datePrevBtn && !dateNextBtn) return;
+
+  const els = { dateContents, inputRecordedAt, dateNextBtn };
 
   // 今日の日付を取得
+  const today = getTodayJST();
+
+  let state = { selectedDate: today, today };
+
+  // 初期描画
+  state = deriveRecordDateState(state, "init");
+  applyRecordDateUI(els, state);
+
+  // 「前の日」ボタンの処理
+  if (datePrevBtn) {
+    datePrevBtn.addEventListener("click", () => {
+      state = deriveRecordDateState(state, "prev");
+      applyRecordDateUI(els, state);
+    });
+  }
+
+  // 「次の日」ボタンの処理
+  if (dateNextBtn) {
+    dateNextBtn.addEventListener("click", () => {
+      state = deriveRecordDateState(state, "next");
+      applyRecordDateUI(els, state);
+    });
+  }
+};
+
+// 今日の日付を取得　YYYY/MM/DD
+const getTodayJST = () => {
   const now = new Date();
   const dateFormatter = new Intl.DateTimeFormat("ja-JP", {
     timeZone: "Asia/Tokyo",
@@ -29,34 +49,46 @@ export const initRecordDateSelect = () => {
   const month = dateParts.find((p) => p.type === "month").value;
   const day = dateParts.find((p) => p.type === "day").value;
 
-  const today = new Date(`${year}-${month}-${day}T00:00:00+09:00`);
-  let selectedDate = new Date(today);
+  return new Date(`${year}-${month}-${day}T00:00:00+09:00`);
+};
 
-  // input 日付要素
-  const inputRecordedAt = document.getElementById("recorded_at");
+// 任意の日付を YYYY/MM/DD に整形
+const recordDateDisplay = (date) => {
+  const pad = (str) => ("0" + str).slice(-2);
 
-  // 日付を表示する関数
-  const updateDateDisplay = () => {
-    dateContents.textContent = recordDateDisplay(selectedDate);
-    inputRecordedAt.value = recordDateDisplay(selectedDate);
-    // 次の日が今日を超えたら無効化
-    dateNextBtn.disabled = selectedDate.getTime() >= today.getTime();
-  };
+  const year = date.getFullYear().toString();
+  const month = pad(date.getMonth() + 1).toString();
+  const day = pad(date.getDate()).toString();
 
-  // 初期表示
-  updateDateDisplay();
+  return `${year}/${month}/${day}`;
+};
 
-  // 「前の日」ボタンの処理
-  datePrevBtn.addEventListener("click", () => {
-    selectedDate.setDate(selectedDate.getDate() - 1);
-    updateDateDisplay();
-  });
+// 純粋ロジック
+const deriveRecordDateState = (state, action) => {
+  let { today } = state;
 
-  // 「次の日」ボタンの処理
-  dateNextBtn.addEventListener("click", () => {
-    if (selectedDate.getTime() < today.getTime()) {
-      selectedDate.setDate(selectedDate.getDate() + 1);
-      updateDateDisplay();
+  const date = new Date(state.selectedDate);
+
+  if (action === "prev") {
+    date.setDate(date.getDate() - 1);
+  } else if (action === "next") {
+    if (date.getTime() < today.getTime()) {
+      date.setDate(date.getDate() + 1);
     }
-  });
+  }
+
+  const display = recordDateDisplay(date);
+  const canGoNext = date.getTime() < today.getTime();
+
+  return { selectedDate: date, today, display, canGoNext };
+};
+
+// DOM反映
+const applyRecordDateUI = (els, state) => {
+  const { dateContents, inputRecordedAt, dateNextBtn } = els;
+
+  if (dateContents) dateContents.textContent = state.display;
+  if (inputRecordedAt) inputRecordedAt.value = state.display;
+  // 次の日が今日を超えたら無効化
+  if (dateNextBtn) dateNextBtn.disabled = !state.canGoNext;
 };
