@@ -94,10 +94,10 @@ function index($page_title, $user, $weight_logs = null)
           <h3 class="weight-days__title contents-title">日ごとの体重記録</h3>
           <ul class="weight-days__switch">
             <li class="weight-days__item">
-              <button class="btn btn--select">新しい順</button>
+              <button class="btn btn--select" data-sort="new">新しい順</button>
             </li>
             <li class="weight-days__item">
-              <button class="btn">古い順</button>
+              <button class="btn" data-sort="old">古い順</button>
             </li>
           </ul>
         </div>

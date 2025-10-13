@@ -1,72 +1,101 @@
+// 日ごとの体重記録用
 export const initWeightDays = () => {
-  // 日ごとの体重記録用
-  const weightDaysBlocksParent = document.querySelector(".weight-days__blocks");
-  const weightDaysBlocks = document.querySelectorAll(".weight-days__block");
-
-  if (!weightDaysBlocksParent) return;
-
-  // 並び順変更関数
-  const sortWeightDaysBlocks = (isOld) => {
-    return [...weightDaysBlocks].sort((a, b) => {
-      const aDate = a.querySelector(".weight-days__date").textContent;
-      const bDate = b.querySelector(".weight-days__date").textContent;
-      if (isOld) {
-        return aDate < bDate ? -1 : 1;
-      } else {
-        return aDate > bDate ? -1 : 1;
-      }
-    });
-  };
-  // 並び順切り替え 初期値
-  let isOld = false;
-  weightDaysBlocksParent.innerHTML = "";
-  sortWeightDaysBlocks(isOld).forEach((block) =>
-    weightDaysBlocksParent.appendChild(block)
-  );
-
-  // 体重記録もっと見るボタン
+  const parent = document.querySelector(".weight-days__blocks");
+  // もっと見るボタン
   const btnMore = document.querySelector(".weight-days .btn--more");
-  let showNum = 6;
+  // 並び順切り替えボタン
+  const switchBtns = [
+    ...document.querySelectorAll(".weight-days__switch button"),
+  ];
+  const els = { parent, btnMore, switchBtns };
 
-  const moreWeightDays = (blocks) => {
-    blocks.forEach((block, i) => {
-      if (i < showNum) {
-        block.classList.add("show");
+  const weightDaysBlocks = [
+    ...document.querySelectorAll(".weight-days__block"),
+  ];
+
+  if (!parent || !weightDaysBlocks.length) return;
+
+  const blocks = weightDaysBlocks.map((el) => ({
+    el,
+    dateStr: el.querySelector(".weight-days__date").textContent.trim(),
+  }));
+
+  const STEP = 6;
+  const state = { sort: "new", showNum: STEP };
+
+  // 初期化
+  let view = deriveWeightDaysState(blocks, state);
+  applyWeightDaysUI(els, blocks, view);
+
+  // もっと見るボタン
+  if (btnMore) {
+    btnMore.addEventListener("click", () => {
+      state.showNum += STEP;
+      view = deriveWeightDaysState(blocks, state);
+      applyWeightDaysUI(els, blocks, view);
+    });
+  }
+
+  // 並び順ボタン
+  switchBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      state.sort = btn.dataset.sort === "old" ? "old" : "new";
+      view = deriveWeightDaysState(blocks, state);
+      applyWeightDaysUI(els, blocks, view);
+    });
+  });
+};
+
+const deriveWeightDaysState = (blocks, state) => {
+  const { sort, showNum } = state;
+  const getBlock = (i) => blocks[i].dateStr.trim();
+  const order = blocks
+    .map((_, i) => i)
+    .sort((ia, ib) => {
+      if (sort === "old") {
+        return getBlock(ia).localeCompare(getBlock(ib));
       } else {
-        if (block.classList.contains("show")) block.classList.remove("show");
+        return getBlock(ib).localeCompare(getBlock(ia));
       }
     });
 
-    if (showNum >= blocks.length) {
-      btnMore.classList.add("hide");
+  const visibleCount = Math.min(showNum, blocks.length);
+  const canShowMore = visibleCount < blocks.length;
+
+  const selectedSort = sort;
+
+  return { order, visibleCount, canShowMore, selectedSort };
+};
+
+const applyWeightDaysUI = (els, blocks, view) => {
+  const { parent, btnMore, switchBtns } = els;
+  const { order, visibleCount, canShowMore, selectedSort } = view;
+
+  if (!parent) return;
+
+  const frag = new DocumentFragment();
+
+  order.forEach((i, pos) => {
+    const el = blocks[i].el;
+    if (pos < visibleCount) {
+      el.classList.add("show");
+    } else {
+      el.classList.remove("show");
     }
-  };
-  moreWeightDays(sortWeightDaysBlocks(isOld));
-
-  btnMore.addEventListener("click", () => {
-    showNum += 6;
-    moreWeightDays(sortWeightDaysBlocks(isOld));
+    frag.appendChild(el);
   });
+  parent.innerHTML = "";
+  parent.appendChild(frag);
 
-  // 並び順切り替えボタン
-  const weightDaysSwitchBtns = document.querySelectorAll(
-    ".weight-days__switch button"
-  );
+  // もっと見るボタン
+  if (!canShowMore) {
+    btnMore.classList.add("hide");
+  }
 
-  weightDaysSwitchBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      document
-        .querySelector(".weight-days__switch .btn--select")
-        ?.classList.remove("btn--select");
-      btn.classList.add("btn--select");
-
-      isOld ? (isOld = false) : (isOld = true);
-      weightDaysBlocksParent.innerHTML = "";
-      sortWeightDaysBlocks(isOld).forEach((block) =>
-        weightDaysBlocksParent.appendChild(block)
-      );
-
-      moreWeightDays(sortWeightDaysBlocks(isOld));
+  // 並び替えボタン
+  if (switchBtns && switchBtns.length) {
+    switchBtns.forEach((btn) => {
+      btn.classList.toggle("btn--select", btn.dataset.sort === selectedSort);
     });
-  });
+  }
 };
