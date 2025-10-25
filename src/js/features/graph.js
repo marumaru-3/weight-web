@@ -1,6 +1,6 @@
-import { fetchChartData } from "../api/api.js";
+import { fetchChartData as real } from "../api/api.js";
 
-export const initWeightGraph = async () => {
+export const initWeightGraph = async (deps = {}) => {
   const graphElement = document.getElementById("graph");
 
   if (!graphElement) return;
@@ -8,6 +8,7 @@ export const initWeightGraph = async () => {
   const today = new Date();
 
   // 体重記録の配列
+  const { fetchChartData = real } = deps;
   const chartData = await fetchChartData();
   const weightRecords = chartData.chart_arr;
   const idealWeight = chartData.ideal_weight;
